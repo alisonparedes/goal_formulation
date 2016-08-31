@@ -12,7 +12,7 @@ from Canvas import Line
 #    '''
 #    '''
     
-def __init__(self, simstate): 
+def __init__(self, simstate): #TODO: Need a list of goals (high-level actions?)
     '''
     Takes a visual representation of the current state and parses it into an internal representation. (Yes, I've been thinking about knowledge representation lately) 
     '''
@@ -92,6 +92,18 @@ def are_fighting(ordered):
     if '!' in ordered:
         return -10
     return 0
+
+def get_actions(state): 
+    '''
+    Returns an iterable list of actions applicable in the given state.
+    '''
+    return []
+
+def get_transition(state, action):
+    '''
+    Returns the next state (s') from the current state (s) given an action.
+    '''
+    return state
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     

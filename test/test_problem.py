@@ -23,6 +23,19 @@ class TestState(unittest.TestCase):
         init = '\n   *\n'
         units = xref(parse(init))
         self.assertEqual(units, {'*':(3,1)}, units)
+        
+    def testActions(self):
+        simstate = '-H--\n---H'
+        state = parse(simstate)
+        actions = get_actions(state)
+        self.assertEquals(actions, [], actions)
+    
+    def testTransition(self):
+        simstate = '-H--\n---H'
+        state = parse(simstate)
+        action = 'M'
+        next_state = write(get_transition(state, action))
+        self.assertEquals(next_state, simstate, next_state)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
