@@ -4,7 +4,7 @@ Created on Sep 2, 2016
 @author: lenovo
 '''
 import unittest
-from bfs import *
+from bfs_g import *
 
 class Test(unittest.TestCase):
 
