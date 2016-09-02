@@ -7,7 +7,7 @@ from collections import namedtuple
 
 def search(initial_state, goal_state):
     
-    Node = namedtuple('Node',['state','previous','action']) #TODO: Add actions. What kind of programming paradigm are factories? This is a little weird
+    Node = namedtuple('Node',['state','previous','action']) #What kind of programming paradigm are factories? This is a little weird
     i = Node(initial_state, previous=None, action=None)
     goal = Node(goal_state, previous=None, action=None)
     open_list = []
@@ -27,11 +27,11 @@ def is_goal(s, goal):
         return True
     return False
 
-def get_plan(s): #TODO: Return a  list of actions; this is sequence of states
+def get_plan(s): 
     i = s
     plan = []
-    while i:
-        plan.insert(0, i.state)
+    while i.previous:
+        plan.insert(0, i.action)
         i = i.previous
     return plan
 
@@ -49,5 +49,4 @@ def transition(s, action):
     return s.state + action #TODO: Pass a function from the problem
 
 if __name__ == '__main__':
-    print(search(1,2))
     pass

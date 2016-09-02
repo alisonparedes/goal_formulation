@@ -13,13 +13,13 @@ class Test(unittest.TestCase):
         initial_state = 1
         goal_state = 2
         plan=search(initial_state,goal_state)
-        self.assertEquals(plan,[1,2],plan)
+        self.assertEquals(plan,[1],plan)
         
     def testSearch1to10(self):
         initial_state = 1
         goal_state = 10
         plan=search(initial_state,goal_state)
-        self.assertEquals(plan,[1,2,3,4,5,6,7,8,9,10],plan)
+        self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testSearch']
