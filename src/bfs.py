@@ -24,7 +24,7 @@ def search(initial_state, goal_state):
 
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
     for node in expanded:
-        if node.state not in closed_list:
+        if node.state not in closed_list: #Tested by commenting "+ action" out of transition function for now
             open_list.append(node)
             closed_list.append(node.state)
 
