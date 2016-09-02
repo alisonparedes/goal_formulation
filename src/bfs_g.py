@@ -44,7 +44,7 @@ def is_goal(s, goal):
     return False
 
 def min_g(open_list): #TODO: Returns the best looking node on the open list
-    return open_list[0] #TODO: Right now returns the first node on open
+    return open_list[0] #TODO: Right now returns the first node on open. Sort on g.
 
 def get_plan(s): 
     i = s
@@ -57,7 +57,7 @@ def get_plan(s):
 def expand(s, Node): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s):
-        result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Is this going to be a problem? TODO: Actions could have unique costs
+        result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Is this going to be a problem? TODO: Calculate g as we go. G is over sequence + current.
         expanded.append(result)
     return expanded
 
