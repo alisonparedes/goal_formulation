@@ -17,25 +17,20 @@ class TestState(unittest.TestCase):
     def testWrite(self):
         init = ' !\n   *'
         simstate = write(parse(init))
-        self.assertEquals(simstate, '\n{0}\nReward:90\n'.format(init), simstate) #TODO: These look equivalent to me
-
-    def testXRef(self):
-        init = '\n   *\n'
-        units = xref(parse(init))
-        self.assertEqual(units, {'*':(3,1)}, units)
+        self.assertEquals(simstate, '\n{0}\n'.format(init), simstate) #TODO: These look equivalent to me
         
     def testActions(self):
         simstate = '-H--\n---H'
         state = parse(simstate)
-        actions = get_actions(state)
-        self.assertEquals(actions, [], actions)
+        actions = applicable_actions(state)
+        self.assertEquals(actions, [1], actions)
     
     def testTransition(self):
         simstate = '-H--\n---H'
         state = parse(simstate)
         action = 'M'
-        next_state = write(get_transition(state, action))
-        self.assertEquals(next_state, simstate, next_state)
+        next_state = write(transition(state, action))
+        self.assertEquals(next_state, 2, next_state)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
