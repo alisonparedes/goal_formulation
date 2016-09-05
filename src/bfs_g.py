@@ -13,14 +13,14 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     goal = Node(goal_state, previous=None, action=None, g=None) #g is N/A for goal test
     
     open_list = [i]
-    closed_list = [] #TODO: Use a hash table. How would I build a hash table? and hash function?
+    closed_list = [] #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
     depth = 0 #TODO: Is there a good way to encapsulate depth test?
     current_level = 1 
     next_level = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.pop(0)
         current_level -= 1
-        if is_goal(s,goal): #TODO: Take out goal test? At least so I do not have to imp
+        if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
             return get_plan(s)    
         expanded = expand(s, Node)
         next_level += add_open(open_list, closed_list, expanded) #TODO: Not sure about returning count of nodes added to open
@@ -33,7 +33,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
     appended = 0
     for node in expanded:
-        if node.state not in closed_list: #Tested by commenting "+ action" out of transition function for now
+        if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
             open_list.append(node)
             closed_list.append(node.state)
             appended += 1
@@ -58,8 +58,8 @@ def get_plan(s):
 
 def expand(s, Node): #Kind of like passing a function? 
     expanded=[]
-    for action in applicable_actions(s):
-        result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current.
+    for action in applicable_actions(s): 
+        result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         expanded.append(result)
     return expanded
 
@@ -67,10 +67,10 @@ def applicable_actions(s): #TODO: Pass a function from the problem
     return problem.applicable_actions(s)
 
 def transition(s, action):
-    return problem.transition(s.state, action) #TODO: Pass a function from the problem
+    return problem.transition(s.state, action) #TODO: Problem figures out how to modify the dictionary
 
 def equals(s1, s2):
-    return s1.state == s2.state #TODO: Pass comparator for problem as a function
+    return s1.state == s2.state #TODO: N/A if removing goal test
 
 if __name__ == '__main__':
     pass
