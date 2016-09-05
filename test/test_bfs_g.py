@@ -8,7 +8,7 @@ from bfs_g import *
 
 class Test(unittest.TestCase):
 
-
+    '''
     def testSearch1to2(self):
         initial_state = 1
         goal_state = 2
@@ -20,24 +20,26 @@ class Test(unittest.TestCase):
         goal_state = 10
         plan=search(initial_state,goal_state)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
-        
-    def testSearch1toD9(self):
+    '''
+    def testSearch1toD10(self): #Results 9/5 (assume no dups): 1 action = 0.003s, 2=0.010s, 3=0.632s, 4=98.076s
         initial_state = 1
         goal_state = 10
-        plan=search(initial_state,goal_state,9)
+        plan=search(initial_state,goal_state,10)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
-
+    '''
     def testSearch1toD1(self):
         initial_state = 1
         goal_state = 10
         plan=search(initial_state,goal_state,1)
         self.assertEquals(plan,[1],plan)
-        
-    def testSearch1toD11(self):
+    '''
+    '''    
+    def testSearch1toGoal(self):
         initial_state = 1
         goal_state = 10
         plan=search(initial_state,goal_state,11)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
+    '''
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testSearch']

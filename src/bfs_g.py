@@ -20,23 +20,24 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     while len(open_list) > 0 and depth < horizon:
         s = open_list.pop(0)
         current_level -= 1
-        if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
-            return get_plan(s)    
+        #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
+        #    return get_plan(s)    
         expanded = expand(s, Node)
         next_level += add_open(open_list, closed_list, expanded) #TODO: Not sure about returning count of nodes added to open
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
             next_level = 0
             depth += 1
+            print(current_level)
     return get_plan(min_g(open_list)) #goal not found return best on open instead
 
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
     appended = 0
     for node in expanded:
-        if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
-            open_list.append(node)
-            closed_list.append(node.state)
-            appended += 1
+        #if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
+        open_list.append(node)
+        closed_list.append(node.state)
+        appended += 1
     return appended
 
 def is_goal(s, goal):
