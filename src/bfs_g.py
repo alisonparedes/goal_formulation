@@ -22,8 +22,8 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node)
-        next_level += add_open(open_list, closed_list, expanded) #TODO: Not sure about returning count of nodes added to open
+        expanded = expand(s, Node, open_list, closed_list)
+        next_level += len(expanded) #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
             next_level = 0
@@ -31,6 +31,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
             print(current_level)
     return get_plan(min_g(open_list)) #goal not found return best on open instead
 
+'''
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
     appended = 0
     for node in expanded:
@@ -39,6 +40,7 @@ def add_open(open_list, closed_list, expanded): #Lists must be mutable
         closed_list.append(node.state)
         appended += 1
     return appended
+'''
 
 def is_goal(s, goal):
     if equals(s, goal): 
@@ -57,10 +59,13 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node): #Kind of like passing a function? 
+def expand(s, Node, open_list, closed_list): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s): 
         result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
+        #if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
+        open_list.append(result)
+        closed_list.append(result.state)
         expanded.append(result)
     return expanded
 

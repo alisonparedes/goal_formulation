@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
         plan=search(initial_state,goal_state)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
     '''
-    def testSearch1toD10(self): #Results 9/5 (assume no dups): 1 action = 0.003s, 2=0.010s, 3=0.632s, 4=98.076s
+    def testSearch1toD10(self): #Results 9/5 (assume no dups): 1 action = 0.003s, 2=0.010s, 3=0.632s, 4=98.076s (98.365s!)
         initial_state = 1
         goal_state = 10
         plan=search(initial_state,goal_state,10)

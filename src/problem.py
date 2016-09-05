@@ -56,7 +56,7 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-    #TODO: What is definitive list of actions? HTOB, HTOF1m HTOF2
+    #TODO: What is definitive list of actions? HTOB, HTOF1, HTOF2
     return [1,2,3,4]
 
 def transition(state, action):
