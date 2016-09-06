@@ -59,6 +59,7 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
     #TODO: What is definitive list of actions? HB and HF only for now.
     HB = 1 #move harvester to base
     HF = 2 #move harvester to food
+    NOOP = 3 #
     actions=[]
     units=''
     for coordinate, unit in state.iteritems():
@@ -68,7 +69,8 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
         actions.append(HB)
     if 'H' in units and 'F' in units:
         actions.append(HF)
-    return actions 
+    actions.append(NOOP) 
+    return actions
 
 def transition(state, action):
     '''
@@ -79,6 +81,8 @@ def transition(state, action):
         return hb(state)
     if action == 2: #HF
         return hf(state)
+    if action == 3: #NOOP
+        return state
     return state 
 
 def hb(state):
