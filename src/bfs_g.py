@@ -19,10 +19,11 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     next_level = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.pop(0)
+        print(s.state)
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list)
+        expanded = expand(s, Node, open_list, closed_list) #TODO: An action should always be available
         next_level += len(expanded) #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
@@ -70,7 +71,7 @@ def expand(s, Node, open_list, closed_list): #Kind of like passing a function?
     return expanded
 
 def applicable_actions(s): #TODO: Pass a function from the problem
-    return problem.applicable_actions(s)
+    return problem.applicable_actions(s.state)
 
 def transition(s, action):
     return problem.transition(s.state, action) #TODO: Problem figures out how to modify the dictionary
