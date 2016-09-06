@@ -23,7 +23,7 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HB*!':
+        if cell in 'HBF$*!':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -66,7 +66,16 @@ def transition(state, action):
     Returns the next state (s') from the current state (s) given an action.
     '''
     #TODO: For example, if actions HTOB, look up harvester's current position and base's position then remove harvester from current position and add to base's position.
-    #TODO: Switch on action and encapsulate logic for each action in its own function
+    if action == 1: #HB
+        return hb(state)
+    if action == 2: #HF
+        return hf(state)
+    return state 
+
+def hb(state):
+    '''
+    Problem specific
+    '''
     next_state = {}
     base = None
     for coordinate, unit in state.iteritems():
@@ -78,6 +87,23 @@ def transition(state, action):
         else:
             next_state[coordinate]=unit
     next_state[base]='*'
+    return next_state
+
+def hf(state):
+    '''
+    Problem specific
+    '''
+    next_state = {}
+    food = None
+    for coordinate, unit in state.iteritems():
+        if unit == 'H':
+            pass
+        elif unit == 'F':
+            food = coordinate
+            pass
+        else:
+            next_state[coordinate]=unit
+    next_state[food]='$'
     return next_state
         
 if __name__ == '__main__': #Read in a simulated state and write it out

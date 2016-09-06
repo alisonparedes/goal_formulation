@@ -26,12 +26,19 @@ class TestState(unittest.TestCase):
         actions = applicable_actions(state)
         self.assertEquals(actions, [1,2], actions)
     
-    def testTransition(self):
+    def testTransitionHB(self):
         simstate = '-H--\n---B'
         state = parse(simstate)
         action = 1 #HB
         next_state = transition(state, action)
         self.assertEquals(next_state, {(3,1):'*'}, next_state)
+        
+    def testTransitionHF(self):
+        simstate = '-H--\n---F'
+        state = parse(simstate)
+        action = 2 #HB
+        next_state = transition(state, action)
+        self.assertEquals(next_state, {(3,1):'$'}, next_state)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
