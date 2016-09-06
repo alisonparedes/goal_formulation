@@ -56,15 +56,29 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-    #TODO: What is definitive list of actions? HTOB, HTOF1, HTOF2
-    return [1,2,3,4]
+    #TODO: What is definitive list of actions? HB and HF only for now.
+    HB = 1 #move harvester to base
+    HF = 2 #move harvester to food
+    return [HB,HF]
 
 def transition(state, action):
     '''
     Returns the next state (s') from the current state (s) given an action.
     '''
     #TODO: For example, if actions HTOB, look up harvester's current position and base's position then remove harvester from current position and add to base's position.
-    return state + action
+    #TODO: Switch on action and encapsulate logic for each action in its own function
+    next_state = {}
+    base = None
+    for coordinate, unit in state.iteritems():
+        if unit == 'H':
+            pass
+        elif unit == 'B':
+            base = coordinate
+            pass
+        else:
+            next_state[coordinate]=unit
+    next_state[base]='*'
+    return next_state
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass
