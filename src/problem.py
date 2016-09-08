@@ -23,7 +23,7 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HBF$*!':
+        if cell in 'HBF$*!@':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -56,20 +56,21 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-    #TODO: What is definitive list of actions? HB and HF only for now.
+    #TODO: What is definitive list of actions? For now harvester should always have exactly two applicable actions.
     HB = 1 #move harvester to base
     HF = 2 #move harvester to food
-    NOOP = 3 #
+    HS = 3 #move harvester somewhere else
     actions=[]
     units=''
     for coordinate, unit in state.iteritems():
-        if unit in 'HBF':
+        if unit in 'HBF$*@':
             units+=unit
-    if 'H' in units and 'B' in units:
+    if ('H' in units or '$' in units) and 'B' in units:
         actions.append(HB)
-    if 'H' in units and 'F' in units:
+    if ('H' in units or '*' in units) and 'F' in units:
         actions.append(HF)
-    actions.append(NOOP) 
+    if ('*' in units or '$' in units) and '@' in units:
+        actions.append(HS)
     return actions
 
 def transition(state, action):
@@ -81,42 +82,57 @@ def transition(state, action):
         return hb(state)
     if action == 2: #HF
         return hf(state)
-    if action == 3: #NOOP
-        return state
+    if action == 3: #HS
+        return hs(state)
     return state 
 
 def hb(state):
     '''
-    Problem specific
+    Move harvester to base
     '''
     next_state = {}
-    base = None
     for coordinate, unit in state.iteritems():
         if unit == 'H':
-            pass
+            next_state[coordinate]='@' #Start
+        elif unit == '$':
+            next_state[coordinate]='F' #Food
         elif unit == 'B':
-            base = coordinate
-            pass
+            next_state[coordinate]='*'
         else:
             next_state[coordinate]=unit
-    next_state[base]='*'
     return next_state
 
 def hf(state):
     '''
-    Problem specific
+    Move harvester to food
     '''
     next_state = {}
-    food = None
     for coordinate, unit in state.iteritems():
         if unit == 'H':
-            pass
+            next_state[coordinate]='@' #Start
         elif unit == 'F':
-            food = coordinate
-            pass
+            next_state[coordinate]='$' #Food
+        elif unit == '*':
+            next_state[coordinate]='B' #Base
         else:
             next_state[coordinate]=unit
-    next_state[food]='$'
+    return next_state
+
+
+def hs(state):
+    '''
+    Move harvester somewhere else
+    '''
+    next_state = {}
+    for coordinate, unit in state.iteritems():
+        if unit == '$':
+            next_state[coordinate]='F'
+        elif unit == '*':
+            next_state[coordinate]='B'
+        elif unit == '@':
+            next_state[coordinate]='H'
+        else:
+            next_state[coordinate]=unit
     return next_state
         
 if __name__ == '__main__': #Read in a simulated state and write it out

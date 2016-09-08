@@ -17,19 +17,26 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     depth = 0 #TODO: Is there a good way to encapsulate depth test?
     current_level = 1 
     next_level = 0
+    nodes_generated = 1
+    nodes_expanded = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.pop(0)
         print(s.state)
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list) #TODO: An action should always be available
+        expanded = expand(s, Node, open_list, closed_list) #TODO: Is Python copying lists around?
+        #A bunch of counts
+        nodes_expanded+=1
         next_level += len(expanded) #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
+        nodes_generated += len(expanded)
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
             next_level = 0
             depth += 1
-            print(current_level)
+            #print(current_level)
+    print(nodes_generated)
+    print(nodes_expanded)
     return get_plan(min_g(open_list)) #goal not found return best on open instead
 
 '''
