@@ -71,7 +71,7 @@ def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a func
     expanded=[]
     for action in applicable_actions(s): 
         next_state = transition(s, action) #TODO: Transition should return value of next_state
-        g=s.g-1+100 #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
+        g=next_state.value #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         max_g = max(max_g,g)
         result = Node(state=next_state, previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         #if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.

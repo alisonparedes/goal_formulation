@@ -74,23 +74,34 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
         actions.append(HS)
     return actions
 
-def transition(s, action):
+def transition(s, action): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
-    #TODO: For example, if actions HTOB, look up harvester's current position and base's position then remove harvester from current position and add to base's position.
     State = namedtuple('State',['state','value'])
+    Simulated = namedtuple('Simulated',['state','resources']) #TODO: To avoid repeating code
     if action == 1: #HB
-        return State(hb(s.state), s.value-1)
-    if action == 2: #HF
-        return State(hf(s.state), s.value-1)
-    if action == 3: #HS
-        return State(hs(s.state), s.value-1)
-    return s 
+        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing data structures around but it seems like it should belong to functional programming
+    elif action == 2: #HF
+        simulated=hf(s.state, Simulated)
+    elif action == 3: #HS
+        simulated=hs(s.state, Simulated)
+    resources=simulated.resources
+    value=s.value + resources + reward(s.state) #TODO: Where does value of cost so far belong? I want to say BFS because it is g of previous state.
+    return State(simulated.state, value) #
 
-def hb(state):
+def reward(state):
+    reward=0
+    for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
+        if unit == '$':
+            reward+=50
+        elif unit == '*':
+            reward+=100
+    return reward
+
+def hb(state, Simulated): 
     '''
-    Move harvester to base
+    Simulate moving harvester to base
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -102,11 +113,11 @@ def hb(state):
             next_state[coordinate]='*'
         else:
             next_state[coordinate]=unit
-    return next_state
+    return Simulated(next_state,resources=-1)
 
-def hf(state):
+def hf(state, Simulated):
     '''
-    Move harvester to food
+    Simulate moving harvester to food
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -118,12 +129,12 @@ def hf(state):
             next_state[coordinate]='B' #Base
         else:
             next_state[coordinate]=unit
-    return next_state
+    return Simulated(next_state,resources=-1)
 
 
-def hs(state):
+def hs(state, Simulated):
     '''
-    Move harvester somewhere else
+    Simulate harvester somewhere else
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -135,7 +146,7 @@ def hs(state):
             next_state[coordinate]='H'
         else:
             next_state[coordinate]=unit
-    return next_state
+    return Simulated(next_state,resources=-1)
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass
