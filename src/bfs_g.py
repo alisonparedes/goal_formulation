@@ -9,8 +9,9 @@ import problem
 def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
-    i = Node(initial_state, previous=None, action=None, g=0) #g could trend positive or negative and noop is an option
-    goal = Node(goal_state, previous=None, action=None, g=None) #g is N/A for goal test
+    State = namedtuple('State',['state','value']) #TODO: Problem should handle state structure.
+    i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
+    goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
     
     open_list = deque([i])
     closed_list = deque([]) #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
@@ -83,8 +84,9 @@ def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a func
 def applicable_actions(s): #TODO: Pass a function from the problem
     return problem.applicable_actions(s.state)
 
-def transition(s, action):
-    return problem.transition(s.state, action) #TODO: Problem figures out how to modify the dictionary
+def transition(s_node, action):
+    next_state=problem.transition(s_node.state, action)
+    return next_state#TODO: Problem figures out how to modify the dictionary
 
 def equals(s1, s2):
     return s1.state == s2.state #TODO: N/A if removing goal test

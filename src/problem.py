@@ -6,6 +6,7 @@ Created on Aug 18, 2016
 
 import operator #TODO: What does this do?
 import sys
+from collections import namedtuple
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -52,7 +53,7 @@ def write(state, action=None):
 def c(state): #TODO: I really want to make this a higher-order function
     return 0 #TODO: For now you get nothing special for any particular configuration of the world
 
-def applicable_actions(state): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
+def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
@@ -62,7 +63,7 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
     HS = 3 #move harvester somewhere else
     actions=[]
     units=''
-    for coordinate, unit in state.iteritems():
+    for coordinate, unit in s.state.iteritems():
         if unit in 'HBF$*@':
             units+=unit
     if ('H' in units or '$' in units) and 'B' in units:
@@ -73,18 +74,19 @@ def applicable_actions(state): #TODO: Units (or combinations of units, e.g. flee
         actions.append(HS)
     return actions
 
-def transition(state, action):
+def transition(s, action):
     '''
-    Returns the next state (s') from the current state (s) given an action.
+    Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     #TODO: For example, if actions HTOB, look up harvester's current position and base's position then remove harvester from current position and add to base's position.
+    State = namedtuple('State',['state','value'])
     if action == 1: #HB
-        return hb(state)
+        return State(hb(s.state), s.value-1)
     if action == 2: #HF
-        return hf(state)
+        return State(hf(s.state), s.value-1)
     if action == 3: #HS
-        return hs(state)
-    return state 
+        return State(hs(s.state), s.value-1)
+    return s 
 
 def hb(state):
     '''
