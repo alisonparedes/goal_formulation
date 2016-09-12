@@ -50,15 +50,12 @@ def write(state, action=None):
     simstate += '\n'
     return simstate
 
-def c(state): #TODO: I really want to make this a higher-order function
-    return 0 #TODO: For now you get nothing special for any particular configuration of the world
-
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
     #TODO: What is definitive list of actions? For now harvester should always have exactly two applicable actions.
-    HB = 1 #move harvester to base
+    '''HB = 1 #move harvester to base
     HF = 2 #move harvester to food
     HS = 3 #move harvester somewhere else
     actions=[]
@@ -73,12 +70,16 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     if ('*' in units or '$' in units) and '@' in units:
         actions.append(HS)
     return actions
+    '''
+    return [1,2]
 
 def transition(s, action): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
+    
     State = namedtuple('State',['state','value'])
+    '''
     Simulated = namedtuple('Simulated',['state','resources']) #TODO: To avoid repeating code
     if action == 1: #HB
         simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing data structures around but it seems like it should belong to functional programming
@@ -89,19 +90,24 @@ def transition(s, action): #TODO: Assumes action is valid
     resources=simulated.resources
     value=s.value + resources + reward(s.state) #TODO: Where does value of cost so far belong? I want to say BFS because it is g of previous state.
     return State(simulated.state, value) #
+    '''
+    return s
 
 def reward(state):
     reward=0
+    '''
     for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
         if unit == '$':
             reward+=50
         elif unit == '*':
             reward+=100
+    '''
     return reward
 
 def hb(state, Simulated): 
     '''
     Simulate moving harvester to base
+    '''
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -114,10 +120,13 @@ def hb(state, Simulated):
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
+    '''
+    return Simulated(state,resources=-1)
 
 def hf(state, Simulated):
     '''
     Simulate moving harvester to food
+    '''
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -130,11 +139,14 @@ def hf(state, Simulated):
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
+    '''
+    return Simulated(state,resources=-1)
 
 
 def hs(state, Simulated):
     '''
     Simulate harvester somewhere else
+    '''
     '''
     next_state = {}
     for coordinate, unit in state.iteritems():
@@ -147,6 +159,8 @@ def hs(state, Simulated):
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
+    '''
+    return Simulated(state,resources=-1)
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass

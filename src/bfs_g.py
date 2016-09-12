@@ -38,8 +38,8 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
             next_level = 0
             depth += 1
             #print(current_level)
-    #print(nodes_generated)
-    #print(nodes_expanded)
+    print(nodes_generated)
+    print(nodes_expanded)
     return max_g #Return highest reward, not plan
 
 '''
@@ -92,4 +92,7 @@ def equals(s1, s2):
     return s1.state == s2.state #TODO: N/A if removing goal test
 
 if __name__ == '__main__':
-    pass
+    simstate = '-H--\nF--B'
+    initial_state = problem.parse(simstate)
+    goal_state = 10
+    plan=search(initial_state,goal_state,10)
