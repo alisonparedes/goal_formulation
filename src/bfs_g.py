@@ -31,6 +31,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         nodes_generated += expanded.len
+        max_g = expanded.max_g
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
             next_level = 0
@@ -56,9 +57,6 @@ def is_goal(s, goal):
         return True
     return False
 
-def min_g(open_list): #TODO: Returns the best looking node on the open list.
-    return open_list[0] #TODO: Right now returns the first node on open. Sort on g. Watch this. Sorting half of all nodes ever generated could be slow! Maybe sort g as nodes are generated? Is g an accurate variable name since in addition to action cost it considers next state's reward? Since it isn't an estimate of cost to go (h) then in contrast g I think using g is OK.
-
 def get_plan(s):
     HEAD=0 
     i = s
@@ -71,9 +69,10 @@ def get_plan(s):
 def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s): 
-        g=s.g-1
-        max_g = max(max_g,s)
-        result = Node(state=transition(s, action), previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
+        next_state = transition(s, action) #TODO: Transition should return value of next_state
+        g=s.g+1 #Calculate value of next state from current state and next state. 
+        max_g = max(max_g,g)
+        result = Node(state=next_state, previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         #if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
         open_list.append(result)
         closed_list.append(result.state)
