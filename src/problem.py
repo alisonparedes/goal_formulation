@@ -78,7 +78,7 @@ def transition(s, action): #TODO: Assumes action is valid
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     
-    State = namedtuple('State',['state','value'])
+    #State = namedtuple('State',['state','value'])
     '''
     Simulated = namedtuple('Simulated',['state','resources']) #TODO: To avoid repeating code
     if action == 1: #HB
@@ -121,7 +121,7 @@ def hb(state, Simulated):
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
     '''
-    return Simulated(state,resources=-1)
+    return (state,-1)
 
 def hf(state, Simulated):
     '''
@@ -140,7 +140,7 @@ def hf(state, Simulated):
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
     '''
-    return Simulated(state,resources=-1)
+    return (state,-1)
 
 
 def hs(state, Simulated):
@@ -160,7 +160,7 @@ def hs(state, Simulated):
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
     '''
-    return Simulated(state,resources=-1)
+    return (state,-1)
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass
