@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         simstate = '-H--\nF--B'
         initial_state = problem.parse(simstate)
         goal_state = 10
-        plan=search(initial_state,goal_state,16)
+        plan=search(initial_state,goal_state,20)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1,1],plan)
     '''
     def testSearch1toD1(self):

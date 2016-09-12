@@ -10,6 +10,8 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
     State = namedtuple('State',['state','value']) #TODO: Problem should handle state structure.
+    Expanded = namedtuple('Expanded',['len','max_g'])
+    Simulated = namedtuple('Simulated',['state','resources'])
     i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
     
@@ -27,7 +29,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list, max_g) 
+        expanded = expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated) 
         #A bunch of counts
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
@@ -67,10 +69,10 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a function? 
+def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s): 
-        next_state = transition(s, action) #TODO: Transition should return value of next_state
+        next_state = transition(s, action, State, Simulated) #TODO: Transition should return value of next_state
         g=next_state.value #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         max_g = max(max_g,g)
         result = Node(state=next_state, previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
@@ -78,14 +80,13 @@ def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a func
         open_list.append(result)
         closed_list.append(result.state)
         expanded.append(result)
-    Expanded = namedtuple('Expanded',['len','max_g'])
     return Expanded(len(expanded),max_g)
 
 def applicable_actions(s): #TODO: Pass a function from the problem
     return problem.applicable_actions(s.state)
 
-def transition(s_node, action):
-    next_state=problem.transition(s_node.state, action)
+def transition(s_node, action, State, Simulated):
+    next_state=problem.transition(s_node.state, action, State, Simulated)
     return next_state#TODO: Problem figures out how to modify the dictionary
 
 def equals(s1, s2):
@@ -95,4 +96,4 @@ if __name__ == '__main__':
     simstate = '-H--\nF--B'
     initial_state = problem.parse(simstate)
     goal_state = 10
-    plan=search(initial_state,goal_state,10)
+    plan=search(initial_state,goal_state,20)
