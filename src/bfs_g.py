@@ -19,6 +19,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     next_level = 0
     nodes_generated = 1
     nodes_expanded = 0
+    min_g = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.popleft() 
         #print(s.state)
@@ -37,7 +38,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
             #print(current_level)
     #print(nodes_generated)
     #print(nodes_expanded)
-    return get_plan(min_g(open_list)) #goal not found return best on open instead
+    return min_g #Return minimum cost, not plan
 
 '''
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
