@@ -19,18 +19,18 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     next_level = 0
     nodes_generated = 1
     nodes_expanded = 0
-    min_g = 0
+    max_g = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.popleft() 
         #print(s.state)
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list) #TODO: Is Python copying lists around?
+        expanded = expand(s, Node, open_list, closed_list, max_g) 
         #A bunch of counts
         nodes_expanded+=1
-        next_level += len(expanded) #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
-        nodes_generated += len(expanded)
+        next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
+        nodes_generated += expanded.len
         if current_level == 0: #TODO: Encapsulate!
             current_level = next_level
             next_level = 0
@@ -38,7 +38,7 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
             #print(current_level)
     #print(nodes_generated)
     #print(nodes_expanded)
-    return min_g #Return minimum cost, not plan
+    return max_g #Return highest reward, not plan
 
 '''
 def add_open(open_list, closed_list, expanded): #Lists must be mutable
@@ -68,15 +68,18 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list): #Kind of like passing a function? 
+def expand(s, Node, open_list, closed_list, max_g): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s): 
-        result = Node(state=transition(s, action), previous=s, action=action, g=s.g-1) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
+        g=s.g-1
+        max_g = max(max_g,s)
+        result = Node(state=transition(s, action), previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         #if node.state not in closed_list: #TODO: What if a state were represented by a dictionary of positions and objects? Encapsulate this to delegate comparison to problem module.
         open_list.append(result)
         closed_list.append(result.state)
         expanded.append(result)
-    return expanded
+    Expanded = namedtuple('Expanded',['len','max_g'])
+    return Expanded(len(expanded),max_g)
 
 def applicable_actions(s): #TODO: Pass a function from the problem
     return problem.applicable_actions(s.state)
