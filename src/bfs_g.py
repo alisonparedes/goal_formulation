@@ -3,7 +3,7 @@ Created on Sep 1, 2016
 
 @author: lenovo
 '''
-from collections import namedtuple
+from collections import namedtuple, deque
 import problem
 
 def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
@@ -12,16 +12,16 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
     i = Node(initial_state, previous=None, action=None, g=0) #g could trend positive or negative and noop is an option
     goal = Node(goal_state, previous=None, action=None, g=None) #g is N/A for goal test
     
-    open_list = [i]
-    closed_list = [] #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
+    open_list = deque([i])
+    closed_list = deque([]) #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
     depth = 0 #TODO: Is there a good way to encapsulate depth test?
     current_level = 1 
     next_level = 0
     nodes_generated = 1
     nodes_expanded = 0
     while len(open_list) > 0 and depth < horizon:
-        s = open_list.pop(0)
-        print(s.state)
+        s = open_list.popleft() 
+        #print(s.state)
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
@@ -35,8 +35,8 @@ def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of 
             next_level = 0
             depth += 1
             #print(current_level)
-    print(nodes_generated)
-    print(nodes_expanded)
+    #print(nodes_generated)
+    #print(nodes_expanded)
     return get_plan(min_g(open_list)) #goal not found return best on open instead
 
 '''
