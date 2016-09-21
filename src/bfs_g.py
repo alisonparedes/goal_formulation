@@ -6,14 +6,14 @@ Created on Sep 1, 2016
 from collections import namedtuple, deque
 import problem
 
-def search(initial_state, goal_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
     State = namedtuple('State',['state','value']) #TODO: Problem should handle state structure.
     Expanded = namedtuple('Expanded',['len','max_g'])
     Simulated = namedtuple('Simulated',['state','resources'])
     i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
-    goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
+    #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
     
     open_list = deque([i])
     closed_list = deque([]) #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
@@ -55,10 +55,10 @@ def add_open(open_list, closed_list, expanded): #Lists must be mutable
     return appended
 '''
 
-def is_goal(s, goal):
+'''def is_goal(s, goal):
     if equals(s, goal): 
         return True
-    return False
+    return False'''
 
 def get_plan(s):
     HEAD=0 
@@ -96,4 +96,5 @@ if __name__ == '__main__':
     simstate = '-H--\nF--B'
     initial_state = problem.parse(simstate)
     goal_state = 10
-    plan=search(initial_state,goal_state,20)
+    max_g=search(initial_state,goal_state,2)
+    print(max_g)
