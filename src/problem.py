@@ -83,7 +83,7 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     elif action == 3: #HS
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
-    value=s.value + resources + reward(s.state) #TODO: Where does value of cost so far belong? I want to say BFS because it is g of previous state.
+    value=s.reward + reward(s.state) - resources #TODO: Where does value of cost so far belong? I want to say BFS because it is g of previous state.
     return State(simulated.state, value) #
     #return s
 

@@ -7,7 +7,7 @@ from bfs_g import *
 def ohwow():
     #What is known?
     #What is prior?
-    n = 1 #What is a good sample size? 1 for testing     
+    n = 100.0 #What is a good sample size? 1 for testing. 
     #Sample from W
     argmina = None #Hold action with max value
     #For each action applicable in s
