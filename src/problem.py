@@ -72,6 +72,23 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
 
+def top_applicable_actions(s, h, w): #TODO: How shall I distinguish top-level planner's actions from hindsight planner's action model?
+    actions=[]
+    units='' #TODO: Maybe use this when adding Defender's moves
+    for coordinate, unit in s.state.iteritems():
+        x=coordinate[0] #TODO: How much performance do I loose using named tuples?
+        y=coordinate[1]
+        if unit in 'H':#TODO: Or D
+            if y-1 >= 0:
+                actions.append('N')
+            elif y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
+                actions.append('S')
+            elif x-1 >= 0:
+                actions.append('E')            
+            elif x+1 < w: #Assuming left most cell in problem is 0
+                actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
+    return actions
+
 def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
@@ -83,9 +100,27 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     elif action == 3: #HS
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
-    value=s.reward + reward(s.state) - resources #TODO: Where does value of cost so far belong? I want to say BFS because it is g of previous state.
-    return State(simulated.state, value) #
+    new_reward=s.reward + reward(s.state) - resources 
+    return State(simulated.state, new_reward) #
     #return s
+
+def top_transition(s, action, State): #TODO: I really want to put these top level action and transitions into a separate problem module
+    N = -1
+    S = +1
+    E = -1
+    W = +1 
+    #TODO: Move units
+    next_state = {}
+    for coordinate, unit in s.iteritems():
+        if unit == 'H': #TODO: Add *$. What about E?
+            x = coordinate[0]
+            y = coordinate[1]
+            if action == 'N':
+                next_state[(x,y+N)]=unit #TODO: +N feels overengineered but not very well
+        else:
+            next_state[coordinate]=unit 
+    #TODO: Update reward
+    return State(next_state,)
 
 def reward(state):
     reward=0
@@ -105,12 +140,12 @@ def hb(state, Simulated):
     for coordinate, unit in state.iteritems():
         if unit == 'H':
             next_state[coordinate]='@' #Start
-        elif unit == '$':
+        elif unit == '$': #TODO: Top level planners may need to use the same symbols
             next_state[coordinate]='F' #Food
         elif unit == 'B':
             next_state[coordinate]='*'
         else:
-            next_state[coordinate]=unit
+            next_state[coordinate]=unit #TODO: Too much iterating!
     return Simulated(next_state,resources=-1)
     #return (state,-1)
 

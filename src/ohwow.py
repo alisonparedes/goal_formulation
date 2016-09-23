@@ -4,22 +4,31 @@ Created on Sep 21, 2016
 @author: Alison Paredes
 '''
 from bfs_g import *
-def ohwow():
-    #What is known?
-    #What is prior?
-    n = 100.0 #What is a good sample size? 1 for testing. 
-    #Sample from W
+from world import *
+def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world module for now
+    '''
+    Agent should keep track of what it knows and send to ohwow
+    '''
+    n = 100 #What is a good sample size?
+    horizion=2 #TODO: What should manage horizon?
+    cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
+    possible_worlds = [];
+    for i in range(n):
+        w = sample(4,4,known,1)
+        possible_worlds.append(w) 
     argmina = None #Hold action with max value
+    Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
+    
     #For each action applicable in s
         #Transition to next state
-    cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
-    #Loop over all w in sample
     c = 0
-    next_state = '-H--\nF--B' #For development only
-    w = problem.parse(next_state)
-    c += search(w,2) #For each w find c
-    q = c/n #- cost
+    #Loop over all w in sample
+    for w in possible_worlds:
+        c += search(w,horizion) 
+    q = c/float(n) #- cost
     return q#'N' #Return action with highest reward
 
 if __name__ == '__main__':
-    print(ohwow())
+    known = problem.parse('-H--\n---B')
+    print(known)
+    print(ohwow(known))    

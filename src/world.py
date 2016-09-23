@@ -16,7 +16,7 @@ def sample(w, h, known, n):
     while i > 0: #How unusual is this way of doing something n times? Scary if i is a reference, maybe.
         location = random_loc(w, h)
         thing = random_thing() #Sample shouldn't conflict with known state of the world
-        map.append([location,thing])
+        map[location]=thing #TODO: Changed map to dict. How does it affect other functions in world.py
         i-=1
     return map
        
@@ -28,8 +28,8 @@ def random_loc(w, h):
     
 
 def random_thing():
-    things = ['E','F','T']
-    r = random.randint(0,2)
+    things = ['E','F'] #TODO: Consider moving this logic (or the entier sampling function to problem)
+    r = random.randint(0,len(things)-1)
     return things[r]
     
 
