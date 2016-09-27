@@ -31,4 +31,5 @@ def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world modul
 if __name__ == '__main__':
     known = problem.parse('-H--\n---B')
     print(known)
-    print(ohwow(known))    
+    print(ohwow(known))
+    #Run ohwow a bunch of times to get next action and print each new state    

@@ -7,6 +7,7 @@ Created on Aug 18, 2016
 import operator #TODO: What does this do?
 import sys
 from collections import namedtuple
+from __builtin__ import None
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -104,23 +105,16 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     return State(simulated.state, new_reward) #
     #return s
 
-def top_transition(s, action, State): #TODO: I really want to put these top level action and transitions into a separate problem module
-    N = -1
-    S = +1
-    E = -1
-    W = +1 
-    #TODO: Move units
-    next_state = {}
-    for coordinate, unit in s.iteritems():
-        if unit == 'H': #TODO: Add *$. What about E?
-            x = coordinate[0]
-            y = coordinate[1]
-            if action == 'N':
-                next_state[(x,y+N)]=unit #TODO: +N feels overengineered but not very well
-        else:
-            next_state[coordinate]=unit 
-    #TODO: Update reward
-    return State(next_state,)
+def top_transition(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
+    '''
+    Takes a state (a starting coordinate) and an action and returns a new world. Transition may not always be possible.
+    '''
+    x = s[0]
+    y = s[1]
+    unit = world[x][y] #TODO: I hope this is a copy!
+    world[x][y]=None
+    #TODO: Start here 9/27
+    return world 
 
 def reward(state):
     reward=0
@@ -183,7 +177,22 @@ def hs(state, Simulated):
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
     #return (state,-1)
+    
+def to_grid(s, w, h): 
+    '''
+    Takes a dictionary and returns a 2D representation
+    '''
+    grid = []
+    for i in range(w): #TODO: I don't need i.
+        grid.append([None]*h) #Meh
+    for coordinate, unit in s.iteritems():
+        x=coordinate[0]
+        y=coordinate[1]
+        grid[x][y]=unit
+    return grid
+
+
         
 if __name__ == '__main__': #Read in a simulated state and write it out
-    pass
+    print to_grid({(1, 0): 'H', (3, 1): 'B'},4,4)
     
