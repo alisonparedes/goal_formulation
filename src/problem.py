@@ -104,16 +104,40 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     new_reward=s.reward + reward(s.state) - resources 
     return State(simulated.state, new_reward) #
     #return s
+    
+def new_coordinate(coordinate, action):
+    '''
+    Returns a new coordinate for an action, could be negative!
+    ''' 
+    x=coordinate[0]
+    y=coordinate[1]
+    if action == 'N':
+        y += -1;
+    elif action == 'S':
+        y += 1;
+    elif action == 'E':
+        x += 1;
+    elif action == 'W': 
+        x += -1;
+    return (x,y)
 
+def get_coordiante(s, world):
+    return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?
+    
 def top_transition(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
     '''
     Takes a state (a starting coordinate) and an action and returns a new world. Transition may not always be possible.
     '''
-    x = s[0]
-    y = s[1]
-    unit = world[x][y] #TODO: I hope this is a copy!
-    world[x][y]=None
-    #TODO: Start here 9/27
+    #TODO: Separate functions maybe?
+    from_x = s[0]
+    from_y = s[1]
+    unit = world[from_x][from_y] #TODO: I hope this is a copy!
+    world[from_x][from_y]=None #TODO: May need to replace old location to get performance stats in the interim
+    to_coordinate = new_coordinate(s, action)
+    to_x = to_coordinate[0]
+    to_y = to_coordinate[1] 
+    #TODO: Try the move and if it fails return
+    world[to_x][to_y]=unit #TODO: Moves may not always work
     return world 
 
 def reward(state):
@@ -123,7 +147,6 @@ def reward(state):
             reward+=50
         elif unit == '*':
             reward+=100
-
     return reward
 
 def hb(state, Simulated): 
@@ -190,6 +213,20 @@ def to_grid(s, w, h):
         y=coordinate[1]
         grid[x][y]=unit
     return grid
+
+def to_dict(w):
+    '''
+    Takes a grid and returns a dictionary (an interim solution until the rest of problem's functions deal with grids
+    '''
+    state={}
+    for i, v in w:
+        x=i
+        for j, unit in v:
+            if unit:
+                y=j
+                state[(x,y)]=unit
+    return state
+                
 
 
         
