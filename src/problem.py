@@ -7,7 +7,6 @@ Created on Aug 18, 2016
 import operator #TODO: What does this do?
 import sys
 from collections import namedtuple
-from __builtin__ import None
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -73,20 +72,20 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
 
-def top_applicable_actions(s, h, w): #TODO: How shall I distinguish top-level planner's actions from hindsight planner's action model?
+def applicable_actions1(s, h, w): #TODO: How shall I distinguish top-level planner's actions from hindsight planner's action model?
     actions=[]
     units='' #TODO: Maybe use this when adding Defender's moves
-    for coordinate, unit in s.state.iteritems():
-        x=coordinate[0] #TODO: How much performance do I loose using named tuples?
+    for coordinate, unit in s.iteritems():
+        x=coordinate[0] 
         y=coordinate[1]
         if unit in 'H':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
-            elif y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
+            if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
                 actions.append('S')
-            elif x-1 >= 0:
+            if x-1 >= 0:
                 actions.append('E')            
-            elif x+1 < w: #Assuming left most cell in problem is 0
+            if x+1 < w: #Assuming left most cell in problem is 0
                 actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
     return actions
 
@@ -123,22 +122,7 @@ def new_coordinate(coordinate, action):
 
 def get_coordiante(s, world):
     return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?
-    
-def top_transition(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
-    '''
-    Takes a state (a starting coordinate) and an action and returns a new world. Transition may not always be possible.
-    '''
-    #TODO: Separate functions maybe?
-    from_x = s[0]
-    from_y = s[1]
-    unit = world[from_x][from_y] #TODO: I hope this is a copy!
-    world[from_x][from_y]=None #TODO: May need to replace old location to get performance stats in the interim
-    to_coordinate = new_coordinate(s, action)
-    to_x = to_coordinate[0]
-    to_y = to_coordinate[1] 
-    #TODO: Try the move and if it fails return
-    world[to_x][to_y]=unit #TODO: Moves may not always work
-    return world 
+
 
 def reward(state):
     reward=0
@@ -219,17 +203,63 @@ def to_dict(w):
     Takes a grid and returns a dictionary (an interim solution until the rest of problem's functions deal with grids
     '''
     state={}
-    for i, v in w:
-        x=i
-        for j, unit in v:
-            if unit:
-                y=j
-                state[(x,y)]=unit
+    x=0
+    for col in w:
+        y=0
+        for cell in col:
+            if cell:
+                state[(x,y)]=cell
+            y+=1
+        x+=1
     return state
                 
+def transition1(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
+    '''
+    Takes a state (a starting coordinate), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
+    '''
+    #TODO: Separate functions maybe?
+    from_x = s[0]
+    from_y = s[1]
+    unit = world[from_x][from_y] #TODO: I hope this is a copy!
+    world[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
+    to_coordinate = new_coordinate(s, action)
+    to_x = to_coordinate[0]
+    to_y = to_coordinate[1] 
+    #TODO: Try the move and if it fails return?
+    cell=world[to_x][to_y]
+    world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
+    return world 
 
-
+def leaving(unit):
+    #if unit=='H':
+    #    return '@'
+    if unit=='*':
+        return 'B'
+    if unit=='$':
+        return 'F'
+    return None
+    
+def arriving(unit, cell):
+    if cell=='B':
+        return '*'
+    if cell=='F':
+        return '$'
+    #if cell=='@':
+    #    return 'H'
+    return unit
         
 if __name__ == '__main__': #Read in a simulated state and write it out
-    print to_grid({(1, 0): 'H', (3, 1): 'B'},4,4)
+    dict={(1, 0): 'H', (3, 1): 'B'}
+    to_grid(dict,4,4)
+    w=[[None, None, None, None], ['H', 'B', None, None], [None, 'B', None, None], [None, 'B', None, None]]
+    print(w)
+    w = transition1((1,0),'S',w)
+    print(w)
+    w = transition1((1,1),'E',w)
+    print(w)
+    w = transition1((2,1),'N',w)
+    print(w)    
+    w = transition1((2,0),'W',w)
+    print(w) 
+    print applicable_actions1(dict, 4, 4)   
     

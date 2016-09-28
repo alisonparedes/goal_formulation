@@ -28,7 +28,7 @@ def random_loc(w, h):
     
 
 def random_thing():
-    things = ['E','F'] #TODO: Consider moving this logic (or the entier sampling function to problem)
+    things = ['F'] #TODO: Consider moving this logic (or the entier sampling function to problem)
     r = random.randint(0,len(things)-1)
     return things[r]
     
