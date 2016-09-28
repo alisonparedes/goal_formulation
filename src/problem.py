@@ -228,7 +228,19 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
     #TODO: Try the move and if it fails return?
     cell=world[to_x][to_y]
     world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
-    return world 
+    return world #TODO: What about returning the new state? 
+
+def get_state(w): #TODO: For now, to keep reasoning about the problem here, parse the Harvester's current state out of the world.
+    state={}
+    x=0
+    for col in w:
+        y=0
+        for cell in col:
+            if cell in 'H*$':
+                state[(x,y)]=cell
+            y+=1
+        x+=1
+    return state
 
 def leaving(unit):
     #if unit=='H':
