@@ -32,7 +32,6 @@ def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world modul
         for w in possible_worlds:
             s=to_grid(w,4,4) #TODO: Magic numbers are size of world
             s_prime=transition1(current_state,action,s) 
-            print(s_prime)
             c += search(to_dict(s_prime),horizion) 
         q = c/float(n) #- cost
         if q > max_q:
