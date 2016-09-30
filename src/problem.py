@@ -218,6 +218,9 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
     Takes a state (a starting coordinate), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #TODO: Separate functions maybe?
+    #TODO: Fix transition
+    #[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
+    #[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
     from_x = s[0]
     from_y = s[1]
     unit = world[from_x][from_y] #TODO: I hope this is a copy!

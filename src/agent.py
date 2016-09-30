@@ -6,9 +6,13 @@ Created on Sep 28, 2016
 
 from simulator import *
 from ohwow import *
+from copy import deepcopy
 
-def new_knowledge(old_world, new_world):
+def new_knowledge(old_world, new_world): 
     
+    #TODO: Fix comparison
+    #[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
+    #[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
     new_knowledge={}
     x=0
     for col in old_world:
@@ -18,6 +22,7 @@ def new_knowledge(old_world, new_world):
                 new_knowledge[(x,y)]=cell
             y+=1
         x+=1
+    print(new_knowledge)
     return new_knowledge
         
 def new_state(state, new_knowledge):
@@ -27,11 +32,20 @@ def new_state(state, new_knowledge):
 
 
 if __name__ == '__main__':
-    real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
+    old_world=[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
+    new_world=[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
+    new_knowledge(old_world, new_world)
+    '''real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     state={(1, 0): 'H', (3, 1): 'B'}
     while True: #TODO: True may be a bit much. When to stop?
         action = ohwow(state)
-        new_world = simulate(state, action, real_world)
-        know=new_knowledge(real_world, new_world)
-        state=new_state(state, know)
-        real_world = new_world
+        print(action, state)
+        print(real_world)
+        old_world=copy(real_world)
+        new_world = simulate(state, action[0], real_world) #Modifies world 
+        known=new_knowledge(old_world, new_world)
+
+        print(new_world)
+        print(known)
+        state=new_state(state, known)
+        real_world = new_world'''

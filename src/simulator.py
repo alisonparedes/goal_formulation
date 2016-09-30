@@ -26,6 +26,6 @@ def get_coordinate(state): #TODO: Get rid of this during refactoring
 
 if __name__ == '__main__':
     state={(1, 0): 'H', (3, 1): 'B'}
-    action='S'
+    action='E'
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     print simulate(state, action, real_world)
