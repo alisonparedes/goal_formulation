@@ -25,19 +25,27 @@ def new_knowledge(old_world, new_world):
     return new_knowledge
         
 def new_state(state, new_knowledge):
-    for coordinate, cell in new_knowledge:
-        state[coordinate]=cell 
-    return state
+    #TODO: Test with {(2, 0): None, (1, 0): 'H'}
+    #TODO: I'd rather not copy dictionaries around. Why not modify in place? Worry about this when changing state representation per Wheeler's recommendation
+    for coordinate, cell in new_knowledge.iteritems():
+        if cell:
+            state[coordinate]=cell 
+        else:
+            if coordinate in state:
+                del state[coordinate]
+    return state #TODO: It may be time to replace the dictionary representation? {(1, 0): 'H', (3, 1): 'B', (0, 0): None}
 
 
 if __name__ == '__main__':
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     state={(1, 0): 'H', (3, 1): 'B'}
+    #known= {(2, 0): None, (1, 0): 'H'}
+    #print(new_state(state, known))
     while True: #TODO: True may be a bit much. When to stop?
         action = ohwow(state)
         old_world=deepcopy(real_world)
         new_world = simulate(state, action[0], real_world) #Modifies world 
         known=new_knowledge(old_world, new_world)
-        print(known)
         state=new_state(state, known)
+        print(state)
         real_world = new_world
