@@ -78,7 +78,7 @@ def applicable_actions1(s, h, w): #TODO: How shall I distinguish top-level plann
     for coordinate, unit in s.iteritems():
         x=coordinate[0] 
         y=coordinate[1]
-        if unit in 'H':#TODO: Or D
+        if unit in 'H*$':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
             if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
@@ -120,8 +120,8 @@ def new_coordinate(coordinate, action):
         x += -1;
     return (x,y)
 
-def get_coordiante(s, world):
-    return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?
+'''def get_coordiante(s, world):
+    return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?'''
 
 
 def reward(state):
@@ -215,23 +215,30 @@ def to_dict(w):
                 
 def transition1(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
     '''
-    Takes a state (a starting coordinate), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
+    Takes a state, an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #TODO: Separate functions maybe?
     #TODO: Fix transition
     #[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
     #[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
-    from_x = s[0]
-    from_y = s[1]
+    from_coordinate=get_coordinate(s)
+    from_x = from_coordinate[0]
+    from_y = from_coordinate[1]
     unit = world[from_x][from_y] #TODO: I hope this is a copy!
     world[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
-    to_coordinate = new_coordinate(s, action)
+    to_coordinate = new_coordinate(from_coordinate, action)
     to_x = to_coordinate[0]
     to_y = to_coordinate[1] 
     #TODO: Try the move and if it fails return?
     cell=world[to_x][to_y]
     world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
     return world #TODO: What about returning the new state? 
+
+def get_coordinate(s):
+    for coordinate, cell in s.iteritems():
+        if cell in 'H*$':
+            return coordinate
+    return None
 
 def get_state(w): #TODO: For now, to keep reasoning about the problem here, parse the Harvester's current state out of the world.
     state={}
@@ -246,8 +253,8 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
     return state
 
 def leaving(unit):
-    #if unit=='H':
-    #    return '@'
+    if unit=='H':
+        return None
     if unit=='*':
         return 'B'
     if unit=='$':

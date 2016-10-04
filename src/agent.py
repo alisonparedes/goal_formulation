@@ -15,7 +15,7 @@ def new_knowledge(old_world, new_world):
     #[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
     new_knowledge={}
     x=0
-    for col in old_world:
+    for col in new_world:
         y=0
         for cell in col:
             if old_world[x][y]!=new_world[x][y]: #TODO: Problem should provide comparison
@@ -35,6 +35,11 @@ def new_state(state, new_knowledge):
                 del state[coordinate]
     return state #TODO: It may be time to replace the dictionary representation? {(1, 0): 'H', (3, 1): 'B', (0, 0): None}
 
+def get_current_state(state):
+    for coordinate, cell in state.iteritems():
+        if cell in 'H$*':
+            return {coordinate:cell}
+    return None
 
 if __name__ == '__main__':
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
@@ -42,10 +47,12 @@ if __name__ == '__main__':
     #known= {(2, 0): None, (1, 0): 'H'}
     #print(new_state(state, known))
     while True: #TODO: True may be a bit much. When to stop?
-        action = ohwow(state)
+        print(state)
+        current_state=get_current_state(state)
+        action = ohwow(current_state, state)
+        print(action)
         old_world=deepcopy(real_world)
         new_world = simulate(state, action[0], real_world) #Modifies world 
         known=new_knowledge(old_world, new_world)
         state=new_state(state, known)
-        print(state)
         real_world = new_world

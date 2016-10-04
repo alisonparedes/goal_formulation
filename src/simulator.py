@@ -13,8 +13,8 @@ def simulate(state, action, real_world):
     #Given a world, which happens to be the real world
     #Not sure about state
     #But given an action return a new state describing everything the agent should know now. TODO: Maintain a knowledge base in the agent eventually.
-    coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    new_world = transition1(coordinate, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
+    #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
+    new_world = transition1(state, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
     #TODO: How does what is known change?
     return new_world #TODO: How to represent newly sensed information?
 
@@ -26,6 +26,6 @@ def get_coordinate(state): #TODO: Get rid of this during refactoring
 
 if __name__ == '__main__':
     state={(1, 0): 'H', (3, 1): 'B'}
-    action='E'
+    action='W'
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     print simulate(state, action, real_world)

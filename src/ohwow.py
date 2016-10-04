@@ -6,7 +6,7 @@ Created on Sep 21, 2016
 from bfs_g import *
 from world import *
 from problem import *
-def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world module for now
+def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled by world module for now
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
@@ -19,10 +19,8 @@ def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world modul
         possible_worlds.append(w) 
     argmina = None #Hold action with max value
     Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
-    
     #For each action applicable in s
-    current_state=(1, 0)#TODO: For development only one starting state
-    actions = applicable_actions1({current_state:'H'}, 4, 4) #TODO: More magic numbers representing the known world
+    actions = applicable_actions1(current_state, 4, 4) #TODO: More magic numbers representing the known world
         #Transition to next state
     max_action=None
     max_q=0 #TODO: Does 0 work?
@@ -42,5 +40,7 @@ def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world modul
 if __name__ == '__main__':
     known = problem.parse('-H--\n---B')
     print(known)
-    print(ohwow(known))
+    current_state={(1, 0): 'H'}
+    print(current_state)
+    print(ohwow(current_state, known))
     #Run ohwow a bunch of times to get next action and print each new state    
