@@ -32,22 +32,51 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
         x += 1    
     return state
 
-def write(state, action=None):
+def write(state, h, w): #TODO: Move to agent module.
     '''
-    A state is a dictionary of positions and objects, keyed on position.
+    A state is a dictionary of positions and objects, keyed on position. Use to write the agent's perspective. 
     '''
-    ordered = sorted(state.items(), key=operator.itemgetter(0)) #TODO: 
+    grid = to_grid(state, h, w)
+    printable = write_grid(grid) #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.   
+    return printable
+
+def interleaved(known, world):
+    height=len(world[0])
+    width=len(world)
+    known_grid = to_grid(known, height, width) 
+    printable = ''
+    for y in range(height):
+        for x in range(width):
+            cell = world[x][y]
+            if cell:
+                printable += cell
+            else:
+                printable += '-'
+        printable += ' '
+        for x in range(width): #TODO: Should agent know boundaries of teh world? World's transition model does. What about imagined view of the world?
+            cell = known_grid[x][y] 
+            if cell:
+                printable += cell
+            else:
+                printable += '?' #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.
+        printable += '\n'
+    return printable
+    
+def write_grid(state):
+    '''
+    A state is a 2D array
+    '''
+    width=len(state)
+    height=len(state[0])
     simstate = ''
-    cell = (-1, 0)
-    for object in ordered:
-        location = object[0]
-        name = object[1] #TODO: This name isn't quite accurate since objects could be obstacles 
-        simstate += '\n' * (location[1] - cell[1])
-        y = location[1]
-        simstate += ' ' * (location[0] - cell[0] - 1)
-        simstate += name
-        x = location[0]
-    simstate += '\n'
+    for y in range(height):
+        for x in range(width):
+            cell = state[x][y]
+            if cell:
+                simstate += cell
+            else:
+                simstate += '-'
+        simstate += '\n'
     return simstate
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
@@ -83,9 +112,9 @@ def applicable_actions1(s, h, w): #TODO: How shall I distinguish top-level plann
                 actions.append('N')
             if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
                 actions.append('S')
-            if x-1 >= 0:
+            if x+1 < w:
                 actions.append('E')            
-            if x+1 < w: #Assuming left most cell in problem is 0
+            if x-1 >= 0: #Assuming left most cell in problem is 0
                 actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
     return actions
 
@@ -218,9 +247,6 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
     Takes a state, an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #TODO: Separate functions maybe?
-    #TODO: Fix transition
-    #[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
-    #[['H', None, 'F', None], [None, 'H', None, None], ['H', None, None, None], [None, 'B', None, None]]
     from_coordinate=get_coordinate(s)
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]

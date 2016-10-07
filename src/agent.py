@@ -47,12 +47,11 @@ if __name__ == '__main__':
     #known= {(2, 0): None, (1, 0): 'H'}
     #print(new_state(state, known))
     while True: #TODO: True may be a bit much. When to stop?
-        print(state)
         current_state=get_current_state(state)
         action = ohwow(current_state, state)
-        print(action)
         old_world=deepcopy(real_world)
         new_world = simulate(state, action[0], real_world) #Modifies world 
         known=new_knowledge(old_world, new_world)
         state=new_state(state, known)
         real_world = new_world
+        print(interleaved(state, real_world)) #TODO: Swap these parameters to reflect order states will be printed
