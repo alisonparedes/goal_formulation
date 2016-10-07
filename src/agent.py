@@ -7,7 +7,7 @@ Created on Sep 28, 2016
 from simulator import *
 from ohwow import *
 from copy import deepcopy
-import os
+import sys
 
 def new_knowledge(old_world, new_world): 
     
@@ -56,4 +56,4 @@ if __name__ == '__main__':
         state=new_state(state, known)
         real_world = new_world
         print(interleaved(state, real_world)) #TODO: Swap these parameters to reflect order states will be printed
-        print(os.system('clear'))
+        print('\x1b[23\x1b[H')
