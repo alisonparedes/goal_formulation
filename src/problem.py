@@ -58,7 +58,7 @@ def interleaved(known, world):
             if cell:
                 printable += cell
             else:
-                printable += '?' #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.
+                printable += '?' #TODO: Modify agent's new knowledge function. Cells known to contain None are different from unknown cells.
         printable += '\n'
     return printable
     
