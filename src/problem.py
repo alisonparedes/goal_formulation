@@ -90,13 +90,13 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     actions=[]
     units=''
     for coordinate, unit in s.state.iteritems():
-        if unit in 'HBF$*@':
+        if unit in 'HBF$*@0!bf':
             units+=unit
-    if ('H' in units or '$' in units) and 'B' in units:
+    if ('H' in units or '$' in units or '0' in units) and ('B' in units or 'b' in units):
         actions.append(HB)
-    if ('H' in units or '*' in units) and 'F' in units:
+    if ('H' in units or '*' in units or '!' in units) and ('F' in units or 'f' in units):
         actions.append(HF)
-    if ('*' in units or '$' in units) and '@' in units:
+    if ('*' in units or '$' in units or '0' in units or '!' in units) and '@' in units:
         actions.append(HS)
     return actions
     #return [1,2]
@@ -107,7 +107,7 @@ def applicable_actions1(s, h, w): #TODO: How shall I distinguish top-level plann
     for coordinate, unit in s.iteritems():
         x=coordinate[0] 
         y=coordinate[1]
-        if unit in 'H*$':#TODO: Or D
+        if unit in 'H*$0!':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
             if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
@@ -156,10 +156,10 @@ def new_coordinate(coordinate, action):
 def reward(state):
     reward=0
     for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
-        if unit == '$':
-            reward+=50
+        if unit == '$': #State tracks when food has been depleted
+            reward+=50 
         elif unit == '*':
-            reward+=100
+            reward+=100 #State tracks if base has ever been visited before
     return reward
 
 def hb(state, Simulated): 
@@ -170,10 +170,12 @@ def hb(state, Simulated):
     for coordinate, unit in state.iteritems():
         if unit == 'H':
             next_state[coordinate]='@' #Start
-        elif unit == '$': #TODO: Top level planners may need to use the same symbols
-            next_state[coordinate]='F' #Food
+        elif unit in '$0': #TODO: Top level planners may need to use the same symbols
+            next_state[coordinate]='f' #Never restock
         elif unit == 'B':
             next_state[coordinate]='*'
+        elif unit == 'b':
+            next_state[coordinate]='!' #Nothing for the prodigal son?
         else:
             next_state[coordinate]=unit #TODO: Too much iterating!
     return Simulated(next_state,resources=-1)
@@ -188,9 +190,11 @@ def hf(state, Simulated):
         if unit == 'H':
             next_state[coordinate]='@' #Start
         elif unit == 'F':
-            next_state[coordinate]='$' #Food
-        elif unit == '*':
-            next_state[coordinate]='B' #Base
+            next_state[coordinate]='$' #Food fully stocked
+        elif unit == 'f':
+            next_state[coordinate]='0' #No food here :(
+        elif unit in '*!':
+            next_state[coordinate]='b' #Been home once already 
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
@@ -204,9 +208,9 @@ def hs(state, Simulated):
     next_state = {}
     for coordinate, unit in state.iteritems():
         if unit == '$':
-            next_state[coordinate]='F'
-        elif unit == '*':
-            next_state[coordinate]='B'
+            next_state[coordinate]='f' #Never restock food (F)
+        elif unit in '*!':
+            next_state[coordinate]='b'
         elif unit == '@':
             next_state[coordinate]='H'
         else:
@@ -262,7 +266,7 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
 
 def get_coordinate(s):
     for coordinate, cell in s.iteritems():
-        if cell in 'H*$':
+        if cell in 'H*$!0':
             return coordinate
     return None
 
@@ -272,7 +276,7 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
     for col in w:
         y=0
         for cell in col:
-            if cell in 'H*$':
+            if cell in 'H*$!0':
                 state[(x,y)]=cell
             y+=1
         x+=1
@@ -282,16 +286,20 @@ def leaving(unit):
     if unit=='H':
         return None
     if unit=='*':
-        return 'B'
+        return 'b'
     if unit=='$':
-        return 'F'
+        return 'f'
     return None
     
 def arriving(unit, cell):
     if cell=='B':
         return '*'
+    if cell=='b':
+        return '!'
     if cell=='F':
         return '$'
+    if cell=='f':
+        return '0'
     #if cell=='@':
     #    return 'H'
     return unit

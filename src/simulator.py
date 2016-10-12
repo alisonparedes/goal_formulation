@@ -20,7 +20,7 @@ def simulate(state, action, real_world):
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring
     for coordinate, unit in state.iteritems():
-        if unit in 'H*$': #TODO: Problem should manage identifying a unit from any of the internal encodings, when I finally settle on an encoding
+        if unit in 'H*$!0': #TODO: Problem should manage identifying a unit from any of the internal encodings, when I finally settle on an encoding
             return coordinate
     return None
 

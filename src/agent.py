@@ -40,7 +40,7 @@ def new_state(state, new_knowledge):
 
 def get_current_state(state):
     for coordinate, cell in state.iteritems():
-        if cell in 'H$*':
+        if cell in 'H$*!0':
             return {coordinate:cell}
     return None
 
