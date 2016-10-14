@@ -10,11 +10,10 @@ def simulate(state, action, real_world):
     '''
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
-    #Given a world, which happens to be the real world
-    #Not sure about state
-    #But given an action return a new state describing everything the agent should know now. TODO: Maintain a knowledge base in the agent eventually.
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
     new_world = transition1(state, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
+    #TODO: What about newly discovered obstacles?
+    #TODO: Spawn new rewardable objects?
     #TODO: How does what is known change?
     return new_world #TODO: Return cumulative reward to use to compare results of each run
 
