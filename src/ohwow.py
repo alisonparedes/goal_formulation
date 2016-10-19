@@ -17,8 +17,8 @@ def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled
     for i in range(n):
         w = sample(4,4,known,1) #TODO: Magic numbers are size of world
         possible_worlds.append(w) 
-    argmina = None #Hold action with max value
-    Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
+    #argmina = None #Hold action with max value
+    #Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
     #For each action applicable in s
     actions = applicable_actions1(current_state, 4, 4) #TODO: More magic numbers representing the known world
         #Transition to next state

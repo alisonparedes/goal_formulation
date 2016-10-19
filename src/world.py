@@ -6,16 +6,16 @@ Created on Jul 13, 2016
 from copy import copy
 import random
 
-def sample(w, h, known, n):
+def sample(width, height, known, n):
     '''
-    Expects a dictionary describing the known state of the world, the size of the map and probability distribution of the world
+    Expects a dictionary describing the known state of the world, the size of the map, and probability distribution of the world (eventually).
     '''
         
     map = copy(known)
-    i = copy(n)      #TODO: Replace i with a probability distribution. Why make a copy?
-    while i > 0: #How unusual is this way of doing something n times? Scary if i is a reference, maybe.
-        location = random_loc(w, h)
-        thing = random_thing() #Sample shouldn't conflict with known state of the world
+    i = 0     #TODO: Replace i with a probability distribution. Why make a copy?
+    for i in range(n) : #How unusual is this way of doing something n times? Scary if i is a reference, maybe.
+        location = random_loc(width, height)
+        thing = random_thing() #Sample shouldn't conflict with known state of the world but it does, enabling real-world to spawn new things and the agent to imagine possible worlds where new things have spawned.
         map[location]=thing #TODO: Changed map to dict. How does it affect other functions in world.py
         i-=1
     return map
@@ -28,7 +28,7 @@ def random_loc(w, h):
     
 
 def random_thing():
-    things = ['F'] #TODO: Consider moving this logic (or the entier sampling function to problem)
+    things = ['F'] #TODO: Consider moving this logic (or the entire sampling function to problem)
     r = random.randint(0,len(things)-1)
     return things[r]
     

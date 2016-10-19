@@ -7,6 +7,7 @@ Created on Aug 18, 2016
 import operator #TODO: What does this do?
 import sys
 from collections import namedtuple
+import world
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -123,15 +124,27 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     if action == 1: #HB
-        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing data structures around but it seems like it should belong to functional programming
+        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
     elif action == 2: #HF
         simulated=hf(s.state, Simulated)
     elif action == 3: #HS
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources 
-    return State(simulated.state, new_reward) #
+    '''Spawn new rewards. What is the simplest way to spawn new rewards? Use the same model used for generating 
+    inital real world (none yet). If I did have a model for generating the inital real world, what might it do? Maybe the similar
+    to what I built for speculating about the world. For now, use the same model I built for speculating about the world--The 
+    assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
+    the world module right now.
+    '''
+    #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
+    new_state = respawn(s.state)
+    return State(new_state, new_reward) #
     #return s
+
+def respawn(state, width=4, height=4, n=1): #Need width and height because state is a dictionary. I'd rather infer size of world.
+    new_state = world.sample(width, height, state, n) 
+    return new_state
     
 def new_coordinate(coordinate, action):
     '''

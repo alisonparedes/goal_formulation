@@ -9,7 +9,8 @@ from ohwow import *
 from copy import deepcopy
 import os
 
-def new_knowledge(old_world, new_world, current_state): 
+#TODO: I dont' think agent should ahve access to old_world vsy7. new_world, especially since the real_world should be able to change in ways that the agent doesn't know about, e.g. spawn new food. Simulator could return new_world and percept.
+def new_knowledge(old_world, new_world, current_state): #TODO: When should an agent remove an attribute from his belief state? Never? World sample could speculate about visited states. When is belief state this fluid? Fluents are allowed to change over time.
     
     new_knowledge={}
     x=0
