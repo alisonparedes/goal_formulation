@@ -5,34 +5,49 @@ Created on Jul 13, 2016
 '''
 from copy import copy
 import random
+from problem import * #TODO: World and problem should maybe be in the same module
 
-def sample(w, h, known, n):
+def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflict with the real-world? Enabling real-world to spawn new things and the agent to imagine possible worlds where new things have spawned where it has been before. Defer to problem!
     '''
-    Expects a dictionary describing the known state of the world, the size of the map and probability distribution of the world
+    Expects a array of probability distributions determined by the problem.
+    
+    N is the number of times.
+    
+    Assumptions:
+
+    A seed could help debug these functions but I don't think it can be used to debug search since search
+    needs to speculate about different models. 
     '''
-        
-    map = copy(known)
-    i = copy(n)      #TODO: Replace i with a probability distribution. Why make a copy?
-    while i > 0: #How unusual is this way of doing something n times? Scary if i is a reference, maybe.
-        location = random_loc(w, h)
-        thing = random_thing() #Sample shouldn't conflict with known state of the world
-        map[location]=thing #TODO: Changed map to dict. How does it affect other functions in world.py
-        i-=1
-    return map
+    new_state = copy(state)
+    for i in range(n):
+        cell = sample_cell(problem_distribution_arr)
+        coordinate=cell[1] #TODO: Use named tuples
+        if coordinate:
+            unit=cell[2]
+            if coordinate in new_state:
+                new_state[coordinate]=merge(new_state[coordinate],unit) 
+            else:
+                new_state[coordinate]=unit
+        i += 1
+    return new_state
+
+def merge(unit_a, unit_b):
+    if unit_a=='H' and unit_b=='F':
+        return 'f'
+    return unit_b
        
-
-def random_loc(w, h):
-    x = random.randint(0, w-1)
-    y = random.randint(0, h-1)
-    return (x, y)   
-    
-
-def random_thing():
-    things = ['E','F'] #TODO: Consider moving this logic (or the entier sampling function to problem)
-    r = random.randint(0,len(things)-1)
-    return things[r]
-    
-
+def sample_cell(problem_distribution_arr): 
+    p = random.random()
+    cummulative = 0
+    i=-1
+    while cummulative < p: #TODO: How might a recursive walk function work?
+        i += 1
+        cell = problem_distribution_arr[i]
+        probability=cell[0] #TODO: Use named tuples
+        cummulative += probability
+    return cell
+      
+'''  
 def print_r(things):
     print 'x,y,a,e,f,t'
     for thing in things:
@@ -49,9 +64,8 @@ def decode(thing):
         return (0,0,0,1)
     if thing == '@':
         return (1,0,0,0)
+'''
 
 if __name__ == '__main__':
-    known = [[(1,1),'@']]
-    m = sample(10, 10, known, 10)
-    print_r(m)
+    pass
     

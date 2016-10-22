@@ -5,7 +5,8 @@ Created on Sep 21, 2016
 '''
 from bfs_g import *
 from world import *
-def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world module for now
+from problem import *
+def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled by world module for now
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
@@ -14,21 +15,32 @@ def ohwow(known, prior=None): #TODO: Prior is uniform and handled by world modul
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
     possible_worlds = [];
     for i in range(n):
-        w = sample(4,4,known,1)
+        w = sample(4,4,known,1) #TODO: Magic numbers are size of world
         possible_worlds.append(w) 
-    argmina = None #Hold action with max value
-    Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
-    
+    #argmina = None #Hold action with max value
+    #Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
     #For each action applicable in s
+    actions = applicable_actions1(current_state, 4, 4) #TODO: More magic numbers representing the known world
         #Transition to next state
-    c = 0
-    #Loop over all w in sample
-    for w in possible_worlds:
-        c += search(w,horizion) 
-    q = c/float(n) #- cost
-    return q#'N' #Return action with highest reward
+    max_action=None
+    max_q=0 #TODO: Does 0 work?
+    for action in actions:
+        c = 0
+        #Loop over all w in sample
+        for w in possible_worlds:
+            s=to_grid(w,4,4) #TODO: Magic numbers are size of world
+            s_prime=transition1(current_state,action,s) 
+            c += search(to_dict(s_prime),horizion) 
+        q = c/float(n) #- cost
+        if q > max_q:
+            max_q=q
+            max_action=action
+    return (max_action, max_q)
 
 if __name__ == '__main__':
     known = problem.parse('-H--\n---B')
     print(known)
-    print(ohwow(known))    
+    current_state={(1, 0): 'H'}
+    print(current_state)
+    print(ohwow(current_state, known))
+    #Run ohwow a bunch of times to get next action and print each new state    

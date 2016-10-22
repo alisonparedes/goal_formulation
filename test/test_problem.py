@@ -39,7 +39,7 @@ class TestState(unittest.TestCase):
         action = 2 #HB
         next_state = transition(state, action)
         self.assertEquals(next_state, {(3,1):'$'}, next_state)
-
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

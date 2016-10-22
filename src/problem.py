@@ -7,6 +7,7 @@ Created on Aug 18, 2016
 import operator #TODO: What does this do?
 import sys
 from collections import namedtuple
+import world
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -32,22 +33,51 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
         x += 1    
     return state
 
-def write(state, action=None):
+def write(state, h, w): #TODO: Move to agent module.
     '''
-    A state is a dictionary of positions and objects, keyed on position.
+    A state is a dictionary of positions and objects, keyed on position. Use to write the agent's perspective. 
     '''
-    ordered = sorted(state.items(), key=operator.itemgetter(0)) #TODO: 
+    grid = to_grid(state, h, w)
+    printable = write_grid(grid) #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.   
+    return printable
+
+def interleaved(known, world):
+    height=len(world[0])
+    width=len(world)
+    known_grid = to_grid(known, height, width) 
+    printable = ''
+    for y in range(height):
+        for x in range(width):
+            cell = world[x][y]
+            if cell:
+                printable += cell
+            else:
+                printable += '-'
+        printable += ' '
+        for x in range(width): #TODO: Should agent know boundaries of teh world? World's transition model does. What about imagined view of the world?
+            cell = known_grid[x][y] 
+            if cell:
+                printable += cell
+            else:
+                printable += '?' #TODO: Modify agent's new knowledge function. Cells known to contain None are different from unknown cells.
+        printable += '\n'
+    return printable
+    
+def write_grid(state):
+    '''
+    A state is a 2D array
+    '''
+    width=len(state)
+    height=len(state[0])
     simstate = ''
-    cell = (-1, 0)
-    for object in ordered:
-        location = object[0]
-        name = object[1] #TODO: This name isn't quite accurate since objects could be obstacles 
-        simstate += '\n' * (location[1] - cell[1])
-        y = location[1]
-        simstate += ' ' * (location[0] - cell[0] - 1)
-        simstate += name
-        x = location[0]
-    simstate += '\n'
+    for y in range(height):
+        for x in range(width):
+            cell = state[x][y]
+            if cell:
+                simstate += cell
+            else:
+                simstate += '-'
+        simstate += '\n'
     return simstate
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
@@ -61,31 +91,31 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     actions=[]
     units=''
     for coordinate, unit in s.state.iteritems():
-        if unit in 'HBF$*@':
+        if unit in 'HBF$*@0!bf':
             units+=unit
-    if ('H' in units or '$' in units) and 'B' in units:
+    if ('H' in units or '$' in units or '0' in units) and ('B' in units or 'b' in units):
         actions.append(HB)
-    if ('H' in units or '*' in units) and 'F' in units:
+    if ('H' in units or '*' in units or '!' in units) and ('F' in units or 'f' in units):
         actions.append(HF)
-    if ('*' in units or '$' in units) and '@' in units:
+    if ('*' in units or '$' in units or '0' in units or '!' in units) and '@' in units:
         actions.append(HS)
     return actions
     #return [1,2]
 
-def top_applicable_actions(s, h, w): #TODO: How shall I distinguish top-level planner's actions from hindsight planner's action model?
+def applicable_actions1(s, h, w): #TODO: How shall I distinguish top-level planner's actions from hindsight planner's action model?
     actions=[]
     units='' #TODO: Maybe use this when adding Defender's moves
-    for coordinate, unit in s.state.iteritems():
-        x=coordinate[0] #TODO: How much performance do I loose using named tuples?
+    for coordinate, unit in s.iteritems():
+        x=coordinate[0] 
         y=coordinate[1]
-        if unit in 'H':#TODO: Or D
+        if unit in 'H*$0!':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
-            elif y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
+            if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
                 actions.append('S')
-            elif x-1 >= 0:
+            if x+1 < w:
                 actions.append('E')            
-            elif x+1 < w: #Assuming left most cell in problem is 0
+            if x-1 >= 0: #Assuming left most cell in problem is 0
                 actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
     return actions
 
@@ -94,42 +124,63 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     if action == 1: #HB
-        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing data structures around but it seems like it should belong to functional programming
+        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
     elif action == 2: #HF
         simulated=hf(s.state, Simulated)
     elif action == 3: #HS
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources 
-    return State(simulated.state, new_reward) #
+    '''Spawn new rewards. What is the simplest way to spawn new rewards? Use the same model used for generating 
+    inital real world (none yet). If I did have a model for generating the inital real world, what might it do? Maybe the similar
+    to what I built for speculating about the world. For now, use the same model I built for speculating about the world--The 
+    assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
+    the world module right now.
+    '''
+    new_state = spawn(s.state)
+    return State(new_state, new_reward) #
     #return s
 
-def top_transition(s, action, State): #TODO: I really want to put these top level action and transitions into a separate problem module
-    N = -1
-    S = +1
-    E = -1
-    W = +1 
-    #TODO: Move units
-    next_state = {}
-    for coordinate, unit in s.iteritems():
-        if unit == 'H': #TODO: Add *$. What about E?
-            x = coordinate[0]
-            y = coordinate[1]
-            if action == 'N':
-                next_state[(x,y+N)]=unit #TODO: +N feels overengineered but not very well
-        else:
-            next_state[coordinate]=unit 
-    #TODO: Update reward
-    return State(next_state,)
+def spawn(state, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
+    '''
+    Spawn expects a state of the world. It doesn't need to be a completely known state of the world (I think) but because I expect
+    this function to be used by the simulator which is omniscient and not the agent which has limited knolwedge, spawn must be able to
+    deal with a complete state, all n of its attributes.
+    
+    State must be a dictionary. Right now there may be two representations of states floating around, dictionaries and 2D grids. There are functions that transform
+    one format to the other but which functions prefer which versions? I don't want to worry about this but ... sigh. 
+    '''
+    problem_distribution_arr = [(0.5,(0,0),'F'),(0.5,None)]
+    new_state = world.sample(problem_distribution_arr, state, n)  #TODO: Need to be able to seed the sample for debugging
+    return new_state
+    
+def new_coordinate(coordinate, action):
+    '''
+    Returns a new coordinate for an action, could be negative!
+    ''' 
+    x=coordinate[0]
+    y=coordinate[1]
+    if action == 'N':
+        y += -1;
+    elif action == 'S':
+        y += 1;
+    elif action == 'E':
+        x += 1;
+    elif action == 'W': 
+        x += -1;
+    return (x,y)
+
+'''def get_coordiante(s, world):
+    return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?'''
+
 
 def reward(state):
     reward=0
     for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
-        if unit == '$':
-            reward+=50
+        if unit == '$': #State tracks when food has been depleted
+            reward+=50 
         elif unit == '*':
-            reward+=100
-
+            reward+=100 #State tracks if base has ever been visited before
     return reward
 
 def hb(state, Simulated): 
@@ -140,10 +191,12 @@ def hb(state, Simulated):
     for coordinate, unit in state.iteritems():
         if unit == 'H':
             next_state[coordinate]='@' #Start
-        elif unit == '$': #TODO: Top level planners may need to use the same symbols
-            next_state[coordinate]='F' #Food
+        elif unit in '$0': #TODO: Top level planners may need to use the same symbols
+            next_state[coordinate]='f' #Never restock
         elif unit == 'B':
             next_state[coordinate]='*'
+        elif unit == 'b':
+            next_state[coordinate]='!' #Nothing for the prodigal son?
         else:
             next_state[coordinate]=unit #TODO: Too much iterating!
     return Simulated(next_state,resources=-1)
@@ -158,9 +211,11 @@ def hf(state, Simulated):
         if unit == 'H':
             next_state[coordinate]='@' #Start
         elif unit == 'F':
-            next_state[coordinate]='$' #Food
-        elif unit == '*':
-            next_state[coordinate]='B' #Base
+            next_state[coordinate]='$' #Food fully stocked
+        elif unit == 'f':
+            next_state[coordinate]='0' #No food here :(
+        elif unit in '*!':
+            next_state[coordinate]='b' #Been home once already 
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
@@ -174,16 +229,114 @@ def hs(state, Simulated):
     next_state = {}
     for coordinate, unit in state.iteritems():
         if unit == '$':
-            next_state[coordinate]='F'
-        elif unit == '*':
-            next_state[coordinate]='B'
+            next_state[coordinate]='f' #Never restock food (F)
+        elif unit in '*!':
+            next_state[coordinate]='b'
         elif unit == '@':
             next_state[coordinate]='H'
         else:
             next_state[coordinate]=unit
     return Simulated(next_state,resources=-1)
     #return (state,-1)
+    
+def to_grid(s, w, h): 
+    '''
+    Takes a dictionary and returns a 2D representation
+    '''
+    grid = []
+    for i in range(w): #TODO: I don't need i.
+        grid.append([None]*h) #Meh
+    for coordinate, unit in s.iteritems():
+        x=coordinate[0]
+        y=coordinate[1]
+        grid[x][y]=unit
+    return grid
+
+def to_dict(w):
+    '''
+    Takes a grid and returns a dictionary (an interim solution until the rest of problem's functions deal with grids
+    '''
+    state={}
+    x=0
+    for col in w:
+        y=0
+        for cell in col:
+            if cell:
+                state[(x,y)]=cell
+            y+=1
+        x+=1
+    return state
+                
+def transition1(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
+    '''
+    Takes a state, an action, and a world (grid)  and returns a new world. Transition may not always be possible.
+    '''
+    #TODO: Separate functions maybe?
+    from_coordinate=get_coordinate(s)
+    from_x = from_coordinate[0]
+    from_y = from_coordinate[1]
+    unit = world[from_x][from_y] #TODO: I hope this is a copy!
+    world[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
+    to_coordinate = new_coordinate(from_coordinate, action)
+    to_x = to_coordinate[0]
+    to_y = to_coordinate[1] 
+    #TODO: Try the move and if it fails return?
+    cell=world[to_x][to_y]
+    world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
+    return world #TODO: What about returning the new state? 
+
+def get_coordinate(s):
+    for coordinate, cell in s.iteritems():
+        if cell in 'H*$!0':
+            return coordinate
+    return None
+
+def get_state(w): #TODO: For now, to keep reasoning about the problem here, parse the Harvester's current state out of the world.
+    state={}
+    x=0
+    for col in w:
+        y=0
+        for cell in col:
+            if cell in 'H*$!0':
+                state[(x,y)]=cell
+            y+=1
+        x+=1
+    return state
+
+def leaving(unit):
+    if unit=='H':
+        return None
+    if unit=='*':
+        return 'b'
+    if unit=='$':
+        return 'f'
+    return None
+    
+def arriving(unit, cell):
+    if cell=='B':
+        return '*'
+    if cell=='b':
+        return '!'
+    if cell=='F':
+        return '$'
+    if cell=='f':
+        return '0'
+    #if cell=='@':
+    #    return 'H'
+    return unit
         
 if __name__ == '__main__': #Read in a simulated state and write it out
-    pass
+    dict={(1, 0): 'H', (3, 1): 'B'}
+    to_grid(dict,4,4)
+    w=[[None, None, None, None], ['H', 'B', None, None], [None, 'B', None, None], [None, 'B', None, None]]
+    print(w)
+    w = transition1((1,0),'S',w)
+    print(w)
+    w = transition1((1,1),'E',w)
+    print(w)
+    w = transition1((2,1),'N',w)
+    print(w)    
+    w = transition1((2,0),'W',w)
+    print(w) 
+    print applicable_actions1(dict, 4, 4)   
     
