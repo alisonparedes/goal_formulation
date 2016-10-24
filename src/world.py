@@ -22,19 +22,23 @@ def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflic
     new_state = copy(state)
     for i in range(n):
         x = sample_cell(problem_distribution_arr)
-        coordinate=x[1] #TODO: Use named tuples to hold coordinate
-        if coordinate:
-            unit=x[2] #TODO: Use named tuple to hold unit
-            if coordinate in new_state:
-                new_state[coordinate]=merge(new_state[coordinate],unit) 
-            else:
-                new_state[coordinate]=unit
+        update_state(new_state, x)
         i += 1
     return new_state
 
+def update_state(state, sample): #Modifies state in place
+    coordinate=sample[1] #TODO: Use named tuples to hold coordinate
+    if coordinate:
+        unit=sample[2] #TODO: Use named tuple to hold unit
+        if coordinate in state:
+            state[coordinate]=merge(state[coordinate],unit) 
+        else:
+            state[coordinate]=unit
+    
+
 def merge(unit_a, unit_b):
-    if unit_a=='H' and unit_b=='F':
-        return 'f'
+    if unit_a=='H' and unit_b in 'F': #TODO: Add the rest of possible F. Use problem's decoding funcitons?
+        return '$'
     return unit_b
        
 def sample_cell(problem_distribution_arr): #TODO: What to return when p > max of proability distribution? Should problem insure prob array sums to 1?
