@@ -14,8 +14,9 @@ def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled
     horizion=2 #TODO: What should manage horizon?
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
     possible_worlds = [];
+    problem_dist = [(0.066, (0, 0), 'F'), (0.066, (0, 1), 'F'), (0.066, (0, 2), 'F'), (0.066, (0, 3), 'F'), (0.066, (1, 0), 'F'), (0.066, (1, 1), 'F'), (0.066, (1, 2), 'F'), (0.066, (1, 3), 'F'), (0.066, (2, 0), 'F'), (0.066, (2, 1), 'F'), (0.066, (2, 2), 'F'), (0.066, (2, 3), 'F'), (0.066, (3, 0), 'F'), (0.066, (3, 1), 'F'), (0.066, (3, 2), 'F'), (0.066, (3, 3), 'F')]
     for i in range(n):
-        w = sample(4,4,known,1) #TODO: Magic numbers are size of world
+        w = sample(problem_dist,known,1) #TODO: Hoping this works the same way with an array of probability distributions
         possible_worlds.append(w) 
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
@@ -38,9 +39,9 @@ def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled
     return (max_action, max_q)
 
 if __name__ == '__main__':
-    known = problem.parse('-H--\n---B')
-    print(known)
-    current_state={(1, 0): 'H'}
-    print(current_state)
-    print(ohwow(current_state, known))
-    #Run ohwow a bunch of times to get next action and print each new state    
+    a = [0,1,2,3]
+    cross=[]
+    for x in a:
+        for y in a:
+            cross.append((0.066,(x,y),'F'))
+    print cross

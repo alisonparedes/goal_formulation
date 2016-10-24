@@ -9,9 +9,10 @@ from problem import * #TODO: World and problem should maybe be in the same modul
 
 def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflict with the real-world? Enabling real-world to spawn new things and the agent to imagine possible worlds where new things have spawned where it has been before. Defer to problem!
     '''
-    Expects a array of probability distributions determined by the problem.
+    Expects a 2D array of probability distributions determined by the problem. 
+    Example [(0.5,(0,1),'F'),(0.5,None)]
     
-    N is the number of times.
+    N is the number of new cells to sample.
     
     Assumptions:
 
@@ -20,10 +21,10 @@ def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflic
     '''
     new_state = copy(state)
     for i in range(n):
-        cell = sample_cell(problem_distribution_arr)
-        coordinate=cell[1] #TODO: Use named tuples
+        x = sample_cell(problem_distribution_arr)
+        coordinate=x[1] #TODO: Use named tuples to hold coordinate
         if coordinate:
-            unit=cell[2]
+            unit=x[2] #TODO: Use named tuple to hold unit
             if coordinate in new_state:
                 new_state[coordinate]=merge(new_state[coordinate],unit) 
             else:
@@ -36,14 +37,14 @@ def merge(unit_a, unit_b):
         return 'f'
     return unit_b
        
-def sample_cell(problem_distribution_arr): 
+def sample_cell(problem_distribution_arr): #TODO: What to return when p > max of proability distribution? Should problem insure prob array sums to 1?
     p = random.random()
     cummulative = 0
     i=-1
     while cummulative < p: #TODO: How might a recursive walk function work?
         i += 1
         cell = problem_distribution_arr[i]
-        probability=cell[0] #TODO: Use named tuples
+        probability=cell[0] #TODO: Use named tuple to hold probability
         cummulative += probability
     return cell
       
