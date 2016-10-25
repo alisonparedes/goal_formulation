@@ -4,7 +4,7 @@ Created on Sep 1, 2016
 @author: lenovo
 '''
 from collections import namedtuple, deque
-import problem
+import relaxed_problem
 
 def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
@@ -83,18 +83,14 @@ def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): 
     return Expanded(len(expanded),max_g)
 
 def applicable_actions(s): #TODO: Pass a function from the problem
-    return problem.applicable_actions(s.state)
+    return relaxed_problem.applicable_actions(s.state)
 
 def transition(s_node, action, State, Simulated):
-    next_state=problem.transition(s_node.state, action, State, Simulated)
+    next_state=relaxed_problem.transition(s_node.state, action, State, Simulated)
     return next_state#TODO: Problem figures out how to modify the dictionary
 
 def equals(s1, s2):
     return s1.state == s2.state #TODO: N/A if removing goal test
 
 if __name__ == '__main__':
-    simstate = '-H--\nF--B'
-    initial_state = problem.parse(simstate)
-    goal_state = 10
-    max_g=search(initial_state,goal_state,2)
-    print(max_g)
+    pass
