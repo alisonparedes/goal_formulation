@@ -15,7 +15,15 @@ def simulate(state, action, real_world):
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
     #TODO: How does what is known change? 
-    return new_world #TODO: Return cumulative reward to use to compare results of each run
+    '''Spawn new rewards. What is the simplest way to spawn new rewards? Use the same model used for generating 
+    inital real world (none yet). If I did have a model for generating the inital real world, what might it do? Maybe the similar
+    to what I built for speculating about the world. For now, use the same model I built for speculating about the world--The 
+    assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
+    the world module right now.
+    '''
+    new_world = spawn(new_world) #TODO: Modify in place?
+    new_world_grid = to_grid(new_world,4,4) #TODO: Where could I get these dimensions from instead?
+    return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring
     for coordinate, unit in state.iteritems():

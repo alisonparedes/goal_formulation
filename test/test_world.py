@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
         state_dict = {(0,0):'H',(3,3):'B'}
         n=1
         new_state_dict = sample(problem_distribution_arr, state_dict, n) 
-        self.assertEquals(new_state_dict,{(0,0):'f',(3,3):'B'},new_state_dict)
+        self.assertEquals(new_state_dict,{(0,0):'$',(3,3):'B'},new_state_dict)
         random.seed(None) #Tear down
 
 if __name__ == "__main__":

@@ -131,14 +131,7 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources 
-    '''Spawn new rewards. What is the simplest way to spawn new rewards? Use the same model used for generating 
-    inital real world (none yet). If I did have a model for generating the inital real world, what might it do? Maybe the similar
-    to what I built for speculating about the world. For now, use the same model I built for speculating about the world--The 
-    assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
-    the world module right now.
-    '''
-    new_state = spawn(s.state)
-    return State(new_state, new_reward) #
+    return State(simulated.state, new_reward) #
     #return s
 
 def spawn(state, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
@@ -151,7 +144,8 @@ def spawn(state, n=1):  #TODO: Consider getting size of world from somewhere els
     one format to the other but which functions prefer which versions? I don't want to worry about this but ... sigh. 
     '''
     problem_distribution_arr = [(0.5,(0,0),'F'),(0.5,None)]
-    new_state = world.sample(problem_distribution_arr, state, n)  #TODO: Need to be able to seed the sample for debugging
+    state_dict = to_dict(state)
+    new_state = world.sample(problem_distribution_arr, state_dict, n)  #TODO: Need to be able to seed the sample for debugging
     return new_state
     
 def new_coordinate(coordinate, action):
@@ -283,7 +277,7 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
     #TODO: Try the move and if it fails return?
     cell=world[to_x][to_y]
     world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
-    return world #TODO: What about returning the new state? 
+    return world #TODO: What about returning new observations to the agent?
 
 def get_coordinate(s):
     for coordinate, cell in s.iteritems():

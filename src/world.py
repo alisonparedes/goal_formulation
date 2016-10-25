@@ -34,6 +34,7 @@ def update_state(state, sample): #Modifies state in place
             state[coordinate]=merge(state[coordinate],unit) 
         else:
             state[coordinate]=unit
+
     
 
 def merge(unit_a, unit_b):

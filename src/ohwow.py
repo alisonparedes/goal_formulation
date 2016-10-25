@@ -4,7 +4,7 @@ Created on Sep 21, 2016
 @author: Alison Paredes
 '''
 from bfs_g import *
-from world import *
+import world
 from problem import *
 def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled by world module for now
     '''
@@ -15,9 +15,7 @@ def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
     possible_worlds = [];
     problem_dist = [(0.066, (0, 0), 'F'), (0.066, (0, 1), 'F'), (0.066, (0, 2), 'F'), (0.066, (0, 3), 'F'), (0.066, (1, 0), 'F'), (0.066, (1, 1), 'F'), (0.066, (1, 2), 'F'), (0.066, (1, 3), 'F'), (0.066, (2, 0), 'F'), (0.066, (2, 1), 'F'), (0.066, (2, 2), 'F'), (0.066, (2, 3), 'F'), (0.066, (3, 0), 'F'), (0.066, (3, 1), 'F'), (0.066, (3, 2), 'F'), (0.066, (3, 3), 'F')]
-    for i in range(n):
-        w = sample(problem_dist,known,1) #TODO: Hoping this works the same way with an array of probability distributions
-        possible_worlds.append(w) 
+    possible_worlds = sample(known, problem_dist, n)
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
     #For each action applicable in s
@@ -38,6 +36,12 @@ def ohwow(current_state, known, prior=None): #TODO: Prior is uniform and handled
             max_action=action
     return (max_action, max_q)
 
+def sample(known, problem_dist, n):
+    possible_worlds=[]
+    for i in range(n):
+        w = world.sample(problem_dist,known,1) 
+        possible_worlds.append(w) 
+    return possible_worlds
 if __name__ == '__main__':
     a = [0,1,2,3]
     cross=[]
