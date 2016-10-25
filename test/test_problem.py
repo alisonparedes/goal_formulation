@@ -25,27 +25,26 @@ class TestState(unittest.TestCase):
         state = parse(simstate)
         actions = applicable_actions(state, 2, 4)
         self.assertEquals(actions, ['S','E','W'], actions)
-    
-    def testTransitionHB(self):
-        simstate = '-H--\n---B'
-        state = parse(simstate)
-        action = 1 #HB
-        next_state = transition(state, action)
-        self.assertEquals(next_state, {(3,1):'*'}, next_state)
-        
-    def testTransitionHF(self):
-        simstate = '-H--\n---F'
-        state = parse(simstate)
-        action = 2 #HB
-        next_state = transition(state, action)
-        self.assertEquals(next_state, {(3,1):'$'}, next_state)
         
     def testGetCoordinate(self):
         simstate = '-H--\n---F'
         state = parse(simstate)
         state_grid = to_grid(state, 4, 2)
-        coordinate = get_coordinate(state_grid)
+        coordinate = get_coordinate(state)
         self.assertEquals(coordinate, (1,0), coordinate)
+        
+    def testTransitionBeliefState(self):
+        simstate = '-H--\n---F'
+        state = parse(simstate)
+        action = 'S'
+        new_state = transition(state, action)
+        self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
+        
+    def to_grid(self):
+        simstate = '-H--\n---F'
+        state = parse(simstate)
+        state_grid = to_grid(state)
+        self.assertEquals(state_grid, [[None, None], ['H', None], [None, None], [None, 'F']], state_grid)    
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

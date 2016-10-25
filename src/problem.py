@@ -161,26 +161,30 @@ def to_dict(w):
         x+=1
     return state
                 
-def transition(world, action):
+def transition(state, action):
     '''
-    Takes a state, an action, and a world (grid)  and returns a new world. Transition may not always be possible.
+    Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
+    or a complete state. 
     '''
-    #TODO: Separate functions maybe?
-    from_coordinate=get_coordinate(world) #TODO: Currently moves harvester only. Why not get this from world?
+    #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
+    state_grid = to_grid(state, 4, 2) #TODO: Get dimensions from problem spec
+    print(state_grid)
+    from_coordinate=get_coordinate(state) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
-    unit = world[from_x][from_y] #TODO: I hope this is a copy!
-    world[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
+    unit = state_grid[from_x][from_y] #TODO: I hope this is a copy!
+    state_grid[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
     to_coordinate = new_coordinate(from_coordinate, action)
     to_x = to_coordinate[0]
     to_y = to_coordinate[1] 
     #TODO: Try the move and if it fails return?
-    cell=world[to_x][to_y]
-    world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
-    return world #TODO: What about returning new observations to the agent?
+    cell=state_grid[to_x][to_y]
+    state_grid[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
+    state_dict = to_dict(state_grid)
+    return state_dict #TODO: What about returning new observations to the agent?
 
-def get_coordinate(world):
-    for coordinate, cell in world.iteritems():
+def get_coordinate(state):
+    for coordinate, cell in state.iteritems():
         if cell in 'H*$!0':
             return coordinate
     return None
