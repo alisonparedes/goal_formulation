@@ -40,7 +40,14 @@ class TestState(unittest.TestCase):
         new_state = transition(state, action)
         self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
         
-    def to_grid(self):
+    def testTransitionRealWorld(self): #TODO: The real world is just more complete, every cell is represented.
+        simstate = '-H--\n---F'
+        state = parse(simstate)
+        action = 'S'
+        new_state = transition(state, action)
+        self.assertEquals(new_state, {(0, 0): None}, new_state)
+        
+    def testToGrid(self):
         simstate = '-H--\n---F'
         state = parse(simstate)
         state_grid = to_grid(state)
