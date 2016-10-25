@@ -161,12 +161,12 @@ def to_dict(w):
         x+=1
     return state
                 
-def transition1(s, action, world): #TODO: I really want to put these top level action and transitions into a separate problem module. S isn't really a state. Fix this!
+def transition(world, action):
     '''
     Takes a state, an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #TODO: Separate functions maybe?
-    from_coordinate=get_coordinate(s)
+    from_coordinate=get_coordinate(world) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
     unit = world[from_x][from_y] #TODO: I hope this is a copy!
@@ -179,8 +179,8 @@ def transition1(s, action, world): #TODO: I really want to put these top level a
     world[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
     return world #TODO: What about returning new observations to the agent?
 
-def get_coordinate(s):
-    for coordinate, cell in s.iteritems():
+def get_coordinate(world):
+    for coordinate, cell in world.iteritems():
         if cell in 'H*$!0':
             return coordinate
     return None

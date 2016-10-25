@@ -21,10 +21,10 @@ class TestState(unittest.TestCase):
         self.assertEquals(simstate, '\n{0}\n'.format(init), simstate) #TODO: These look equivalent to me
     '''
     def testActions(self):
-        simstate = '-H--\n---H'
+        simstate = '-H--\n---B'
         state = parse(simstate)
-        actions = applicable_actions(state)
-        self.assertEquals(actions, [1,2], actions)
+        actions = applicable_actions(state, 2, 4)
+        self.assertEquals(actions, ['S','E','W'], actions)
     
     def testTransitionHB(self):
         simstate = '-H--\n---B'
@@ -39,6 +39,13 @@ class TestState(unittest.TestCase):
         action = 2 #HB
         next_state = transition(state, action)
         self.assertEquals(next_state, {(3,1):'$'}, next_state)
+        
+    def testGetCoordinate(self):
+        simstate = '-H--\n---F'
+        state = parse(simstate)
+        state_grid = to_grid(state, 4, 2)
+        coordinate = get_coordinate(state_grid)
+        self.assertEquals(coordinate, (1,0), coordinate)
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

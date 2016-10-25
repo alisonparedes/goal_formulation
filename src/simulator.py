@@ -4,14 +4,14 @@ Created on Sep 28, 2016
 @author: Alison Paredes
 '''
 
-from problem import *
+import problem
 
-def simulate(state, action, real_world): 
+def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft state?
     '''
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    new_world = transition1(state, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
+    new_world = problem.transition(state, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
     #TODO: How does what is known change? 
