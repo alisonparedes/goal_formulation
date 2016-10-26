@@ -100,16 +100,15 @@ def applicable_actions(belief_state, h, w): #TODO: Use a problem definition inst
 
 
 
-def spawn(state, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
+def reset(state, problem_distribution_arr, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
     '''
-    Spawn expects a state of the world. It doesn't need to be a completely known state of the world (I think) but because I expect
+    Expects a state of the world. It doesn't need to be a completely known state of the world (I think) but because I expect
     this function to be used by the simulator which is omniscient and not the agent which has limited knolwedge, spawn must be able to
     deal with a complete state, all n of its attributes.
     
     State must be a dictionary. Right now there may be two representations of states floating around, dictionaries and 2D grids. There are functions that transform
     one format to the other but which functions prefer which versions? I don't want to worry about this but ... sigh. 
     '''
-    problem_distribution_arr = [(0.5,(0,0),'F'),(0.5,None)]
     state_dict = to_dict(state)
     new_state = world.sample(problem_distribution_arr, state_dict, n)  #TODO: Need to be able to seed the sample for debugging
     return new_state
@@ -187,18 +186,35 @@ def problem_distribution(belief_state_dict, problem_spec=(4,2)): #TODO: Problem 
     problem_distribution_arr = []
     for coordinate, unit in belief_state_dict.iteritems():
         problem_distribution_arr.append((0.0, coordinate, unit)) #There is no chance an attribute of the belief state could be different, for now
+    #TODO: Make a function for this
     total_probability=0.0
-    print(belief_state_dict)
     for x in range(0, problem_spec[0]):
         for y in range(0, problem_spec[1]):
-            print (x, y)
             if (x, y) not in belief_state_dict:
                 probability = 0.1
                 problem_distribution_arr.append((probability, (x, y), 'F')) 
                 total_probability += probability
     problem_distribution_arr.append((1 - total_probability, None))        
     return problem_distribution_arr
-    
+
+
+def reset_distribution(state_dict, problem_spec=(4,2)): #TODO: Oh my god stop doing this :)
+    problem_distribution_arr = []
+    #To allow this program to run forever, there should always be a chance that new food will spawn somewhere at least
+    for coordinate, unit in state_dict.iteritems():
+        if unit in 'f':
+            problem_distribution_arr.append((0.1,coordinate,'F')) #Chance to reset food
+        if unit in 'Bb*$F':
+            problem_distribution_arr.append((0.0,coordinate,'B')) #New food can't spawn where food already is available, on a base
+    total_probability=0.0
+    for x in range(0, problem_spec[0]):
+        for y in range(0, problem_spec[1]):
+            if (x, y) not in state_dict:
+                probability = 0.1
+                problem_distribution_arr.append((probability, (x, y), 'F')) 
+                total_probability += probability
+    problem_distribution_arr.append((1 - total_probability, None)) 
+    return problem_distribution_arr
 
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():

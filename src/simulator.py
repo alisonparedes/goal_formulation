@@ -21,7 +21,9 @@ def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft sta
     assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
     the world module right now.
     '''
-    new_world = problem.spawn(new_world) #TODO: Modify in place?
+    new_world_dict = problem.to_dict(new_world)
+    probability_to_reset = problem.reset_distribution(new_world_dict) #TODO: Uses default problem spec for testing, create a problem spec function
+    new_world = problem.reset(new_world, probability_to_reset) #TODO: Modify in place
     new_world_grid = problem.to_grid(new_world,4,4) #TODO: Where could I get these dimensions from instead?
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
 

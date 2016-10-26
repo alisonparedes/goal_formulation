@@ -5,6 +5,7 @@ Created on Aug 18, 2016
 '''
 import unittest
 from problem import *
+import random
 
 class TestState(unittest.TestCase):
 
@@ -58,6 +59,23 @@ class TestState(unittest.TestCase):
         belief_state_dict = parse(simstate)
         problem_dist = problem_distribution(belief_state_dict)
         self.assertEquals(problem_dist,[], problem_dist)
+        
+    def testResetDistribution(self):
+        simstate = '-H--\n---B'
+        state_dict = parse(simstate)
+        reset_dist = reset_distribution(state_dict)
+        expected = [(0.0, (3, 1), 'B'), (0.1, (0, 0), 'F'), (0.1, (0, 1), 'F'), (0.1, (1, 1), 'F'), (0.1, (2, 0), 'F'), (0.1, (2, 1), 'F'), (0.1, (3, 0), 'F'), (0.4, None)]
+        self.assertEquals(reset_dist, expected, reset_dist)
+        
+    def testReset(self):
+        random.seed(1) #Set-up
+        simstate = '-H--\n---B'
+        state_dict = parse(simstate)
+        state_grid = to_grid(state_dict, 4, 2)
+        reset_dist = [(0.0, (3, 1), 'B'), (0.1, (0, 0), 'F'), (0.1, (0, 1), 'F'), (0.1, (1, 1), 'F'), (0.1, (2, 0), 'F'), (0.1, (2, 1), 'F'), (0.1, (3, 0), 'F'), (0.4, None)]
+        new_world = reset(state_grid, reset_dist, 1)
+        self.assertEquals(new_world,{(0, 1): 'F', (1, 0): 'H', (3, 1): 'B'}, new_world)
+        random.seed(None) #Tear down          
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
