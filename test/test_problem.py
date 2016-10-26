@@ -53,6 +53,12 @@ class TestState(unittest.TestCase):
         state_grid = to_grid(state)
         self.assertEquals(state_grid, [[None, None], ['H', None], [None, None], [None, 'F']], state_grid)    
         
+    def testProblemDistribution(self):
+        simstate = '-H--\n---B'
+        belief_state_dict = parse(simstate)
+        problem_dist = problem_distribution(belief_state_dict)
+        self.assertEquals(problem_dist,[], problem_dist)
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

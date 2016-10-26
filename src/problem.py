@@ -183,6 +183,23 @@ def transition(state, action):
     state_dict = to_dict(state_grid)
     return state_dict #TODO: What about returning new observations to the agent?
 
+def problem_distribution(belief_state_dict, problem_spec=(4,2)): #TODO: Problem spec is width and height of a single test problem right now
+    problem_distribution_arr = []
+    for coordinate, unit in belief_state_dict.iteritems():
+        problem_distribution_arr.append((0.0, coordinate, unit)) #There is no chance an attribute of the belief state could be different, for now
+    total_probability=0.0
+    print(belief_state_dict)
+    for x in range(0, problem_spec[0]):
+        for y in range(0, problem_spec[1]):
+            print (x, y)
+            if (x, y) not in belief_state_dict:
+                probability = 0.1
+                problem_distribution_arr.append((probability, (x, y), 'F')) 
+                total_probability += probability
+    problem_distribution_arr.append((1 - total_probability, None))        
+    return problem_distribution_arr
+    
+
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():
         if cell in 'H*$!0':
