@@ -26,7 +26,7 @@ def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and 
         c = 0
         #Loop over all w in sample
         for world in possible_worlds:
-            s_prime = transition(belief_state, action, world)
+            s_prime = transition(belief_state, action)
             c += search(s_prime,horizion) 
         q = c/float(n) #- cost
         if q > max_q:
@@ -37,10 +37,8 @@ def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and 
 def applicable_actions(belief_state):
     return problem.applicable_actions(belief_state, 4, 4)#TODO: Pass a problem definition instead
 
-def transition(belief_state, action, world):
-    world_grid = problem.to_grid(world,4,4) #TODO: Magic numbers are size of world
-    s_prime=problem.transition1(belief_state, action, world_grid) 
-    s_prime_dict = problem.to_dict(s_prime)
+def transition(belief_state, action):
+    s_prime_dict=problem.transition(belief_state, action) #TODO: Should not return integer units
     return s_prime_dict
 
 def sample(belief_state, problem_dist, n):
@@ -51,9 +49,4 @@ def sample(belief_state, problem_dist, n):
     return possible_worlds
 
 if __name__ == '__main__':
-    a = [0,1,2,3]
-    cross=[]
-    for x in a:
-        for y in a:
-            cross.append((0.066,(x,y),'F'))
-    print cross
+    pass

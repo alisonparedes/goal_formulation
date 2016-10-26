@@ -48,8 +48,9 @@ def get_current_state(state):
 if __name__ == '__main__': #TODO: What arguments should it accept?
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     belief_state={(1, 0): 'H', (3, 1): 'B'}
+    problem_spec=(len(real_world), len(real_world[0]))
+    print(problem_spec)
     while True: #TODO: True may be a bit much. When to stop?
-        print(belief_state)
         current_state = get_current_state(belief_state) #TODO: Why not use just belief state?
         action = ohwow(current_state, belief_state)
         old_world = deepcopy(real_world) #TODO: Why not modify in place?
@@ -58,6 +59,4 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
         belief_state = new_state(belief_state, known)
         real_world = new_world
         os.system('clear') 
-        print(belief_state)
-        print(real_world)
         print(problem.interleaved(belief_state, real_world)) #TODO: Swap these parameters to reflect order states will be printed

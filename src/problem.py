@@ -100,7 +100,7 @@ def applicable_actions(belief_state, h, w): #TODO: Use a problem definition inst
 
 
 
-def reset(state, problem_distribution_arr, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
+def reset(state_dict, problem_distribution_arr, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
     '''
     Expects a state of the world. It doesn't need to be a completely known state of the world (I think) but because I expect
     this function to be used by the simulator which is omniscient and not the agent which has limited knolwedge, spawn must be able to
@@ -109,7 +109,7 @@ def reset(state, problem_distribution_arr, n=1):  #TODO: Consider getting size o
     State must be a dictionary. Right now there may be two representations of states floating around, dictionaries and 2D grids. There are functions that transform
     one format to the other but which functions prefer which versions? I don't want to worry about this but ... sigh. 
     '''
-    state_dict = to_dict(state)
+    #state_dict = to_dict(state)
     new_state = world.sample(problem_distribution_arr, state_dict, n)  #TODO: Need to be able to seed the sample for debugging
     return new_state
     
@@ -166,8 +166,7 @@ def transition(state, action):
     or a complete state. 
     '''
     #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
-    state_grid = to_grid(state, 4, 2) #TODO: Get dimensions from problem spec
-    print(state_grid)
+    state_grid = to_grid(state, 4, 4) #TODO: Get dimensions from problem spec
     from_coordinate=get_coordinate(state) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]

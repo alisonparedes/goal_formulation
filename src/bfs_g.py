@@ -14,7 +14,7 @@ def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test co
     Simulated = namedtuple('Simulated',['state','resources'])
     i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
-    
+
     open_list = deque([i])
     closed_list = deque([]) #TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
     depth = 0 #TODO: Is there a good way to encapsulate depth test?
@@ -25,6 +25,7 @@ def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test co
     max_g = 0
     while len(open_list) > 0 and depth < horizon:
         s = open_list.popleft() 
+
         #print(s.state)
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A

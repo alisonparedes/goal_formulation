@@ -11,7 +11,8 @@ def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft sta
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    new_world = problem.transition(state, action, real_world) #TODO: OMG reorganize top level and next level operations! For now transition requires a coordinate. How much more flexible does transition need to be?
+    real_world_dict = problem.to_dict(real_world)
+    new_world_dict = problem.transition(real_world_dict, action) 
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
     #TODO: How does what is known change? 
@@ -21,10 +22,9 @@ def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft sta
     assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
     the world module right now.
     '''
-    new_world_dict = problem.to_dict(new_world)
-    probability_to_reset = problem.reset_distribution(new_world_dict) #TODO: Uses default problem spec for testing, create a problem spec function
-    new_world = problem.reset(new_world, probability_to_reset) #TODO: Modify in place
-    new_world_grid = problem.to_grid(new_world,4,4) #TODO: Where could I get these dimensions from instead?
+    probability_to_reset = problem.reset_distribution(new_world_dict, problem_spec=(4,4)) #TODO: Uses default problem spec for testing, create a problem spec function
+    new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
+    new_world_grid = problem.to_grid(new_world_dict,4,4) #TODO: Where could I get these dimensions from instead?
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring
@@ -34,7 +34,4 @@ def get_coordinate(state): #TODO: Get rid of this during refactoring
     return None
 
 if __name__ == '__main__':
-    state={(1, 0): 'H', (3, 1): 'B'}
-    action='W'
-    real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
-    print simulate(state, action, real_world)
+    pass
