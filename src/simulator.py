@@ -21,8 +21,8 @@ def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft sta
     assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
     the world module right now.
     '''
-    new_world = spawn(new_world) #TODO: Modify in place?
-    new_world_grid = to_grid(new_world,4,4) #TODO: Where could I get these dimensions from instead?
+    new_world = problem.spawn(new_world) #TODO: Modify in place?
+    new_world_grid = problem.to_grid(new_world,4,4) #TODO: Where could I get these dimensions from instead?
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring

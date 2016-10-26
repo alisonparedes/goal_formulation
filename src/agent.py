@@ -49,15 +49,15 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     belief_state={(1, 0): 'H', (3, 1): 'B'}
     while True: #TODO: True may be a bit much. When to stop?
-        print(state)
+        print(belief_state)
         current_state = get_current_state(belief_state) #TODO: Why not use just belief state?
         action = ohwow(current_state, belief_state)
         old_world = deepcopy(real_world) #TODO: Why not modify in place?
         new_world = simulator.simulate(belief_state, action[0], real_world) #Modifies world 
         known = new_knowledge(old_world, new_world, current_state) #TODO: Maybe simulator needs to return new observations
-        state = new_state(state, known)
+        belief_state = new_state(belief_state, known)
         real_world = new_world
         os.system('clear') 
-        print(state)
+        print(belief_state)
         print(real_world)
-        print(simulator.interleaved(state, real_world)) #TODO: Swap these parameters to reflect order states will be printed
+        print(problem.interleaved(belief_state, real_world)) #TODO: Swap these parameters to reflect order states will be printed
