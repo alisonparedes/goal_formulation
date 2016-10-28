@@ -12,7 +12,9 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
     real_world_dict = problem.to_dict(real_world)
-    new_world_dict = problem.transition(real_world_dict, action, problem_spec)
+    new_world = problem.transition(real_world_dict, action, problem_spec)
+    new_world_dict = new_world.state_dict
+    new_observation = new_world.observation_dict #TODO: Return new observations to agent so it can update its belief state (overengineered?)
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
     #TODO: How does what is known change? 
@@ -26,6 +28,7 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
     new_world_grid = problem.to_grid(new_world_dict,problem_spec)
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
+
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring
     for coordinate, unit in state.iteritems():

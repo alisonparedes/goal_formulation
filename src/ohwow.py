@@ -38,7 +38,8 @@ def applicable_actions(belief_state, problem_spec):
     return problem.applicable_actions(belief_state, problem_spec)#TODO: Pass a problem definition instead
 
 def transition(belief_state, action, problem_spec):
-    s_prime_dict=problem.transition(belief_state, action, problem_spec) #TODO: Should not return integer units
+    s_prime = problem.transition(belief_state, action, problem_spec) #TODO: Should not return integer units
+    s_prime_dict=s_prime.state_dict
     return s_prime_dict
 
 def sample(belief_state, problem_dist, n):

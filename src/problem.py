@@ -177,15 +177,22 @@ def transition(state, action, problem_spec):
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
     unit = state_grid[from_x][from_y] #TODO: I hope this is a copy!
-    state_grid[from_x][from_y]=leaving(unit) #TODO: May need to replace old location to get performance stats in the interim
+    leaving_unit = leaving(unit)
+    state_grid[from_x][from_y]= leaving_unit#TODO: May need to replace old location to get performance stats in the interim
     to_coordinate = new_coordinate(from_coordinate, action)
     to_x = to_coordinate[0]
     to_y = to_coordinate[1] 
     #TODO: Try the move and if it fails return?
     cell=state_grid[to_x][to_y]
-    state_grid[to_x][to_y]=arriving('H', cell) #TODO: Moves may not always work
+    arriving_unit = arriving('H', cell) #TODO: Moves may not always work
+    state_grid[to_x][to_y]=arriving_unit #TODO: Moves may not always work
     state_dict = to_dict(state_grid)
-    return state_dict #TODO: What about returning new observations to the agent?
+    observation_dict={}
+    observation_dict[(from_x, from_y)]= leaving_unit
+    observation_dict[(to_x, to_y)]= arriving_unit
+    Transition = namedtuple('Transition',['state_dict','observation_dict'])
+    new_state = Transition(state_dict=state_dict, observation_dict=observation_dict)
+    return new_state #TODO: What about returning new observations to the agent?
 
 def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
     problem_distribution_arr = []
