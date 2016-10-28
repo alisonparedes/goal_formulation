@@ -4,7 +4,7 @@ Created on Aug 18, 2016
 @author: lenovo
 '''
 
-import operator #TODO: What does this do?
+
 import sys
 from collections import namedtuple
 import world
@@ -181,7 +181,7 @@ def transition(state, action):
     state_dict = to_dict(state_grid)
     return state_dict #TODO: What about returning new observations to the agent?
 
-def problem_distribution(belief_state_dict, problem_spec=(4,2)): #TODO: Problem spec is width and height of a single test problem right now
+def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
     problem_distribution_arr = []
     for coordinate, unit in belief_state_dict.iteritems():
         problem_distribution_arr.append((0.0, coordinate, unit)) #There is no chance an attribute of the belief state could be different, for now
