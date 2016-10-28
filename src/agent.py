@@ -33,13 +33,12 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     belief_state={(1, 0): 'H', (3, 1): 'B'}
     problem_spec=(len(real_world), len(real_world[0]))
     print(problem_spec)
-    while True: #TODO: True may be a bit much. When to stop?
+    while True:
         action = ohwow(belief_state, problem_spec)
-        old_world = deepcopy(real_world) #TODO: Why not modify in place?
-        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec) #Modifies world
+        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec)
         new_observations = new_world.new_observations_dict
         new_world_state = new_world.new_real_world_grid
         belief_state = new_belief_state(belief_state, new_observations)
         real_world = new_world_state
-        os.system('clear')
+        #os.system('clear')
         print(problem.interleaved(belief_state, real_world, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed

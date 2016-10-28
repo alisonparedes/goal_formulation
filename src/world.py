@@ -19,6 +19,7 @@ def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflic
     A seed could help debug these functions but I don't think it can be used to debug search since search
     needs to speculate about different models. 
     '''
+    print(problem_distribution_arr)
     new_state = copy(state)
     for i in range(n):
         x = sample_cell(problem_distribution_arr)
