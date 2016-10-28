@@ -12,7 +12,7 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
     real_world_dict = problem.to_dict(real_world)
-    new_world_dict = problem.transition(real_world_dict, action) 
+    new_world_dict = problem.transition(real_world_dict, action, problem_spec)
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
     #TODO: How does what is known change? 
@@ -24,7 +24,7 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     '''
     probability_to_reset = problem.reset_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
-    new_world_grid = problem.to_grid(new_world_dict,4,4) #TODO: Where could I get these dimensions from instead?
+    new_world_grid = problem.to_grid(new_world_dict,problem_spec)
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run
 
 def get_coordinate(state): #TODO: Get rid of this during refactoring

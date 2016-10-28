@@ -52,11 +52,11 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     print(problem_spec)
     while True: #TODO: True may be a bit much. When to stop?
         current_state = get_current_state(belief_state) #TODO: Why not use just belief state?
-        action = ohwow(current_state, belief_state)
+        action = ohwow(current_state, belief_state, problem_spec)
         old_world = deepcopy(real_world) #TODO: Why not modify in place?
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec) #Modifies world
         known = new_knowledge(old_world, new_world, current_state) #TODO: Maybe simulator needs to return new observations
         belief_state = new_state(belief_state, known)
         real_world = new_world
         os.system('clear') 
-        print(problem.interleaved(belief_state, real_world)) #TODO: Swap these parameters to reflect order states will be printed
+        print(problem.interleaved(belief_state, real_world, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed

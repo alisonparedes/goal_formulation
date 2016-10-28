@@ -33,18 +33,20 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
         x += 1    
     return state
 
-def write(state, h, w): #TODO: Move to agent module.
+def write(state, problem_spec): #TODO: Move to agent module.
     '''
     A state is a dictionary of positions and objects, keyed on position. Use to write the agent's perspective. 
     '''
-    grid = to_grid(state, h, w)
+    w=problem_spec[0]
+    h=problem_spec[1]
+    grid = to_grid(state, problem_spec)
     printable = write_grid(grid) #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.   
     return printable
 
-def interleaved(known, world):
+def interleaved(known, world, problem_spec):
     height=len(world[0])
     width=len(world)
-    known_grid = to_grid(known, height, width) 
+    known_grid = to_grid(known, problem_spec)
     printable = ''
     for y in range(height):
         for x in range(width):
@@ -80,8 +82,10 @@ def write_grid(state):
         simstate += '\n'
     return simstate
 
-def applicable_actions(belief_state, h, w): #TODO: Use a problem definition instead of dimensions
+def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definition instead of dimensions
     actions=[]
+    w=problem_spec[0]
+    h=problem_spec[1]
     units='' #TODO: Maybe use this when adding Defender's moves
     for coordinate, unit in belief_state.iteritems():
         x=coordinate[0] 
@@ -132,11 +136,13 @@ def new_coordinate(coordinate, action):
 '''def get_coordiante(s, world):
     return (0,0) #TODO: Get coordinate(s)? of a unit in the world. Overkill?'''
     
-def to_grid(s, w, h): 
+def to_grid(s, problem_spec):
     '''
     Takes a dictionary and returns a 2D representation
     '''
     grid = []
+    w=problem_spec[0]
+    h=problem_spec[1]
     for i in range(w): #TODO: I don't need i.
         grid.append([None]*h) #Meh
     for coordinate, unit in s.iteritems():
@@ -160,13 +166,13 @@ def to_dict(w):
         x+=1
     return state
                 
-def transition(state, action):
+def transition(state, action, problem_spec):
     '''
     Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
     or a complete state. 
     '''
     #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
-    state_grid = to_grid(state, 4, 4) #TODO: Get dimensions from problem spec
+    state_grid = to_grid(state, problem_spec) #TODO: Get dimensions from problem spec
     from_coordinate=get_coordinate(state) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]

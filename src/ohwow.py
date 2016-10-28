@@ -6,7 +6,7 @@ Created on Sep 21, 2016
 from bfs_g import *
 import world
 import problem
-def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and handled by world module for now
+def ohwow(current_state, belief_state, problem_spec): #TODO: Prior is uniform and handled by world module for now
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
@@ -18,7 +18,7 @@ def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and 
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward']) #TODO: Label "order" comes from the problem. What is a more general name?
     #For each action applicable in s
-    actions_in_s = applicable_actions(belief_state) 
+    actions_in_s = applicable_actions(belief_state, problem_spec)
         #Transition to next state
     max_action=None
     max_q=0 #TODO: Does 0 work?
@@ -26,7 +26,7 @@ def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and 
         c = 0
         #Loop over all w in sample
         for world in possible_worlds:
-            s_prime = transition(belief_state, action)
+            s_prime = transition(belief_state, action, problem_spec)
             c += search(s_prime,horizion) 
         q = c/float(n) #- cost
         if q > max_q:
@@ -34,11 +34,11 @@ def ohwow(current_state, belief_state, prior=None): #TODO: Prior is uniform and 
             max_action=action
     return (max_action, max_q)
 
-def applicable_actions(belief_state):
-    return problem.applicable_actions(belief_state, 4, 4)#TODO: Pass a problem definition instead
+def applicable_actions(belief_state, problem_spec):
+    return problem.applicable_actions(belief_state, problem_spec)#TODO: Pass a problem definition instead
 
-def transition(belief_state, action):
-    s_prime_dict=problem.transition(belief_state, action) #TODO: Should not return integer units
+def transition(belief_state, action, problem_spec):
+    s_prime_dict=problem.transition(belief_state, action, problem_spec) #TODO: Should not return integer units
     return s_prime_dict
 
 def sample(belief_state, problem_dist, n):
