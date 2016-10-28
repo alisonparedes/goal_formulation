@@ -43,15 +43,25 @@ class TestState(unittest.TestCase):
         
     def testTransitionRealWorld(self): #TODO: The real world is just more complete, every cell is represented.
         simstate = '-H--\n---F'
+        problem_spec = (4,2)
         state = parse(simstate)
         action = 'S'
-        new_state = transition(state, action)
-        self.assertEquals(new_state, {(0, 0): None}, new_state)
+        new_state = transition(state, action, problem_spec).state_dict
+        self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
+
+    def testTransitionObservations(self):
+        simstate = '-H--\n---F'
+        problem_spec = (4,2)
+        state = parse(simstate)
+        action = 'S'
+        new_observations = transition(state, action, problem_spec).observation_dict
+        self.assertEquals(new_observations, {(1, 0): None, (1, 1): 'H'}, new_observations)
         
     def testToGrid(self):
         simstate = '-H--\n---F'
         state = parse(simstate)
-        state_grid = to_grid(state)
+        problem_spec = (4,2)
+        state_grid = to_grid(state, problem_spec)
         self.assertEquals(state_grid, [[None, None], ['H', None], [None, None], [None, 'F']], state_grid)    
         
     def testProblemDistribution(self):
