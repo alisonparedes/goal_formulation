@@ -197,21 +197,29 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
     return problem_distribution_arr
 
 
-def reset_distribution(state_dict, problem_spec=(4,2)): #TODO: Oh my god stop doing this :)
+def reset_distribution(state_dict, problem_spec): #TODO: Oh my god stop doing this :)
     problem_distribution_arr = []
+    inventory={}
     #To allow this program to run forever, there should always be a chance that new food will spawn somewhere at least
     for coordinate, unit in state_dict.iteritems():
         if unit in 'f':
             problem_distribution_arr.append((0.1,coordinate,'F')) #Chance to reset food
         if unit in 'Bb*$F':
-            problem_distribution_arr.append((0.0,coordinate,'B')) #New food can't spawn where food already is available, on a base
+            problem_distribution_arr.append((0.0,coordinate,'B')) #New food can't spawn
+            # where food already is available, on a base
+        if unit not in inventory:
+            inventory[unit]=1
+        else:
+            inventory[unit]+=1
     total_probability=0.0
-    for x in range(0, problem_spec[0]):
-        for y in range(0, problem_spec[1]):
-            if (x, y) not in state_dict:
-                probability = 0.1
-                problem_distribution_arr.append((probability, (x, y), 'F')) 
-                total_probability += probability
+    MAX_FOOD = 2
+    if inventory['F'] < MAX_FOOD:
+        for x in range(0, problem_spec[0]):
+            for y in range(0, problem_spec[1]):
+                if (x, y) not in state_dict:
+                    probability = 0.1
+                    problem_distribution_arr.append((probability, (x, y), 'F'))
+                    total_probability += probability
     problem_distribution_arr.append((1 - total_probability, None)) 
     return problem_distribution_arr
 

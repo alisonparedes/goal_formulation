@@ -6,7 +6,7 @@ Created on Sep 28, 2016
 
 import problem
 
-def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft state?
+def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I need a beleft state?
     '''
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
@@ -22,7 +22,7 @@ def simulate(belief_state, action, real_world): #TODO: Wh do I need a beleft sta
     assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
     the world module right now.
     '''
-    probability_to_reset = problem.reset_distribution(new_world_dict, problem_spec=(4,4)) #TODO: Uses default problem spec for testing, create a problem spec function
+    probability_to_reset = problem.reset_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
     new_world_grid = problem.to_grid(new_world_dict,4,4) #TODO: Where could I get these dimensions from instead?
     return new_world_grid #TODO: Return cumulative reward to use to compare results of each run

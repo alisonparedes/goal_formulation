@@ -54,7 +54,7 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
         current_state = get_current_state(belief_state) #TODO: Why not use just belief state?
         action = ohwow(current_state, belief_state)
         old_world = deepcopy(real_world) #TODO: Why not modify in place?
-        new_world = simulator.simulate(belief_state, action[0], real_world) #Modifies world 
+        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec) #Modifies world
         known = new_knowledge(old_world, new_world, current_state) #TODO: Maybe simulator needs to return new observations
         belief_state = new_state(belief_state, known)
         real_world = new_world

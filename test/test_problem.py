@@ -57,7 +57,7 @@ class TestState(unittest.TestCase):
     def testProblemDistribution(self):
         simstate = '-H--\n---B'
         belief_state_dict = parse(simstate)
-        problem_dist = problem_distribution(belief_state_dict)
+        problem_dist = problem_distribution(belief_state_dict, problem_spec=(4,2))
         self.assertEquals(problem_dist,[], problem_dist)
         
     def testResetDistribution(self):
