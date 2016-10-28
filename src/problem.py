@@ -37,8 +37,6 @@ def write(state, problem_spec): #TODO: Move to agent module.
     '''
     A state is a dictionary of positions and objects, keyed on position. Use to write the agent's perspective. 
     '''
-    w=problem_spec[0]
-    h=problem_spec[1]
     grid = to_grid(state, problem_spec)
     printable = write_grid(grid) #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.   
     return printable
@@ -64,6 +62,12 @@ def interleaved(known, world, problem_spec):
                 printable += '?' #TODO: Modify agent's new knowledge function. Cells known to contain None are different from unknown cells.
         printable += '\n'
     return printable
+
+def empty(cell):
+    if cell:
+        return cell
+    else:
+        return '-'
     
 def write_grid(state):
     '''
@@ -188,7 +192,7 @@ def transition(state, action, problem_spec):
     state_grid[to_x][to_y]=arriving_unit #TODO: Moves may not always work
     state_dict = to_dict(state_grid)
     observation_dict={}
-    observation_dict[(from_x, from_y)]= leaving_unit
+    observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
     Transition = namedtuple('Transition',['state_dict','observation_dict'])
     new_state = Transition(state_dict=state_dict, observation_dict=observation_dict)

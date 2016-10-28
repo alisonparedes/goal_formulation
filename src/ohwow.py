@@ -6,7 +6,7 @@ Created on Sep 21, 2016
 from bfs_g import *
 import world
 import problem
-def ohwow(current_state, belief_state, problem_spec): #TODO: Prior is uniform and handled by world module for now
+def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by world module for now
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
