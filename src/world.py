@@ -19,7 +19,6 @@ def sample(problem_distribution_arr, state, n): #TODO: When can a sample conflic
     A seed could help debug these functions but I don't think it can be used to debug search since search
     needs to speculate about different models. 
     '''
-    print(problem_distribution_arr)
     new_state = copy(state)
     for i in range(n):
         x = sample_cell(problem_distribution_arr)
@@ -39,8 +38,14 @@ def update_state(state, sample): #Modifies state in place
     
 
 def merge(unit_a, unit_b):
-    if unit_a=='H' and unit_b in 'F': #TODO: Add the rest of possible F. Use problem's decoding funcitons?
+    if unit_a in '0!$*H' and unit_b in 'F': #TODO: Use problem's decoding funcitons?
         return '$'
+    if unit_a in '0!$*H' and unit_b in 'f':
+        return '0'
+    if unit_a in '0!$*H' and unit_b in 'B':
+        return '*'
+    if unit_a in  '0!$*H' and unit_b in 'b':
+        return '!'
     return unit_b
        
 def sample_cell(problem_distribution_arr): #TODO: What to return when p > max of proability distribution? Should problem insure prob array sums to 1?

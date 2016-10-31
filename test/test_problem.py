@@ -28,9 +28,9 @@ class TestState(unittest.TestCase):
         self.assertEquals(actions, ['S','E','W'], actions)
         
     def testGetCoordinate(self):
-        simstate = '-H--\n---F'
+        simstate = '-*--\n---F'
         state = parse(simstate)
-        state_grid = to_grid(state, 4, 2)
+        state_grid = to_grid(state, problem_spec=(4, 2))
         coordinate = get_coordinate(state)
         self.assertEquals(coordinate, (1,0), coordinate)
         

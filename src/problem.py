@@ -219,9 +219,9 @@ def reset_distribution(state_dict, problem_spec): #TODO: Oh my god stop doing th
     inventory={}
     #To allow this program to run forever, there should always be a chance that new food will spawn somewhere at least
     for coordinate, unit in state_dict.iteritems():
-        if unit in 'f':
+        if unit in '0f':
             problem_distribution_arr.append((0.1,coordinate,'F')) #Chance to reset food
-        if unit in 'Bb*$F':
+        if unit in 'Bb*$F!':
             problem_distribution_arr.append((0.0,coordinate,'B')) #New food can't spawn
             # where food already is available, on a base
         if unit not in inventory:
@@ -229,8 +229,8 @@ def reset_distribution(state_dict, problem_spec): #TODO: Oh my god stop doing th
         else:
             inventory[unit]+=1
     total_probability=0.0
-    MAX_FOOD = 2
-    if inventory['F'] < MAX_FOOD:
+    MAX_FOOD = 1 #TODO: Need to update action descriptions for multiple food
+    if 'F' in inventory and inventory['F'] < MAX_FOOD:
         for x in range(0, problem_spec[0]):
             for y in range(0, problem_spec[1]):
                 if (x, y) not in state_dict:
@@ -261,11 +261,12 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
 def leaving(unit):
     if unit=='H':
         return None
-    if unit=='*':
+    if unit in '*!':
         return 'b'
-    if unit=='$':
+    if unit in '0$':
         return 'f'
     return None
+
     
 def arriving(unit, cell):
     if cell=='B':

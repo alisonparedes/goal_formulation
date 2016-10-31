@@ -32,7 +32,6 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
     belief_state={(1, 0): 'H', (3, 1): 'B'}
     problem_spec=(len(real_world), len(real_world[0]))
-    print(problem_spec)
     while True:
         action = ohwow(belief_state, problem_spec)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec)
