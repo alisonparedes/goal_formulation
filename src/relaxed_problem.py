@@ -16,13 +16,13 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     actions=[]
     units=''
     for coordinate, unit in s.state.iteritems():
-        if unit in 'HBF$*@0!bf':
+        if unit in 'HBF$*@!b':
             units+=unit
-    if ('H' in units or '$' in units or '0' in units) and ('B' in units or 'b' in units):
+    if ('H' in units or '$' in units ) and ('B' in units or 'b' in units):
         actions.append(HB)
-    if ('H' in units or '*' in units or '!' in units) and ('F' in units or 'f' in units):
+    if ('H' in units or '*' in units or '!' in units) and ('F' in units):
         actions.append(HF)
-    if ('*' in units or '$' in units or '0' in units or '!' in units) and '@' in units:
+    if ('*' in units or '$' in units or '!' in units) and '@' in units:
         actions.append(HS)
     return actions
     #return [1,2]
@@ -53,8 +53,8 @@ def hb(state, Simulated):
         if unit == 'H':
             next_state[coordinate]='@' #Start
             from_coordinate=coordinate
-        elif unit in '$0': #TODO: Top level planners may need to use the same symbols
-            next_state[coordinate]='f' #Never restock
+        elif unit in '$': #TODO: Top level planners may need to use the same symbols
+            #next_state[coordinate]=None #Never restock
             from_coordinate=coordinate
         elif unit == 'B':
             next_state[coordinate]='*'
@@ -91,8 +91,6 @@ def hf(state, Simulated):
         elif unit == 'F':
             next_state[coordinate]='$' #Food fully stocked
             to_coordinate=coordinate
-        elif unit == 'f':
-            next_state[coordinate]='0' #No food here :(
             to_coordinate=coordinate
         elif unit in '*!':
             next_state[coordinate]='b' #Been home once already
@@ -113,8 +111,8 @@ def hs(state, Simulated): #TODO: Keep this?
     from_coordinate=()
     to_coordinate=()
     for coordinate, unit in state.iteritems():
-        if unit in '$0':
-            next_state[coordinate]='f' #Never restock food (F)
+        if unit in '$':
+            #next_state[coordinate]=None #Never restock food (F)
             from_coordinate=coordinate
         elif unit in '*!':
             next_state[coordinate]='b'

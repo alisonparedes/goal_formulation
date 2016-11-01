@@ -13,7 +13,7 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
     n = 10 #What is a good sample size?
     horizion=2 #TODO: What should manage horizon?
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
-    problem_dist = [(0.066, (0, 0), 'F'), (0.066, (0, 1), 'F'), (0.066, (0, 2), 'F'), (0.066, (0, 3), 'F'), (0.066, (1, 0), 'F'), (0.066, (1, 1), 'F'), (0.066, (1, 2), 'F'), (0.066, (1, 3), 'F'), (0.066, (2, 0), 'F'), (0.066, (2, 1), 'F'), (0.066, (2, 2), 'F'), (0.066, (2, 3), 'F'), (0.066, (3, 0), 'F'), (0.066, (3, 1), 'F'), (0.066, (3, 2), 'F'), (0.066, (3, 3), 'F')]
+    problem_dist = problem.problem_distribution(belief_state, problem_spec)
     possible_worlds = sample(belief_state, problem_dist, n)
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])

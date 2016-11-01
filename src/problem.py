@@ -94,7 +94,7 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     for coordinate, unit in belief_state.iteritems():
         x=coordinate[0] 
         y=coordinate[1]
-        if unit in 'H*$0!':#TODO: Or D
+        if unit in 'H*$!':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
             if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
@@ -200,49 +200,26 @@ def transition(state, action, problem_spec):
 
 def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
     problem_distribution_arr = []
+    food_sum = 0
     for coordinate, unit in belief_state_dict.iteritems():
-        problem_distribution_arr.append((0.0, coordinate, unit)) #There is no chance an attribute of the belief state could be different, for now
-    #TODO: Make a function for this
+        if unit and unit not in '-':
+            problem_distribution_arr.append((0.0, coordinate, unit))
+        if unit in 'F$':
+            food_sum += 1
     total_probability=0.0
-    for x in range(0, problem_spec[0]):
-        for y in range(0, problem_spec[1]):
-            if (x, y) not in belief_state_dict:
-                probability = 0.1
-                problem_distribution_arr.append((probability, (x, y), 'F')) 
-                total_probability += probability
-    problem_distribution_arr.append((1 - total_probability, None))        
-    return problem_distribution_arr
-
-
-def reset_distribution(state_dict, problem_spec): #TODO: Oh my god stop doing this :)
-    problem_distribution_arr = []
-    inventory={}
-    #To allow this program to run forever, there should always be a chance that new food will spawn somewhere at least
-    for coordinate, unit in state_dict.iteritems():
-        if unit in '0f':
-            problem_distribution_arr.append((0.1,coordinate,'F')) #Chance to reset food
-        if unit in 'Bb*$F!':
-            problem_distribution_arr.append((0.0,coordinate,'B')) #New food can't spawn
-            # where food already is available, on a base
-        if unit not in inventory:
-            inventory[unit]=1
-        else:
-            inventory[unit]+=1
-    total_probability=0.0
-    MAX_FOOD = 1 #TODO: Need to update action descriptions for multiple food
-    if 'F' in inventory and inventory['F'] < MAX_FOOD:
+    if food_sum < 1:
         for x in range(0, problem_spec[0]):
             for y in range(0, problem_spec[1]):
-                if (x, y) not in state_dict:
+                if (x, y) not in belief_state_dict:
                     probability = 0.1
                     problem_distribution_arr.append((probability, (x, y), 'F'))
                     total_probability += probability
-    problem_distribution_arr.append((1 - total_probability, None)) 
+    problem_distribution_arr.append((1 - total_probability, None))        
     return problem_distribution_arr
 
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():
-        if cell in 'H*$!0':
+        if cell in 'H*$!':
             return coordinate
     return None
 
@@ -252,7 +229,7 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
     for col in w:
         y=0
         for cell in col:
-            if cell in 'H*$!0':
+            if cell in 'H*$!':
                 state[(x,y)]=cell
             y+=1
         x+=1
@@ -263,8 +240,8 @@ def leaving(unit):
         return None
     if unit in '*!':
         return 'b'
-    if unit in '0$':
-        return 'f'
+    if unit in '$':
+        return None
     return None
 
     
@@ -275,8 +252,6 @@ def arriving(unit, cell):
         return '!'
     if cell=='F':
         return '$'
-    if cell=='f':
-        return '0'
     #if cell=='@':
     #    return 'H'
     return unit

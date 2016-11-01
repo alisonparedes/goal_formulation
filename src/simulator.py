@@ -25,7 +25,7 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     assumption is that the agent knows the real probability distribution (or his estimate is unbiased :). This model lives in
     the world module right now.
     '''
-    probability_to_reset = problem.reset_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
+    probability_to_reset = problem.problem_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
     new_world_grid = problem.to_grid(new_world_dict,problem_spec)
     Simulation = namedtuple('Simulation',['new_real_world_grid','new_observations_dict'])
