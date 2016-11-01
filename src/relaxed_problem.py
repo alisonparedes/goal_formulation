@@ -9,7 +9,7 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-    #TODO: What is definitive list of actions? For now harvester should always have exactly two applicable actions.
+
     HB = 1 #move harvester to base
     HF = 2 #move harvester to food
     HS = 3 #move harvester somewhere else
@@ -19,11 +19,11 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
         if unit in 'HBF$*@!b':
             units+=unit
     if ('H' in units or '$' in units ) and ('B' in units or 'b' in units):
-        actions.append(HB)
-    if ('H' in units or '*' in units or '!' in units) and ('F' in units):
-        actions.append(HF)
+        actions.append('HB')
+    if ('H' in units or '*' in units or '!' in units) and ('F' in units): #TODO: How about a function?
+        actions.append('HF')
     if ('*' in units or '$' in units or '!' in units) and '@' in units:
-        actions.append(HS)
+        actions.append('HS')
     return actions
     #return [1,2]
     
@@ -31,11 +31,11 @@ def transition(s, action, State, Simulated): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
-    if action == 1: #HB
+    if action == 'HB':
         simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
-    elif action == 2: #HF
+    elif action == 'HF':
         simulated=hf(s.state, Simulated)
-    elif action == 3: #HS
+    elif action == 'HS':
         simulated=hs(s.state, Simulated)
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources 
@@ -75,7 +75,7 @@ def distance(from_coordinate, to_coordinate):
     to_x=to_coordinate[0]
     to_y=to_coordinate[1]
     distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
-    return distance
+    return distance * 10
 
 def hf(state, Simulated):
     '''

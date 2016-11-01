@@ -14,10 +14,7 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
     horizion=2 #TODO: What should manage horizon?
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
     problem_dist = problem.problem_distribution(belief_state, problem_spec)
-    print(problem_dist)
     possible_worlds = sample(belief_state, problem_dist, n)
-    print(belief_state)
-    print(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -31,7 +28,6 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
             s_prime = transition(world, action, problem_spec)
             c += search(s_prime,horizion)
         q = c/float(n) #- cost
-        print(action, q)
         if q > max_q:
             max_q=q
             max_action=action
