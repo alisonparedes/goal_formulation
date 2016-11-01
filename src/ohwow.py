@@ -28,7 +28,6 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
             s_prime = transition(world, action, problem_spec)
             c += search(s_prime,horizion)
         q = c/float(n) #- cost
-        print(action, q)
         if q > max_q:
             max_q=q
             max_action=action

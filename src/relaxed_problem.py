@@ -3,6 +3,8 @@ Created on Oct 25, 2016
 
 @author: lenovo
 '''
+import math
+
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
     Returns an iterable list of actions applicable in the given state.
@@ -45,55 +47,87 @@ def hb(state, Simulated):
     Simulate moving harvester to base
     '''
     next_state = {}
+    from_coordinate=()
+    to_coordinate=()
     for coordinate, unit in state.iteritems():
         if unit == 'H':
             next_state[coordinate]='@' #Start
+            from_coordinate=coordinate
         elif unit in '$0': #TODO: Top level planners may need to use the same symbols
             next_state[coordinate]='f' #Never restock
+            from_coordinate=coordinate
         elif unit == 'B':
             next_state[coordinate]='*'
+            to_coordinate=coordinate
         elif unit == 'b':
             next_state[coordinate]='!' #Nothing for the prodigal son?
+            to_coordinate=coordinate
         else:
             next_state[coordinate]=unit #TODO: Too much iterating!
-    return Simulated(next_state,resources=-1)
+    resources = distance(from_coordinate, to_coordinate)
+    resources *= -1
+    return Simulated(next_state, resources)
     #return (state,-1)
+
+def distance(from_coordinate, to_coordinate):
+    from_x=from_coordinate[0]
+    from_y=from_coordinate[1]
+    to_x=to_coordinate[0]
+    to_y=to_coordinate[1]
+    distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
+    return distance
 
 def hf(state, Simulated):
     '''
     Simulate moving harvester to food
     '''
     next_state = {}
+    from_coordinate=()
+    to_coordinate=()
     for coordinate, unit in state.iteritems():
         if unit == 'H':
             next_state[coordinate]='@' #Start
+            from_coordinate=coordinate
         elif unit == 'F':
             next_state[coordinate]='$' #Food fully stocked
+            to_coordinate=coordinate
         elif unit == 'f':
             next_state[coordinate]='0' #No food here :(
+            to_coordinate=coordinate
         elif unit in '*!':
-            next_state[coordinate]='b' #Been home once already 
+            next_state[coordinate]='b' #Been home once already
+            from_coordinate=coordinate
         else:
             next_state[coordinate]=unit
-    return Simulated(next_state,resources=-1)
+    resources = distance(from_coordinate, to_coordinate)
+    resources *= -1
+    return Simulated(next_state,resources)
     #return (state,-1)
 
 
-def hs(state, Simulated):
+def hs(state, Simulated): #TODO: Keep this?
     '''
     Simulate harvester somewhere else
     '''
     next_state = {}
+    from_coordinate=()
+    to_coordinate=()
     for coordinate, unit in state.iteritems():
-        if unit == '$':
+        if unit in '$0':
             next_state[coordinate]='f' #Never restock food (F)
+            from_coordinate=coordinate
         elif unit in '*!':
             next_state[coordinate]='b'
+            from_coordinate=coordinate
         elif unit == '@':
             next_state[coordinate]='H'
+            to_coordinate=coordinate
         else:
             next_state[coordinate]=unit
-    return Simulated(next_state,resources=-1)
+    resources=distance(from_coordinate, to_coordinate)
+    resources *= -1
+
+    return Simulated(next_state,resources)
     #return (state,-1)
     
 def reward(state):
