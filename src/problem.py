@@ -205,7 +205,7 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
             food_sum += 1
     total_probability=0.0
     probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(problem_distribution_arr))
-    if food_sum < 1:
+    if food_sum < 2:
         for x in range(problem_spec[0]):
             for y in range(problem_spec[1]):
                 if (x, y) not in belief_state_dict:

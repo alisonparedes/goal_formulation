@@ -9,34 +9,36 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-
-    HB = 1 #move harvester to base
-    HF = 2 #move harvester to food
-    HS = 3 #move harvester somewhere else
     actions=[]
     units=''
+    food_coordinates=[]
     for coordinate, unit in s.state.iteritems():
+        if unit in 'F':
+            food_coordinates.append(coordinate)
         if unit in 'HBF$*@!b':
             units+=unit
     if ('H' in units or '$' in units ) and ('B' in units or 'b' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units or '!' in units) and ('F' in units): #TODO: How about a function?
-        actions.append('HF')
-    if ('*' in units or '$' in units or '!' in units) and '@' in units:
-        actions.append('HS')
+    if ('H' in units or '*' in units or '!' in units) and ('F' in units): #TODO: How could this work passing funcitons?
+        for food_coordinate in food_coordinates:
+            actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
+    '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
+        actions.append('HS')'''
     return actions
     #return [1,2]
     
-def transition(s, action, State, Simulated): #TODO: Assumes action is valid
+def transition(s, action_and_coordinate, State, Simulated): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
+    action = action_and_coordinate.split('_')[0]
     if action == 'HB':
         simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
     elif action == 'HF':
-        simulated=hf(s.state, Simulated)
-    elif action == 'HS':
-        simulated=hs(s.state, Simulated)
+        coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
+        simulated=hf(s.state, coordinate, Simulated)
+    '''elif action == 'HS':
+        simulated=hs(s.state, Simulated)'''
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources 
     return State(simulated.state, new_reward) #
@@ -51,7 +53,7 @@ def hb(state, Simulated):
     to_coordinate=()
     for coordinate, unit in state.iteritems():
         if unit == 'H':
-            next_state[coordinate]='@' #Start
+            #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
         elif unit in '$': #TODO: Top level planners may need to use the same symbols
             #next_state[coordinate]=None #Never restock
@@ -77,7 +79,7 @@ def distance(from_coordinate, to_coordinate):
     distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
     return distance * 10
 
-def hf(state, Simulated):
+def hf(state, food_coordinate, Simulated):
     '''
     Simulate moving harvester to food
     '''
@@ -86,11 +88,10 @@ def hf(state, Simulated):
     to_coordinate=()
     for coordinate, unit in state.iteritems():
         if unit == 'H':
-            next_state[coordinate]='@' #Start
+            #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
-        elif unit == 'F':
+        elif unit == 'F' and coordinate == food_coordinate :
             next_state[coordinate]='$' #Food fully stocked
-            to_coordinate=coordinate
             to_coordinate=coordinate
         elif unit in '*!':
             next_state[coordinate]='b' #Been home once already
@@ -132,9 +133,9 @@ def reward(state):
     reward=0
     for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
         if unit == '$': #State tracks when food has been depleted
-            reward+=50 
+            reward+=1
         elif unit == '*':
-            reward+=100 #State tracks if base has ever been visited before
+            reward+=10 #State tracks if base has ever been visited before
     return reward
 
 if __name__ == '__main__':

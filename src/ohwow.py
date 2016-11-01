@@ -23,7 +23,7 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
     max_action=None
     max_q=0 #TODO: Does 0 work?
     for action in actions_in_s: #TODO: Should be for each s_prime, not action
-        c = 0
+        c = 0.0
         for world in possible_worlds:
             s_prime = transition(world, action, problem_spec)
             c += search(s_prime,horizion)
@@ -59,7 +59,7 @@ def transition(belief_state, action, problem_spec):
 def sample(belief_state, problem_dist, n):
     possible_worlds=[]
     for i in range(n):
-        w = world.sample(problem_dist,belief_state,1) 
+        w = world.sample(problem_dist,belief_state, max_food=2) #TODO: This magic number is in two places. Fix this ASAP.
         possible_worlds.append(w) 
     return possible_worlds
 

@@ -72,7 +72,7 @@ def get_plan(s):
 
 def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): #Kind of like passing a function? 
     expanded=[]
-    for action in applicable_actions(s): 
+    for action in applicable_actions(s):
         next_state = transition(s, action, State, Simulated) #TODO: Transition should return value of next_state
         g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         max_g = max(max_g,g)
