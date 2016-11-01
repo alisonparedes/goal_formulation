@@ -29,8 +29,8 @@ def get_current_state(state):
     return None
 
 if __name__ == '__main__': #TODO: What arguments should it accept?
-    real_world=[[None, None, 'F', None], ['H', None, None, None], [None, None, None, None], [None, 'B', None, None]]
-    belief_state={(1, 0): 'H', (3, 1): 'B'}
+    real_world=[[None, None, 'F', None], [None, None, 'H', None], [None, None, None, None], ['B', None, None, None]]
+    belief_state={(3, 0): 'B', (1, 3): 'H'}
     problem_spec=(len(real_world), len(real_world[0]))
     while True:
         action = ohwow(belief_state, problem_spec)

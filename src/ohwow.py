@@ -10,11 +10,14 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
-    n = 10 #What is a good sample size?
+    n = 100 #What is a good sample size?
     horizion=2 #TODO: What should manage horizon?
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
     problem_dist = problem.problem_distribution(belief_state, problem_spec)
+    print(problem_dist)
     possible_worlds = sample(belief_state, problem_dist, n)
+    print(belief_state)
+    print(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -24,14 +27,30 @@ def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by wo
     max_q=0 #TODO: Does 0 work?
     for action in actions_in_s: #TODO: Should be for each s_prime, not action
         c = 0
-        for world in possible_worlds: #TODO: Oops. I may have broken oh-wow.
+        for world in possible_worlds:
             s_prime = transition(world, action, problem_spec)
             c += search(s_prime,horizion)
         q = c/float(n) #- cost
+        print(action, q)
         if q > max_q:
             max_q=q
             max_action=action
     return (max_action, max_q)
+
+
+def summarize_sample(possible_worlds, problem_spec):
+    summary_grid=[]
+    for i in range(problem_spec[0]):
+        summary_grid.append([])
+        for j in range(problem_spec[1]):
+            summary_grid[i].append(0)
+    for world in possible_worlds:
+        for coordinate, unit in world.iteritems():
+            if unit in 'F':
+                summary_grid[coordinate[0]][coordinate[1]] += 1
+    return summary_grid
+
+
 
 def applicable_actions(belief_state, problem_spec):
     return problem.applicable_actions(belief_state, problem_spec)#TODO: Pass a problem definition instead
