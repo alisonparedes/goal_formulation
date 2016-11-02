@@ -29,7 +29,7 @@ def get_current_state(state):
     return None
 
 if __name__ == '__main__': #TODO: What arguments should it accept?
-    real_world=[['F', None, None, None], [None, None, 'H', None], [None, None, None, None], ['B', None, None, 'F']]
+    real_world=[[None, None, None, None], [None, None, 'H', None], [None, None, 'F', None], ['B', None, None, 'F']]
     belief_state={(3, 0): 'B', (1, 2): 'H'}
     problem_spec=(len(real_world), len(real_world[0]))
     while True:
@@ -39,5 +39,5 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
         new_world_state = new_world.new_real_world_grid
         belief_state = new_belief_state(belief_state, new_observations)
         real_world = new_world_state
-        #os.system('clear')
+        os.system('clear')
         print(problem.interleaved(belief_state, real_world, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed

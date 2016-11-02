@@ -103,7 +103,6 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
                 actions.append('E')            
             if x-1 >= 0: #Assuming left most cell in problem is 0
                 actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
-                
     return actions
 
 
@@ -199,19 +198,19 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
     problem_distribution_arr = []
     food_sum = 0
     for coordinate, unit in belief_state_dict.iteritems():
-        if unit:
+        if unit and unit not in '-':
             problem_distribution_arr.append((0.0, coordinate, unit))
         if unit in 'F$':
             food_sum += 1
     total_probability=0.0
     probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(problem_distribution_arr))
     if food_sum < 2:
-        for x in range(problem_spec[0]):
-            for y in range(problem_spec[1]):
-                if (x, y) not in belief_state_dict:
+        for x in range(2,problem_spec[0]):
+            for y in range(2,problem_spec[1]):
+                if (x, y) not in belief_state_dict or belief_state_dict[(x,y)]=='-':
                     problem_distribution_arr.append((probability, (x, y), 'F'))
                     total_probability += probability
-    problem_distribution_arr.append((1 - total_probability, None))        
+    problem_distribution_arr.append((1 - total_probability, None))
     return problem_distribution_arr
 
 def get_coordinate(state):

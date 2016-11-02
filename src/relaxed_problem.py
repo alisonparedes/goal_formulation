@@ -40,7 +40,7 @@ def transition(s, action_and_coordinate, State, Simulated): #TODO: Assumes actio
     '''elif action == 'HS':
         simulated=hs(s.state, Simulated)'''
     resources=simulated.resources
-    new_reward=s.reward + reward(s.state) - resources 
+    new_reward=s.reward + reward(s.state) - resources
     return State(simulated.state, new_reward) #
     #return s
 
@@ -67,15 +67,13 @@ def hb(state, Simulated):
         else:
             next_state[coordinate]=unit #TODO: Too much iterating!
     resources = distance(from_coordinate, to_coordinate)
-    resources *= -1
     return Simulated(next_state, resources)
-    #return (state,-1)
 
 def distance(from_coordinate, to_coordinate):
-    from_x=from_coordinate[0]
-    from_y=from_coordinate[1]
-    to_x=to_coordinate[0]
-    to_y=to_coordinate[1]
+    from_x=float(from_coordinate[0])
+    from_y=float(from_coordinate[1])
+    to_x=float(to_coordinate[0])
+    to_y=float(to_coordinate[1])
     distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
     return distance * 10
 
@@ -99,9 +97,7 @@ def hf(state, food_coordinate, Simulated):
         else:
             next_state[coordinate]=unit
     resources = distance(from_coordinate, to_coordinate)
-    resources *= -1
     return Simulated(next_state,resources)
-    #return (state,-1)
 
 
 def hs(state, Simulated): #TODO: Keep this?
@@ -124,18 +120,15 @@ def hs(state, Simulated): #TODO: Keep this?
         else:
             next_state[coordinate]=unit
     resources=distance(from_coordinate, to_coordinate)
-    resources *= -1
-
     return Simulated(next_state,resources)
-    #return (state,-1)
     
 def reward(state):
     reward=0
     for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
         if unit == '$': #State tracks when food has been depleted
-            reward+=1
+            reward+=50
         elif unit == '*':
-            reward+=10 #State tracks if base has ever been visited before
+            reward+=100 #State tracks if base has ever been visited before
     return reward
 
 if __name__ == '__main__':
