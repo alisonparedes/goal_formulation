@@ -11,7 +11,7 @@ def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test co
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
     State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
     Expanded = namedtuple('Expanded',['len','max_g'])
-    Simulated = namedtuple('Simulated',['state','resources'])
+    Simulated = namedtuple('Simulated',['state','resources']) #TODO: This can go and use State tuple instead
     i = Node(State(initial_state,0,has_food=False), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
 
@@ -73,7 +73,7 @@ def get_plan(s):
 def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): #Kind of like passing a function? 
     expanded=[]
     for action in applicable_actions(s):
-        next_state = transition(s, action, State, Simulated) #TODO: Transition should return value of next_state
+        next_state = transition(s, action, State) #TODO: Transition should return value of next_state
         g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         max_g = max(max_g,g)
         result = Node(state=next_state, previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
@@ -86,8 +86,8 @@ def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): 
 def applicable_actions(s): #TODO: Pass a function from the problem
     return relaxed_problem.applicable_actions(s.state)
 
-def transition(s_node, action, State, Simulated):
-    next_state=relaxed_problem.transition(s_node.state, action, State, Simulated)
+def transition(s_node, action, State):
+    next_state=relaxed_problem.transition(s_node.state, action, State)
     return next_state#TODO: Problem figures out how to modify the dictionary
 
 def equals(s1, s2):

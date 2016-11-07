@@ -15,11 +15,11 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     for coordinate, unit in s.state.iteritems():
         if unit in 'F':
             food_coordinates.append(coordinate)
-        if unit in 'HBF$*@!b':
+        if unit in 'HBF$*@':
             units+=unit
-    if ('H' in units or '$' in units ) and ('B' in units or 'b' in units):
+    if ('H' in units or '$' in units ) and ('B' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units or '!' in units) and ('F' in units): #TODO: How could this work passing funcitons?
+    if ('H' in units or '*' in units) and ('F' in units): #TODO: How could this work passing funcitons?
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
     '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
@@ -27,31 +27,28 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(s, action_and_coordinate, State, Simulated): #TODO: Assumes action is valid
+def transition(state, action_and_coordinate, State): #TODO: Assumes action is valid
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
+    next_state=None
     if action == 'HB':
-        simulated=hb(s.state, Simulated) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
+        next_state=hb(state, State) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        simulated=hf(s.state, coordinate, Simulated)
-    '''elif action == 'HS':
-        simulated=hs(s.state, Simulated)'''
-    resources=simulated.resources
-    new_reward=s.reward + reward(s.state) - resources
-    return State(simulated.state, new_reward, has_food=False) #
+        next_state=hf(state, coordinate, State)
+    return next_state
     #return s
 
-def hb(state, Simulated): 
+def hb(state, State):
     '''
     Simulate moving harvester to base
     '''
-    next_state = {}
+    new_map = {}
     from_coordinate=()
     to_coordinate=()
-    for coordinate, unit in state.iteritems():
+    for coordinate, unit in state.state.iteritems():
         if unit == 'H':
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
@@ -59,15 +56,18 @@ def hb(state, Simulated):
             #next_state[coordinate]=None #Never restock
             from_coordinate=coordinate
         elif unit == 'B':
-            next_state[coordinate]='*'
-            to_coordinate=coordinate
-        elif unit == 'b':
-            next_state[coordinate]='!' #Nothing for the prodigal son?
+            new_map[coordinate]='*'
             to_coordinate=coordinate
         else:
-            next_state[coordinate]=unit #TODO: Too much iterating!
+            new_map[coordinate]=unit #TODO: Too much iterating!
     resources = distance(from_coordinate, to_coordinate)
-    return Simulated(next_state, resources)
+    has_food = state.has_food
+    if has_food:
+        has_food = False
+    new_reward = state.reward
+    next_state = State(new_map,new_reward, has_food)
+    new_reward += reward(next_state) - resources
+    return State(new_map,new_reward, has_food)
 
 def distance(from_coordinate, to_coordinate):
     from_x=float(from_coordinate[0])
@@ -77,58 +77,39 @@ def distance(from_coordinate, to_coordinate):
     distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
     return distance * 10
 
-def hf(state, food_coordinate, Simulated):
+def hf(state, food_coordinate, State):
     '''
     Simulate moving harvester to food
     '''
-    next_state = {}
+    new_map = {}
     from_coordinate=()
     to_coordinate=()
-    for coordinate, unit in state.iteritems():
+    for coordinate, unit in state.state.iteritems():
         if unit == 'H':
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
         elif unit == 'F' and coordinate == food_coordinate :
-            next_state[coordinate]='$' #Food fully stocked
+            new_map[coordinate]='$' #Food fully stocked
             to_coordinate=coordinate
-        elif unit in '*!':
-            next_state[coordinate]='b' #Been home once already
+        elif unit in '*':
+            new_map[coordinate]='B' #Been home once already
             from_coordinate=coordinate
         else:
-            next_state[coordinate]=unit
+            new_map[coordinate]=unit
     resources = distance(from_coordinate, to_coordinate)
-    return Simulated(next_state,resources)
-
-
-def hs(state, Simulated): #TODO: Keep this?
-    '''
-    Simulate harvester somewhere else
-    '''
-    next_state = {}
-    from_coordinate=()
-    to_coordinate=()
-    for coordinate, unit in state.iteritems():
-        if unit in '$':
-            #next_state[coordinate]=None #Never restock food (F)
-            from_coordinate=coordinate
-        elif unit in '*!':
-            next_state[coordinate]='b'
-            from_coordinate=coordinate
-        elif unit == '@':
-            next_state[coordinate]='H'
-            to_coordinate=coordinate
-        else:
-            next_state[coordinate]=unit
-    resources=distance(from_coordinate, to_coordinate)
-    return Simulated(next_state,resources)
+    has_food = True
+    new_reward = state.reward
+    next_state = State(new_map, new_reward, has_food)
+    new_reward += reward(next_state) - resources
+    return next_state
     
-def reward(state):
+def reward(s): #Expecting State object
     reward=0
-    for coordinate, unit in state.iteritems(): #TODO: How much is this slowing my BFS down?
-        if unit == '$': #State tracks when food has been depleted
-            reward+=50
-        elif unit == '*':
+    for coordinate, unit in s.state.iteritems(): #TODO: How much is this slowing my BFS down?
+        if unit in '*':
             reward+=100 #State tracks if base has ever been visited before
+            if s.has_food:
+                reward += 50
     return reward
 
 if __name__ == '__main__':

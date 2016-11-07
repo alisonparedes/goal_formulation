@@ -25,7 +25,7 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HBF$*!@':
+        if cell in 'HBF$*@':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -94,7 +94,7 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     for coordinate, unit in belief_state.iteritems():
         x=coordinate[0] 
         y=coordinate[1]
-        if unit in 'H*$!':#TODO: Or D
+        if unit in 'H*$':#TODO: Or D
             if y-1 >= 0:
                 actions.append('N')
             if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
@@ -215,7 +215,7 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
 
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():
-        if cell in 'H*$!':
+        if cell in 'H*$':
             return coordinate
     return None
 
@@ -225,7 +225,7 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
     for col in w:
         y=0
         for cell in col:
-            if cell in 'H*$!':
+            if cell in 'H*$':
                 state[(x,y)]=cell
             y+=1
         x+=1
@@ -234,8 +234,8 @@ def get_state(w): #TODO: For now, to keep reasoning about the problem here, pars
 def leaving(unit):
     if unit=='H':
         return None
-    if unit in '*!':
-        return 'b'
+    if unit in '*':
+        return 'B'
     if unit in '$':
         return None
     return None
@@ -244,8 +244,6 @@ def leaving(unit):
 def arriving(unit, cell):
     if cell=='B':
         return '*'
-    if cell=='b':
-        return '!'
     if cell=='F':
         return '$'
     #if cell=='@':
