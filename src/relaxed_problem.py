@@ -41,7 +41,7 @@ def transition(s, action_and_coordinate, State, Simulated): #TODO: Assumes actio
         simulated=hs(s.state, Simulated)'''
     resources=simulated.resources
     new_reward=s.reward + reward(s.state) - resources
-    return State(simulated.state, new_reward) #
+    return State(simulated.state, new_reward, has_food=False) #
     #return s
 
 def hb(state, Simulated): 

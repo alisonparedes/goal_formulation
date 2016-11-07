@@ -9,10 +9,10 @@ import relaxed_problem
 def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
-    State = namedtuple('State',['state','reward']) #TODO: Problem should handle state structure.
+    State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
     Expanded = namedtuple('Expanded',['len','max_g'])
     Simulated = namedtuple('Simulated',['state','resources'])
-    i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
+    i = Node(State(initial_state,0,has_food=False), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
 
     open_list = deque([i])

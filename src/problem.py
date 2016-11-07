@@ -198,7 +198,7 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
     problem_distribution_arr = []
     food_sum = 0
     for coordinate, unit in belief_state_dict.iteritems():
-        if unit and unit not in '-':
+        if unit: #and unit not in '-':
             problem_distribution_arr.append((0.0, coordinate, unit))
         if unit in 'F$':
             food_sum += 1
@@ -207,7 +207,7 @@ def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec i
     if food_sum < 2:
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
-                if (x, y) not in belief_state_dict or belief_state_dict[(x,y)]=='-':
+                if (x, y) not in belief_state_dict: #or belief_state_dict[(x,y)]=='-':
                     problem_distribution_arr.append((probability, (x, y), 'F'))
                     total_probability += probability
     problem_distribution_arr.append((1 - total_probability, None))
