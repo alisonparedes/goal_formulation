@@ -74,7 +74,7 @@ def distance(from_coordinate, to_coordinate):
     from_y=float(from_coordinate[1])
     to_x=float(to_coordinate[0])
     to_y=float(to_coordinate[1])
-    distance=math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
+    distance=abs(from_x - to_x) + abs(from_y - to_y)#math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
     return distance * 10
 
 def hf(state, food_coordinate, State):

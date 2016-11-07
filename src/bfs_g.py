@@ -88,7 +88,7 @@ def applicable_actions(s): #TODO: Pass a function from the problem
 
 def transition(s_node, action, State):
     next_state=relaxed_problem.transition(s_node.state, action, State)
-    return next_state#TODO: Problem figures out how to modify the dictionary
+    return next_state
 
 def equals(s1, s2):
     return s1.state == s2.state #TODO: N/A if removing goal test

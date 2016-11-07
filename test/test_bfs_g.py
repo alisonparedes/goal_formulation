@@ -44,11 +44,12 @@ class Test(unittest.TestCase):
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
     '''
     def testTransition(self):
-        State = namedtuple('State',['state','reward']) #TODO: Problem should handle state structure.
-        Simulated = namedtuple('Simulated',['state','resources'])
+        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
         Node = namedtuple('Node',['state','previous','action', 'g'])
-        i = Node(State(initial_state,0), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
-        transition(s_node, action, State, Simulated)
+        initial_state = Node(State({(1, 1): 'B', (0, 0): 'H'},reward=0,has_food=False), previous=None, action=None, g=0) #TODO: Delegate creating an initial State object to problem?
+        action='HB'
+        next_state = transition(initial_state, action, State)
+        self.assertEquals(next_state, State({(1, 1): '*'},reward=80,has_food=False), next_state)
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testSearch']
