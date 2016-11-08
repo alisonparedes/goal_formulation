@@ -6,27 +6,27 @@ Created on Sep 21, 2016
 from bfs_g import *
 import world
 import problem
-def ohwow(belief_state, problem_spec): #TODO: Prior is uniform and handled by world module for now
+def ohwow(belief_state, problem_spec, State): #TODO: Prior is uniform and handled by world module for now
     '''
     Agent should keep track of what it knows and send to ohwow
     '''
     n = 100 #What is a good sample size?
-    horizion=2 #TODO: What should manage horizon?
+    horizion=3 #TODO: What should manage horizon?
     cost = -1 #Assume all actions cost the same? Makes C(s,a) irrelevant
-    problem_dist = problem.problem_distribution(belief_state, problem_spec)
-    possible_worlds = sample(belief_state, problem_dist, n)
+    problem_dist = problem.problem_distribution(belief_state.state, problem_spec)
+    possible_worlds = sample(belief_state.state, problem_dist, n)
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
-    actions_in_s = applicable_actions(belief_state, problem_spec)
+    actions_in_s = applicable_actions(belief_state.state, problem_spec)
         #Transition to next state
     max_action=None
     max_q=0 #TODO: Does 0 work?
     for action in actions_in_s: #TODO: Should be for each s_prime, not action
         c = 0.0
         for world in possible_worlds:
-            s_prime = transition(world, action, problem_spec)
-            c += search(s_prime,horizion)
+            s_prime = transition(State(world,belief_state.reward,belief_state.has_food), action, problem_spec, State)
+            c += search(s_prime,horizion, State)
         q = c/float(n) #- cost
         print(action, q)
         if q > max_q:
@@ -52,10 +52,9 @@ def summarize_sample(possible_worlds, problem_spec):
 def applicable_actions(belief_state, problem_spec):
     return problem.applicable_actions(belief_state, problem_spec)#TODO: Pass a problem definition instead
 
-def transition(belief_state, action, problem_spec):
-    s_prime = problem.transition(belief_state, action, problem_spec) #TODO: Should not return integer units
-    s_prime_dict=s_prime.state_dict
-    return s_prime_dict
+def transition(belief_state, action, problem_spec, State):
+    s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
+    return s_prime.state_dict
 
 def sample(belief_state, problem_dist, n):
     possible_worlds=[]

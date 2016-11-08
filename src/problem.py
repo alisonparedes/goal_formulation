@@ -42,13 +42,14 @@ def write(state, problem_spec): #TODO: Move to agent module.
     return printable
 
 def interleaved(known, world, problem_spec):
-    height=len(world[0])
-    width=len(world)
+    height=problem_spec[1]
+    width=problem_spec[0]
     known_grid = to_grid(known, problem_spec)
+    world_grid = to_grid(world, problem_spec)
     printable = ''
     for y in range(height):
         for x in range(width):
-            cell = world[x][y]
+            cell = world_grid[x][y]
             if cell:
                 printable += cell
             else:
@@ -166,14 +167,14 @@ def to_dict(w):
         x+=1
     return state
                 
-def transition(state, action, problem_spec):
+def transition(state, action, problem_spec, State):
     '''
     Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
     or a complete state. 
     '''
     #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
-    state_grid = to_grid(state, problem_spec) #TODO: Get dimensions from problem spec
-    from_coordinate=get_coordinate(state) #TODO: Currently moves harvester only. Why not get this from world?
+    state_grid = to_grid(state.state, problem_spec) #TODO: Get dimensions from problem spec
+    from_coordinate=get_coordinate(state.state) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
     unit = state_grid[from_x][from_y] #TODO: I hope this is a copy!
@@ -184,15 +185,18 @@ def transition(state, action, problem_spec):
     to_y = to_coordinate[1] 
     #TODO: Try the move and if it fails return?
     cell=state_grid[to_x][to_y]
-    arriving_unit = arriving('H', cell) #TODO: Moves may not always work
-    state_grid[to_x][to_y]=arriving_unit #TODO: Moves may not always work
+    arriving_unit = arriving('H', cell)
+    has_food = state.has_food
+    if arriving_unit in '$':
+        has_food = True
+    state_grid[to_x][to_y]=arriving_unit
     state_dict = to_dict(state_grid)
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
     Transition = namedtuple('Transition',['state_dict','observation_dict'])
-    new_state = Transition(state_dict=state_dict, observation_dict=observation_dict)
-    return new_state #TODO: What about returning new observations to the agent?
+    new_state = Transition(State(state_dict, reward=0, has_food=has_food), observation_dict=observation_dict)
+    return new_state
 
 def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
     problem_distribution_arr = []

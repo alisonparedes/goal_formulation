@@ -18,9 +18,15 @@ def new_belief_state(belief_state, new_observations):
     :param new_knowledge:
     :return:
     '''
+    new_belief_state=belief_state.state
+    has_food = belief_state.has_food
     for coordinate, cell in new_observations.iteritems():
-            belief_state[coordinate]=cell
-    return belief_state
+        new_belief_state[coordinate]=cell
+        if cell in '$':
+            has_food = True
+        elif cell in '*':
+            has_food = False
+    return State(new_belief_state, belief_state.reward, has_food)
 
 def get_current_state(state):
     for coordinate, cell in state.iteritems():
@@ -29,15 +35,18 @@ def get_current_state(state):
     return None
 
 if __name__ == '__main__': #TODO: What arguments should it accept?
-    real_world=[[None, None, None, None], [None, None, 'H', None], [None, None, 'F', None], ['B', None, None, 'F']]
-    belief_state={(3, 0): 'B', (1, 2): 'H'}
-    problem_spec=(len(real_world), len(real_world[0]))
+    real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, 'F', None], ['B', None, None, 'F']])
+    State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
+    reward=0
+    has_food=False
+    belief_state=State({(3, 0): 'B', (1, 2): 'H'}, reward, has_food)
+    real_world=State(real_world_dict, reward, has_food)
+    problem_spec=(4, 4)
     while True:
-        action = ohwow(belief_state, problem_spec)
-        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec)
+        action = ohwow(belief_state, problem_spec, State)
+        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.new_observations_dict
-        new_world_state = new_world.new_real_world_grid
+        real_world = new_world.new_real_world_grid
         belief_state = new_belief_state(belief_state, new_observations)
-        real_world = new_world_state
         os.system('clear')
-        print(problem.interleaved(belief_state, real_world, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed
+        print(problem.interleaved(belief_state.state, real_world.state, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed

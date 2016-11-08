@@ -62,11 +62,11 @@ def hb(state, State):
             new_map[coordinate]=unit #TODO: Too much iterating!
     resources = distance(from_coordinate, to_coordinate)
     has_food = state.has_food
-    if has_food:
-        has_food = False
-    new_reward = state.reward
+    new_reward = 0#state.reward
     next_state = State(new_map,new_reward, has_food)
     new_reward += reward(next_state) - resources
+    if has_food:
+        has_food = False
     return State(new_map,new_reward, has_food)
 
 def distance(from_coordinate, to_coordinate):
@@ -75,7 +75,7 @@ def distance(from_coordinate, to_coordinate):
     to_x=float(to_coordinate[0])
     to_y=float(to_coordinate[1])
     distance=abs(from_x - to_x) + abs(from_y - to_y)#math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
-    return distance * 10
+    return distance * 1
 
 def hf(state, food_coordinate, State):
     '''
@@ -98,16 +98,16 @@ def hf(state, food_coordinate, State):
             new_map[coordinate]=unit
     resources = distance(from_coordinate, to_coordinate)
     has_food = True
-    new_reward = state.reward
+    new_reward = 0#state.reward
     next_state = State(new_map, new_reward, has_food)
     new_reward += reward(next_state) - resources
-    return next_state
+    return State(new_map, new_reward, has_food)
     
 def reward(s): #Expecting State object
     reward=0
     for coordinate, unit in s.state.iteritems(): #TODO: How much is this slowing my BFS down?
         if unit in '*':
-            reward+=100 #State tracks if base has ever been visited before
+            reward+=0 #State tracks if base has ever been visited before
             if s.has_food:
                 reward += 50
     return reward

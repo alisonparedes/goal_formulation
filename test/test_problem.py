@@ -24,7 +24,7 @@ class TestState(unittest.TestCase):
     def testActions(self):
         simstate = '-H--\n---B'
         state = parse(simstate)
-        actions = applicable_actions(state, 2, 4)
+        actions = applicable_actions(state, problem_spec=(4, 2))
         self.assertEquals(actions, ['S','E','W'], actions)
         
     def testGetCoordinate(self):
@@ -38,7 +38,8 @@ class TestState(unittest.TestCase):
         simstate = '-H--\n---F'
         state = parse(simstate)
         action = 'S'
-        new_state = transition(state, action)
+        State = namedtuple('State',['state','reward','has_food']) #TODO: Add food to state object
+        new_state = transition(state, action, State)
         self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
         
     def testTransitionRealWorld(self): #TODO: The real world is just more complete, every cell is represented.

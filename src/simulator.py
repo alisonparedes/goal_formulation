@@ -7,14 +7,13 @@ Created on Sep 28, 2016
 import problem
 from collections import namedtuple
 
-def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I need a beleft state?
+def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh do I need a beleft state?
     '''
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    real_world_dict = problem.to_dict(real_world)
-    new_world = problem.transition(real_world_dict, action, problem_spec)
-    new_world_dict = new_world.state_dict
+    new_world = problem.transition(real_world, action, problem_spec, State)
+    new_world_dict = new_world.state_dict.state
     new_observations = new_world.observation_dict #TODO: Return new observations to agent so it can update its belief state (overengineered?)
     #TODO: What about newly discovered obstacles?
     #TODO: Spawn new rewardable objects? But these should stay hidden
@@ -27,9 +26,8 @@ def simulate(belief_state, action, real_world, problem_spec): #TODO: Wh do I nee
     '''
     probability_to_reset = problem.problem_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
-    new_world_grid = problem.to_grid(new_world_dict,problem_spec)
     Simulation = namedtuple('Simulation',['new_real_world_grid','new_observations_dict'])
-    simulation = Simulation(new_world_grid, new_observations)
+    simulation = Simulation(State(new_world_dict,real_world.reward,real_world.has_food), new_observations)
     return simulation #TODO: Return cumulative reward to use to compare results of each run
 
 

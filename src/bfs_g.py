@@ -6,13 +6,11 @@ Created on Sep 1, 2016
 from collections import namedtuple, deque
 import relaxed_problem
 
-def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, horizon, State):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
-    Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of? 
-    State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
+    Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g'])
-    Simulated = namedtuple('Simulated',['state','resources']) #TODO: This can go and use State tuple instead
-    i = Node(State(initial_state,0,has_food=False), previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
+    i = Node(initial_state, previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
 
     open_list = deque([i])
@@ -22,7 +20,7 @@ def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test co
     next_level = 0
     nodes_generated = 1
     nodes_expanded = 0
-    max_g = 0
+    max_g = -1000 #TODO: Negative infinity
     while len(open_list) > 0 and depth < horizon:
         s = open_list.popleft() 
 
@@ -30,7 +28,7 @@ def search(initial_state, horizon=float("inf")):  #TODO: Get rid of goal test co
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated) 
+        expanded = expand(s, Node, open_list, closed_list, max_g, State, Expanded)
         #A bunch of counts
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
@@ -70,7 +68,7 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list, max_g, State, Expanded, Simulated): #Kind of like passing a function? 
+def expand(s, Node, open_list, closed_list, max_g, State, Expanded): #Kind of like passing a function?
     expanded=[]
     for action in applicable_actions(s):
         next_state = transition(s, action, State) #TODO: Transition should return value of next_state
