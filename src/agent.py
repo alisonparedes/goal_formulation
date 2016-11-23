@@ -43,10 +43,11 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)
     while True:
+        print 'belief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.new_observations_dict
         real_world = new_world.new_real_world_grid
         belief_state = new_belief_state(belief_state, new_observations)
-        os.system('clear')
+        #os.system('clear')
         print(problem.interleaved(belief_state.state, real_world.state, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed
