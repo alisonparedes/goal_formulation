@@ -26,8 +26,9 @@ def ohwow(belief_state, problem_spec, State): #TODO: Prior is uniform and handle
         c = -1000.0
         for world in possible_worlds:
             print world
+            print 'has food:', belief_state.has_food
             s_prime = transition(State(world,belief_state.reward,belief_state.has_food), action, problem_spec, State)
-            print s_prime
+            print 's_prime:', s_prime #Maybe get the reward from this step and add it to c?
             c += search(s_prime,horizion, State)
         q = c/float(n) #- cost
         print '{0} {1}'.format(action, q)

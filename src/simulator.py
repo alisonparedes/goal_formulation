@@ -14,10 +14,8 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
     new_world = problem.transition(real_world, action, problem_spec, State)
     new_world_dict = new_world.state_dict.state
-    new_observations = new_world.observation_dict #TODO: Return new observations to agent so it can update its belief state (overengineered?)
+    new_observations = new_world.observations
     #TODO: What about newly discovered obstacles?
-    #TODO: Spawn new rewardable objects? But these should stay hidden
-    #TODO: How does what is known change? 
     '''Spawn new rewards. What is the simplest way to spawn new rewards? Use the same model used for generating 
     inital real world (none yet). If I did have a model for generating the inital real world, what might it do? Maybe the similar
     to what I built for speculating about the world. For now, use the same model I built for speculating about the world--The 
@@ -26,7 +24,7 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     '''
     probability_to_reset = problem.problem_distribution(new_world_dict, problem_spec) #TODO: Uses default problem spec for testing, create a problem spec function
     new_world_dict = problem.reset(new_world_dict, probability_to_reset) #TODO: Modify in place #TODO: Fix 1 - running total. Should not be -0.30000000000000004,
-    Simulation = namedtuple('Simulation',['new_real_world_grid','new_observations_dict'])
+    Simulation = namedtuple('Simulation',['new_real_world_grid','new_observations'])
     simulation = Simulation(State(new_world_dict,real_world.reward,real_world.has_food), new_observations)
     return simulation #TODO: Return cumulative reward to use to compare results of each run
 

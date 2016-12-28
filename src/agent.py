@@ -19,8 +19,8 @@ def new_belief_state(belief_state, new_observations):
     :return:
     '''
     new_belief_state=belief_state.state
-    has_food = belief_state.has_food
-    for coordinate, cell in new_observations.iteritems():
+    has_food = new_observations.has_food
+    for coordinate, cell in new_observations.observation_dict.iteritems():
         new_belief_state[coordinate]=cell
         if cell in '$':
             has_food = True
@@ -46,8 +46,8 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
         print 'belief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
-        new_observations = new_world.new_observations_dict
+        new_observations = new_world.new_observations
         real_world = new_world.new_real_world_grid
-        belief_state = new_belief_state(belief_state, new_observations)
+        belief_state = new_belief_state(belief_state, new_observations) #Does observation contain food? Nope. Fix this.
         #os.system('clear')
         print(problem.interleaved(belief_state.state, real_world.state, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed

@@ -45,7 +45,7 @@ def search(initial_state, horizon, State, return_plan=True):  #TODO: Get rid of 
     #print(nodes_generated)
     #print(nodes_expanded)
     if return_plan:
-        print get_plan(plan), max_g
+        print 'plan:', get_plan(plan), max_g
     return max_g #Return highest reward, not plan
 
 '''

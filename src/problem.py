@@ -196,9 +196,11 @@ def transition(state, action, problem_spec, State):
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
-    Transition = namedtuple('Transition',['state_dict','observation_dict'])
+    Observation = namedtuple('Observation',['observation_dict','has_food'])
+    observations = Observation(observation_dict,has_food=has_food)
+    Transition = namedtuple('Transition',['state_dict','observations'])
     new_reward = reward(State(state_dict, reward=state.reward, has_food=has_food))
-    new_state = Transition(State(state_dict, reward=new_reward, has_food=has_food), observation_dict=observation_dict)
+    new_state = Transition(State(state_dict, reward=new_reward, has_food=has_food), observations=observations)
     return new_state
 
 def reward(s): #Expecting State object

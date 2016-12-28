@@ -35,8 +35,6 @@ def update_state(state, sample): #Modifies state in place
         else:
             state[coordinate]=unit
 
-    
-
 def merge(unit_a, unit_b):
     if unit_a in '0!$*H' and unit_b in 'F': #TODO: Use problem's decoding funcitons?
         return '$'

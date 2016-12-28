@@ -57,6 +57,15 @@ class TestState(unittest.TestCase):
         action = 'S'
         new_observations = transition(state, action, problem_spec).observation_dict
         self.assertEquals(new_observations, {(1, 0): None, (1, 1): 'H'}, new_observations)
+
+    def testTransitionReward(self):
+        simstate = 'BH--\n----'
+        coordinates = parse(simstate)
+        action = 'W'
+        State = namedtuple('State',['state','reward','has_food'])
+        initial_state = State(state=coordinates,reward=0,has_food=True)
+        reward = transition(initial_state, action, (4,2), State).state_dict.reward
+        self.assertEquals(reward, 50, reward)
         
     def testToGrid(self):
         simstate = '-H--\n---F'
