@@ -43,7 +43,7 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)
     while True:
-        print 'belief: {0}'.format(belief_state)
+        print '\nbelief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.new_observations
