@@ -3,7 +3,7 @@ Created on Oct 25, 2016
 
 @author: lenovo
 '''
-import math
+import problem
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
@@ -19,7 +19,7 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
             units+=unit
     if ('H' in units or '$' in units ) and ('B' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units) and ('F' in units): #TODO: How could this work passing funcitons?
+    if ('H' in units or '*' in units) and ('F' in units) and not s.has_food:
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
     '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
@@ -52,22 +52,22 @@ def hb(state, State):
         if unit == 'H':
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
-        elif unit in '$': #TODO: Top level planners may need to use the same symbols
+        elif unit in '$':
             #next_state[coordinate]=None #Never restock
             from_coordinate=coordinate
         elif unit == 'B':
             new_map[coordinate]='*'
             to_coordinate=coordinate
         else:
-            new_map[coordinate]=unit #TODO: Too much iterating!
+            new_map[coordinate]=unit
     resources = distance(from_coordinate, to_coordinate)
     has_food = state.has_food
-    new_reward = 0#state.reward
+    new_reward = state.reward
     next_state = State(new_map,new_reward, has_food)
-    new_reward += reward(next_state) - resources
+    new_reward += problem.reward(next_state) - resources
     if has_food:
         has_food = False
-    return State(new_map,new_reward, has_food)
+    return State(new_map, new_reward, has_food)
 
 def distance(from_coordinate, to_coordinate):
     from_x=float(from_coordinate[0])
@@ -98,19 +98,11 @@ def hf(state, food_coordinate, State):
             new_map[coordinate]=unit
     resources = distance(from_coordinate, to_coordinate)
     has_food = True
-    new_reward = 0#state.reward
+    new_reward = state.reward
     next_state = State(new_map, new_reward, has_food)
-    new_reward += reward(next_state) - resources
+    new_reward += problem.reward(next_state) - resources
     return State(new_map, new_reward, has_food)
-    
-def reward(s): #Expecting State object
-    reward=0
-    for coordinate, unit in s.state.iteritems(): #TODO: How much is this slowing my BFS down?
-        if unit in '*':
-            reward+=0 #State tracks if base has ever been visited before
-            if s.has_food:
-                reward += 50
-    return reward
+
 
 if __name__ == '__main__':
     pass

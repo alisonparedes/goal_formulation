@@ -189,14 +189,38 @@ def transition(state, action, problem_spec, State):
     has_food = state.has_food
     if arriving_unit in '$':
         has_food = True
+    if arriving_unit in '*':
+        state_grid = clear_visited(state_grid)
     state_grid[to_x][to_y]=arriving_unit
     state_dict = to_dict(state_grid)
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
     Transition = namedtuple('Transition',['state_dict','observation_dict'])
-    new_state = Transition(State(state_dict, reward=0, has_food=has_food), observation_dict=observation_dict)
+    new_reward = reward(State(state_dict, reward=state.reward, has_food=has_food))
+    new_state = Transition(State(state_dict, reward=new_reward, has_food=has_food), observation_dict=observation_dict)
     return new_state
+
+def reward(s): #Expecting State object
+    reward=0
+    for coordinate, unit in s.state.iteritems(): #TODO: How much is this slowing my BFS down?
+        if unit in '*':
+            reward+=0 #State tracks if base has ever been visited before
+            if s.has_food:
+                reward += 50
+    return reward
+
+def clear_visited(state_grid):
+    cleared = state_grid
+    x=0
+    for col in state_grid:
+        y=0
+        for cell in col:
+            if cell == '-':
+                cleared[x][y] = None
+            y += 1
+        x += 1
+    return cleared
 
 def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
     problem_distribution_arr = []
