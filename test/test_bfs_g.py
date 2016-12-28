@@ -50,7 +50,24 @@ class Test(unittest.TestCase):
         action='HB'
         next_state = transition(initial_state, action, State)
         self.assertEquals(next_state, State({(1, 1): '*'},reward=80,has_food=False), next_state)
-        
+
+    def testReturnMaxG(self):
+        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
+        Node = namedtuple('Node',['state','previous','action', 'g'])
+        initial_state = State(state={(3, 0): 'B', (1, 2): 'H', (3, 2): 'F', (0, 0): 'F'}, reward=0, has_food=False)
+        horizon = 10;
+        max_g = search(initial_state, horizon, State)
+        self.assertEquals(max_g, 90.0, max_g)
+
+    def testReturnPlan(self):
+        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
+        Node = namedtuple('Node',['state','previous','action', 'g'])
+        initial_state = State(state={(3, 0): 'B', (1, 2): 'H', (3, 2): 'F', (0, 0): 'F'}, reward=0, has_food=False)
+        horizon = 10;
+        plan = search(initial_state, horizon, State, True)
+        self.assertEquals(plan, ['HF_3_2', 'HB', 'HF_0_0', 'HB'], plan)
+
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testSearch']
     unittest.main()
