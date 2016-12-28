@@ -25,7 +25,7 @@ def new_belief_state(belief_state, new_observations):
         if cell in '$':
             has_food = True
         elif cell in '*':
-            has_food = False
+            has_food = False #test
     return State(new_belief_state, belief_state.reward, has_food)
 
 def get_current_state(state):
