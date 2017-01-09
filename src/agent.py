@@ -12,7 +12,12 @@ import os
 
 def new_belief_state(belief_state, new_observations):
     '''
-    When should an agent remove an attribute from his belief state? Never? World sample could speculate about visited states. When is belief state this fluid? Fluents are allowed to change over time.
+    A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
+    far and 3) the condition of having food. Coordinates could be implemented as a list of tuples instead of a
+    dictionary, and operators would wrap and unwrap coordinates using either the coordinate as the key. The amount of
+    reward collected is an integer. The condition of having food or not is either True or False. These three components
+    could be organized using a tuple using lambdas to name indices instead of namedtuples, which require passing
+    instances of the namedtuple around.
 
     :param state:
     :param new_knowledge:
@@ -25,7 +30,7 @@ def new_belief_state(belief_state, new_observations):
         if cell in '$':
             has_food = True
         elif cell in '*':
-            has_food = False #test
+            has_food = False
     return State(new_belief_state, belief_state.reward, has_food)
 
 def get_current_state(state):
@@ -34,7 +39,8 @@ def get_current_state(state):
             return {coordinate:cell}
     return None
 
-if __name__ == '__main__': #TODO: What arguments should it accept?
+if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
+
     real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, 'F', None], ['B', None, None, 'F']])
     State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
     reward=0
@@ -42,6 +48,7 @@ if __name__ == '__main__': #TODO: What arguments should it accept?
     belief_state=State({(3, 0): 'B', (1, 2): 'H'}, reward, has_food)
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)
+
     while True:
         print 'belief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State)
