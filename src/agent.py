@@ -9,35 +9,38 @@ from ohwow import *
 from copy import deepcopy
 import os
 
+'''
+   A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
+   far and 3) the condition of having food. Coordinates could be implemented as a list of tuples instead of a
+   dictionary, and operators would wrap and unwrap coordinates using either the coordinate as the key. The amount of
+   reward collected is an integer. The condition of having food or not is either True or False.
+
+   :param state:
+   :param new_knowledge:
+   :return:
+   '''
+
 
 def new_belief_state(belief_state, new_observations):
-    '''
-    A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
-    far and 3) the condition of having food. Coordinates could be implemented as a list of tuples instead of a
-    dictionary, and operators would wrap and unwrap coordinates using either the coordinate as the key. The amount of
-    reward collected is an integer. The condition of having food or not is either True or False. These three components
-    could be organized using a tuple using lambdas to name indices instead of namedtuples, which require passing
-    instances of the namedtuple around.
 
-    :param state:
-    :param new_knowledge:
-    :return:
-    '''
     new_belief_state=belief_state.state
     has_food = new_observations.has_food
-    for coordinate, cell in new_observations.observation_dict.iteritems():
-        new_belief_state[coordinate]=cell
+
+    for coordinate, cell in new_observations.observation_dict.iteritems():  # TODO: This doesn't need to be a dictionary
+
+        # There should be be very few observations compared to the coordinates in a belief state
+        new_belief_state[coordinate] = cell
+
+        # TODO: Consider implementing this via problem
         if cell in '$':
             has_food = True
         elif cell in '*':
             has_food = False
+
+    # TODO: These three components could be organized using a tuple using lambdas to name indices instead of
+    # namedtuples, which require passing instances of the namedtuple around.
     return State(new_belief_state, belief_state.reward, has_food)
 
-def get_current_state(state):
-    for coordinate, cell in state.iteritems():
-        if cell in 'H$*!0':
-            return {coordinate:cell}
-    return None
 
 if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
 
