@@ -34,21 +34,27 @@ class TestState(unittest.TestCase):
         coordinate = get_coordinate(state)
         self.assertEquals(coordinate, (1,0), coordinate)
         
-    def testTransitionBeliefState(self):
-        simstate = '-H--\n---F'
-        state = parse(simstate)
-        action = 'S'
-        State = namedtuple('State',['state','reward','has_food']) #TODO: Add food to state object
-        new_state = transition(state, action, State)
-        self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
+    def testTransitionBeliefStateToBase(self):
+        simstate = 'HB\n-F'
+        problem_spec = (2,2)
+        grid = parse(simstate)
+        action = 'E'
+        State = namedtuple('State',['grid','reward','has_food'])
+        state = State(grid, reward=0, has_food=True)
+        new_state_and_observations = transition(state, action, problem_spec, State)
+        new_state = new_state_and_observations.state
+        self.assertEquals(new_state.reward, 50, new_state_and_observations)
         
-    def testTransitionRealWorld(self): #TODO: The real world is just more complete, every cell is represented.
-        simstate = '-H--\n---F'
-        problem_spec = (4,2)
-        state = parse(simstate)
+    def testTransitionRealWorldFood(self):  # TODO: The real world should be more complete; every cell should be represented
+        simstate = 'H-\n-F'
+        problem_spec = (2,2)
+        grid = parse(simstate)
         action = 'S'
-        new_state = transition(state, action, problem_spec).state_dict
-        self.assertEquals(new_state, {(3, 1): 'F', (1, 1): 'H'}, new_state)
+        State = namedtuple('State',['grid','reward','has_food'])
+        state = State(grid, reward=0, has_food = True)
+        new_state_and_observations = transition(state, action, problem_spec, State)
+        new_state = new_state_and_observations.state
+        self.assertEquals(new_state.has_food, True, new_state.has_food)
 
     def testTransitionObservations(self):
         simstate = '-H--\n---F'
@@ -74,12 +80,31 @@ class TestState(unittest.TestCase):
         state_grid = to_grid(state, problem_spec)
         self.assertEquals(state_grid, [[None, None], ['H', None], [None, None], [None, 'F']], state_grid)    
         
-    def testProblemDistribution(self):
-        simstate = '-H--\n---B'
-        belief_state_dict = parse(simstate)
-        problem_dist = problem_distribution(belief_state_dict, problem_spec=(4,2))
-        self.assertEquals(problem_dist,[], problem_dist)
-        
+    def testChanceToGrow(self):
+        simstate = '-$\n-B'
+        grid = parse(simstate)
+        State = namedtuple('State',['grid','has_food'])
+        state = State(grid, has_food = True)
+        distribution = chance_to_grow(state, problem_spec=(2,2))
+        self.assertEquals(distribution,[(0.25, (0, 0), 'F'), (0.25, (0, 1), 'F'), (0.25, (1, 0), 'F'), (0.25, (1, 1), 'F'), (0.0, None)], distribution)
+
+    def testChanceOfFoodNoHarvest(self):
+        simstate = '-H\n-B'
+        grid = parse(simstate)
+        State = namedtuple('State',['grid','has_food'])
+        state = State(grid, has_food = False)
+        distribution = chance_of_food(state, problem_spec=(2,2))
+        self.assertEquals(distribution,[(0.50, (0, 0), 'F'), (0.50, (0, 1), 'F'), (0.0, None)], distribution)
+
+    def testChanceOfFoodHasHarvest(self):
+        simstate = '-$\n-B'
+        grid = parse(simstate)
+        State = namedtuple('State',['grid','has_food'])
+        state = State(grid, has_food = True)
+        distribution = chance_of_food(state, problem_spec=(2,2))
+        self.assertEquals(distribution,[(0.125, (1, 0), 'F'), (0.125, (1, 1), 'F'), (0.375, (0, 0), 'F'), (0.375, (0, 1), 'F'), (0.0, None)], distribution)
+
+
     def testResetDistribution(self):
         simstate = '-H--\n---B'
         state_dict = parse(simstate)
