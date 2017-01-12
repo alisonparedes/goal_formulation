@@ -7,7 +7,7 @@ from copy import copy
 import random
 from problem import * #TODO: World and problem should maybe be in the same module
 
-def sample(problem_distribution_arr, state, max_food): #TODO: When can a sample conflict with the real-world? Enabling real-world to spawn new things and the agent to imagine possible worlds where new things have spawned where it has been before. Defer to problem!
+def sample(problem_distribution_arr, state, max_food):
     '''
     Expects a 2D array of probability distributions determined by the problem. 
     Example [(0.5,(0,1),'F'),(0.5,None)]

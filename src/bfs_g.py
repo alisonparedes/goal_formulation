@@ -6,7 +6,7 @@ Created on Sep 1, 2016
 from collections import namedtuple, deque
 import relaxed_problem
 
-def search(initial_state, horizon, State, return_plan=True):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, horizon, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g','plan'])

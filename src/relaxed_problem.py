@@ -12,7 +12,7 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     actions=[]
     units=''
     food_coordinates=[]
-    for coordinate, unit in s.state.iteritems():
+    for coordinate, unit in s.grid.iteritems():
         if unit in 'F':
             food_coordinates.append(coordinate)
         if unit in 'HBF$*@':
@@ -48,7 +48,7 @@ def hb(state, State):
     new_map = {}
     from_coordinate=()
     to_coordinate=()
-    for coordinate, unit in state.state.iteritems():
+    for coordinate, unit in state.grid.iteritems():
         if unit == 'H':
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
@@ -84,7 +84,7 @@ def hf(state, food_coordinate, State):
     new_map = {}
     from_coordinate=()
     to_coordinate=()
-    for coordinate, unit in state.state.iteritems():
+    for coordinate, unit in state.grid.iteritems():
         if unit == 'H':
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate

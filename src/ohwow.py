@@ -6,36 +6,51 @@ Created on Sep 21, 2016
 from bfs_g import *
 import world
 import problem
-def ohwow(belief_state, problem_spec, State): #TODO: Prior is uniform and handled by world module for now
-    '''
-    Agent should keep track of what it knows and send to ohwow
-    '''
-    n = 100 #What is a good sample size?
-    horizion=10 #TODO: What should manage horizon?
-    problem_dist = problem.problem_distribution(belief_state.state, problem_spec)
-    possible_worlds = sample(belief_state.state, problem_dist, n)
+
+'''
+Oh wow expects an incomplete state, a belief state. It maybe tuned to change sample size, search horizon, and
+underlying distribution of possible worlds.
+'''
+
+
+def ohwow(belief_state, problem_spec, State):
+
+    # Tunable parameters
+    n = 100  # TODO: What is a good sample size?
+    horizon = 10  # TODO: Move this parameter to search. It tunes search
+    problem_dist = problem.chance_of_food(belief_state, problem_spec)
+
+    # Sample worlds
+    possible_worlds = sample(belief_state.grid, problem_dist, n)
     print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
-    actions_in_s = applicable_actions(belief_state.state, problem_spec)
-        #Transition to next state
+
+    # Simulate each action available in the current world
+    actions_in_s = problem.applicable_actions(belief_state.grid, problem_spec)
+
     max_action=None
     max_q=-1000 #TODO: Does 0 work? Umm no
     for action in actions_in_s: #TODO: Should be for each s_prime, not action
         c = -1000.0
         for world in possible_worlds:
-            print world
-            print 'has food:', belief_state.has_food
-            s_prime = transition(State(world,belief_state.reward,belief_state.has_food), action, problem_spec, State)
-            print 's_prime:', s_prime #Maybe get the reward from this step and add it to c?
-            c += search(s_prime,horizion, State)
+            #print world
+            #print 'has food:', belief_state.has_food
+
+            # Simulate taking each action
+            # TODO: Consider using a tuple of tuples to organize state instead of a State object
+            s_prime = transition(State(world, belief_state.reward, belief_state.has_food), action, problem_spec, State)
+            #print 's_prime:', s_prime #Maybe get the reward from this step and add it to c?
+
+            # Search from this next state
+            c += search(s_prime,horizon, State)
         q = c/float(n) #- cost
         print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
-    return (max_action, max_q)
+    return max_action, max_q
 
 
 def summarize_sample(possible_worlds, problem_spec):
@@ -51,13 +66,9 @@ def summarize_sample(possible_worlds, problem_spec):
     return summary_grid
 
 
-
-def applicable_actions(belief_state, problem_spec):
-    return problem.applicable_actions(belief_state, problem_spec)#TODO: Pass a problem definition instead
-
 def transition(belief_state, action, problem_spec, State):
     s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
-    return s_prime.state_dict
+    return s_prime.state
 
 def sample(belief_state, problem_dist, n):
     possible_worlds=[]

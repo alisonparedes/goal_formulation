@@ -166,15 +166,29 @@ def to_dict(w):
             y+=1
         x+=1
     return state
-                
+
+'''
+Transition expects a state and an action and returns a state and an observation. The problem spec helps determine how
+the state changes.
+
+A state is made up of three features: ...
+
+Action determine which of the units that an agent may control may attempt move and to where, although the move may not
+resolve as expected; units may not get as far as they had hoped, moving 0 to n - m.
+
+Encountering food changes if the agent has food or not and causes new food to grow somewhere else.
+
+'''
+
+
 def transition(state, action, problem_spec, State):
     '''
     Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
     or a complete state. 
     '''
     #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
-    state_grid = to_grid(state.state, problem_spec) #TODO: Get dimensions from problem spec
-    from_coordinate=get_coordinate(state.state) #TODO: Currently moves harvester only. Why not get this from world?
+    state_grid = to_grid(state.grid, problem_spec) #TODO: Get dimensions from problem spec
+    from_coordinate=get_coordinate(state.grid) #TODO: Currently moves harvester only. Why not get this from world?
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
     unit = state_grid[from_x][from_y] #TODO: I hope this is a copy!
@@ -186,26 +200,26 @@ def transition(state, action, problem_spec, State):
     #TODO: Try the move and if it fails return?
     cell=state_grid[to_x][to_y]
     arriving_unit = arriving('H', cell)
-    has_food = state.has_food
+    food = state.has_food
     if arriving_unit in '$':
-        has_food = True
+        food = True
     if arriving_unit in '*':
         state_grid = clear_visited(state_grid)
     state_grid[to_x][to_y]=arriving_unit
-    state_dict = to_dict(state_grid)
+    grid = to_dict(state_grid)
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
     Observation = namedtuple('Observation',['observation_dict','has_food'])
-    observations = Observation(observation_dict,has_food=has_food)
-    Transition = namedtuple('Transition',['state_dict','observations'])
-    new_reward = reward(State(state_dict, reward=state.reward, has_food=has_food))
-    new_state = Transition(State(state_dict, reward=new_reward, has_food=has_food), observations=observations)
+    observations = Observation(observation_dict,has_food=food)
+    Transition = namedtuple('Transition',['state','observations'])
+    new_reward = reward(State(grid=grid, reward=state.reward, has_food=food))
+    new_state = Transition(State(grid=grid, reward=new_reward, has_food=food), observations=observations)
     return new_state
 
 def reward(s): #Expecting State object
     reward=0
-    for coordinate, unit in s.state.iteritems(): #TODO: How much is this slowing my BFS down?
+    for coordinate, unit in s.grid.iteritems(): #TODO: How much is this slowing my BFS down?
         if unit in '*':
             reward+=0 #State tracks if base has ever been visited before
             if s.has_food:
@@ -224,24 +238,75 @@ def clear_visited(state_grid):
         x += 1
     return cleared
 
-def problem_distribution(belief_state_dict, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
-    problem_distribution_arr = []
-    food_sum = 0
-    for coordinate, unit in belief_state_dict.iteritems():
-        if unit: #and unit not in '-':
-            problem_distribution_arr.append((0.0, coordinate, unit))
-        if unit in 'F$':
-            food_sum += 1
-    total_probability=0.0
-    probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(problem_distribution_arr))
-    if food_sum < 2:
+
+'''
+
+'''
+
+def chance_to_grow(state, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
+
+    MAXFOOD = 2
+    distribution = []
+    food = 0
+
+    if not state.has_food:
+        distribution.append((1.0,None))
+        return distribution
+
+    for coordinate, unit in state.grid.iteritems():
+        if unit in 'F':
+            food += 1
+
+    total_probability = 0.0
+    probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
+
+    if food < MAXFOOD:
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
-                if (x, y) not in belief_state_dict: #or belief_state_dict[(x,y)]=='-':
-                    problem_distribution_arr.append((probability, (x, y), 'F'))
+                    distribution.append((probability, (x, y), 'F'))
                     total_probability += probability
-    problem_distribution_arr.append((1 - total_probability, None))
-    return problem_distribution_arr
+
+    distribution.append((1 - total_probability, None))
+
+    return distribution
+
+
+'''
+Used by the agent with an incomplete state. Considers chance to grow.
+'''
+def chance_of_food(belief_state, problem_spec):
+    # type: (object, object) -> object
+
+    distribution = []
+
+    chance_to_grow = 1.0 / (problem_spec[0] * problem_spec[1])
+
+    for coordinate, unit in belief_state.grid.iteritems():
+        if unit: #Explored or occupied
+            if belief_state.has_food:
+                distribution.append((chance_to_grow/2, coordinate, 'F'))
+
+    total_probability = 0.0
+
+    unexplored = (problem_spec[0] * problem_spec[1] - len(belief_state.grid))
+    if unexplored > 0:
+        probability = 1.0 / unexplored
+    else:
+        probability = 0.0
+
+    for x in range(0,problem_spec[0]):
+        for y in range(0,problem_spec[1]):
+            if (x, y) not in belief_state.grid:
+                if belief_state.has_food:
+                    distribution.append(((probability + chance_to_grow)/2, (x, y), 'F'))
+                    total_probability += probability
+                else:
+                    distribution.append((probability, (x, y), 'F'))
+                    total_probability += probability
+
+    distribution.append((1 - total_probability, None))
+
+    return distribution
 
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():
