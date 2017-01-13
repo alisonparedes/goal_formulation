@@ -80,7 +80,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
-
+    '''
     # Scenario 1 used for development
     # Agent knows about a food but there is another hidden food along the way. It should go directly to the food,
     # stumble on the closer food and take that to the base with it for a reward.
@@ -94,7 +94,21 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=False
     belief_state=State(grid_belief, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
 
+    # Scenario 2 used for development
+    # Agent must explore for food and take it to base. Simulator grows new food, so this scenario is endlessly
+    # repeatable
+    initial_state = 'H--B\nF---\n----\n---F\n'
+    belief_state = 'H--B\n----\n----\n----\n'
+    problem_spec = (4,4)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
 
     '''
     # Scenario 1 used for debugging
