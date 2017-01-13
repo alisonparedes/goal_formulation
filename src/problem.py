@@ -286,47 +286,6 @@ def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width
     return distribution
 
 
-'''
-Used by the agent with an incomplete state. Considers chance to grow. Maybe irrelevant.
-'''
-def chance_of_food(belief_state, problem_spec, chance=False):
-    # type: (object, object) -> object
-
-    distribution = []
-
-    if not chance:
-        distribution.append((1.0, None))
-        return distribution
-
-    chance_to_grow = 1.0 / (problem_spec[0] * problem_spec[1])
-
-    for coordinate, unit in belief_state.grid.iteritems():
-        if unit: #Explored or occupied
-            if belief_state.has_food:
-                distribution.append((chance_to_grow/2, coordinate, 'F'))
-
-    total_probability = 0.0
-
-    unexplored = (problem_spec[0] * problem_spec[1] - len(belief_state.grid))
-    if unexplored > 0:
-        probability = 1.0 / unexplored
-    else:
-        probability = 0.0
-
-    for x in range(0,problem_spec[0]):
-        for y in range(0,problem_spec[1]):
-            if (x, y) not in belief_state.grid:
-                if belief_state.has_food:
-                    distribution.append(((probability + chance_to_grow)/2, (x, y), 'F'))
-                    total_probability += probability
-                else:
-                    distribution.append((probability, (x, y), 'F'))
-                    total_probability += probability
-
-    distribution.append((1 - total_probability, None))
-
-    return distribution
-
 def get_coordinate(state):
     for coordinate, cell in state.iteritems():
         if cell in 'H*$':
