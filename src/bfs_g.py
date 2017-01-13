@@ -6,10 +6,17 @@ Created on Sep 1, 2016
 from collections import namedtuple, deque
 import relaxed_problem
 
+
+'''
+Returns total reward
+'''
+
+
 def search(initial_state, horizon, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g','plan'])
+
     i = Node(initial_state, previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
 
@@ -20,10 +27,12 @@ def search(initial_state, horizon, State, return_plan=False):  #TODO: Get rid of
     next_level = 0
     nodes_generated = 1
     nodes_expanded = 0
-    max_g = -1000 #TODO: Negative infinity
+    max_g = 0
     plan = None
+
     while len(open_list) > 0 and depth < horizon:
-        s = open_list.popleft() 
+
+        s = open_list.popleft()
 
         #print(s.state)
         current_level -= 1
@@ -35,17 +44,21 @@ def search(initial_state, horizon, State, return_plan=False):  #TODO: Get rid of
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         nodes_generated += expanded.len
         max_g = expanded.max_g
+
         if expanded.plan:
             plan = expanded.plan
-        if current_level == 0: #TODO: Encapsulate!
+
+        if current_level == 0:
             current_level = next_level
             next_level = 0
             depth += 1
             #print(current_level)
+
     #print(nodes_generated)
     #print(nodes_expanded)
     if return_plan:
         print 'plan:', get_plan(plan), max_g
+
     return max_g #Return highest reward, not plan
 
 '''

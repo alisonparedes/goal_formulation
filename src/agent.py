@@ -44,13 +44,25 @@ def new_belief_state(belief_state, new_observations):
 
 if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
 
-    real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, None, None], ['B', 'F', None, 'F']])
+    # Scenario used for development
+    '''real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, None, None], ['B', 'F', None, 'F']])
     State = namedtuple('State',['grid','reward','has_food']) #TODO: Problem should handle state structure.
     reward=0
     has_food=False
     belief_state=State({(3, 0): 'B', (1, 2): 'H'}, reward, has_food)
     real_world=State(real_world_dict, reward, has_food)
-    problem_spec=(4, 4)
+    problem_spec=(4, 4)'''
+
+    # Base case used for development
+    # Since agent has food already it should march straight to the base with it for a reward.
+    initial_state = 'H---\n----\n----\n---B\n'
+    problem_spec = (4,4)
+    grid = problem.parse(initial_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=True
+    belief_state=State(grid, reward, has_food)
+    real_world=State(grid, reward, has_food)
 
     while True:
         #print 'belief: {0}'.format(belief_state)

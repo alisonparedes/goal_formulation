@@ -183,31 +183,38 @@ Encountering food changes if the agent has food or not and causes new food to gr
 '''
 
 
+'''
+Transition is used to simulate next step.
+'''
+
+
 def transition(state, action, problem_spec, State, here=None):
-    '''
-    Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
-    or a complete state. 
-    '''
-    #TODO: Separate functions maybe? But I don't want to revert to using dictionaries.
-    state_grid = to_grid(state.grid, problem_spec) #TODO: Get dimensions from problem spec
-    from_coordinate=get_coordinate(state.grid) #TODO: Currently moves harvester only. Why not get this from world?
+
+    state_grid = to_grid(state.grid, problem_spec)
+
+    from_coordinate=get_coordinate(state.grid)
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
-    unit = state_grid[from_x][from_y] #TODO: I hope this is a copy!
+
+    unit = state_grid[from_x][from_y]
     leaving_unit = leaving(unit)
-    state_grid[from_x][from_y]= leaving_unit#TODO: May need to replace old location to get performance stats in the interim
+    state_grid[from_x][from_y] = leaving_unit
+
     to_coordinate = new_coordinate(from_coordinate, action)
     to_x = to_coordinate[0]
-    to_y = to_coordinate[1] 
-    #TODO: Try the move and if it fails return?
+    to_y = to_coordinate[1]
+
     cell=state_grid[to_x][to_y]
     arriving_unit = arriving('H', cell)
+
     food = state.has_food
     if arriving_unit in '$':
         food = True
     if arriving_unit in '*':
         state_grid = clear_visited(state_grid)
+
     state_grid[to_x][to_y]=arriving_unit
+
     grid = to_dict(state_grid)
 
     observation_dict={}
@@ -225,6 +232,7 @@ def transition(state, action, problem_spec, State, here=None):
 
     Transition = namedtuple('Transition',['state','observations'])
     new_state_and_observations = Transition(new_state, observations=observations)
+
     return new_state_and_observations
 
 def reward(s): #Expecting State object
@@ -253,9 +261,8 @@ def clear_visited(state_grid):
 
 '''
 
-def chance_to_grow(state, problem_spec): #TODO: Problem spec is width and height of a single test problem right now
+def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width and height of a single test problem right now
 
-    MAXFOOD = 2
     distribution = []
     food = 0
 
@@ -270,7 +277,7 @@ def chance_to_grow(state, problem_spec): #TODO: Problem spec is width and height
     total_probability = 0.0
     probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
 
-    if food < MAXFOOD:
+    if food < maxfood:
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
                     distribution.append((probability, (x, y), 'F'))
@@ -284,10 +291,14 @@ def chance_to_grow(state, problem_spec): #TODO: Problem spec is width and height
 '''
 Used by the agent with an incomplete state. Considers chance to grow.
 '''
-def chance_of_food(belief_state, problem_spec):
+def chance_of_food(belief_state, problem_spec, chance=True):
     # type: (object, object) -> object
 
     distribution = []
+
+    if not chance:
+        distribution.append((1.0, None))
+        return distribution
 
     chance_to_grow = 1.0 / (problem_spec[0] * problem_spec[1])
 

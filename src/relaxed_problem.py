@@ -27,14 +27,14 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(state, action_and_coordinate, State): #TODO: Assumes action is valid
+def transition(state, action_and_coordinate, State):
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
     next_state=None
     if action == 'HB':
-        next_state=hb(state, State) #TODO: I'm not sure I like passing class specifications (what are these exactly?) around but it seems like it should belong to functional programming
+        next_state=hb(state, State)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         next_state=hf(state, coordinate, State)
@@ -77,10 +77,11 @@ def distance(from_coordinate, to_coordinate):
     distance=abs(from_x - to_x) + abs(from_y - to_y)#math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
     return distance * 1
 
+'''
+Simulate moving harvester to food
+'''
 def hf(state, food_coordinate, State):
-    '''
-    Simulate moving harvester to food
-    '''
+
     new_map = {}
     from_coordinate=()
     to_coordinate=()

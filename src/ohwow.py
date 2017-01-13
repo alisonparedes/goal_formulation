@@ -13,12 +13,10 @@ underlying distribution of possible worlds.
 '''
 
 
-def ohwow(belief_state, problem_spec, State):
+def ohwow(belief_state, problem_spec, State, n=1, horizon=1, grows=False):
 
     # Tunable parameters
-    n = 100  # TODO: What is a good sample size?
-    horizon = 10  # TODO: Move this parameter to search. It tunes search
-    problem_dist = problem.chance_of_food(belief_state, problem_spec)
+    problem_dist = problem.chance_of_food(belief_state, problem_spec, grows)
 
     # Sample worlds
     possible_worlds = sample(belief_state.grid, problem_dist, n)
@@ -31,22 +29,22 @@ def ohwow(belief_state, problem_spec, State):
     actions_in_s = problem.applicable_actions(belief_state.grid, problem_spec)
 
     max_action=None
-    max_q=-1000 #TODO: Does 0 work? Umm no
+    max_q=0
     for action in actions_in_s: #TODO: Should be for each s_prime, not action
-        c = -1000.0
+        c = 0.0
         for world in possible_worlds:
             #print world
             #print 'has food:', belief_state.has_food
 
             # Simulate taking each action
-            # TODO: Consider using a tuple of tuples to organize state instead of a State object
             s_prime = transition(State(world, belief_state.reward, belief_state.has_food), action, problem_spec, State)
-            #print 's_prime:', s_prime #Maybe get the reward from this step and add it to c?
+            c += s_prime.reward
 
             # Search from this next state
             c += search(s_prime, horizon, State)
-        q = c/float(n) #- cost
-        #print '{0} {1}'.format(action, q)
+
+        q = c/float(n)
+        print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
