@@ -66,6 +66,50 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
+    '''
+    # Base case used for development
+    # Agent knows about a food. It should go directly to the food then to the base with it for a reward.
+    initial_state = 'H--B\n----\n----\n---F\n'
+    problem_spec = (4,4)
+    grid = problem.parse(initial_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid, reward, has_food)
+    real_world=State(grid, reward, has_food)
+    '''
+
+    '''
+    # Scenario 1 used for development
+    # Agent knows about a food but there is another hidden food along the way. It should go directly to the food,
+    # stumble on the closer food and take that to the base with it for a reward.
+    initial_state = 'H--B\nF---\n----\n---F\n'
+    belief_state = 'H--B\----\n----\n---F\n'
+    problem_spec = (4,4)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+    '''
+
+    # Scenario 1 used for debugging
+    # Agent knows about a food but there is another hidden food along the way. It should go directly to the food,
+    # stumble on the closer food and take that to the base with it for a reward.
+    initial_state = 'HB\nFF\n'
+    belief_state = 'HB\n-F\n'
+    problem_spec = (2,2)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+
+    '''
     # Base case used to debug reward
     # Since agent has food already it should march straight to the base with it for a reward.
     initial_state = 'HB\n'
@@ -76,14 +120,15 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=True
     belief_state=State(grid, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
 
     time = 0
     print "time: {0}".format(time)
     print "reward: {0}".format(real_world.reward)
     print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
-    while True:
+    while time <= 100:
         #print 'belief: {0}'.format(belief_state)
-        action = ohwow(belief_state, problem_spec, State)
+        action = ohwow(belief_state, problem_spec, State, horizon=10)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.observations
         real_world = new_world.state
@@ -93,4 +138,5 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
         print "reward: {0}".format(real_world.reward)
         print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
         time += 1
+
 
