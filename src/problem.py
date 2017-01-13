@@ -220,14 +220,14 @@ def transition(state, action, problem_spec, State, here=None):
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
-    Observation = namedtuple('Observation',['observation_dict','has_food'])
+    Observation = namedtuple('Observation',['observation_dict', 'has_food', 'reward'])
 
     new_reward = reward(State(grid=grid, reward=state.reward, has_food=food))
 
     if arriving_unit in '*': # TODO: If changing symbols to represent when harvester is carrying food or not, change this too
         food = False
 
-    observations = Observation(observation_dict,has_food=food)
+    observations = Observation(observation_dict, has_food=food, reward=new_reward)
     new_state = State(grid=grid, reward=new_reward, has_food=food)
 
     if here:

@@ -25,6 +25,7 @@ def new_belief_state(belief_state, new_observations):
 
     new_belief_state=belief_state.grid
     has_food = new_observations.has_food
+    accumulated_reward = belief_state.reward + new_observations.reward
 
     for coordinate, cell in new_observations.observation_dict.iteritems():  # TODO: This doesn't need to be a dictionary
 
@@ -39,7 +40,7 @@ def new_belief_state(belief_state, new_observations):
 
     # TODO: These three components could be organized using a tuple using lambdas to name indices instead of
     # namedtuples, which require passing instances of the namedtuple around.
-    return State(new_belief_state, belief_state.reward, has_food)
+    return State(new_belief_state, accumulated_reward, has_food)
 
 
 if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
@@ -135,7 +136,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
         belief_state = new_belief_state(belief_state, new_observations) #Does observation contain food? Nope. Fix this.
         #os.system('clear')
         print "time: {0}".format(time)
-        print "reward: {0}".format(real_world.reward)
+        print "total reward: {0}".format(belief_state.reward)
         print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
         time += 1
 
