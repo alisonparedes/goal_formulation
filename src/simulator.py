@@ -28,7 +28,7 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     new_observations = new_world.observations
     #TODO: What about newly discovered obstacles?
     Simulation = namedtuple('Simulation',['state','observations'])
-    simulation = Simulation(State(new_world_dict,real_world.reward,new_world.state.has_food), new_observations)
+    simulation = Simulation(State(new_world_dict, new_world.state.reward, new_world.state.has_food), new_observations)
     return simulation #TODO: Return cumulative reward to use to compare results of each run
 
 

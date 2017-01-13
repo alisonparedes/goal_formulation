@@ -53,6 +53,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)'''
 
+    '''
     # Base case used for development
     # Since agent has food already it should march straight to the base with it for a reward.
     initial_state = 'H---\n----\n----\n---B\n'
@@ -63,7 +64,23 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=True
     belief_state=State(grid, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
 
+    # Base case used to debug reward
+    # Since agent has food already it should march straight to the base with it for a reward.
+    initial_state = 'HB\n'
+    problem_spec = (2,1)
+    grid = problem.parse(initial_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=True
+    belief_state=State(grid, reward, has_food)
+    real_world=State(grid, reward, has_food)
+
+    time = 0
+    print "time: {0}".format(time)
+    print "reward: {0}".format(real_world.reward)
+    print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
     while True:
         #print 'belief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State)
@@ -72,4 +89,8 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
         real_world = new_world.state
         belief_state = new_belief_state(belief_state, new_observations) #Does observation contain food? Nope. Fix this.
         #os.system('clear')
-        print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec)) #TODO: Swap these parameters to reflect order states will be printed
+        print "time: {0}".format(time)
+        print "reward: {0}".format(real_world.reward)
+        print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
+        time += 1
+

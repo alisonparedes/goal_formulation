@@ -291,7 +291,7 @@ def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width
 '''
 Used by the agent with an incomplete state. Considers chance to grow.
 '''
-def chance_of_food(belief_state, problem_spec, chance=True):
+def chance_of_food(belief_state, problem_spec, chance=False):
     # type: (object, object) -> object
 
     distribution = []

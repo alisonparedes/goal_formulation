@@ -13,10 +13,10 @@ underlying distribution of possible worlds.
 '''
 
 
-def ohwow(belief_state, problem_spec, State, n=1, horizon=1, grows=False):
+def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    problem_dist = problem.chance_of_food(belief_state, problem_spec, grows)
+    problem_dist = problem.chance_of_food(belief_state, problem_spec)
 
     # Sample worlds
     possible_worlds = sample(belief_state.grid, problem_dist, n)
@@ -44,7 +44,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1, grows=False):
             c += search(s_prime, horizon, State)
 
         q = c/float(n)
-        print '{0} {1}'.format(action, q)
+        #print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
