@@ -16,8 +16,7 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    problem_dist = problem.chance_of_food(belief_state, problem_spec, chance=True)
-    print(problem_dist)
+    problem_dist = problem.chance_to_grow(belief_state, problem_spec, maxfood=2)
 
     # Sample worlds
     possible_worlds = sample(belief_state.grid, problem_dist, n)

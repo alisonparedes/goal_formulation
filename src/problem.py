@@ -267,20 +267,15 @@ def clear_visited(state_grid):
 def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width and height of a single test problem right now
 
     distribution = []
+
     food = 0
-
-    if not state.has_food:
-        distribution.append((1.0,None))
-        return distribution
-
     for coordinate, unit in state.grid.iteritems():
         if unit in 'F':
             food += 1
 
     total_probability = 0.0
-    probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
-
     if food < maxfood:
+        probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
                     distribution.append((probability, (x, y), 'F'))
@@ -292,7 +287,7 @@ def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width
 
 
 '''
-Used by the agent with an incomplete state. Considers chance to grow.
+Used by the agent with an incomplete state. Considers chance to grow. Maybe irrelevant.
 '''
 def chance_of_food(belief_state, problem_spec, chance=False):
     # type: (object, object) -> object
