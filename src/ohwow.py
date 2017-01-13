@@ -22,7 +22,7 @@ def ohwow(belief_state, problem_spec, State):
 
     # Sample worlds
     possible_worlds = sample(belief_state.grid, problem_dist, n)
-    print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
+    #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -44,9 +44,9 @@ def ohwow(belief_state, problem_spec, State):
             #print 's_prime:', s_prime #Maybe get the reward from this step and add it to c?
 
             # Search from this next state
-            c += search(s_prime,horizon, State)
+            c += search(s_prime, horizon, State)
         q = c/float(n) #- cost
-        print '{0} {1}'.format(action, q)
+        #print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action

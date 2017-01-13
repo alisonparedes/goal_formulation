@@ -7,7 +7,7 @@ from copy import copy
 import random
 from problem import * #TODO: World and problem should maybe be in the same module
 
-def sample(problem_distribution_arr, state, max_food):
+def sample(problem_distribution_arr, grid, max_food=1):
     '''
     Expects a 2D array of probability distributions determined by the problem. 
     Example [(0.5,(0,1),'F'),(0.5,None)]
@@ -19,17 +19,17 @@ def sample(problem_distribution_arr, state, max_food):
     A seed could help debug these functions but I don't think it can be used to debug search since search
     needs to speculate about different models. 
     '''
-    new_state = copy(state)
+    new_grid = copy(grid)
     for i in range(max_food):
         x = sample_cell(problem_distribution_arr)
-        update_state(new_state, x)
+        update_state(new_grid, x)
         i += 1
-    return new_state
+    return new_grid
 
 def update_state(state, sample): #Modifies state in place
-    coordinate=sample[1] #TODO: Use named tuples to hold coordinate
+    coordinate=sample[1]
     if coordinate:
-        unit=sample[2] #TODO: Use named tuple to hold unit
+        unit=sample[2]
         if coordinate in state:
             state[coordinate]=merge(state[coordinate],unit) 
         else:

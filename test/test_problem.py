@@ -44,6 +44,18 @@ class TestState(unittest.TestCase):
         new_state_and_observations = transition(state, action, problem_spec, State)
         new_state = new_state_and_observations.state
         self.assertEquals(new_state.reward, 50, new_state_and_observations)
+
+    def testTransitionBeliefStateGrow(self):
+        simstate = 'HF'
+        problem_spec = (2,1)
+        grid = parse(simstate)
+        action = 'E'
+        State = namedtuple('State',['grid','reward','has_food'])
+        state = State(grid, reward=0, has_food=False)
+        new_food=(0,0)
+        new_state_and_observations = transition(state, action, problem_spec, State, new_food)
+        new_state = new_state_and_observations.state
+        self.assertEquals(new_state.grid, {(0, 0): 'F', (1, 0): '$'}, new_state.grid)
         
     def testTransitionRealWorldFood(self):  # TODO: The real world should be more complete; every cell should be represented
         simstate = 'H-\n-F'

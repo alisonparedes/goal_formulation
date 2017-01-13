@@ -107,19 +107,21 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     return actions
 
 
+def grow(state, coordinate, State):
 
-def reset(state_dict, problem_distribution_arr, n=1):  #TODO: Consider getting size of world from somewhere else, a problem structure maybe?
-    '''
-    Expects a state of the world. It doesn't need to be a completely known state of the world (I think) but because I expect
-    this function to be used by the simulator which is omniscient and not the agent which has limited knolwedge, spawn must be able to
-    deal with a complete state, all n of its attributes.
-    
-    State must be a dictionary. Right now there may be two representations of states floating around, dictionaries and 2D grids. There are functions that transform
-    one format to the other but which functions prefer which versions? I don't want to worry about this but ... sigh. 
-    '''
-    #state_dict = to_dict(state)
-    new_state = world.sample(problem_distribution_arr, state_dict, n)  #TODO: Need to be able to seed the sample for debugging
-    return new_state
+    grid = state.grid
+
+    has_food = state.has_food
+    if coordinate in grid:
+        if grid[coordinate] == 'H':
+            grid[coordinate] = '$'
+            has_food = True
+        else:
+            grid[coordinate] = 'F'
+    else:
+        grid[coordinate] = 'F'
+
+    return State(grid, state.reward, has_food)
     
 def new_coordinate(coordinate, action):
     '''
@@ -181,7 +183,7 @@ Encountering food changes if the agent has food or not and causes new food to gr
 '''
 
 
-def transition(state, action, problem_spec, State):
+def transition(state, action, problem_spec, State, here=None):
     '''
     Transition is used by both search to imagine the next state and the simulator to take an action. It could operate on a belief state
     or a complete state. 
@@ -207,15 +209,23 @@ def transition(state, action, problem_spec, State):
         state_grid = clear_visited(state_grid)
     state_grid[to_x][to_y]=arriving_unit
     grid = to_dict(state_grid)
+
     observation_dict={}
     observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)]= arriving_unit
     Observation = namedtuple('Observation',['observation_dict','has_food'])
     observations = Observation(observation_dict,has_food=food)
-    Transition = namedtuple('Transition',['state','observations'])
+
     new_reward = reward(State(grid=grid, reward=state.reward, has_food=food))
-    new_state = Transition(State(grid=grid, reward=new_reward, has_food=food), observations=observations)
-    return new_state
+
+    new_state = State(grid=grid, reward=new_reward, has_food=food)
+
+    if here:
+        new_state = grow(new_state, here, State)
+
+    Transition = namedtuple('Transition',['state','observations'])
+    new_state_and_observations = Transition(new_state, observations=observations)
+    return new_state_and_observations
 
 def reward(s): #Expecting State object
     reward=0
