@@ -4,64 +4,74 @@ Created on Sep 3, 2015
 @author: Alison
 '''
 
-from collections import deque
+from collections import deque, namedtuple
 import problem
 from copy import deepcopy
-  
-def dijkstra(goal, problem): #TODO: Run to a horizon, i.e. number of nodes expanded
-    #TODO: Initialize open list
-    
-    open_list = deque([goal])
-    policy = empty_policy(problem) #TODO: What is this if it isn't a policy? =
-    policy[goal[0]][goal[1]]='B' #TODO: How to separate this logic from dijkstra?
-    while len(open_list) > 0:  #TODO: Instead of goal state run to horizon, i.e. run n times
-        explored = open_list.popleft()     
-        expand(explored, open_list, policy, problem)
-    return policy #Always returns something, since there is no goal state, only a reward
 
-def expand(current_state, open_list, policy, problem):
-    for action in actions(current_state, problem): #Actions are directions
-        next_state=transition(current_state,action,problem)
+'''
+Expects a coordinate identifying the goal. For this project the goal could be the base or a food node.
+'''
+
+
+def dijkstra(goal, belief_state, problem_spec):
+    open_list = deque([(goal,0)])
+    policy = empty_policy(problem_spec)
+    policy[goal[0]][goal[1]] = ('*', 0)
+    while len(open_list) > 0:
+        explored = open_list.popleft() # Start from the goal coordinate
+        expand(explored, belief_state, open_list, policy, problem_spec)
+    return problem.to_dict(policy) #Always returns something, since there is no goal state, only a reward
+
+
+def expand(start, belief_state, open_list, policy, problem_spec):
+    start_coordinate = start[0]
+    cost = start[1]
+    for action in problem.unit_actions(start_coordinate, belief_state, problem_spec):
+        next_state=transition(start_coordinate,action)
         x=next_state[0]
         y=next_state[1]
-        if policy[x][y] == None:       
-            open_list.append(next_state) #States are coordinates
-            policy[x][y]=current_state
-        
-        
-def actions(state, problem):
-    w=len(problem)
-    h=len(problem[0])
-    actions=[]
-    x=state[0]
-    y=state[1]
-    if x+1 < w:
-        actions.append((1,0))
-    if x-1 >= 0:
-        actions.append((-1,0))
-    if y+1 < h: 
-        actions.append((0,1))
-    if y-1 >= 0:
-        actions.append((0,-1))
-    return actions
+        if policy[x][y] == None:
+            open_list.append((next_state, cost + 1)) #States are coordinates
+            policy[x][y] = (start_coordinate, cost + 1)
 
+
+'''
+Expects a grid containing from which this function will derive the dimensions of the grid (height and width) and use
+them to construct an empty policy. Empty policies contain no instructions (or costs).
+'''
 def empty_policy(problem):
-    w=len(problem)
-    h=len(problem[0])
+    w=problem[0]
+    h=problem[1]
     grid = []
-    for i in range(w): #TODO: I don't need i.
+    for i in range(w):
         grid.append([None]*h) #Meh
     return grid
 
-def transition(state, action, problem):
-    next_x=state[0]+action[0]
-    next_y=state[1]+action[1]
-    return (next_x,next_y)
 
+def transition(state, action):
+    x = y = 0
+    if action == 'N':
+        y = -1
+    elif action == 'S':
+        y = 1
+    elif action == 'E':
+        x = 1
+    elif action == 'W':
+        x = -1
+    next_x=state[0] + x
+    next_y=state[1] + y
+    return (next_x, next_y)
 
         
 if __name__ == '__main__':
-    problem=[['H', None, 'F', None], [None, None, None, None], ['H', None, None, None], [None, 'B', None, None]]
-    goal=(3,1)
-    print(dijkstra(goal, problem))
+    problem_spec = (2,2)
+    initial_state = 'H#\n-B'
+    goal=(1,1)
+    grid = problem.parse(initial_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid, reward, has_food)
+
+    print(dijkstra(goal, belief_state, problem_spec))
     

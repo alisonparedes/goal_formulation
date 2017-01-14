@@ -20,7 +20,7 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    distribution = problem.chance_to_grow(real_world, problem_spec, maxfood=2)
+    distribution = problem.chance_of_food(real_world, problem_spec, maxfood=0)
     new_food = world.sample_cell(distribution)
     coordinate=new_food[1]
     new_world = problem.transition(real_world, action, problem_spec, State, coordinate)

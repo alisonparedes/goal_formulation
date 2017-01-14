@@ -23,6 +23,9 @@ import os
 
 def new_belief_state(belief_state, new_observations):
 
+    if not new_observations:
+        return belief_state
+
     new_belief_state=belief_state.grid
     has_food = new_observations.has_food
     accumulated_reward = belief_state.reward + new_observations.reward
@@ -96,6 +99,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
+    '''
     # Scenario 2 used for development
     # Agent must explore for food and take it to base. Simulator grows new food, so this scenario is endlessly
     # repeatable
@@ -107,6 +111,21 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     State = namedtuple('State',['grid','reward','has_food'])
     reward=0
     has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+    '''
+
+    # Scenario 2 with obstacles used for development
+    # Agent must explore for food and take it to base. Simulator grows new food, so this scenario is endlessly
+    # repeatable
+    initial_state = 'H-#B'
+    belief_state = 'H--B'
+    problem_spec = (4,1)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=True
     belief_state=State(grid_belief, reward, has_food)
     real_world=State(grid, reward, has_food)
 

@@ -25,7 +25,7 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HBF$*@':
+        if cell in 'HBF$*@#':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -93,17 +93,34 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     h=problem_spec[1]
     units='' #TODO: Maybe use this when adding Defender's moves
     for coordinate, unit in belief_state.iteritems():
-        x=coordinate[0] 
-        y=coordinate[1]
-        if unit in 'H*$':#TODO: Or D
-            if y-1 >= 0:
-                actions.append('N')
-            if y+1 < h: #Internal representation of coordinate system puts origin in upper left corner of map
-                actions.append('S')
-            if x+1 < w:
-                actions.append('E')            
-            if x-1 >= 0: #Assuming left most cell in problem is 0
-                actions.append('W')#TODO: Eventually both harvester and defender should be able to move: units+=unit
+        if unit in 'H*$':#TODO: Or Defender?
+            actions = unit_actions(coordinate, belief_state, problem_spec)
+    return actions
+
+'''
+Given a coordinate returns a list of actions that may be taken from that coordinate in the given state.
+'''
+
+
+def unit_actions(coordinate, belief_state, problem_spec):
+
+    actions = []
+
+    w = problem_spec[0]
+    h = problem_spec[1]
+
+    x = coordinate[0]
+    y = coordinate[1]
+
+    if y-1 >= 0 and ((x, y-1) not in belief_state.grid or belief_state.grid[(x, y-1)] != '#'):
+        actions.append('N')
+    if y+1 < h and ((x, y+1) not in belief_state.grid or belief_state.grid[(x, y+1)] != '#'): # Internal representation of coordinate system puts origin in upper left corner of map
+        actions.append('S')
+    if x+1 < w and ((x+1, y) not in belief_state.grid or belief_state.grid[(x+1, y)] != '#'):
+        actions.append('E')
+    if x-1 >= 0 and ((x-1, y) not in belief_state.grid or belief_state.grid[(x-1, y)] != '#'): # Assuming left most cell in problem is 0
+        actions.append('W')
+
     return actions
 
 
@@ -190,6 +207,10 @@ Transition is used to simulate next step.
 
 def transition(state, action, problem_spec, State, here=None):
 
+    Observation = namedtuple('Observation',['observation_dict', 'has_food', 'reward'])
+    observation_dict={}
+    Transition = namedtuple('Transition',['state','observations'])
+
     state_grid = to_grid(state.grid, problem_spec)
 
     from_coordinate=get_coordinate(state.grid)
@@ -204,7 +225,12 @@ def transition(state, action, problem_spec, State, here=None):
     to_x = to_coordinate[0]
     to_y = to_coordinate[1]
 
-    cell=state_grid[to_x][to_y]
+    cell = state_grid[to_x][to_y]
+
+    if cell and cell in '#':
+        observation_dict[(to_x, to_y)]='#'
+        return Transition(state, observations=Observation(observation_dict, has_food=state.has_food, reward=0))
+
     arriving_unit = arriving('H', cell)
 
     food = state.has_food
@@ -217,10 +243,9 @@ def transition(state, action, problem_spec, State, here=None):
 
     grid = to_dict(state_grid)
 
-    observation_dict={}
-    observation_dict[(from_x, from_y)]= empty(leaving_unit) #TODO: Name this function something better
-    observation_dict[(to_x, to_y)]= arriving_unit
-    Observation = namedtuple('Observation',['observation_dict', 'has_food', 'reward'])
+    observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
+    observation_dict[(to_x, to_y)] = arriving_unit
+
 
     new_reward = reward(State(grid=grid, reward=state.reward, has_food=food))
 
@@ -233,7 +258,6 @@ def transition(state, action, problem_spec, State, here=None):
     if here:
         new_state = grow(new_state, here, State)
 
-    Transition = namedtuple('Transition',['state','observations'])
     new_state_and_observations = Transition(new_state, observations=observations)
 
     return new_state_and_observations
@@ -264,7 +288,7 @@ def clear_visited(state_grid):
 
 '''
 
-def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width and height of a single test problem right now
+def chance_of_food(state, problem_spec, maxfood=0):
 
     distribution = []
 
@@ -272,17 +296,20 @@ def chance_to_grow(state, problem_spec, maxfood=0): #TODO: Problem spec is width
     for coordinate, unit in state.grid.iteritems():
         if unit in 'F':
             food += 1
+        #elif unit in 'B#': # Food cannot grow in cell occupied by the base or an obstacle
+        #    distribution.append((0.0, coordinate))
 
     total_probability = 0.0
+
     if food < maxfood:
         probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
+                if (x, y) not in state.grid or state.grid[(x, y)] not in 'B#':
                     distribution.append((probability, (x, y), 'F'))
                     total_probability += probability
 
     distribution.append((1 - total_probability, None))
-
     return distribution
 
 

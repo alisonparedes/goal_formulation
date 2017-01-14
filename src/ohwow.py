@@ -16,7 +16,7 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    problem_dist = problem.chance_to_grow(belief_state, problem_spec, maxfood=2)
+    problem_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
 
     # Sample worlds
     possible_worlds = sample(belief_state.grid, problem_dist, n)
@@ -30,7 +30,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     max_action=None
     max_q=0
-    for action in actions_in_s: #TODO: Should be for each s_prime, not action
+    for action in actions_in_s:
         c = 0.0
         for world in possible_worlds:
             #print world
@@ -44,7 +44,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
             c += search(s_prime, horizon, State)
 
         q = c/float(n)
-        #print '{0} {1}'.format(action, q)
+        print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
@@ -68,10 +68,10 @@ def transition(belief_state, action, problem_spec, State):
     s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
     return s_prime.state
 
-def sample(belief_state, problem_dist, n):
+def sample(belief_state, food_dist, n):
     possible_worlds=[]
     for i in range(n):
-        w = world.sample(problem_dist,belief_state, max_food=2) #TODO: This magic number is in two places. Fix this ASAP.
+        w = world.sample(food_dist, belief_state, max_food=2) #TODO: This magic number is in two places. Fix this ASAP.
         possible_worlds.append(w) 
     return possible_worlds
 

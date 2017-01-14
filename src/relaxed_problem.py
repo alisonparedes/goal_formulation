@@ -32,12 +32,12 @@ def transition(state, action_and_coordinate, State):
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
-    next_state=None
+    next_state = None
     if action == 'HB':
-        next_state=hb(state, State)
+        next_state = hb(state, State)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        next_state=hf(state, coordinate, State)
+        next_state = hf(state, coordinate, State)
     return next_state
     #return s
 
@@ -51,15 +51,15 @@ def hb(state, State):
     for coordinate, unit in state.grid.iteritems():
         if unit == 'H':
             #next_state[coordinate]='@' #Start
-            from_coordinate=coordinate
+            from_coordinate = coordinate
         elif unit in '$':
             #next_state[coordinate]=None #Never restock
-            from_coordinate=coordinate
+            from_coordinate = coordinate
         elif unit == 'B':
-            new_map[coordinate]='*'
-            to_coordinate=coordinate
+            new_map[coordinate] = '*'
+            to_coordinate = coordinate
         else:
-            new_map[coordinate]=unit
+            new_map[coordinate] = unit
     resources = distance(from_coordinate, to_coordinate)
     has_food = state.has_food
     new_reward = state.reward
@@ -74,7 +74,7 @@ def distance(from_coordinate, to_coordinate):
     from_y=float(from_coordinate[1])
     to_x=float(to_coordinate[0])
     to_y=float(to_coordinate[1])
-    distance=abs(from_x - to_x) + abs(from_y - to_y)#math.sqrt(math.pow(from_x - to_x,2) + math.pow(from_y - to_y,2))
+    distance=abs(from_x - to_x) + abs(from_y - to_y)
     return distance * 1
 
 '''
