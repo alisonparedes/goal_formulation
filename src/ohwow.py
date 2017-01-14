@@ -20,7 +20,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
     food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
 
     # Sample worlds
-    World = namedtuple("World",["grid","distance_to_base"])
+    World = namedtuple("World",["grid","distances"])
     possible_worlds = sample(belief_state, food_dist, n, problem_spec, World)
     #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
@@ -41,7 +41,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
             c += s_prime.reward
 
             # Search from this next state
-            c += search(s_prime, horizon, world.distance_to_base, State)
+            c += search(s_prime, horizon, world.distances, State)
 
         q = c/float(n)
         print '{0} {1}'.format(action, q)
@@ -72,9 +72,13 @@ def sample(belief_state, food_dist, n, problem_spec, World):
     possible_worlds=[]
     for i in range(n):
         grid = world.sample(food_dist, belief_state.grid, max_food=2) #TODO: This magic number is in two places!
+        distances = []
         base = problem.find_base(grid)
-        distance_to_base = dijkstra.dijkstra(base[0], belief_state, problem_spec)
-        w = World(grid, distance_to_base)
+        distances.append((base, dijkstra.dijkstra(base[0], belief_state, problem_spec)))
+        food = problem.find_food(grid)
+        for f in food:
+            distances.append((f, dijkstra.dijkstra(f[0], belief_state, problem_spec)))
+        w = World(grid, distances)
         possible_worlds.append(w)
     return possible_worlds
 

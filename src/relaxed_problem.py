@@ -27,21 +27,21 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(state, action_and_coordinate, distance_to_base, State):
+def transition(state, action_and_coordinate, distances, State):
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
-        next_state = hb(state, distance_to_base, State)
+        next_state = hb(state, distances, State)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        next_state = hf(state, coordinate, State)
+        next_state = hf(state, coordinate, distances, State)
     return next_state
     #return s
 
-def hb(state, distance_to_base, State):
+def hb(state, distances, State):
     '''
     Simulate moving harvester to base
     '''
@@ -60,7 +60,7 @@ def hb(state, distance_to_base, State):
             to_coordinate = coordinate
         else:
             new_map[coordinate] = unit
-    resources = distance_to_base[from_coordinate][1] # Second index in distance dictionary is distance; first is policy
+    resources = find_distances_to_base(distances)[1][from_coordinate][1] # Second index in distance dictionary is distance; first is policy
     has_food = state.has_food
     new_reward = state.reward
     next_state = State(new_map,new_reward, has_food)
@@ -68,6 +68,19 @@ def hb(state, distance_to_base, State):
     if has_food:
         has_food = False
     return State(new_map, new_reward, has_food)
+
+def find_distances_to_base(distances):
+    for d in distances:
+        if d[0][1] in 'B*':
+            return d
+    return None
+
+
+def find_distances_to_food(distances, food):
+    for d in distances:
+        if d[0][0] == food:
+            return d
+    return None
 
 def distance(from_coordinate, to_coordinate):
     from_x=float(from_coordinate[0])
@@ -80,7 +93,7 @@ def distance(from_coordinate, to_coordinate):
 '''
 Simulate moving harvester to food
 '''
-def hf(state, food_coordinate, State):
+def hf(state, food_coordinate, distances, State):
 
     new_map = {}
     from_coordinate=()
@@ -97,7 +110,7 @@ def hf(state, food_coordinate, State):
             from_coordinate=coordinate
         else:
             new_map[coordinate]=unit
-    resources = distance(from_coordinate, to_coordinate)
+    resources = find_distances_to_food(distances, food_coordinate)[1][from_coordinate][1] # Second index in distance dictionary is distance; first is policy
     has_food = True
     new_reward = state.reward
     next_state = State(new_map, new_reward, has_food)

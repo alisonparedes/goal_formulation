@@ -130,7 +130,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
-
+    '''
     # Scenario 2 with obstacles used for development
     # Agent uses policy to calculate distance to base
     initial_state = 'H--\n-#B'
@@ -143,6 +143,22 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=True
     belief_state=State(grid_belief, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
+
+
+    # Scenario 2 with obstacles used for development
+    # Agent uses policy to calculate distance to any food
+    initial_state = 'H#F\n---\n-#B'
+    belief_state = 'H#F\n---\n-#B'
+    problem_spec = (3,3)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+
 
 
     '''
@@ -186,9 +202,10 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
         real_world = new_world.state
         belief_state = new_belief_state(belief_state, new_observations) #Does observation contain food? Nope. Fix this.
         #os.system('clear')
+        time += 1
         print "time: {0}".format(time)
         print "total reward: {0}".format(belief_state.reward)
         print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
-        time += 1
+
 
 

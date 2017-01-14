@@ -355,6 +355,13 @@ def find_base(grid):
         if unit in 'B*':
             return (coordinate, unit)
     return None
+
+def find_food(grid):
+    food = []
+    for coordinate, unit in grid.iteritems():
+        if unit in 'F':
+            food.append((coordinate, unit))
+    return food
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass
