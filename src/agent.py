@@ -115,9 +115,9 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
+    '''
     # Scenario 2 with obstacles used for development
-    # Agent must explore for food and take it to base. Simulator grows new food, so this scenario is endlessly
-    # repeatable
+    # Agent can't move harvester past obstacle.
     initial_state = 'H-#B'
     belief_state = 'H--B'
     problem_spec = (4,1)
@@ -128,6 +128,22 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=True
     belief_state=State(grid_belief, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
+
+
+    # Scenario 2 with obstacles used for development
+    # Agent uses policy to calculate distance to base
+    initial_state = 'H--\n-#B'
+    belief_state = 'H--\n-#B'
+    problem_spec = (3,2)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=True
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+
 
     '''
     # Scenario 1 used for debugging

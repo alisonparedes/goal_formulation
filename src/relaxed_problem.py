@@ -27,21 +27,21 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(state, action_and_coordinate, State):
+def transition(state, action_and_coordinate, distance_to_base, State):
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
-        next_state = hb(state, State)
+        next_state = hb(state, distance_to_base, State)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         next_state = hf(state, coordinate, State)
     return next_state
     #return s
 
-def hb(state, State):
+def hb(state, distance_to_base, State):
     '''
     Simulate moving harvester to base
     '''
@@ -60,7 +60,7 @@ def hb(state, State):
             to_coordinate = coordinate
         else:
             new_map[coordinate] = unit
-    resources = distance(from_coordinate, to_coordinate)
+    resources = distance_to_base[from_coordinate][1] # Second index in distance dictionary is distance; first is policy
     has_food = state.has_food
     new_reward = state.reward
     next_state = State(new_map,new_reward, has_food)
@@ -90,10 +90,10 @@ def hf(state, food_coordinate, State):
             #next_state[coordinate]='@' #Start
             from_coordinate=coordinate
         elif unit == 'F' and coordinate == food_coordinate :
-            new_map[coordinate]='$' #Food fully stocked
+            new_map[coordinate]='$'
             to_coordinate=coordinate
         elif unit in '*':
-            new_map[coordinate]='B' #Been home once already
+            new_map[coordinate]='B'
             from_coordinate=coordinate
         else:
             new_map[coordinate]=unit

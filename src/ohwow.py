@@ -6,6 +6,7 @@ Created on Sep 21, 2016
 from bfs_g import *
 import world
 import problem
+import dijkstra
 
 '''
 Oh wow expects an incomplete state, a belief state. It maybe tuned to change sample size, search horizon, and
@@ -16,32 +17,31 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    problem_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
+    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
 
     # Sample worlds
-    possible_worlds = sample(belief_state.grid, problem_dist, n)
+    World = namedtuple("World",["grid","distance_to_base"])
+    possible_worlds = sample(belief_state, food_dist, n, problem_spec, World)
     #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
 
     # Simulate each action available in the current world
-    actions_in_s = problem.applicable_actions(belief_state.grid, problem_spec)
+    actions_in_s = problem.applicable_actions(belief_state, problem_spec)
 
     max_action=None
     max_q=0
     for action in actions_in_s:
         c = 0.0
         for world in possible_worlds:
-            #print world
-            #print 'has food:', belief_state.has_food
 
             # Simulate taking each action
-            s_prime = transition(State(world, belief_state.reward, belief_state.has_food), action, problem_spec, State)
+            s_prime = transition(State(world.grid, belief_state.reward, belief_state.has_food), action, problem_spec, State)
             c += s_prime.reward
 
             # Search from this next state
-            c += search(s_prime, horizon, State)
+            c += search(s_prime, horizon, world.distance_to_base, State)
 
         q = c/float(n)
         print '{0} {1}'.format(action, q)
@@ -68,11 +68,14 @@ def transition(belief_state, action, problem_spec, State):
     s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
     return s_prime.state
 
-def sample(belief_state, food_dist, n):
+def sample(belief_state, food_dist, n, problem_spec, World):
     possible_worlds=[]
     for i in range(n):
-        w = world.sample(food_dist, belief_state, max_food=2) #TODO: This magic number is in two places. Fix this ASAP.
-        possible_worlds.append(w) 
+        grid = world.sample(food_dist, belief_state.grid, max_food=2) #TODO: This magic number is in two places!
+        base = problem.find_base(grid)
+        distance_to_base = dijkstra.dijkstra(base[0], belief_state, problem_spec)
+        w = World(grid, distance_to_base)
+        possible_worlds.append(w)
     return possible_worlds
 
 if __name__ == '__main__':

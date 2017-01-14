@@ -92,7 +92,7 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     w=problem_spec[0]
     h=problem_spec[1]
     units='' #TODO: Maybe use this when adding Defender's moves
-    for coordinate, unit in belief_state.iteritems():
+    for coordinate, unit in belief_state.grid.iteritems():
         if unit in 'H*$':#TODO: Or Defender?
             actions = unit_actions(coordinate, belief_state, problem_spec)
     return actions
@@ -349,6 +349,12 @@ def arriving(unit, cell):
     #if cell=='@':
     #    return 'H'
     return unit
+
+def find_base(grid):
+    for coordinate, unit in grid.iteritems():
+        if unit in 'B*':
+            return (coordinate, unit)
+    return None
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass

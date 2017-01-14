@@ -33,7 +33,15 @@ class TestState(unittest.TestCase):
         state_grid = to_grid(state, problem_spec=(4, 2))
         coordinate = get_coordinate(state)
         self.assertEquals(coordinate, (1,0), coordinate)
-        
+
+
+    def testFindBase(self):
+        simstate = '-*--\n---F'
+        state = parse(simstate)
+        state_grid = to_grid(state, problem_spec=(4, 2))
+        coordinate = find_base(state)
+        self.assertEquals(coordinate, ((1,0), '*'), coordinate)
+
     def testTransitionBeliefStateToBase(self):
         simstate = 'HB\n-F'
         problem_spec = (2,2)
