@@ -134,7 +134,7 @@ def grow(state, coordinate, State):
     else:
         grid[coordinate] = 'F'
 
-    return State(grid, state.reward)
+    return State(grid, state.reward, state.t)
     
 def new_coordinate(coordinate, action):
     '''

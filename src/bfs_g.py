@@ -12,10 +12,10 @@ Returns total reward
 '''
 
 
-def search(initial_state, horizon, distance_to_base, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, horizon, distances, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g','t']) #What kind of programming paradigm are factories a part of?
-    Expanded = namedtuple('Expanded',['len','max_g','plan'])
+    Expanded = namedtuple('Expanded',['len','max_g','plan','t'])
 
     i = Node(initial_state, previous=None, action=None, g=0, t=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
@@ -29,8 +29,9 @@ def search(initial_state, horizon, distance_to_base, State, return_plan=False): 
     nodes_expanded = 0
     max_g = 0
     plan = None
+    time = 0
 
-    while len(open_list) > 0 and depth < horizon: #time < horizon
+    while len(open_list) > 0 and time < horizon: #depth < horizon:
 
         s = open_list.popleft()
 
@@ -38,12 +39,13 @@ def search(initial_state, horizon, distance_to_base, State, return_plan=False): 
         current_level -= 1
         #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list, max_g, distance_to_base, State, Expanded)
+        expanded = expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded)
         #A bunch of counts
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         nodes_generated += expanded.len
         max_g = expanded.max_g
+        time = expanded.t
 
         if expanded.plan:
             plan = expanded.plan
@@ -58,7 +60,6 @@ def search(initial_state, horizon, distance_to_base, State, return_plan=False): 
     #print(nodes_expanded)
     if return_plan:
         print 'plan:', get_plan(plan), max_g
-
     return max_g #Return highest reward, not plan
 
 '''
@@ -86,11 +87,12 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list, max_g, distance_to_base, State, Expanded): #Kind of like passing a function?
+def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded): #Kind of like passing a function?
     expanded=[]
     plan=None
+    t=0
     for action in applicable_actions(s):
-        next_state = transition(s, action, distance_to_base, State) #TODO: Transition should return value of next_state
+        next_state = transition(s, action, distances, State) #TODO: Transition should return value of next_state
         g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         t=next_state.t
         result = Node(state=next_state, previous=s, action=action, g=g, t=t) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
@@ -101,7 +103,7 @@ def expand(s, Node, open_list, closed_list, max_g, distance_to_base, State, Expa
         open_list.append(result)
         closed_list.append(result.state)
         expanded.append(result)
-    return Expanded(len(expanded),max_g,plan)
+    return Expanded(len(expanded),max_g, plan, t)
 
 def applicable_actions(s): #TODO: Pass a function from the problem
     return relaxed_problem.applicable_actions(s.state)

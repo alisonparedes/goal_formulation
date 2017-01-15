@@ -249,7 +249,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
     while time <= 100:
         #print 'belief: {0}'.format(belief_state)
-        action = ohwow(belief_state, problem_spec, State, horizon=10)
+        action = ohwow(belief_state, problem_spec, State, n=1, horizon=4)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.observations
         real_world = new_world.state
