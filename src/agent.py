@@ -50,7 +50,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)'''
 
-
+    '''
     # Base case used for development
     # Since agent has food already it should march straight to the base with it for a reward.
     initial_state = '$---\n----\n----\n---B\n'
@@ -61,20 +61,19 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     #has_food=True
     belief_state=State(grid, reward)
     real_world=State(grid, reward)
-
-
     '''
+
+
     # Base case used for development
     # Agent knows about a food. It should go directly to the food then to the base with it for a reward.
     initial_state = 'H--B\n----\n----\n---F\n'
     problem_spec = (4,4)
     grid = problem.parse(initial_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=False
-    belief_state=State(grid, reward, has_food)
-    real_world=State(grid, reward, has_food)
-    '''
+    belief_state=State(grid, reward)
+    real_world=State(grid, reward)
+
 
     '''
     # Scenario 1 used for development
@@ -168,8 +167,6 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
-
-
     '''
     # Scenario 1 used for debugging
     # Agent knows about a food but there is another hidden food along the way. It should go directly to the food,
@@ -179,25 +176,25 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     problem_spec = (2,2)
     grid = problem.parse(initial_state)
     grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=False
-    belief_state=State(grid_belief, reward, has_food)
-    real_world=State(grid, reward, has_food)
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward)
     '''
+
 
     '''
     # Base case used to debug reward
     # Since agent has food already it should march straight to the base with it for a reward.
-    initial_state = 'HB\n'
+    initial_state = '$B\n'
     problem_spec = (2,1)
     grid = problem.parse(initial_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=True
-    belief_state=State(grid, reward, has_food)
-    real_world=State(grid, reward, has_food)
+    belief_state=State(grid, reward)
+    real_world=State(grid, reward)
     '''
+
 
     time = 0
     print "time: {0}".format(time)
@@ -209,7 +206,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
         new_observations = new_world.observations
         real_world = new_world.state
-        belief_state = new_belief_state(belief_state, new_observations) #Does observation contain food? Nope. Fix this.
+        belief_state = new_belief_state(belief_state, new_observations)
         #os.system('clear')
         time += 1
         print "time: {0}".format(time)

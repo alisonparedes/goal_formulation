@@ -4,6 +4,7 @@ Created on Oct 25, 2016
 @author: lenovo
 '''
 import problem
+from copy import deepcopy
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
@@ -19,7 +20,7 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
             units += unit
     if ('H' in units or '$' in units ) and ('B' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units) and ('F' in units):
+    if ('H' in units or '*' in units or 'b' in units) and ('F' in units):
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
     '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
@@ -46,7 +47,7 @@ def hb(state, distances, State):
     '''
     Simulate moving harvester to base
     '''
-    new_grid = state.grid
+    new_grid = deepcopy(state.grid)
 
     harvester = problem.find_harvester(state.grid)
     base = problem.find_base(state.grid)
@@ -87,7 +88,7 @@ Simulate moving harvester to food
 '''
 def hf(state, food_coordinate, distances, State):
 
-    new_grid = state.grid
+    new_grid = deepcopy(state.grid)
 
     harvester = problem.find_harvester(state.grid)
     food = (food_coordinate, 'F')
@@ -95,7 +96,8 @@ def hf(state, food_coordinate, distances, State):
     new_grid[food_coordinate] = problem.arriving(harvester[1], food[1])
     new_grid[harvester[0]] = problem.leaving(harvester[1])
 
-    resources = find_distances_to_food(distances, food_coordinate)[1][food[0]][1] # Second index in distance dictionary is distance; first is policy
+    distance = find_distances_to_food(distances, food_coordinate)
+    resources = distance[1][harvester[0]][1] # Second index in distance dictionary is distance; first is policy
 
     new_reward = state.reward
     next_state = State(new_grid, new_reward)

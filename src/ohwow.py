@@ -17,7 +17,7 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=2)
+    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
 
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
