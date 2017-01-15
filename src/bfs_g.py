@@ -14,10 +14,10 @@ Returns total reward
 
 def search(initial_state, horizon, distance_to_base, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
-    Node = namedtuple('Node',['state','previous','action', 'g']) #What kind of programming paradigm are factories a part of?
+    Node = namedtuple('Node',['state','previous','action', 'g','t']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g','plan'])
 
-    i = Node(initial_state, previous=None, action=None, g=0) #TODO: How to delegate creating an initial State object to problem?
+    i = Node(initial_state, previous=None, action=None, g=0, t=0) #TODO: How to delegate creating an initial State object to problem?
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
 
     open_list = deque([i])
@@ -30,7 +30,7 @@ def search(initial_state, horizon, distance_to_base, State, return_plan=False): 
     max_g = 0
     plan = None
 
-    while len(open_list) > 0 and depth < horizon:
+    while len(open_list) > 0 and depth < horizon: #time < horizon
 
         s = open_list.popleft()
 
@@ -92,7 +92,8 @@ def expand(s, Node, open_list, closed_list, max_g, distance_to_base, State, Expa
     for action in applicable_actions(s):
         next_state = transition(s, action, distance_to_base, State) #TODO: Transition should return value of next_state
         g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
-        result = Node(state=next_state, previous=s, action=action, g=g) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
+        t=next_state.t
+        result = Node(state=next_state, previous=s, action=action, g=g, t=t) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         if g > max_g:
             max_g = g
             plan=result
@@ -105,8 +106,8 @@ def expand(s, Node, open_list, closed_list, max_g, distance_to_base, State, Expa
 def applicable_actions(s): #TODO: Pass a function from the problem
     return relaxed_problem.applicable_actions(s.state)
 
-def transition(s_node, action, distance_to_base, State):
-    next_state=relaxed_problem.transition(s_node.state, action, distance_to_base, State)
+def transition(s_node, action, distances, State):
+    next_state = relaxed_problem.transition(s_node.state, action, distances, State)
     return next_state
 
 def equals(s1, s2):

@@ -36,8 +36,6 @@ def expand(start, belief_state, open_list, policy, problem_spec):
 
 
 '''
-Expects a grid containing from which this function will derive the dimensions of the grid (height and width) and use
-them to construct an empty policy. Empty policies contain no instructions (or costs).
 '''
 def empty_policy(problem):
     w=problem[0]
@@ -60,7 +58,7 @@ def transition(state, action):
         x = -1
     next_x=state[0] + x
     next_y=state[1] + y
-    return (next_x, next_y)
+    return next_x, next_y
 
         
 if __name__ == '__main__':

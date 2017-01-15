@@ -236,13 +236,16 @@ def transition(state, action, problem_spec, State, here=None):
     observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)] = arriving_unit
 
-    new_reward = reward(State(grid=grid, reward=state.reward))
+    new_reward = reward(State(grid=grid, reward=state.reward, t=0))
 
     observations = Observation(observation_dict, reward=new_reward)
-    new_state = State(grid=grid, reward=new_reward)
+    new_state = State(grid=grid, reward=new_reward, t=0)
 
-    if here:
-        new_state = grow(new_state, here, State)
+    maxfood = 2
+    i = 0
+    while (here and i < len(here) and arriving_unit in '$' and world.count_food(grid) < maxfood):
+        new_state = grow(new_state, here[i], State)
+        i+=1
 
     new_state_and_observations = Transition(new_state, observations=observations)
 
@@ -272,7 +275,7 @@ def clear_visited(state_grid):
 
 '''
 
-def chance_of_food(state, problem_spec, maxfood=0):
+def chance_of_food(state, problem_spec):
 
     distribution = []
 
@@ -285,13 +288,12 @@ def chance_of_food(state, problem_spec, maxfood=0):
 
     total_probability = 0.0
 
-    if food < maxfood:
-        probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
-        for x in range(0,problem_spec[0]):
-            for y in range(0,problem_spec[1]):
-                if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
-                    distribution.append((probability, (x, y), 'F'))
-                    total_probability += probability
+    probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
+    for x in range(0,problem_spec[0]):
+        for y in range(0,problem_spec[1]):
+            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
+                distribution.append((probability, (x, y), 'F'))
+                total_probability += probability
 
     distribution.append((1 - total_probability, None))
     return distribution

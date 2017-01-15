@@ -14,14 +14,14 @@ underlying distribution of possible worlds.
 '''
 
 
-def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
+def ohwow(belief_state, problem_spec, State, n=100, horizon=10):
 
     # Tunable parameters
-    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=2)
+    food_dist = problem.chance_of_food(belief_state, problem_spec)
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
     possible_worlds = sample(belief_state, food_dist, n, problem_spec, World)
-    #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
+    print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -36,12 +36,11 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
         for world in possible_worlds:
 
             # Simulate taking each action
-            s_prime = transition(State(world.grid, belief_state.reward), action, problem_spec, State)
+            s_prime = transition(State(world.grid, belief_state.reward, t=0), action, problem_spec, State)
             c += s_prime.reward
 
             # Search from this next state
             c += search(s_prime, horizon, world.distances, State)
-
         q = c/float(n)
         print '{0} {1}'.format(action, q)
         if q > max_q:

@@ -57,9 +57,10 @@ def hb(state, distances, State):
 
     resources = distance(harvester, base, distances)
     new_reward = state.reward
-    next_state = State(new_grid,new_reward)
+    next_state = State(new_grid,new_reward, t=0)
     new_reward += problem.reward(next_state) - resources
-    return State(new_grid, new_reward)
+
+    return State(new_grid, new_reward, t=resources)
 
 
 def distance(from_cell, to_cell, distances):
@@ -119,9 +120,9 @@ def hf(state, food_coordinate, distances, State):
     resources = distance(harvester, food, distances)
 
     new_reward = state.reward
-    next_state = State(new_grid, new_reward)
+    next_state = State(new_grid, new_reward, t=0)
     new_reward += problem.reward(next_state) - resources
-    return State(new_grid, new_reward)
+    return State(new_grid, new_reward, t=resources)
 
 
 if __name__ == '__main__':

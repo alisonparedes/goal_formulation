@@ -20,15 +20,16 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    distribution = problem.chance_of_food(real_world, problem_spec, maxfood=2)
-    new_food = world.sample_cell(distribution)
-    coordinate=new_food[1]
-    new_world = problem.transition(real_world, action, problem_spec, State, coordinate)
+    distribution = problem.chance_of_food(real_world, problem_spec)
+    new_foods = []
+    for i in range(10):
+        new_foods.append(world.sample_cell(distribution)[1])
+    new_world = problem.transition(real_world, action, problem_spec, State, new_foods)
     new_world_dict = new_world.state.grid # TODO: If state returns a dictionary then state_dict is a misnomer.
     new_observations = new_world.observations
     #TODO: What about newly discovered obstacles?
     Simulation = namedtuple('Simulation',['state','observations'])
-    simulation = Simulation(State(new_world_dict, new_world.state.reward), new_observations)
+    simulation = Simulation(State(new_world_dict, new_world.state.reward, t=0), new_observations)
     return simulation #TODO: Return cumulative reward to use to compare results of each run
 
 
