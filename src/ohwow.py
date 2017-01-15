@@ -71,7 +71,7 @@ def transition(belief_state, action, problem_spec, State):
 def sample(belief_state, food_dist, n, problem_spec, World):
     possible_worlds=[]
     for i in range(n):
-        grid = world.sample(food_dist, belief_state.grid, max_food=2) #TODO: This magic number is in two places!
+        grid = world.sample(food_dist, belief_state.grid, max_food=0) #TODO: This magic number is in two places!
         distances = []
         base = problem.find_base(grid)
         distances.append((base, dijkstra.dijkstra(base[0], belief_state, problem_spec)))
