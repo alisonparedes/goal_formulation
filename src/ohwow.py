@@ -18,7 +18,6 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
     food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=2)
-
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
     possible_worlds = sample(belief_state, food_dist, n, problem_spec, World)
@@ -58,7 +57,7 @@ def summarize_sample(possible_worlds, problem_spec):
         for j in range(problem_spec[1]):
             summary_grid[i].append(0)
     for world in possible_worlds:
-        for coordinate, unit in world.iteritems():
+        for coordinate, unit in world.grid.iteritems():
             if unit in 'F':
                 summary_grid[coordinate[0]][coordinate[1]] += 1
     return summary_grid

@@ -20,11 +20,17 @@ def sample(problem_distribution_arr, grid, max_food=1):
     needs to speculate about different models. 
     '''
     new_grid = copy(grid)
-    for i in range(max_food):
+    while count_food(new_grid) < max_food:
         x = sample_cell(problem_distribution_arr)
         update_state(new_grid, x)
-        i += 1
     return new_grid
+
+def count_food(grid):
+    food = 0
+    for coordinate, unit in grid.iteritems():
+        if unit == 'F':
+            food += 1
+    return food
 
 def update_state(state, sample): #Modifies state in place
     coordinate=sample[1]

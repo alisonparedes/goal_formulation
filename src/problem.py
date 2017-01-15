@@ -280,8 +280,8 @@ def chance_of_food(state, problem_spec, maxfood=0):
     for coordinate, unit in state.grid.iteritems():
         if unit in 'F':
             food += 1
-        #elif unit in 'B#': # Food cannot grow in cell occupied by the base or an obstacle
-        #    distribution.append((0.0, coordinate))
+        elif unit in 'b*B#': # Food cannot grow in cell occupied by the base or an obstacle
+            distribution.append((0.0, coordinate))
 
     total_probability = 0.0
 

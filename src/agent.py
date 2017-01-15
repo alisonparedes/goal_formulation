@@ -42,9 +42,6 @@ def new_belief_state(belief_state, new_observations):
         for cell in reset_cells:
             del new_belief_state[cell]
 
-    # TODO: These three components could be organized using a tuple using lambdas to name indices instead of
-    # namedtuples, which require passing instances of the namedtuple around.
-    print(belief_state)
     return State(new_belief_state, accumulated_reward)
 
 
@@ -131,7 +128,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     '''
 
 
-
+    '''
     # Scenario 2 with obstacles used for development
     # Agent uses policy to calculate distance to base
     initial_state = '$--\n-#B'
@@ -143,6 +140,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     reward=0
     belief_state=State(grid_belief, reward)
     real_world=State(grid, reward)
+    '''
 
 
     '''
@@ -190,6 +188,18 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward)
     '''
 
+    # Scenario 1 used for debugging
+    # Agent must imagine food
+    initial_state = 'HB\nFF\n'
+    belief_state = 'HB\n--\n'
+    problem_spec = (2,2)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward'])
+    reward=0
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward)
+
 
     '''
     # Base case used to debug reward
@@ -208,7 +218,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     print "time: {0}".format(time)
     print "reward: {0}".format(real_world.reward)
     print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
-    while time <= 100:
+    while time <= 10:
         #print 'belief: {0}'.format(belief_state)
         action = ohwow(belief_state, problem_spec, State, horizon=10)
         new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)

@@ -72,8 +72,8 @@ def distance(from_cell, to_cell, distances):
             d = policy[1]
     else:
         distances_to_food = find_distances_to_food(distances, to_cell[0])
-        if from_cell[0] in distances_to_food:
-            policy = distances_to_food[from_cell[0]]
+        if from_cell[0] in distances_to_food[1]:
+            policy = distances_to_food[1][from_cell[0]]
             d = policy[1]
 
     return d
