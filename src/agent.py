@@ -28,14 +28,23 @@ def new_belief_state(belief_state, new_observations):
 
     new_belief_state = belief_state.grid
     accumulated_reward = belief_state.reward + new_observations.reward
-
-    for coordinate, cell in new_observations.observation_dict.iteritems():  # TODO: This doesn't need to be a dictionary
+    reset_cells = []
+    for coordinate, cell in new_observations.observation_dict.iteritems():
 
         # There should be be very few observations compared to the coordinates in a belief state
         new_belief_state[coordinate] = cell
+        if cell == '*':
+            for coordinate, cell in new_belief_state.iteritems():
+                if cell == '-':
+                    reset_cells.append(coordinate)
+
+    if len(reset_cells) > 0:
+        for cell in reset_cells:
+            del new_belief_state[cell]
 
     # TODO: These three components could be organized using a tuple using lambdas to name indices instead of
     # namedtuples, which require passing instances of the namedtuple around.
+    print(belief_state)
     return State(new_belief_state, accumulated_reward)
 
 
@@ -63,7 +72,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward)
     '''
 
-
+    '''
     # Base case used for development
     # Agent knows about a food. It should go directly to the food then to the base with it for a reward.
     initial_state = 'H--B\n----\n----\n---F\n'
@@ -73,6 +82,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     reward=0
     belief_state=State(grid, reward)
     real_world=State(grid, reward)
+    '''
 
 
     '''
@@ -84,11 +94,10 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     problem_spec = (4,4)
     grid = problem.parse(initial_state)
     grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=False
-    belief_state=State(grid_belief, reward, has_food)
-    real_world=State(grid, reward, has_food)
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward, )
     '''
 
     '''
@@ -100,42 +109,41 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     problem_spec = (4,4)
     grid = problem.parse(initial_state)
     grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=False
-    belief_state=State(grid_belief, reward, has_food)
-    real_world=State(grid, reward, has_food)
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward)
     '''
+
 
     '''
     # Scenario 2 with obstacles used for development
     # Agent can't move harvester past obstacle.
-    initial_state = 'H-#B'
-    belief_state = 'H--B'
+    initial_state = '$-#B'
+    belief_state = '$--B'
     problem_spec = (4,1)
     grid = problem.parse(initial_state)
     grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=True
-    belief_state=State(grid_belief, reward, has_food)
-    real_world=State(grid, reward, has_food)
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward)
     '''
 
-    '''
+
+
     # Scenario 2 with obstacles used for development
     # Agent uses policy to calculate distance to base
-    initial_state = 'H--\n-#B'
-    belief_state = 'H--\n-#B'
+    initial_state = '$--\n-#B'
+    belief_state = '$--\n-#B'
     problem_spec = (3,2)
     grid = problem.parse(initial_state)
     grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=True
-    belief_state=State(grid_belief, reward, has_food)
-    real_world=State(grid, reward, has_food)
-    '''
+    belief_state=State(grid_belief, reward)
+    real_world=State(grid, reward)
+
 
     '''
     # Scenario 2 with obstacles used for development

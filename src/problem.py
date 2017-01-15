@@ -229,9 +229,6 @@ def transition(state, action, problem_spec, State, here=None):
 
     arriving_unit = arriving(unit, cell)
 
-    if arriving_unit in '*':
-        state_grid = clear_visited(state_grid)
-
     state_grid[to_x][to_y]=arriving_unit
 
     grid = to_dict(state_grid)

@@ -17,7 +17,7 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
+    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=2)
 
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
@@ -71,7 +71,7 @@ def transition(belief_state, action, problem_spec, State):
 def sample(belief_state, food_dist, n, problem_spec, World):
     possible_worlds=[]
     for i in range(n):
-        grid = world.sample(food_dist, belief_state.grid, max_food=0) #TODO: This magic number is in two places!
+        grid = world.sample(food_dist, belief_state.grid, max_food=2)
         distances = []
         base = problem.find_base(grid)
         distances.append((base, dijkstra.dijkstra(base[0], belief_state, problem_spec)))

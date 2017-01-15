@@ -55,11 +55,29 @@ def hb(state, distances, State):
     new_grid[base[0]] = problem.arriving(harvester[1], base[1])
     new_grid[harvester[0]] = problem.leaving(harvester[1])
 
-    resources = find_distances_to_base(distances)[1][harvester[0]][1] # Second index in distance dictionary is distance; first is policy
+    resources = distance(harvester, base, distances)
     new_reward = state.reward
     next_state = State(new_grid,new_reward)
     new_reward += problem.reward(next_state) - resources
     return State(new_grid, new_reward)
+
+
+def distance(from_cell, to_cell, distances):
+    d = 1000  # Impossible
+
+    if to_cell[1] in 'Bb*':
+        distances_to_base = find_distances_to_base(distances)[1]
+        if from_cell[0] in distances_to_base:
+            policy = distances_to_base[from_cell[0]]
+            d = policy[1]
+    else:
+        distances_to_food = find_distances_to_food(distances, to_cell[0])
+        if from_cell[0] in distances_to_food:
+            policy = distances_to_food[from_cell[0]]
+            d = policy[1]
+
+    return d
+
 
 def find_distances_to_base(distances):
     for d in distances:
@@ -74,6 +92,7 @@ def find_distances_to_food(distances, food):
             return d
     return None
 
+'''
 def distance(from_coordinate, to_coordinate):
     from_x=float(from_coordinate[0])
     from_y=float(from_coordinate[1])
@@ -81,6 +100,7 @@ def distance(from_coordinate, to_coordinate):
     to_y=float(to_coordinate[1])
     distance=abs(from_x - to_x) + abs(from_y - to_y)
     return distance * 1
+'''
 
 
 '''
@@ -96,8 +116,7 @@ def hf(state, food_coordinate, distances, State):
     new_grid[food_coordinate] = problem.arriving(harvester[1], food[1])
     new_grid[harvester[0]] = problem.leaving(harvester[1])
 
-    distance = find_distances_to_food(distances, food_coordinate)
-    resources = distance[1][harvester[0]][1] # Second index in distance dictionary is distance; first is policy
+    resources = distance(harvester, food, distances)
 
     new_reward = state.reward
     next_state = State(new_grid, new_reward)
