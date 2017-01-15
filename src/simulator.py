@@ -20,7 +20,7 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''
     #coordinate=get_coordinate(state) #TODO: I'm not sure an agent should tell the simulator everything it knows
-    distribution = problem.chance_of_food(real_world, problem_spec, maxfood=0)
+    distribution = problem.chance_of_food(real_world, problem_spec, maxfood=2)
     new_food = world.sample_cell(distribution)
     coordinate=new_food[1]
     new_world = problem.transition(real_world, action, problem_spec, State, coordinate)
@@ -28,15 +28,9 @@ def simulate(belief_state, action, real_world, problem_spec, State): #TODO: Wh d
     new_observations = new_world.observations
     #TODO: What about newly discovered obstacles?
     Simulation = namedtuple('Simulation',['state','observations'])
-    simulation = Simulation(State(new_world_dict, new_world.state.reward, new_world.state.has_food), new_observations)
+    simulation = Simulation(State(new_world_dict, new_world.state.reward), new_observations)
     return simulation #TODO: Return cumulative reward to use to compare results of each run
 
-
-def get_coordinate(state): #TODO: Get rid of this during refactoring
-    for coordinate, unit in state.iteritems():
-        if unit in 'H*$!0': #TODO: Problem should manage identifying a unit from any of the internal encodings, when I finally settle on an encoding
-            return coordinate
-    return None
 
 if __name__ == '__main__':
     pass

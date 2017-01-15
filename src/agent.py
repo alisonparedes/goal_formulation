@@ -26,8 +26,7 @@ def new_belief_state(belief_state, new_observations):
     if not new_observations:
         return belief_state
 
-    new_belief_state=belief_state.grid
-    has_food = new_observations.has_food
+    new_belief_state = belief_state.grid
     accumulated_reward = belief_state.reward + new_observations.reward
 
     for coordinate, cell in new_observations.observation_dict.iteritems():  # TODO: This doesn't need to be a dictionary
@@ -35,15 +34,9 @@ def new_belief_state(belief_state, new_observations):
         # There should be be very few observations compared to the coordinates in a belief state
         new_belief_state[coordinate] = cell
 
-        # TODO: Consider implementing this via problem
-        if cell in '$':
-            has_food = True
-        elif cell in '*':
-            has_food = False
-
     # TODO: These three components could be organized using a tuple using lambdas to name indices instead of
     # namedtuples, which require passing instances of the namedtuple around.
-    return State(new_belief_state, accumulated_reward, has_food)
+    return State(new_belief_state, accumulated_reward)
 
 
 if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
@@ -57,18 +50,18 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(real_world_dict, reward, has_food)
     problem_spec=(4, 4)'''
 
-    '''
+
     # Base case used for development
     # Since agent has food already it should march straight to the base with it for a reward.
-    initial_state = 'H---\n----\n----\n---B\n'
+    initial_state = '$---\n----\n----\n---B\n'
     problem_spec = (4,4)
     grid = problem.parse(initial_state)
-    State = namedtuple('State',['grid','reward','has_food'])
+    State = namedtuple('State',['grid','reward'])
     reward=0
-    has_food=True
-    belief_state=State(grid, reward, has_food)
-    real_world=State(grid, reward, has_food)
-    '''
+    #has_food=True
+    belief_state=State(grid, reward)
+    real_world=State(grid, reward)
+
 
     '''
     # Base case used for development
@@ -145,7 +138,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward, has_food)
     '''
 
-
+    '''
     # Scenario 2 with obstacles used for development
     # Agent uses policy to calculate distance to any food
     initial_state = 'H#F\n---\n-#B'
@@ -158,6 +151,22 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     has_food=False
     belief_state=State(grid_belief, reward, has_food)
     real_world=State(grid, reward, has_food)
+    '''
+
+    '''
+    # Scenario 2 with obstacles used for development
+    # Agent must imagine food
+    initial_state = 'H#F\nF--\n-#B'
+    belief_state = 'H--\n---\n--B'
+    problem_spec = (3,3)
+    grid = problem.parse(initial_state)
+    grid_belief = problem.parse(belief_state)
+    State = namedtuple('State',['grid','reward','has_food'])
+    reward=0
+    has_food=False
+    belief_state=State(grid_belief, reward, has_food)
+    real_world=State(grid, reward, has_food)
+    '''
 
 
 

@@ -36,14 +36,14 @@ def update_state(state, sample): #Modifies state in place
             state[coordinate]=unit
 
 def merge(unit_a, unit_b):
-    if unit_a in '0!$*H' and unit_b in 'F': #TODO: Use problem's decoding funcitons?
+    if unit_a in 'b$*H' and unit_b in 'F':
         return '$'
-    if unit_a in '0!$*H' and unit_b in 'f':
-        return '0'
-    if unit_a in '0!$*H' and unit_b in 'B':
+    if unit_a in '$' and unit_b in 'B':
         return '*'
-    if unit_a in  '0!$*H' and unit_b in 'b':
-        return '!'
+    if unit_a in 'H' and unit_b in 'B':
+        return 'b'
+    if unit_a in 'b*':
+        return 'H'
     return unit_b
        
 def sample_cell(problem_distribution_arr): #TODO: What to return when p > max of proability distribution? Should problem insure prob array sums to 1?
@@ -56,25 +56,7 @@ def sample_cell(problem_distribution_arr): #TODO: What to return when p > max of
         probability=cell[0] #TODO: Use named tuple to hold probability
         cummulative += probability
     return cell
-      
-'''  
-def print_r(things):
-    print 'x,y,a,e,f,t'
-    for thing in things:
-        decoded = decode(thing[1]) #TODO: Use a named variable instead, an object (record in Ocaml?)
-        print '{0},{1},{2},{3},{4},{5}'.format(thing[0][0],thing[0][1],decoded[0],decoded[1],decoded[2],decoded[3]) #TODO: OMG!
 
-
-def decode(thing):
-    if thing == 'E':
-        return (0,1,0,0)
-    if thing == 'F':
-        return (0,0,1,0)
-    if thing == 'T':
-        return (0,0,0,1)
-    if thing == '@':
-        return (1,0,0,0)
-'''
 
 if __name__ == '__main__':
     pass

@@ -17,7 +17,7 @@ underlying distribution of possible worlds.
 def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
 
     # Tunable parameters
-    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=0)
+    food_dist = problem.chance_of_food(belief_state, problem_spec, maxfood=2)
 
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
@@ -37,7 +37,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
         for world in possible_worlds:
 
             # Simulate taking each action
-            s_prime = transition(State(world.grid, belief_state.reward, belief_state.has_food), action, problem_spec, State)
+            s_prime = transition(State(world.grid, belief_state.reward), action, problem_spec, State)
             c += s_prime.reward
 
             # Search from this next state

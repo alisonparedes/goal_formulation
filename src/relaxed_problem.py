@@ -13,17 +13,18 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     units=''
     food_coordinates=[]
     for coordinate, unit in s.grid.iteritems():
-        if unit in 'F':
+        if unit and unit in 'F':
             food_coordinates.append(coordinate)
-        if unit in 'HBF$*@':
-            units+=unit
+        if unit and unit in 'HbBF$*':
+            units += unit
     if ('H' in units or '$' in units ) and ('B' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units) and ('F' in units) and not s.has_food:
+    if ('H' in units or '*' in units) and ('F' in units):
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
     '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
         actions.append('HS')'''
+
     return actions
     #return [1,2]
     
@@ -45,33 +46,23 @@ def hb(state, distances, State):
     '''
     Simulate moving harvester to base
     '''
-    new_map = {}
-    from_coordinate=()
-    to_coordinate=()
-    for coordinate, unit in state.grid.iteritems():
-        if unit == 'H':
-            #next_state[coordinate]='@' #Start
-            from_coordinate = coordinate
-        elif unit in '$':
-            #next_state[coordinate]=None #Never restock
-            from_coordinate = coordinate
-        elif unit == 'B':
-            new_map[coordinate] = '*'
-            to_coordinate = coordinate
-        else:
-            new_map[coordinate] = unit
-    resources = find_distances_to_base(distances)[1][from_coordinate][1] # Second index in distance dictionary is distance; first is policy
-    has_food = state.has_food
+    new_grid = state.grid
+
+    harvester = problem.find_harvester(state.grid)
+    base = problem.find_base(state.grid)
+
+    new_grid[base[0]] = problem.arriving(harvester[1], base[1])
+    new_grid[harvester[0]] = problem.leaving(harvester[1])
+
+    resources = find_distances_to_base(distances)[1][harvester[0]][1] # Second index in distance dictionary is distance; first is policy
     new_reward = state.reward
-    next_state = State(new_map,new_reward, has_food)
+    next_state = State(new_grid,new_reward)
     new_reward += problem.reward(next_state) - resources
-    if has_food:
-        has_food = False
-    return State(new_map, new_reward, has_food)
+    return State(new_grid, new_reward)
 
 def find_distances_to_base(distances):
     for d in distances:
-        if d[0][1] in 'B*':
+        if d[0][1] in 'Bb*':
             return d
     return None
 
@@ -90,32 +81,26 @@ def distance(from_coordinate, to_coordinate):
     distance=abs(from_x - to_x) + abs(from_y - to_y)
     return distance * 1
 
+
 '''
 Simulate moving harvester to food
 '''
 def hf(state, food_coordinate, distances, State):
 
-    new_map = {}
-    from_coordinate=()
-    to_coordinate=()
-    for coordinate, unit in state.grid.iteritems():
-        if unit == 'H':
-            #next_state[coordinate]='@' #Start
-            from_coordinate=coordinate
-        elif unit == 'F' and coordinate == food_coordinate :
-            new_map[coordinate]='$'
-            to_coordinate=coordinate
-        elif unit in '*':
-            new_map[coordinate]='B'
-            from_coordinate=coordinate
-        else:
-            new_map[coordinate]=unit
-    resources = find_distances_to_food(distances, food_coordinate)[1][from_coordinate][1] # Second index in distance dictionary is distance; first is policy
-    has_food = True
+    new_grid = state.grid
+
+    harvester = problem.find_harvester(state.grid)
+    food = (food_coordinate, 'F')
+
+    new_grid[food_coordinate] = problem.arriving(harvester[1], food[1])
+    new_grid[harvester[0]] = problem.leaving(harvester[1])
+
+    resources = find_distances_to_food(distances, food_coordinate)[1][food[0]][1] # Second index in distance dictionary is distance; first is policy
+
     new_reward = state.reward
-    next_state = State(new_map, new_reward, has_food)
+    next_state = State(new_grid, new_reward)
     new_reward += problem.reward(next_state) - resources
-    return State(new_map, new_reward, has_food)
+    return State(new_grid, new_reward)
 
 
 if __name__ == '__main__':

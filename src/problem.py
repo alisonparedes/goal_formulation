@@ -25,7 +25,7 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HBF$*@#':
+        if cell in 'HbBF$*#':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -93,7 +93,7 @@ def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definit
     h=problem_spec[1]
     units='' #TODO: Maybe use this when adding Defender's moves
     for coordinate, unit in belief_state.grid.iteritems():
-        if unit in 'H*$':#TODO: Or Defender?
+        if unit in 'H*$b':#TODO: Or Defender?
             actions = unit_actions(coordinate, belief_state, problem_spec)
     return actions
 
@@ -128,17 +128,13 @@ def grow(state, coordinate, State):
 
     grid = state.grid
 
-    has_food = state.has_food
     if coordinate in grid:
-        if grid[coordinate] == 'H':
+        if grid[coordinate] in 'H$':
             grid[coordinate] = '$'
-            has_food = True
-        else:
-            grid[coordinate] = 'F'
     else:
         grid[coordinate] = 'F'
 
-    return State(grid, state.reward, has_food)
+    return State(grid, state.reward)
     
 def new_coordinate(coordinate, action):
     '''
@@ -207,13 +203,13 @@ Transition is used to simulate next step.
 
 def transition(state, action, problem_spec, State, here=None):
 
-    Observation = namedtuple('Observation',['observation_dict', 'has_food', 'reward'])
+    Observation = namedtuple('Observation',['observation_dict', 'reward'])
     observation_dict={}
     Transition = namedtuple('Transition',['state','observations'])
 
     state_grid = to_grid(state.grid, problem_spec)
 
-    from_coordinate=get_coordinate(state.grid)
+    from_coordinate = find_harvester(state.grid)[0]
     from_x = from_coordinate[0]
     from_y = from_coordinate[1]
 
@@ -229,13 +225,10 @@ def transition(state, action, problem_spec, State, here=None):
 
     if cell and cell in '#':
         observation_dict[(to_x, to_y)]='#'
-        return Transition(state, observations=Observation(observation_dict, has_food=state.has_food, reward=0))
+        return Transition(state, observations=Observation(observation_dict, reward=0))
 
-    arriving_unit = arriving('H', cell)
+    arriving_unit = arriving(unit, cell)
 
-    food = state.has_food
-    if arriving_unit in '$':
-        food = True
     if arriving_unit in '*':
         state_grid = clear_visited(state_grid)
 
@@ -246,14 +239,10 @@ def transition(state, action, problem_spec, State, here=None):
     observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)] = arriving_unit
 
+    new_reward = reward(State(grid=grid, reward=state.reward))
 
-    new_reward = reward(State(grid=grid, reward=state.reward, has_food=food))
-
-    if arriving_unit in '*': # TODO: If changing symbols to represent when harvester is carrying food or not, change this too
-        food = False
-
-    observations = Observation(observation_dict, has_food=food, reward=new_reward)
-    new_state = State(grid=grid, reward=new_reward, has_food=food)
+    observations = Observation(observation_dict, reward=new_reward)
+    new_state = State(grid=grid, reward=new_reward)
 
     if here:
         new_state = grow(new_state, here, State)
@@ -262,13 +251,11 @@ def transition(state, action, problem_spec, State, here=None):
 
     return new_state_and_observations
 
-def reward(s): #Expecting State object
+def reward(state):
     reward=0
-    for coordinate, unit in s.grid.iteritems(): #TODO: How much is this slowing my BFS down?
-        if unit in '*':
-            reward+=0 #State tracks if base has ever been visited before
-            if s.has_food:
-                reward += 50
+    base = find_base(state.grid)
+    if base[1] == '*':
+        reward += 50
     return reward
 
 def clear_visited(state_grid):
@@ -305,7 +292,7 @@ def chance_of_food(state, problem_spec, maxfood=0):
         probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
         for x in range(0,problem_spec[0]):
             for y in range(0,problem_spec[1]):
-                if (x, y) not in state.grid or state.grid[(x, y)] not in 'B#':
+                if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
                     distribution.append((probability, (x, y), 'F'))
                     total_probability += probability
 
@@ -313,47 +300,36 @@ def chance_of_food(state, problem_spec, maxfood=0):
     return distribution
 
 
-def get_coordinate(state):
+def find_harvester(state):
     for coordinate, cell in state.iteritems():
-        if cell in 'H*$':
-            return coordinate
+        if cell and cell in 'bH*$':
+            return (coordinate, cell)
     return None
 
-def get_state(w): #TODO: For now, to keep reasoning about the problem here, parse the Harvester's current state out of the world.
-    state={}
-    x=0
-    for col in w:
-        y=0
-        for cell in col:
-            if cell in 'H*$':
-                state[(x,y)]=cell
-            y+=1
-        x+=1
-    return state
 
-def leaving(unit):
-    if unit=='H':
+def leaving(from_symbol):
+    if from_symbol in 'H$':
         return None
-    if unit in '*':
+    if from_symbol in '*b':
         return 'B'
-    if unit in '$':
-        return None
     return None
 
     
-def arriving(unit, cell):
-    if cell=='B':
-        return '*'
-    if cell=='F':
+def arriving(from_symbol, to_symbol):
+    if from_symbol == '$' and to_symbol == 'B':  # A harvester carrying food
+        return '*' # Gets a reward
+    if from_symbol in '$H*b' and to_symbol == 'F':
         return '$'
-    #if cell=='@':
-    #    return 'H'
-    return unit
+    if from_symbol in 'H' and to_symbol == 'B':
+        return 'b' # Does not get a reward
+    if from_symbol in 'b*':
+        return 'H'
+    return from_symbol
 
 def find_base(grid):
     for coordinate, unit in grid.iteritems():
-        if unit in 'B*':
-            return (coordinate, unit)
+        if unit and unit in 'Bb*':
+            return coordinate, unit
     return None
 
 def find_food(grid):
