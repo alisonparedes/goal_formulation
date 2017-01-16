@@ -134,7 +134,7 @@ if __name__ == '__main__':
         new_observations = new_world.observations
         real_world = new_world.state
         belief_state = new_belief_state(belief_state, new_observations)
-        time.sleep(0.5)
+        time.sleep(0.25)
         os.system('clear')
         time_step += 1
         print "time: {0}".format(time_step)
