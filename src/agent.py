@@ -9,6 +9,7 @@ from ohwow import *
 from copy import deepcopy
 import os
 import argparse
+import time
 
 '''
    A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
@@ -282,6 +283,7 @@ if __name__ == '__main__':
         belief_state = new_belief_state(belief_state, new_observations)
         os.system('clear')
         time_step += 1
+        time.sleep(0.25)
         print "time: {0}".format(time_step)
         print "total reward: {0}".format(belief_state.reward)
         print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
