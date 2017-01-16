@@ -7,7 +7,7 @@ from copy import copy
 import random
 from problem import * #TODO: World and problem should maybe be in the same module
 
-def sample(problem_distribution_arr, grid, max_food=1):
+def sample(problem_distribution_arr, grid, maxfood=1):
     '''
     Expects a 2D array of probability distributions determined by the problem. 
     Example [(0.5,(0,1),'F'),(0.5,None)]
@@ -20,7 +20,7 @@ def sample(problem_distribution_arr, grid, max_food=1):
     needs to speculate about different models. 
     '''
     new_grid = copy(grid)
-    while count_food(new_grid) < max_food:
+    while count_food(new_grid) < maxfood:
         x = sample_cell(problem_distribution_arr)
         update_state(new_grid, x)
     return new_grid

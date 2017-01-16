@@ -201,7 +201,7 @@ Transition is used to simulate next step.
 '''
 
 
-def transition(state, action, problem_spec, State, here=None):
+def transition(state, action, problem_spec, State, here=None, maxfood=2):
 
     Observation = namedtuple('Observation',['observation_dict', 'reward'])
     observation_dict={}
@@ -241,7 +241,6 @@ def transition(state, action, problem_spec, State, here=None):
     observations = Observation(observation_dict, reward=new_reward)
     new_state = State(grid=grid, reward=new_reward, t=0)
 
-    maxfood = 2
     i = 0
     while (here and i < len(here) and arriving_unit in '$' and world.count_food(grid) < maxfood):
         new_state = grow(new_state, here[i], State)

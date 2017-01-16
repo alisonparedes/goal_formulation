@@ -8,6 +8,7 @@ import simulator
 from ohwow import *
 from copy import deepcopy
 import os
+import argparse
 
 '''
    A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
@@ -45,7 +46,17 @@ def new_belief_state(belief_state, new_observations):
     return State(new_belief_state, accumulated_reward, t=0)
 
 
-if __name__ == '__main__': #TODO: Read an initial beilef state and real world from a file
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("real")
+    parser.add_argument("belief")
+    parser.add_argument("horizon")
+    parser.add_argument("sample")
+    parser.add_argument("food")
+    parser.add_argument("time")
+    args = parser.parse_args()
+
 
     # Scenario used for development
     '''real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, None, None], ['B', 'F', None, 'F']])
@@ -186,7 +197,7 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward)
     '''
 
-
+    '''
     # Scenario 2 for debugging
     # Agent must explore from base.
     initial_state = '--F-\nF##-\n----\n###b'
@@ -198,6 +209,27 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     reward=0
     belief_state=State(grid_belief, reward, t=0)
     real_world=State(grid, reward, t=0)
+    '''
+
+    # Scenario 1 read file
+    # Agent must explore from base.
+    initial_state = ''
+    y = 0
+    x = 0
+    with open(args.real, 'r') as real:
+        for line in real:
+            initial_state += line
+            x = len(line) - 1
+            y += 1
+    grid = problem.parse(initial_state)
+    problem_spec = (x, y)
+
+    belief_state = ''
+    with open(args.belief, 'r') as belief:
+        for line in belief:
+            belief_state += line
+
+    grid_belief = problem.parse(belief_state)
 
 
     '''
@@ -242,23 +274,31 @@ if __name__ == '__main__': #TODO: Read an initial beilef state and real world fr
     real_world=State(grid, reward)
     '''
 
-
-    time = 0
-    print "time: {0}".format(time)
+    State = namedtuple('State',['grid','reward','t'])
+    reward = 0
+    belief_state=State(grid_belief, reward, t=0)
+    real_world=State(grid, reward, t=0)
+    time_step = 0
+    print "time: {0}".format(time_step)
     print "reward: {0}".format(real_world.reward)
     print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
-    while time <= 100:
+    while time_step < int(args.time):
         #print 'belief: {0}'.format(belief_state)
-        action = ohwow(belief_state, problem_spec, State, n=1, horizon=4)
-        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State)
+        action = ohwow(belief_state, problem_spec, State, n=int(args.sample), horizon=int(args.horizon), maxfood=int(args.food))
+        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State, maxfood=int(args.food))
         new_observations = new_world.observations
         real_world = new_world.state
         belief_state = new_belief_state(belief_state, new_observations)
         #os.system('clear')
-        time += 1
-        print "time: {0}".format(time)
+        time_step += 1
+        print "time: {0}".format(time_step)
         print "total reward: {0}".format(belief_state.reward)
         print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
 
-
+    print "real: {0}".format(args.real)
+    print "belief: {0}".format(args.belief)
+    print "horizon: {0}".format(args.horizon)
+    print "sample: {0}".format(args.sample)
+    print "food: {0}".format(args.food)
+    print "time: {0}".format(args.time)
 

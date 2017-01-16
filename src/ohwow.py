@@ -14,13 +14,13 @@ underlying distribution of possible worlds.
 '''
 
 
-def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
+def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
 
     # Tunable parameters
     food_dist = problem.chance_of_food(belief_state, problem_spec)
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
-    possible_worlds = sample(belief_state, food_dist, n, problem_spec, World)
+    possible_worlds = sample(belief_state, food_dist, n, problem_spec, World, maxfood)
     #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
@@ -36,7 +36,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1):
         for world in possible_worlds:
 
             # Simulate taking each action
-            s_prime = transition(State(world.grid, belief_state.reward, t=0), action, problem_spec, State)
+            s_prime = transition(State(world.grid, belief_state.reward, t=0), action, problem_spec, State, maxfood)
             c += s_prime.reward
 
             # Search from this next state
@@ -62,14 +62,14 @@ def summarize_sample(possible_worlds, problem_spec):
     return summary_grid
 
 
-def transition(belief_state, action, problem_spec, State):
+def transition(belief_state, action, problem_spec, State, maxfood):
     s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
     return s_prime.state
 
-def sample(belief_state, food_dist, n, problem_spec, World):
+def sample(belief_state, food_dist, n, problem_spec, World, maxfood):
     possible_worlds=[]
     for i in range(n):
-        grid = world.sample(food_dist, belief_state.grid, max_food=2)
+        grid = world.sample(food_dist, belief_state.grid, maxfood)
         distances = []
         base = problem.find_base(grid)
         distances.append((base, dijkstra.dijkstra(base[0], belief_state, problem_spec)))
