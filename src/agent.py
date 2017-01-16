@@ -58,15 +58,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
 
-    # Scenario used for development
-    '''real_world_dict=problem.to_dict([[None, None, None, None], [None, None, 'H', None], [None, None, None, None], ['B', 'F', None, 'F']])
-    State = namedtuple('State',['grid','reward','has_food']) #TODO: Problem should handle state structure.
-    reward=0
-    has_food=False
-    belief_state=State({(3, 0): 'B', (1, 2): 'H'}, reward, has_food)
-    real_world=State(real_world_dict, reward, has_food)
-    problem_spec=(4, 4)'''
-
     '''
     # Base case used for development
     # Since agent has food already it should march straight to the base with it for a reward.
