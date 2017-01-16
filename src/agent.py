@@ -289,7 +289,7 @@ if __name__ == '__main__':
         new_observations = new_world.observations
         real_world = new_world.state
         belief_state = new_belief_state(belief_state, new_observations)
-        #os.system('clear')
+        os.system('clear')
         time_step += 1
         print "time: {0}".format(time_step)
         print "total reward: {0}".format(belief_state.reward)
