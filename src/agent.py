@@ -61,19 +61,6 @@ if __name__ == '__main__':
 
     '''
     # Base case used for development
-    # Since agent has food already it should march straight to the base with it for a reward.
-    initial_state = '$---\n----\n----\n---B\n'
-    problem_spec = (4,4)
-    grid = problem.parse(initial_state)
-    State = namedtuple('State',['grid','reward'])
-    reward=0
-    #has_food=True
-    belief_state=State(grid, reward)
-    real_world=State(grid, reward)
-    '''
-
-    '''
-    # Base case used for development
     # Agent knows about a food. It should go directly to the food then to the base with it for a reward.
     initial_state = 'H--B\n----\n----\n---F\n'
     problem_spec = (4,4)
