@@ -76,49 +76,6 @@ if __name__ == '__main__':
 
     grid_belief = problem.parse(belief_state)
 
-
-    '''
-    # Scenario 1 used for debugging
-    # Agent knows about a food but there is another hidden food along the way. It should go directly to the food,
-    # stumble on the closer food and take that to the base with it for a reward.
-    initial_state = 'HB\nFF\n'
-    belief_state = 'HB\n-F\n'
-    problem_spec = (2,2)
-    grid = problem.parse(initial_state)
-    grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward'])
-    reward=0
-    belief_state=State(grid_belief, reward)
-    real_world=State(grid, reward)
-    '''
-
-    '''
-    # Scenario 1 used for debugging
-    # Agent must imagine food
-    initial_state = 'HB\nFF\n'
-    belief_state = 'HB\n--\n'
-    problem_spec = (2,2)
-    grid = problem.parse(initial_state)
-    grid_belief = problem.parse(belief_state)
-    State = namedtuple('State',['grid','reward'])
-    reward=0
-    belief_state=State(grid_belief, reward)
-    real_world=State(grid, reward)
-    '''
-
-
-    '''
-    # Base case used to debug reward
-    # Since agent has food already it should march straight to the base with it for a reward.
-    initial_state = '$B\n'
-    problem_spec = (2,1)
-    grid = problem.parse(initial_state)
-    State = namedtuple('State',['grid','reward'])
-    reward=0
-    belief_state=State(grid, reward)
-    real_world=State(grid, reward)
-    '''
-
     State = namedtuple('State',['grid','reward','t'])
     reward = 0
     belief_state=State(grid_belief, reward, t=0)

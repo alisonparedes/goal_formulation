@@ -29,40 +29,53 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(state, action_and_coordinate, distances, State):
+def transition(state, action_and_coordinate, distances, State, horizon):
     '''
     Returns the next state (s') and its value(?) from the current state (s) given an action. 
     '''
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
-        next_state = hb(state, distances, State)
+        next_state = hb(state, distances, State, horizon)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         next_state = hf(state, coordinate, distances, State)
     return next_state
     #return s
 
-def hb(state, distances, State):
+def hb(state, distances, State, horizon):
     '''
     Simulate moving harvester to base
     '''
     new_grid = deepcopy(state.grid)
 
     harvester = problem.find_harvester(state.grid)
+    new_grid[harvester[0]] = problem.leaving(harvester[1])  # Harvester leaves its starting location
+
     base = problem.find_base(state.grid)
+    step_cost = distance(harvester, base, distances) # Look up cost to move to base
+    total_cost = state.t + step_cost # If new time is past horizon then harvester stops short of base. Use distances to figure out how far it gets.
+    to_cell = base
+    if total_cost > horizon:
+        distance_to_base = find_distances_to_base(distances)[1]
+        next_step = harvester[0]
+        step_cost = 0
+        while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
+            policy = distance_to_base[next_step] # Look up policy
+            next_step = policy[0]
+            step_cost += 1
 
-    new_grid[base[0]] = problem.arriving(harvester[1], base[1])
-    new_grid[harvester[0]] = problem.leaving(harvester[1])
+        if next_step in state.grid:
+            to_cell = next_step, state.grid[next_step]
+        else:
+            to_cell = next_step, None
 
-    resources = distance(harvester, base, distances)
-    new_reward = state.reward
-    next_state = State(new_grid,new_reward, t=0)
-    new_reward += problem.reward(next_state) - resources
+    new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
 
-    new_time = state.t + resources
+    next_state = State(new_grid, state.reward, state.t)
+    new_reward = state.reward + problem.reward(next_state) - step_cost
 
-    return State(new_grid, new_reward, t=new_time)
+    return State(new_grid, new_reward, state.t + step_cost)
 
 
 def distance(from_cell, to_cell, distances):

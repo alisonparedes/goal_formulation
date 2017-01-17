@@ -37,10 +37,9 @@ def search(initial_state, horizon, distances, State, return_plan=False):  #TODO:
 
         #print(s.state)
         current_level -= 1
-        #if is_goal(s,goal): #TODO: Take out goal test. Goal test is N/A
+        #if is_goal(s,goal):
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded)
-        #A bunch of counts
+        expanded = expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon)
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         nodes_generated += expanded.len
@@ -87,12 +86,12 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded): #Kind of like passing a function?
+def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon):
     expanded=[]
     plan=None
     t=0
     for action in applicable_actions(s):
-        next_state = transition(s, action, distances, State) #TODO: Transition should return value of next_state
+        next_state = transition(s, action, distances, State, horizon) #TODO: Transition should return value of next_state
         g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
         t=next_state.t
         result = Node(state=next_state, previous=s, action=action, g=g, t=t) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
@@ -108,8 +107,8 @@ def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded): 
 def applicable_actions(s): #TODO: Pass a function from the problem
     return relaxed_problem.applicable_actions(s.state)
 
-def transition(s_node, action, distances, State):
-    next_state = relaxed_problem.transition(s_node.state, action, distances, State)
+def transition(s_node, action, distances, State, horizon):
+    next_state = relaxed_problem.transition(s_node.state, action, distances, State, horizon)
     return next_state
 
 def equals(s1, s2):
