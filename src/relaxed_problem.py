@@ -139,9 +139,12 @@ def hf(state, food_coordinate, distances, State, horizon):
         next_step = harvester[0]
         step_cost = 0
         while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
-            policy = distance_to_food[next_step] # Look up policy
-            next_step = policy[0]
-            step_cost += 1
+            try:
+                policy = distance_to_food[next_step] # Look up policy
+                next_step = policy[0]
+                step_cost += 1
+            except:
+                print distance_to_food
 
         if next_step in state.grid:
             to_cell = next_step, state.grid[next_step]

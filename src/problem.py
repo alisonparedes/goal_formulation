@@ -282,7 +282,7 @@ def chance_of_food(state, problem_spec):
     for coordinate, unit in state.grid.iteritems():
         if unit in 'F':
             food += 1
-        elif unit in 'b*B#': # Food cannot grow in cell occupied by the base or an obstacle
+        elif unit in 'b*B#H': # Food cannot grow in cell occupied by the base or an obstacle
             distribution.append((0.0, coordinate))
 
     total_probability = 0.0
@@ -290,7 +290,7 @@ def chance_of_food(state, problem_spec):
     probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
     for x in range(0,problem_spec[0]):
         for y in range(0,problem_spec[1]):
-            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
+            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#H':
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
 

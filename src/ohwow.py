@@ -21,7 +21,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
     # Sample worlds
     World = namedtuple("World",["grid","distances"])
     possible_worlds = sample(belief_state, food_dist, n, problem_spec, World, maxfood)
-    #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
+    print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -42,7 +42,7 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
             # Search from this next state
             c += search(s_prime, horizon, world.distances, State)
         q = c/float(n)
-        #print '{0} {1}'.format(action, q)
+        print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
