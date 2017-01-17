@@ -8,6 +8,7 @@ Created on Aug 18, 2016
 import sys
 from collections import namedtuple
 import world
+from copy import deepcopy
 
 #class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
 #    '''
@@ -126,7 +127,7 @@ def unit_actions(coordinate, belief_state, problem_spec):
 
 def grow(state, coordinate, State):
 
-    grid = state.grid
+    grid = deepcopy(state.grid)
 
     if coordinate in grid:
         if grid[coordinate] in 'H$':
@@ -134,7 +135,7 @@ def grow(state, coordinate, State):
     else:
         grid[coordinate] = 'F'
 
-    return State(grid, state.reward, state.t)
+    return State(grid, state.reward, state.t, deepcopy(state.future_food))
     
 def new_coordinate(coordinate, action):
     '''
@@ -236,15 +237,13 @@ def transition(state, action, problem_spec, State, here=None, maxfood=2):
     observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)] = arriving_unit
 
-    new_reward = reward(State(grid=grid, reward=state.reward, t=0))
+    new_reward = reward(State(grid=grid, reward=state.reward, t=0, future_food=state.future_food))
 
     observations = Observation(observation_dict, reward=new_reward)
-    new_state = State(grid=grid, reward=new_reward, t=0)
+    new_state = State(grid=grid, reward=new_reward, t=0, future_food=state.future_food)
 
-    i = 0
-    while (here and i < len(here) and arriving_unit in '$' and world.count_food(grid) < maxfood):
-        new_state = grow(new_state, here[i], State)
-        i+=1
+    while (len(here) > 0 and arriving_unit in '$' and world.count_food(grid) < maxfood):
+        new_state = grow(new_state, here.pop(), State)
 
     new_state_and_observations = Transition(new_state, observations=observations)
 
@@ -282,7 +281,7 @@ def chance_of_food(state, problem_spec):
     for coordinate, unit in state.grid.iteritems():
         if unit in 'F':
             food += 1
-        elif unit in 'b*B#H': # Food cannot grow in cell occupied by the base or an obstacle
+        elif unit in 'b*B#': # Food cannot grow in cell occupied by the base or an obstacle
             distribution.append((0.0, coordinate))
 
     total_probability = 0.0
@@ -290,7 +289,7 @@ def chance_of_food(state, problem_spec):
     probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
     for x in range(0,problem_spec[0]):
         for y in range(0,problem_spec[1]):
-            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#H':
+            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
 

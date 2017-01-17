@@ -25,6 +25,13 @@ def sample(problem_distribution_arr, grid, maxfood=1):
         update_state(new_grid, x)
     return new_grid
 
+def sample_future_food(chance_of_food, n=1):
+    foods = []
+    while(n > 0):
+        foods.append(sample_cell(chance_of_food)[1])
+        n -= 1
+    return foods
+
 def count_food(grid):
     food = 0
     for coordinate, unit in grid.iteritems():

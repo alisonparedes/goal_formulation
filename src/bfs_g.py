@@ -12,7 +12,7 @@ Returns total reward
 '''
 
 
-def search(initial_state, horizon, distances, State, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, horizon, distances, State, return_plan=False, maxfood=1, here=None):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g','t']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g','plan','t'])
@@ -39,7 +39,7 @@ def search(initial_state, horizon, distances, State, return_plan=False):  #TODO:
         current_level -= 1
         #if is_goal(s,goal):
         #    return get_plan(s)    
-        expanded = expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon)
+        expanded = expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon, maxfood)
         nodes_expanded+=1
         next_level += expanded.len #add_open(open_list, closed_list, expanded) #Checking closed list as each node is expanded instead
         nodes_generated += expanded.len
@@ -86,13 +86,13 @@ def get_plan(s):
         i = i.previous
     return plan
 
-def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon):
+def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, horizon, maxfood):
     expanded=[]
     plan=None
     t=0
     for action in applicable_actions(s):
-        next_state = transition(s, action, distances, State, horizon) #TODO: Transition should return value of next_state
-        g=next_state.reward #TODO: Delegate g of value of next state from current state and next state. Search should only use g.
+        next_state = transition(s, action, distances, State, horizon, maxfood)
+        g=next_state.reward
         t=next_state.t
         result = Node(state=next_state, previous=s, action=action, g=g, t=t) #Are tuple factories going to be a problem? TODO: Calculate g as we go. G is over sequence + current. Currently assumes all actions cost -1
         if g > max_g:
@@ -107,8 +107,8 @@ def expand(s, Node, open_list, closed_list, max_g, distances, State, Expanded, h
 def applicable_actions(s): #TODO: Pass a function from the problem
     return relaxed_problem.applicable_actions(s.state)
 
-def transition(s_node, action, distances, State, horizon):
-    next_state = relaxed_problem.transition(s_node.state, action, distances, State, horizon)
+def transition(s_node, action, distances, State, horizon, maxfood):
+    next_state = relaxed_problem.transition(s_node.state, action, distances, State, horizon, maxfood)
     return next_state
 
 def equals(s1, s2):

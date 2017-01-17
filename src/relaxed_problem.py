@@ -5,6 +5,7 @@ Created on Oct 25, 2016
 '''
 import problem
 from copy import deepcopy
+import world
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
@@ -29,10 +30,7 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     return actions
     #return [1,2]
     
-def transition(state, action_and_coordinate, distances, State, horizon):
-    '''
-    Returns the next state (s') and its value(?) from the current state (s) given an action. 
-    '''
+def transition(state, action_and_coordinate, distances, State, horizon, maxfood):
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
@@ -40,6 +38,9 @@ def transition(state, action_and_coordinate, distances, State, horizon):
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         next_state = hf(state, coordinate, distances, State, horizon)
+    future_food = deepcopy(state.future_food)
+    while (world.count_food(next_state.grid) < maxfood):
+        next_state = problem.grow(next_state, future_food.pop(), State)
     return next_state
     #return s
 
@@ -70,12 +71,13 @@ def hb(state, distances, State, horizon):
         else:
             to_cell = next_step, None
 
-    new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
+    arriving_unit = problem.arriving(harvester[1], to_cell[1])
+    new_grid[to_cell[0]] = arriving_unit # May not make it all the way if takes too long
 
-    next_state = State(new_grid, state.reward, state.t)
+    next_state = State(new_grid, state.reward, state.t, state.future_food)
     new_reward = state.reward + problem.reward(next_state) - step_cost
 
-    return State(new_grid, new_reward, state.t + step_cost)
+    return State(new_grid, new_reward, state.t + step_cost, state.future_food)
 
 
 def distance(from_cell, to_cell, distances):
@@ -88,10 +90,13 @@ def distance(from_cell, to_cell, distances):
             d = policy[1]
     else:
         distances_to_food = find_distances_to_food(distances, to_cell[0])
-        if from_cell[0] in distances_to_food[1]:
-            policy = distances_to_food[1][from_cell[0]]
-            d = policy[1]
-
+        try:
+            if from_cell[0] in distances_to_food[1]:
+                policy = distances_to_food[1][from_cell[0]]
+                d = policy[1]
+        except:
+            print to_cell
+            print distances
     return d
 
 
@@ -107,17 +112,6 @@ def find_distances_to_food(distances, food):
         if d[0][0] == food:
             return d
     return None
-
-'''
-def distance(from_coordinate, to_coordinate):
-    from_x=float(from_coordinate[0])
-    from_y=float(from_coordinate[1])
-    to_x=float(to_coordinate[0])
-    to_y=float(to_coordinate[1])
-    distance=abs(from_x - to_x) + abs(from_y - to_y)
-    return distance * 1
-'''
-
 
 '''
 Simulate moving harvester to food
@@ -139,12 +133,9 @@ def hf(state, food_coordinate, distances, State, horizon):
         next_step = harvester[0]
         step_cost = 0
         while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
-            try:
-                policy = distance_to_food[next_step] # Look up policy
-                next_step = policy[0]
-                step_cost += 1
-            except:
-                print distance_to_food
+            policy = distance_to_food[next_step] # Look up policy
+            next_step = policy[0]
+            step_cost += 1
 
         if next_step in state.grid:
             to_cell = next_step, state.grid[next_step]
@@ -153,10 +144,15 @@ def hf(state, food_coordinate, distances, State, horizon):
 
     new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
 
-    next_state = State(new_grid, state.reward, state.t)
+    next_state = State(new_grid, state.reward, state.t, state.future_food)
     new_reward = state.reward + problem.reward(next_state) - step_cost
-    return State(new_grid, new_reward, state.t + step_cost)
+    return State(new_grid, new_reward, state.t + step_cost, state.future_food)
 
 
 if __name__ == '__main__':
-    pass
+    foods = [(1,1),(2,2)]
+    a = deepcopy(foods)
+    b = deepcopy(foods)
+    a.pop()
+    print "a: {0}".format(a)
+    print "b: {0}".format(b)

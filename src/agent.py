@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
     grid_belief = problem.parse(belief_state)
 
-    State = namedtuple('State',['grid','reward','t'])
+    State = namedtuple('State',['grid','reward','t','future_food'])
     reward = 0
-    belief_state=State(grid_belief, reward, t=0)
-    real_world=State(grid, reward, t=0)
+    belief_state=State(grid_belief, reward, t=0, future_food=[])
+    real_world=State(grid, reward, t=0, future_food=[])
     time_step = 0
     print "time: {0}".format(time_step)
     print "reward: {0}".format(real_world.reward)

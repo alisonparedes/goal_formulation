@@ -19,9 +19,9 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
     # Tunable parameters
     food_dist = problem.chance_of_food(belief_state, problem_spec)
     # Sample worlds
-    World = namedtuple("World",["grid","distances"])
+    World = namedtuple("World",["grid","distances","future_food"])
     possible_worlds = sample(belief_state, food_dist, n, problem_spec, World, maxfood)
-    #print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
+    print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
     #argmina = None #Hold action with max value
     #Action = namedtuple('Action',['order','expected_reward'])
     #For each action applicable in s
@@ -36,13 +36,13 @@ def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
         for world in possible_worlds:
 
             # Simulate taking each action
-            s_prime = transition(State(world.grid, belief_state.reward, t=0), action, problem_spec, State, maxfood)
+            s_prime = transition(State(world.grid, belief_state.reward, t=0, future_food=world.future_food), action, problem_spec, State, maxfood)
             c += s_prime.reward
 
             # Search from this next state
-            c += search(s_prime, horizon, world.distances, State)
+            c += search(s_prime, horizon, world.distances, State, maxfood=maxfood, here=world.future_food)
         q = c/float(n)
-        #print '{0} {1}'.format(action, q)
+        print '{0} {1}'.format(action, q)
         if q > max_q:
             max_q=q
             max_action=action
@@ -63,7 +63,7 @@ def summarize_sample(possible_worlds, problem_spec):
 
 
 def transition(belief_state, action, problem_spec, State, maxfood):
-    s_prime = problem.transition(belief_state, action, problem_spec, State) #TODO: Should not return integer units
+    s_prime = problem.transition(belief_state, action, problem_spec, State, belief_state.future_food, maxfood)
     return s_prime.state
 
 def sample(belief_state, food_dist, n, problem_spec, World, maxfood):
@@ -76,7 +76,10 @@ def sample(belief_state, food_dist, n, problem_spec, World, maxfood):
         food = problem.find_food(grid)
         for f in food:
             distances.append((f, dijkstra.dijkstra(f[0], belief_state, problem_spec)))
-        w = World(grid, distances)
+        future_food = world.sample_future_food(food_dist, n=100)
+        for f in future_food:
+            distances.append((f, dijkstra.dijkstra(f, belief_state, problem_spec)))
+        w = World(grid, distances, future_food)
         possible_worlds.append(w)
     return possible_worlds
 
