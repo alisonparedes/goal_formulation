@@ -5,4 +5,4 @@ python ./src/agent.py test/hidden_food_4x4_real.txt test/hidden_food_4x4_belief.
 python ./src/agent.py test/hidden_food_4x4_real.txt test/hidden_food_4x4_belief.txt 10 1 2 20
 python ./src/agent.py test/blocked_4x1_real.txt test/blocked_4x1_belief.txt 10 10 0 10
 python ./src/agent.py test/scenario_01_4x4_01_real.txt test/scenario_01_4x4_01_belief.txt 10 2 2 100
-python ./src/agent.py scenario_02_4x4_01_real.txt scenario_02_4x4_01_belief.txt 10 2 2 100
+python ./src/agent.py test/scenario_02_4x4_01_real.txt test/scenario_02_4x4_01_belief.txt 10 2 2 100

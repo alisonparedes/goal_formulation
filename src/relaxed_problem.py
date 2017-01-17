@@ -39,7 +39,7 @@ def transition(state, action_and_coordinate, distances, State, horizon):
         next_state = hb(state, distances, State, horizon)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        next_state = hf(state, coordinate, distances, State)
+        next_state = hf(state, coordinate, distances, State, horizon)
     return next_state
     #return s
 
@@ -122,25 +122,37 @@ def distance(from_coordinate, to_coordinate):
 '''
 Simulate moving harvester to food
 '''
-def hf(state, food_coordinate, distances, State):
+def hf(state, food_coordinate, distances, State, horizon):
 
     new_grid = deepcopy(state.grid)
 
     harvester = problem.find_harvester(state.grid)
     food = (food_coordinate, 'F')
 
-    new_grid[food_coordinate] = problem.arriving(harvester[1], food[1])
     new_grid[harvester[0]] = problem.leaving(harvester[1])
 
-    resources = distance(harvester, food, distances)
+    step_cost = distance(harvester, food, distances) # Look up cost to move to base
+    total_cost = state.t + step_cost # If new time is past horizon then harvester stops short of base. Use distances to figure out how far it gets.
+    to_cell = food
+    if total_cost > horizon:
+        distance_to_food = find_distances_to_food(distances, food[0])[1]
+        next_step = harvester[0]
+        step_cost = 0
+        while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
+            policy = distance_to_food[next_step] # Look up policy
+            next_step = policy[0]
+            step_cost += 1
 
-    new_reward = state.reward
-    next_state = State(new_grid, new_reward, t=0)
-    new_reward += problem.reward(next_state) - resources
+        if next_step in state.grid:
+            to_cell = next_step, state.grid[next_step]
+        else:
+            to_cell = next_step, None
 
-    new_time = state.t + resources
+    new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
 
-    return State(new_grid, new_reward, t=new_time)
+    next_state = State(new_grid, state.reward, state.t)
+    new_reward = state.reward + problem.reward(next_state) - step_cost
+    return State(new_grid, new_reward, state.t + step_cost)
 
 
 if __name__ == '__main__':
