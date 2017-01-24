@@ -5,7 +5,6 @@ Created on Oct 25, 2016
 '''
 import problem
 from copy import deepcopy
-import world
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''

@@ -6,19 +6,81 @@ Created on Oct 25, 2016
 import unittest
 from agent import *
 import problem
+from collections import namedtuple
+
 
 class Test(unittest.TestCase):
 
+    def testInitReality(self):
+        file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
+        Arguments = namedtuple("Arguments", ["max_food"])
+        max_food = 2
+        args = Arguments(max_food=max_food)
+        reality = init_reality(file_name, args)
+        self.assertEquals(reality.grid, {(0, 0): 'F', (1, 1): 'b'}, reality.grid)
+        self.assertEquals(reality.reward, 0, reality.reward)
+        self.assertEquals(reality.t, 0, reality.t)
+        self.assertEquals(reality.future_food, [], reality.future_food)
+        self.assertEquals(reality.max_food, max_food, reality.max_food)
+        self.assertEquals(reality.x, 2, reality.x)
+        self.assertEquals(reality.y, 2, reality.y)
 
-    def testNewBeliefState(self):
-        belief_state_str = '-H--\n---B'
-        belief_state_dict = problem.parse(belief_state_str)
-        new_observation_str = '----\n-H--'
-        new_observations_dict = problem.parse(new_observation_str)
-        new_observations_dict[(1,0)]=None
-        new_belief_state_dict = new_belief_state(belief_state_dict, new_observations_dict)
-        self.assertEquals(new_belief_state_dict, {(1, 0): None, (3, 1): 'B', (1, 1): 'H'}, new_belief_state_dict)
+    def testInitBelief(self):
+        file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
+        Arguments = namedtuple("Arguments", ["max_food"])
+        max_food = 2
+        args = Arguments(max_food=max_food)
+        belief = init_belief(file_name, args)
+        self.assertEquals(belief.grid, {(0, 0): 'F', (1, 1): 'b'}, belief.grid)
+        self.assertEquals(belief.reward, 0, belief.reward)
+        self.assertEquals(belief.t, 0, belief.t)
+        self.assertEquals(belief.future_food, [], belief.future_food)
+        self.assertEquals(belief.max_food, max_food, belief.max_food)
+        self.assertEquals(belief.x, 2, belief.x)
+        self.assertEquals(belief.y, 2, belief.y)
 
+    def testListExploredCell(self):
+        belief_str = 'F-\n-b'
+        grid = problem.parse(belief_str)
+        grid[(1, 0)] = '-'
+        grid[(0, 1)] = '-'
+        explored = list_explored_cell(grid)
+        self.assertEquals(explored, {(1, 0): '-',  (0, 1): '-'}, explored)
+
+    def testDelExploredCell(self):
+        belief_str = 'F-\n-b'
+        grid = problem.parse(belief_str)
+        grid[(1, 0)] = '-'
+        grid[(0, 1)] = '-'
+        new_grid = del_explored_cell(grid)
+        self.assertEquals(new_grid, {(0, 0): 'F', (1, 1): 'b'}, new_grid)
+        self.assertEquals(grid, {(0, 0): 'F', (1, 1): 'b', (1, 0): '-',  (0, 1): '-'}, grid)
+
+    def testUpdateCell(self):
+        belief_str = 'F-\n-b'
+        grid = problem.parse(belief_str)
+        observation_str = '--\nHB'
+        observation_dict = problem.parse(observation_str)
+        new_grid = update_cell(grid, observation_dict)
+        self.assertEquals(new_grid, {(0, 0): 'F',  (1, 1): 'B', (0, 1): 'H'}, new_grid)
+        self.assertEquals(grid, {(0, 0): 'F', (1, 1): 'b'}, grid)
+
+    def testIsPayDay(self):
+        belief_str = 'F-\n-*'
+        grid = problem.parse(belief_str)
+        pay_day = is_pay_day(grid)
+        self.assertEquals(pay_day, True, pay_day)
+
+    def testUpdateBelief(self):
+        belief_str = 'F-\n-b'
+        grid = problem.parse(belief_str)
+        belief = problem.to_state(grid)
+        observation_str = '--\nHB'
+        observation_dict = problem.parse(observation_str)
+        observation = problem.to_observation(observation_dict)
+        new_belief = update_belief(belief, observation)
+        self.assertEquals(new_belief.grid, {(0, 0): 'F',  (1, 1): 'B', (0, 1): 'H'}, new_belief.grid)
+        self.assertEquals(belief.grid, {(0, 0): 'F', (1, 1): 'b'}, belief.grid)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

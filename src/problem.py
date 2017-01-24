@@ -5,23 +5,43 @@ Created on Aug 18, 2016
 '''
 
 
-import sys
 from collections import namedtuple
-import world
 from copy import deepcopy
+import dijkstra
+from random import *
 
-#class State(object): #TODO: Why an object? I want a function to be able to take a human-readable representation of the game state and return its value
-#    '''
-#    '''
-    
-def __init__(self, simstate): #TODO: Need a list of goals (high-level actions?)
-    '''
-    Takes a visual representation of the current state and parses it into an internal representation, a dictionary of positions and objects.
-    '''
+
+def calculate_distance(grid):
+    distance = []
+    distance = append_distance_to_base(distance, grid)
+    distance = append_distance_to_food(distance, grid)
+    return distance
+
+
+def append_distance_to_food(distance, state):
+    new_distance = deepcopy(distance)
+    food = find_food(state.grid)
+    for f in food:
+        new_distance.append((f, dijkstra.dijkstra(f[0], state)))
+    future_food = sample_future_food(food_dist, n=100)
+    for f in future_food:
+        new_distance.append((f, dijkstra.dijkstra(f, state )))
+    return new_distance
+
+
+def append_distance_to_base(distance, state):
+    new_distance = deepcopy(distance)
+    base = find_base(state.grid)
+    new_distance.append((base, dijkstra.dijkstra(base[0], state)))
+    return new_distance
+
+
+def to_state(grid_dict, x=0, y=0, max_food=0, reward=0, t=0, future_food=[], distances={}):
+    State = namedtuple('State', ['grid', 'x', 'y', 'max_food', 'reward', 't', 'future_food', 'distances'])
+    return State(grid_dict, x, y, max_food, reward, t, future_food, distances)
+
     
 def parse(simstate): #Could recursively split first and rest and send rest to the parse function. Function returns a list of units and their coordinates.
-    '''
-    '''  
     state = {}   
     y=0
     x=0    
@@ -34,13 +54,6 @@ def parse(simstate): #Could recursively split first and rest and send rest to th
         x += 1    
     return state
 
-def write(state, problem_spec): #TODO: Move to agent module.
-    '''
-    A state is a dictionary of positions and objects, keyed on position. Use to write the agent's perspective. 
-    '''
-    grid = to_grid(state, problem_spec)
-    printable = write_grid(grid) #TODO: Modify agent's new knowledge function. Cell's known to contain None are different from unknown cells.   
-    return printable
 
 def interleaved(known, world, problem_spec):
     height=problem_spec[1]
@@ -56,91 +69,56 @@ def interleaved(known, world, problem_spec):
             else:
                 printable += '-'
         printable += ' '
-        for x in range(width): #TODO: Should agent know boundaries of teh world? World's transition model does. What about imagined view of the world?
+        for x in range(width): #
             cell = known_grid[x][y] 
             if cell:
                 printable += cell
             else:
-                printable += '?' #TODO: Modify agent's new knowledge function. Cells known to contain None are different from unknown cells.
+                printable += '?'
         printable += '\n'
     return printable
+
 
 def empty(cell):
     if cell:
         return cell
     else:
         return '-'
-    
-def write_grid(state):
-    '''
-    A state is a 2D array
-    '''
-    width=len(state)
-    height=len(state[0])
-    simstate = ''
-    for y in range(height):
-        for x in range(width):
-            cell = state[x][y]
-            if cell:
-                simstate += cell
-            else:
-                simstate += '-'
-        simstate += '\n'
-    return simstate
-
-def applicable_actions(belief_state, problem_spec): #TODO: Use a problem definition instead of dimensions
-    actions=[]
-    w=problem_spec[0]
-    h=problem_spec[1]
-    units='' #TODO: Maybe use this when adding Defender's moves
-    for coordinate, unit in belief_state.grid.iteritems():
-        if unit in 'H*$b':#TODO: Or Defender?
-            actions = unit_actions(coordinate, belief_state, problem_spec)
-    return actions
-
-'''
-Given a coordinate returns a list of actions that may be taken from that coordinate in the given state.
-'''
 
 
-def unit_actions(coordinate, belief_state, problem_spec):
+def applicable_actions(state):
+    harvester = find_harvester(state)
+    return unit_actions(harvester.coordinate, state)
 
+
+def unit_actions(coordinate, state):
     actions = []
-
-    w = problem_spec[0]
-    h = problem_spec[1]
-
     x = coordinate[0]
     y = coordinate[1]
 
-    if y-1 >= 0 and ((x, y-1) not in belief_state.grid or belief_state.grid[(x, y-1)] != '#'):
+    if y-1 >= 0 and ((x, y-1) not in state.grid or state.grid[(x, y-1)] != '#'):
         actions.append('N')
-    if y+1 < h and ((x, y+1) not in belief_state.grid or belief_state.grid[(x, y+1)] != '#'): # Internal representation of coordinate system puts origin in upper left corner of map
+    if y+1 < state.y and ((x, y+1) not in state.grid or state.grid[(x, y+1)] != '#'):
         actions.append('S')
-    if x+1 < w and ((x+1, y) not in belief_state.grid or belief_state.grid[(x+1, y)] != '#'):
+    if x+1 < state.x and ((x+1, y) not in state.grid or state.grid[(x+1, y)] != '#'):
         actions.append('E')
-    if x-1 >= 0 and ((x-1, y) not in belief_state.grid or belief_state.grid[(x-1, y)] != '#'): # Assuming left most cell in problem is 0
+    if x-1 >= 0 and ((x-1, y) not in state.grid or state.grid[(x-1, y)] != '#'):
         actions.append('W')
 
     return actions
 
 
 def grow(state, coordinate, State):
-
     grid = deepcopy(state.grid)
-
     if coordinate in grid:
         if grid[coordinate] in 'H$':
             grid[coordinate] = '$'
     else:
         grid[coordinate] = 'F'
-
     return State(grid, state.reward, state.t, deepcopy(state.future_food))
-    
+
+
 def new_coordinate(coordinate, action):
-    '''
-    Returns a new coordinate for an action, could be negative!
-    ''' 
     x=coordinate[0]
     y=coordinate[1]
     if action == 'N':
@@ -152,7 +130,8 @@ def new_coordinate(coordinate, action):
     elif action == 'W': 
         x += -1;
     return (x,y)
-    
+
+
 def to_grid(s, problem_spec):
     '''
     Takes a dictionary and returns a 2D representation
@@ -167,6 +146,7 @@ def to_grid(s, problem_spec):
         y=coordinate[1]
         grid[x][y]=unit
     return grid
+
 
 def to_dict(w):
     '''
@@ -183,28 +163,15 @@ def to_dict(w):
         x+=1
     return state
 
-'''
-Transition expects a state and an action and returns a state and an observation. The problem spec helps determine how
-the state changes.
 
-A state is made up of three features: ...
-
-Action determine which of the units that an agent may control may attempt move and to where, although the move may not
-resolve as expected; units may not get as far as they had hoped, moving 0 to n - m.
-
-Encountering food changes if the agent has food or not and causes new food to grow somewhere else.
-
-'''
-
-
-'''
-Transition is used to simulate next step.
-'''
+def to_observation(grid_dict, reward=0):
+    Observation = namedtuple('Observation',['cell_dict', 'reward'])
+    return Observation(grid_dict, reward)
 
 
 def transition(state, action, problem_spec, State, here=None, maxfood=2):
 
-    Observation = namedtuple('Observation',['observation_dict', 'reward'])
+
     observation_dict={}
     Transition = namedtuple('Transition',['state','observations'])
 
@@ -226,7 +193,7 @@ def transition(state, action, problem_spec, State, here=None, maxfood=2):
 
     if cell and cell in '#':
         observation_dict[(to_x, to_y)]='#'
-        return Transition(state, observations=Observation(observation_dict, reward=0))
+        return Transition(state, observations=to_observation(observation_dict, reward=0))
 
     arriving_unit = arriving(unit, cell)
 
@@ -237,17 +204,18 @@ def transition(state, action, problem_spec, State, here=None, maxfood=2):
     observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
     observation_dict[(to_x, to_y)] = arriving_unit
 
-    new_reward = reward(State(grid=grid, reward=state.reward, t=0, future_food=state.future_food))
+    new_reward = reward(to_state(grid=grid, reward=state.reward, t=0, future_food=state.future_food))
 
-    observations = Observation(observation_dict, reward=new_reward)
-    new_state = State(grid=grid, reward=new_reward, t=0, future_food=state.future_food)
+    observations = to_observation(observation_dict, reward=new_reward)
+    new_state = to_state(grid=grid, reward=new_reward, t=0, future_food=state.future_food)
 
-    while (len(here) > 0 and arriving_unit in '$' and world.count_food(grid) < maxfood):
+    while (len(here) > 0 and arriving_unit in '$' and count_food(grid) < maxfood):
         new_state = grow(new_state, here.pop(), State)
 
     new_state_and_observations = Transition(new_state, observations=observations)
 
     return new_state_and_observations
+
 
 def reward(state):
     reward=0
@@ -255,6 +223,7 @@ def reward(state):
     if base[1] == '*':
         reward += 50
     return reward
+
 
 def clear_visited(state_grid):
     cleared = state_grid
@@ -268,10 +237,6 @@ def clear_visited(state_grid):
         x += 1
     return cleared
 
-
-'''
-
-'''
 
 def chance_of_food(state, problem_spec):
 
@@ -298,10 +263,15 @@ def chance_of_food(state, problem_spec):
 
 
 def find_harvester(state):
-    for coordinate, cell in state.iteritems():
+    for coordinate, cell in state.grid.iteritems():
         if cell and cell in 'bH*$':
-            return (coordinate, cell)
+            return to_unit(coordinate, cell)
     return None
+
+
+def to_unit(coordinate, cell):
+    Unit = namedtuple("Unit", ["coordinate", "cell"])
+    return Unit(coordinate, cell)
 
 
 def leaving(from_symbol):
@@ -337,6 +307,65 @@ def find_food(grid):
         if unit in 'F':
             food.append((coordinate, unit))
     return food
+
+
+def sample(problem_distribution_arr, grid, maxfood=1):
+    new_grid = deepcopy(grid)
+    while count_food(new_grid) < maxfood:
+        x = sample_cell(problem_distribution_arr)
+        update_state(new_grid, x)
+    return new_grid
+
+
+def sample_future_food(chance_of_food, n=1):
+    foods = []
+    while(n > 0):
+        foods.append(sample_cell(chance_of_food)[1])
+        n -= 1
+    return foods
+
+
+def count_food(grid):
+    food = 0
+    for coordinate, unit in grid.iteritems():
+        if unit == 'F':
+            food += 1
+    return food
+
+
+def update_state(state, sample): #Modifies state in place
+    coordinate=sample[1]
+    if coordinate:
+        unit=sample[2]
+        if coordinate in state:
+            state[coordinate]=merge(state[coordinate],unit)
+        else:
+            state[coordinate]=unit
+
+
+def merge(unit_a, unit_b):
+    if unit_a in 'b$*H' and unit_b in 'F':
+        return '$'
+    if unit_a in '$' and unit_b in 'B':
+        return '*'
+    if unit_a in 'H' and unit_b in 'B':
+        return 'b'
+    if unit_a in 'b*':
+        return 'H'
+    return unit_b
+
+
+def sample_cell(problem_distribution_arr):
+    p = random.random()
+    cummulative = 0
+    i=-1
+    while cummulative < p:
+        i += 1
+        cell = problem_distribution_arr[i]
+        probability=cell[0]
+        cummulative += probability
+    return cell
+
         
 if __name__ == '__main__': #Read in a simulated state and write it out
     pass

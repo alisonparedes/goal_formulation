@@ -11,34 +11,20 @@ class TestState(unittest.TestCase):
 
 
     def testParse(self):
-        simstate = '-H--\n---H'
-        state = parse(simstate)
+        state_str = '-H--\n---H'
+        state = parse(state_str)
         self.assertDictEqual(state, {(1,0):'H', (3,1):'H'}, state)
-        
-    '''
-    def testWrite(self):
-        init = ' !\n   *'
-        simstate = write(parse(init))
-        self.assertEquals(simstate, '\n{0}\n'.format(init), simstate) #TODO: These look equivalent to me
-    '''
-    def testActions(self):
-        simstate = '-H--\n---B'
-        state = parse(simstate)
-        actions = applicable_actions(state, problem_spec=(4, 2))
-        self.assertEquals(actions, ['S','E','W'], actions)
-        
-    def testGetCoordinate(self):
-        simstate = '-*--\n---F'
-        state = parse(simstate)
-        state_grid = to_grid(state, problem_spec=(4, 2))
-        coordinate = get_coordinate(state)
-        self.assertEquals(coordinate, (1,0), coordinate)
 
+    def testActions(self):
+        state_str = '-H--\n---B'
+        grid = parse(state_str)
+        state = to_state(grid, x=4, y=2)
+        actions = applicable_actions(state)
+        self.assertEquals(actions, ['S', 'E', 'W'], actions)
 
     def testFindBase(self):
         simstate = '-*--\n---F'
         state = parse(simstate)
-        state_grid = to_grid(state, problem_spec=(4, 2))
         coordinate = find_base(state)
         self.assertEquals(coordinate, ((1,0), '*'), coordinate)
 

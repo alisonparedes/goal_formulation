@@ -5,7 +5,6 @@ Created on Sep 28, 2016
 '''
 
 import problem
-import world
 from collections import namedtuple
 
 

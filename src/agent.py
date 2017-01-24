@@ -5,103 +5,140 @@ Created on Sep 28, 2016
 '''
 
 import simulator
-from ohwow import *
-from copy import deepcopy
+import ohwow
 import os
 import argparse
 import time
-
-'''
-   A belief state is made up of 1) a collection of coordinates and their contents, 2) the amount of reward collected so
-   far and 3) the condition of having food. Coordinates could be implemented as a list of tuples instead of a
-   dictionary, and operators would wrap and unwrap coordinates using either the coordinate as the key. The amount of
-   reward collected is an integer. The condition of having food or not is either True or False.
-
-   :param state:
-   :param new_knowledge:
-   :return:
-   '''
+import problem
+from copy import deepcopy
 
 
-def new_belief_state(belief_state, new_observations):
+def update_belief(state, observation):
+    """An agent can update its own belief state about the location of objects in the world and how much reward it has
+    accumulated so far.
+    :param state: A state object representing the agent's current belief state
+    :param observation: An observation object
+    :return Agent's new belief state
+    """
+    if not observation:
+        return state
+    new_grid = update_cell(state.grid, observation.cell_dict)
+    new_reward = state.reward
+    if is_pay_day(observation.cell_dict):
+        new_grid = del_explored_cell(new_grid)
+        new_reward += observation.reward
+    return problem.to_state(new_grid, reward=new_reward)
 
-    if not new_observations:
-        return belief_state
 
-    new_belief_state = belief_state.grid
-    accumulated_reward = belief_state.reward + new_observations.reward
-    reset_cells = []
-    for coordinate, cell in new_observations.observation_dict.iteritems():
+def del_explored_cell(grid):
+    explored = list_explored_cell(grid)
+    new_grid = deepcopy(grid)
+    for coordinate, _ in explored.iteritems():
+        del new_grid[coordinate]
+    return new_grid
 
-        # There should be be very few observations compared to the coordinates in a belief state
-        new_belief_state[coordinate] = cell
+
+def list_explored_cell(grid):
+    explored = {}
+    for coordinate, cell in grid.iteritems():
+        if cell == '-':
+            explored[coordinate] = cell
+    return explored
+
+
+def update_cell(grid, cell_dict):
+    new_grid = deepcopy(grid)
+    for coordinate, cell in cell_dict.iteritems():  # Set of observations is much smaller than state
+        new_grid[coordinate] = cell
+    return new_grid
+
+
+def is_pay_day(cell_dict):
+    for coordinate, cell in cell_dict.iteritems():
         if cell == '*':
-            for coordinate, cell in new_belief_state.iteritems():
-                if cell == '-':
-                    reset_cells.append(coordinate)
+            return True
 
-    if len(reset_cells) > 0:
-        for cell in reset_cells:
-            del new_belief_state[cell]
 
-    return State(new_belief_state, accumulated_reward, t=0)
+def init_reality(reality_file_name, other_args):
+    """Constructs the initial state of the world from a file.
+    param: reality_file_name: The path and name of a file illustrating the real world. See problem for format.
+    return: Initial state of the world
+    return: x, y: Dimensions of the world
+    """
+    reality_str = ''
+    x = 0
+    y = 0
+    with open(reality_file_name, 'r') as reality_file:
+        for line in reality_file:
+            reality_str += line
+            x = len(line) - 1
+            y += 1
+    grid_dict = problem.parse(reality_str)
+    return problem.to_state(grid_dict, x, y, max_food=int(other_args.max_food))
+
+
+def init_belief(belief_file_name, other_args):
+    """Constructs the agent's initial belief about the world from a file.
+    param: belief_file_name: The path and name of a file illustrating the agent's belief. See problem for format.
+    return: Agent's initial belief state
+    """
+    belief_str = ''
+    x = 0
+    y = 0
+    with open(belief_file_name, 'r') as belief:
+        for line in belief:
+            belief_str += line
+            x = len(line) - 1
+            y += 1
+    grid_dict = problem.parse(belief_str)
+    return problem.to_state(grid_dict, x, y, max_food=int(other_args.max_food))
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("reality")
+    parser.add_argument("belief")
+    parser.add_argument("horizon")
+    parser.add_argument("sample")
+    parser.add_argument("max_food")
+    parser.add_argument("time")
+    return parser.parse_args()
+
+
+def print_args(args):
+    print "reality: {0}".format(args.real)
+    print "belief: {0}".format(args.belief)
+    print "horizon: {0}".format(args.horizon)
+    print "sample: {0}".format(args.sample)
+    print "max_food: {0}".format(args.food)
+    print "time: {0}".format(args.time)
+
+
+def print_step(time_step, state_a, state_b, dimensions):
+    os.system('clear')
+    print "time: {0}".format(time_step)
+    print "reward: {0}".format(state_b.reward)
+    print(problem.interleaved(state_a.grid, state_b.grid, dimensions))
 
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("real")
-    parser.add_argument("belief")
-    parser.add_argument("horizon")
-    parser.add_argument("sample")
-    parser.add_argument("food")
-    parser.add_argument("time")
-    args = parser.parse_args()
+    args = parse_args()
+    reality_state, x, y = init_reality(args.real)  # Dimensions of reality are derived from input file
+    belief_state = init_belief(args.belief)
 
-    initial_state = ''
-    y = 0
-    x = 0
-    with open(args.real, 'r') as real:
-        for line in real:
-            initial_state += line
-            x = len(line) - 1
-            y += 1
-    grid = problem.parse(initial_state)
-    problem_spec = (x, y)
-
-    belief_state = ''
-    with open(args.belief, 'r') as belief:
-        for line in belief:
-            belief_state += line
-
-    grid_belief = problem.parse(belief_state)
-
-    State = namedtuple('State',['grid','reward','t','future_food'])
-    reward = 0
-    belief_state=State(grid_belief, reward, t=0, future_food=[])
-    real_world=State(grid, reward, t=0, future_food=[])
     time_step = 0
-    print "time: {0}".format(time_step)
-    print "reward: {0}".format(real_world.reward)
-    print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
+    print_step(time_step, belief_state, reality_state)
+
     while time_step < int(args.time):
-        #print 'belief: {0}'.format(belief_state)
-        action = ohwow(belief_state, problem_spec, State, n=int(args.sample), horizon=int(args.horizon), maxfood=int(args.food))
-        new_world = simulator.simulate(belief_state, action[0], real_world, problem_spec, State, maxfood=int(args.food))
+
+        action = ohwow.ohwow(belief_state, n=int(args.sample), horizon=int(args.horizon))
+        new_world = simulator.simulate(belief_state, action[0], reality_state)
         new_observations = new_world.observations
         real_world = new_world.state
-        belief_state = new_belief_state(belief_state, new_observations)
-        time.sleep(0.25)
-        os.system('clear')
-        time_step += 1
-        print "time: {0}".format(time_step)
-        print "total reward: {0}".format(belief_state.reward)
-        print(problem.interleaved(belief_state.grid, real_world.grid, problem_spec))
+        belief_state = update_belief(belief_state, new_observations)
 
-    print "real: {0}".format(args.real)
-    print "belief: {0}".format(args.belief)
-    print "horizon: {0}".format(args.horizon)
-    print "sample: {0}".format(args.sample)
-    print "food: {0}".format(args.food)
-    print "time: {0}".format(args.time)
+        time_step += 1
+        time.sleep(0.25)
+        print_step(time_step, belief_state, reality_state)
 

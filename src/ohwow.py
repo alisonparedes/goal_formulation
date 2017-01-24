@@ -3,50 +3,34 @@ Created on Sep 21, 2016
 
 @author: Alison Paredes
 '''
-from bfs_g import *
-import world
+import bfs_g
 import problem
-import dijkstra
-
-'''
-Oh wow expects an incomplete state, a belief state. It maybe tuned to change sample size, search horizon, and
-underlying distribution of possible worlds.
-'''
 
 
-def ohwow(belief_state, problem_spec, State, n=1, horizon=1, maxfood=2):
+def ohwow(belief_state, number_of_samples=1, horizon=1):
+    """
+    """
 
-    # Tunable parameters
-    food_dist = problem.chance_of_food(belief_state, problem_spec)
-    # Sample worlds
-    World = namedtuple("World",["grid","distances","future_food"])
-    possible_worlds = sample(belief_state, food_dist, n, problem_spec, World, maxfood)
-    print 'food: {0}'.format(summarize_sample(possible_worlds, problem_spec))
-    #argmina = None #Hold action with max value
-    #Action = namedtuple('Action',['order','expected_reward'])
-    #For each action applicable in s
+    sampled_worlds = sample(belief_state, number_of_samples)
 
-    # Simulate each action available in the current world
-    actions_in_s = problem.applicable_actions(belief_state, problem_spec)
+    actions_in_s = problem.applicable_actions(belief_state)
 
-    max_action=None
-    max_q=0
+    max_action = None
+    max_expected_value = 0
     for action in actions_in_s:
-        c = 0.0
-        for world in possible_worlds:
 
-            # Simulate taking each action
-            s_prime = transition(State(world.grid, belief_state.reward, t=0, future_food=world.future_food), action, problem_spec, State, maxfood)
-            c += s_prime.reward
+        total_reward = 0.0
+        for initial_state in sampled_worlds:
+            next_state = problem.transition(initial_state, action)
+            total_reward += next_state.reward
+            total_reward += bfs_g.search(next_state, horizon)
 
-            # Search from this next state
-            c += search(s_prime, horizon, world.distances, State, maxfood=maxfood, here=world.future_food)
-        q = c/float(n)
-        print '{0} {1}'.format(action, q)
-        if q > max_q:
-            max_q=q
-            max_action=action
-    return max_action, max_q
+        expected_value = total_reward/float(number_of_samples)
+        if expected_value > max_expected_value:
+            max_expected_value = expected_value
+            max_action = action
+
+    return max_action, max_expected_value
 
 
 def summarize_sample(possible_worlds, problem_spec):
@@ -62,26 +46,18 @@ def summarize_sample(possible_worlds, problem_spec):
     return summary_grid
 
 
-def transition(belief_state, action, problem_spec, State, maxfood):
-    s_prime = problem.transition(belief_state, action, problem_spec, State, belief_state.future_food, maxfood)
-    return s_prime.state
-
-def sample(belief_state, food_dist, n, problem_spec, World, maxfood):
+def sample(belief_state, number_of_samples):
     possible_worlds=[]
-    for i in range(n):
-        grid = world.sample(food_dist, belief_state.grid, maxfood)
-        distances = []
-        base = problem.find_base(grid)
-        distances.append((base, dijkstra.dijkstra(base[0], belief_state, problem_spec)))
-        food = problem.find_food(grid)
-        for f in food:
-            distances.append((f, dijkstra.dijkstra(f[0], belief_state, problem_spec)))
-        future_food = world.sample_future_food(food_dist, n=100)
-        for f in future_food:
-            distances.append((f, dijkstra.dijkstra(f, belief_state, problem_spec)))
-        w = World(grid, distances, future_food)
+    food_dist = problem.chance_of_food(belief_state)
+    for i in range(number_of_samples):
+        grid = problem.sample(food_dist, belief_state)
+        distance = problem.calculate_distance(belief_state.grid)
+        w = problem.to_state(grid, belief_state.reward, t=0, future_food=world.future_food, distances=distance)
         possible_worlds.append(w)
     return possible_worlds
+
+
+
 
 if __name__ == '__main__':
     pass
