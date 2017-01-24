@@ -23,8 +23,14 @@ class TestState(unittest.TestCase):
         self.assertEquals(actions, ['S', 'E', 'W'], actions)
 
     def testFindBase(self):
-        simstate = '-*--\n---F'
-        state = parse(simstate)
+        state_str = '-*--\n---F'
+        state = parse(state_str)
+        coordinate = find_base(state)
+        self.assertEquals(coordinate, ((1,0), '*'), coordinate)
+
+    def testCalculateDistance(self):
+        state_str = '-*--\n---F'
+        state = parse(state_str)
         coordinate = find_base(state)
         self.assertEquals(coordinate, ((1,0), '*'), coordinate)
 
@@ -95,39 +101,51 @@ class TestState(unittest.TestCase):
         self.assertEquals(distribution,[(0.25, (0, 0), 'F'), (0.25, (0, 1), 'F'), (0.25, (1, 0), 'F'), (0.25, (1, 1), 'F'), (0.0, None)], distribution)
 
     def testChanceOfFoodNoHarvest(self):
-        simstate = '-H\n-B'
-        grid = parse(simstate)
-        State = namedtuple('State',['grid','has_food'])
-        state = State(grid, has_food = False)
-        distribution = chance_of_food(state, problem_spec=(2,2))
-        self.assertEquals(distribution,[(0.50, (0, 0), 'F'), (0.50, (0, 1), 'F'), (0.0, None)], distribution)
+        state_str = '-#\nHB'
+        grid = parse(state_str)
+        state = to_state(grid, x=2, y=2)
+        distribution = chance_of_food(state)
+        self.assertEquals(distribution, [(0.0, (1, 0)), (0.0, (1, 1)), (0.5, (0, 0), 'F'), (0.5, (0, 1), 'F'), (0.0, None)], distribution)
 
     def testChanceOfFoodHasHarvest(self):
-        simstate = '-$\n-B'
-        grid = parse(simstate)
-        State = namedtuple('State',['grid','has_food'])
-        state = State(grid, has_food = True)
-        distribution = chance_of_food(state, problem_spec=(2,2))
-        self.assertEquals(distribution,[(0.125, (1, 0), 'F'), (0.125, (1, 1), 'F'), (0.375, (0, 0), 'F'), (0.375, (0, 1), 'F'), (0.0, None)], distribution)
+        state_str = '-#\n$B'
+        grid = parse(state_str)
+        state = to_state(grid, x=2, y=2)
+        distribution = chance_of_food(state)
+        self.assertEquals(distribution, [(0.0, (1, 0)), (0.0, (1, 1)), (0.5, (0, 0), 'F'), (0.5, (0, 1), 'F'), (0.0, None)], distribution)
+
+    def testUnitActions(self):
+        state_str = '-H--\n---B'
+        grid = parse(state_str)
+        state = to_state(grid, x=4, y=2)
+        actions = unit_actions((1, 0), state)
+        self.assertEquals(actions, ['S', 'E', 'W'], actions)
+
+    def testNoChance(self):
+        state_str = '-#--\n---B'
+        grid = parse(state_str)
+        state = to_state(grid, x=4, y=2)
+        distribution = no_chance(state)
+        self.assertEquals(distribution, [(0.0, (1, 0)), (0.0, (3, 1))], distribution)
+
+    def testDistanceToBase(self):
+        state_str = '-#\n-B'
+        grid = parse(state_str)
+        state = to_state(grid, x=2, y=2)
+        distance = distance_to_base(state)
+        self.assertEquals(distance, [(((1, 1), 'B'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})], distance)
+
+    def testSampleFood(self):
+        state_str = '-#\n-B'
+        grid = parse(state_str)
+        state = to_state(grid, x=2, y=2, max_food=2)
+        food_dist = chance_of_food(state)
+        random.seed(1)
+        new_grid = sample_food(food_dist, state)
+        random.seed(None)
+        self.assertEquals(new_grid, {(0, 1): 'F', (1, 0): '#', (0, 0): 'F', (1, 1): 'B'}, new_grid)
 
 
-    def testResetDistribution(self):
-        simstate = '-H--\n---B'
-        state_dict = parse(simstate)
-        reset_dist = reset_distribution(state_dict)
-        expected = [(0.0, (3, 1), 'B'), (0.1, (0, 0), 'F'), (0.1, (0, 1), 'F'), (0.1, (1, 1), 'F'), (0.1, (2, 0), 'F'), (0.1, (2, 1), 'F'), (0.1, (3, 0), 'F'), (0.4, None)]
-        self.assertEquals(reset_dist, expected, reset_dist)
-        
-    def testReset(self):
-        random.seed(1) #Set-up
-        simstate = '-H--\n---B'
-        state_dict = parse(simstate)
-        state_grid = to_grid(state_dict, 4, 2)
-        reset_dist = [(0.0, (3, 1), 'B'), (0.1, (0, 0), 'F'), (0.1, (0, 1), 'F'), (0.1, (1, 1), 'F'), (0.1, (2, 0), 'F'), (0.1, (2, 1), 'F'), (0.1, (3, 0), 'F'), (0.4, None)]
-        new_world = reset(state_grid, reset_dist, 1)
-        self.assertEquals(new_world,{(0, 1): 'F', (1, 0): 'H', (3, 1): 'B'}, new_world)
-        random.seed(None) #Tear down          
-        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

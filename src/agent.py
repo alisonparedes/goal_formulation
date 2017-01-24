@@ -94,6 +94,7 @@ def init_belief(belief_file_name, other_args):
     return problem.to_state(grid_dict, x, y, max_food=int(other_args.max_food))
 
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("reality")

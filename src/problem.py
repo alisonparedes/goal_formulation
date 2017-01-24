@@ -8,32 +8,7 @@ Created on Aug 18, 2016
 from collections import namedtuple
 from copy import deepcopy
 import dijkstra
-from random import *
-
-
-def calculate_distance(grid):
-    distance = []
-    distance = append_distance_to_base(distance, grid)
-    distance = append_distance_to_food(distance, grid)
-    return distance
-
-
-def append_distance_to_food(distance, state):
-    new_distance = deepcopy(distance)
-    food = find_food(state.grid)
-    for f in food:
-        new_distance.append((f, dijkstra.dijkstra(f[0], state)))
-    future_food = sample_future_food(food_dist, n=100)
-    for f in future_food:
-        new_distance.append((f, dijkstra.dijkstra(f, state )))
-    return new_distance
-
-
-def append_distance_to_base(distance, state):
-    new_distance = deepcopy(distance)
-    base = find_base(state.grid)
-    new_distance.append((base, dijkstra.dijkstra(base[0], state)))
-    return new_distance
+import random
 
 
 def to_state(grid_dict, x=0, y=0, max_food=0, reward=0, t=0, future_food=[], distances={}):
@@ -95,7 +70,6 @@ def unit_actions(coordinate, state):
     actions = []
     x = coordinate[0]
     y = coordinate[1]
-
     if y-1 >= 0 and ((x, y-1) not in state.grid or state.grid[(x, y-1)] != '#'):
         actions.append('N')
     if y+1 < state.y and ((x, y+1) not in state.grid or state.grid[(x, y+1)] != '#'):
@@ -104,7 +78,6 @@ def unit_actions(coordinate, state):
         actions.append('E')
     if x-1 >= 0 and ((x-1, y) not in state.grid or state.grid[(x-1, y)] != '#'):
         actions.append('W')
-
     return actions
 
 
@@ -169,13 +142,11 @@ def to_observation(grid_dict, reward=0):
     return Observation(grid_dict, reward)
 
 
-def transition(state, action, problem_spec, State, here=None, maxfood=2):
-
-
+def transition(state, action):
     observation_dict={}
     Transition = namedtuple('Transition',['state','observations'])
 
-    state_grid = to_grid(state.grid, problem_spec)
+    state_grid = to_grid(state.grid)
 
     from_coordinate = find_harvester(state.grid)[0]
     from_x = from_coordinate[0]
@@ -238,27 +209,24 @@ def clear_visited(state_grid):
     return cleared
 
 
-def chance_of_food(state, problem_spec):
-
-    distribution = []
-
-    food = 0
-    for coordinate, unit in state.grid.iteritems():
-        if unit in 'F':
-            food += 1
-        elif unit in 'b*B#': # Food cannot grow in cell occupied by the base or an obstacle
-            distribution.append((0.0, coordinate))
-
+def chance_of_food(state):
+    distribution = no_chance(state)
     total_probability = 0.0
-
-    probability = 1.0/ (problem_spec[0] * problem_spec[1] - len(distribution))
-    for x in range(0,problem_spec[0]):
-        for y in range(0,problem_spec[1]):
+    probability = 1.0/ (state.x * state.y - len(distribution))
+    for x in range(0,state.x):
+        for y in range(0, state.y):
             if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
-
     distribution.append((1 - total_probability, None))
+    return distribution
+
+
+def no_chance(state):
+    distribution = []
+    for coordinate, unit in state.grid.iteritems():
+        if unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
+            distribution.append((0.0, coordinate))
     return distribution
 
 
@@ -309,10 +277,10 @@ def find_food(grid):
     return food
 
 
-def sample(problem_distribution_arr, grid, maxfood=1):
-    new_grid = deepcopy(grid)
-    while count_food(new_grid) < maxfood:
-        x = sample_cell(problem_distribution_arr)
+def sample_food(food_dist, state):
+    new_grid = deepcopy(state.grid)
+    while count_food(new_grid) < state.max_food:
+        x = sample_cell(food_dist)
         update_state(new_grid, x)
     return new_grid
 
@@ -365,6 +333,39 @@ def sample_cell(problem_distribution_arr):
         probability=cell[0]
         cummulative += probability
     return cell
+
+
+def distance_to_base(state):
+    new_distance = []
+    base = find_base(state.grid)
+    new_distance.append((base, dijkstra.dijkstra(base[0], state)))
+    return new_distance
+
+
+def add_distance_to_food(distance, state):
+    new_distance = deepcopy(distance)
+    food = find_food(state.grid)
+    for f in food:
+        new_distance.append((f, dijkstra.dijkstra(f[0], state)))
+    future_food = sample_future_food(food_dist, n=100)
+    for f in future_food:
+        new_distance.append((f, dijkstra.dijkstra(f, state )))
+    return new_distance
+
+
+def next_coordinate(coordinate, action):
+    x = y = 0
+    if action == 'N':
+        y = -1
+    elif action == 'S':
+        y = 1
+    elif action == 'E':
+        x = 1
+    elif action == 'W':
+        x = -1
+    next_x = coordinate[0] + x
+    next_y = coordinate[1] + y
+    return next_x, next_y
 
         
 if __name__ == '__main__': #Read in a simulated state and write it out
