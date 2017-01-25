@@ -132,7 +132,7 @@ if __name__ == '__main__':
     print_step(time_step, belief_state, reality_state)
 
     while time_step < int(args.time):
-
+        food_dist = problem.chance_of_food(belief_state)  # TODO: Share the same dice rolls between simulator and search
         action = ohwow.ohwow(belief_state, n=int(args.sample), horizon=int(args.horizon))
         new_world = simulator.simulate(belief_state, action[0], reality_state)
         new_observations = new_world.observations

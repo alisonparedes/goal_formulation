@@ -45,13 +45,9 @@ def summarize_sample(possible_worlds, problem_spec):
 
 def sample(belief_state, number_of_samples):
     sampled_worlds = []
-    food_dist = problem.chance_of_food(belief_state)
-    distance_to_base = problem.distance_to_base(belief_state)
     for i in range(number_of_samples):
-        grid = problem.sample_food(food_dist, belief_state)
-        distance = problem.add_distance_to_food(distance_to_base, belief_state)
-        w = problem.to_state(grid, belief_state.reward, t=0, future_food=world.future_food, distances=distance)
-        sampled_worlds.append(w)
+        world = problem.sample(belief_state, food_dist)
+        sampled_worlds.append(world)
     return sampled_worlds
 
 

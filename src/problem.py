@@ -263,11 +263,13 @@ def arriving(from_symbol, to_symbol):
         return 'H'
     return from_symbol
 
+
 def find_base(grid):
     for coordinate, unit in grid.iteritems():
         if unit and unit in 'Bb*':
             return coordinate, unit
     return None
+
 
 def find_food(grid):
     food = []
@@ -277,20 +279,41 @@ def find_food(grid):
     return food
 
 
+def sample(belief_state, food_dist):
+    complete_state = sample_food(food_dist, belief_state)
+    future_state = sample_future_food(food_dist, belief_state, n=100)
+    distance_to_base = distance_to_base(future_state)
+    all_distances = add_distance_to_food(distance_to_base, future_state)
+    return to_state(complete_state.grid, belief_state.reward, t=0, future_food=future_food, distances=distance)
+
 def sample_food(food_dist, state):
     new_grid = deepcopy(state.grid)
     while count_food(new_grid) < state.max_food:
         x = sample_cell(food_dist)
-        update_state(new_grid, x)
-    return new_grid
+        new_grid = add_food(new_grid, x)
+    new_state = replace_grid(new_grid, state)
+    return new_state
 
 
-def sample_future_food(chance_of_food, n=1):
-    foods = []
-    while(n > 0):
-        foods.append(sample_cell(chance_of_food)[1])
+def replace_grid(state, new_grid):
+    new_state = to_state(new_grid,
+                state.x,
+                state.y,
+                state.max_food,
+                state.reward,
+                state.t,
+                deepcopy(state.future_food),
+                deepcopy(state.distances))
+    return new_state
+
+
+def sample_future_food(food_dist, n=1):
+    food_sequence = []
+    while n > 0:
+        sampled_food = sample_cell(food_dist)[1]  #TODO: Use the same list of random numbers as the simulator
+        food_sequence.append(sampled_food)
         n -= 1
-    return foods
+    return food_sequence
 
 
 def count_food(grid):
@@ -301,14 +324,17 @@ def count_food(grid):
     return food
 
 
-def update_state(state, sample): #Modifies state in place
-    coordinate=sample[1]
+def add_food(grid, sample): #Modifies state in place
+    new_grid = deepcopy(grid)
+    coordinate = sample[1]
     if coordinate:
-        unit=sample[2]
-        if coordinate in state:
-            state[coordinate]=merge(state[coordinate],unit)
+        unit = sample[2]
+        if coordinate in grid:
+            new_unit = merge(new_grid[coordinate], unit)
+            new_grid[coordinate] = new_unit
         else:
-            state[coordinate]=unit
+            new_grid[coordinate] = unit
+    return new_grid
 
 
 def merge(unit_a, unit_b):
@@ -347,13 +373,17 @@ def add_distance_to_food(distance, state):
     food = find_food(state.grid)
     for f in food:
         new_distance.append((f, dijkstra.dijkstra(f[0], state)))
-    future_food = sample_future_food(food_dist, n=100)
-    for f in future_food:
+    return new_distance
+
+
+def add_distance_to_future(distance, state):
+    new_distance = deepcopy(distance)
+    for f in state.future_food:
         new_distance.append((f, dijkstra.dijkstra(f, state )))
     return new_distance
 
 
-def next_coordinate(coordinate, action):
+def adjacent_coordinate(coordinate, action):
     x = y = 0
     if action == 'N':
         y = -1
@@ -368,6 +398,6 @@ def next_coordinate(coordinate, action):
     return next_x, next_y
 
         
-if __name__ == '__main__': #Read in a simulated state and write it out
+if __name__ == '__main__':
     pass
     

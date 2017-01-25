@@ -133,7 +133,8 @@ class TestState(unittest.TestCase):
         grid = parse(state_str)
         state = to_state(grid, x=2, y=2)
         distance = distance_to_base(state)
-        self.assertEquals(distance, [(((1, 1), 'B'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})], distance)
+        expected_distance = [(((1, 1), 'B'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
+        self.assertEquals(distance, expected_distance, distance)
 
     def testSampleFood(self):
         state_str = '-#\n-B'
@@ -141,9 +142,18 @@ class TestState(unittest.TestCase):
         state = to_state(grid, x=2, y=2, max_food=2)
         food_dist = chance_of_food(state)
         random.seed(1)
-        new_grid = sample_food(food_dist, state)
+        new_state = sample_food(food_dist, state)
         random.seed(None)
-        self.assertEquals(new_grid, {(0, 1): 'F', (1, 0): '#', (0, 0): 'F', (1, 1): 'B'}, new_grid)
+        self.assertEquals(new_state.grid, {(0, 1): 'F', (1, 0): '#', (0, 0): 'F', (1, 1): 'B'}, new_state.grid)
+
+    def testAddDistanceToFood(self):
+        state_str = '-#\n-F'
+        grid = parse(state_str)
+        state = to_state(grid, x=2, y=2)
+        distance = []
+        distance = add_distance_to_food(distance, state)
+        expected_distance = [(((1, 1), 'F'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
+        self.assertEquals(distance, expected_distance, distance)
 
 
 if __name__ == "__main__":
