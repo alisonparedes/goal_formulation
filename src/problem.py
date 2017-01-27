@@ -81,7 +81,7 @@ def unit_actions(coordinate, state, problem):
     return actions
 
 
-def new_coordinate(coordinate, action):
+def destination(coordinate, action):
     x=coordinate[0]
     y=coordinate[1]
     if action == 'N':
@@ -128,41 +128,39 @@ def to_dict(w):
 
 
 def transition(state, action):
-
-    state_grid = to_grid(state.grid)
-
-    harvester = find_harvester(state)
-
-    unit = state_grid[from_x][from_y]
-    leaving_unit = leaving(unit)
-    state_grid[from_x][from_y] = leaving_unit
-
-    to_coordinate = new_coordinate(from_coordinate, action)
-    to_x = to_coordinate[0]
-    to_y = to_coordinate[1]
-
-    cell = state_grid[to_x][to_y]
-
-    if cell and cell in '#':
-        observation_dict[(to_x, to_y)]='#'
-        return Transition(state, observations=to_observation(observation_dict, reward=0))
-
-    arriving_unit = arriving(unit, cell)
-
-    state_grid[to_x][to_y] = arriving_unit
-
-    grid = to_dict(state_grid)
-
-    observation_dict = {}
-    observation_dict[(from_x, from_y)] = empty(leaving_unit)
-    observation_dict[(to_x, to_y)] = arriving_unit
-
-    new_reward = reward(grid, state.reward)
-
-    observations = to_observation(observation_dict, reward=new_reward)
+    new_grid = deepcopy(state.grid)
+    new_from_cell, new_to_cell = move(state.grid, action)
+    if new_to_cell in '#':  # Sometimes the action available in the beilef state is not really available
+        observation = to_observation({(new_to_cell.coordinate): '#'})
+        return state, observation
+    new_reward = reward(new_grid, state.reward)
+    observations = to_observation({new_from_cell, new_to_cell}, reward=new_reward)
     new_state = to_state(grid=new_grid, reward=new_reward, t=0, future_food=remaining_food
-
     return new_state, observations
+
+
+def to_observation(dict, reward=0):
+    Observation = namedtuple("Observation", ["dict","reward"])
+    return Observation(dict, reward)
+
+
+def from_cell(grid, action):
+    harvester = find_harvester(grid)
+    new_symbol = leaving_symbol(harvester.cell)
+    return harvester.coordinate, new_symbol
+
+
+def to_cell(grid, action, from_symbol):
+    coordinate = destination(action)
+    new_symbol = grid.get(coordinate, None)
+    new_symbol = arriving(from_symbol, new_symbol)
+    return coordinate, new_symbol
+
+
+def move(grid, action):
+    new_from_cell = from_cell(grid, action)
+    new_to_cell = to_cell(grid, action, new_from_cell.cell)
+    return new_from_cell, new_to_cell
 
 
 def leaving_symbol(from_symbol):
