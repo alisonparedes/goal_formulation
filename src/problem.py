@@ -11,9 +11,9 @@ import dijkstra
 import random
 
 
-def to_state(grid_dict, x=0, y=0, max_food=0, reward=0, t=0, future_food=[], distances={}):
-    State = namedtuple('State', ['grid', 'x', 'y', 'max_food', 'reward', 't', 'future_food', 'distances'])
-    return State(grid_dict, x, y, max_food, reward, t, future_food, distances)
+def to_state(grid_dict, reward=0, t=0, future_food=[], distances={}):
+    State = namedtuple('State', ['grid', 'reward', 't', 'future_food', 'distances'])
+    return State(grid_dict, reward, t, future_food, distances)
 
     
 def parse(simstate): #Could recursively split first and rest and send rest to the parse function. Function returns a list of units and their coordinates.
@@ -61,34 +61,24 @@ def empty(cell):
         return '-'
 
 
-def applicable_actions(state):
+def applicable_actions(state, problem):
     harvester = find_harvester(state)
-    return unit_actions(harvester.coordinate, state)
+    return unit_actions(harvester.coordinate, state, problem)
 
 
-def unit_actions(coordinate, state):
+def unit_actions(coordinate, state, problem):
     actions = []
     x = coordinate[0]
     y = coordinate[1]
     if y-1 >= 0 and ((x, y-1) not in state.grid or state.grid[(x, y-1)] != '#'):
         actions.append('N')
-    if y+1 < state.y and ((x, y+1) not in state.grid or state.grid[(x, y+1)] != '#'):
+    if y+1 < problem.y and ((x, y+1) not in state.grid or state.grid[(x, y+1)] != '#'):
         actions.append('S')
-    if x+1 < state.x and ((x+1, y) not in state.grid or state.grid[(x+1, y)] != '#'):
+    if x+1 < problem.x and ((x+1, y) not in state.grid or state.grid[(x+1, y)] != '#'):
         actions.append('E')
     if x-1 >= 0 and ((x-1, y) not in state.grid or state.grid[(x-1, y)] != '#'):
         actions.append('W')
     return actions
-
-
-def grow(state, coordinate, State):
-    grid = deepcopy(state.grid)
-    if coordinate in grid:
-        if grid[coordinate] in 'H$':
-            grid[coordinate] = '$'
-    else:
-        grid[coordinate] = 'F'
-    return State(grid, state.reward, state.t, deepcopy(state.future_food))
 
 
 def new_coordinate(coordinate, action):
@@ -137,20 +127,11 @@ def to_dict(w):
     return state
 
 
-def to_observation(grid_dict, reward=0):
-    Observation = namedtuple('Observation',['cell_dict', 'reward'])
-    return Observation(grid_dict, reward)
-
-
 def transition(state, action):
-    observation_dict={}
-    Transition = namedtuple('Transition',['state','observations'])
 
     state_grid = to_grid(state.grid)
 
-    from_coordinate = find_harvester(state.grid)[0]
-    from_x = from_coordinate[0]
-    from_y = from_coordinate[1]
+    harvester = find_harvester(state)
 
     unit = state_grid[from_x][from_y]
     leaving_unit = leaving(unit)
@@ -168,24 +149,54 @@ def transition(state, action):
 
     arriving_unit = arriving(unit, cell)
 
-    state_grid[to_x][to_y]=arriving_unit
+    state_grid[to_x][to_y] = arriving_unit
 
     grid = to_dict(state_grid)
 
-    observation_dict[(from_x, from_y)] = empty(leaving_unit) #TODO: Name this function something better
+    observation_dict = {}
+    observation_dict[(from_x, from_y)] = empty(leaving_unit)
     observation_dict[(to_x, to_y)] = arriving_unit
 
-    new_reward = reward(to_state(grid=grid, reward=state.reward, t=0, future_food=state.future_food))
+    new_reward = reward(grid, state.reward)
 
     observations = to_observation(observation_dict, reward=new_reward)
-    new_state = to_state(grid=grid, reward=new_reward, t=0, future_food=state.future_food)
+    new_state = to_state(grid=new_grid, reward=new_reward, t=0, future_food=remaining_food
 
-    while (len(here) > 0 and arriving_unit in '$' and count_food(grid) < maxfood):
-        new_state = grow(new_state, here.pop(), State)
+    return new_state, observations
 
-    new_state_and_observations = Transition(new_state, observations=observations)
 
-    return new_state_and_observations
+def leaving_symbol(from_symbol):
+    if from_symbol in 'H$':
+        return None
+    if from_symbol in '*b':
+        return 'B'
+    return None
+
+
+
+def to_observation(dict, reward):
+    Observation = namedtuple("Observation", ["dict", "reward"])
+    return Observation(dict, reward)
+
+
+def replace_food(future_food, grid, max_food):
+    if find_harvester(grid).cell != '$':
+        return grid
+    remaining_food = deepcopy(future_food)
+    new_grid = deepcopy(grid)
+    while (count_food(new_grid) < max_food):
+        new_grid = add_food(remaining_food.pop())
+    return new_grid, remaining_food
+
+
+def add_food(grid, coordinate):  # Maybe modify the grid?
+    new_grid = deepcopy(grid)
+    if coordinate in new_grid:
+        if new_grid[coordinate] in 'H$':
+            new_grid[coordinate] = '$'
+    else:
+        new_grid[coordinate] = 'F'
+    return new_grid
 
 
 def reward(state):
@@ -209,12 +220,12 @@ def clear_visited(state_grid):
     return cleared
 
 
-def chance_of_food(state):
+def chance_of_food(state, problem):
     distribution = no_chance(state)
     total_probability = 0.0
-    probability = 1.0/ (state.x * state.y - len(distribution))
-    for x in range(0,state.x):
-        for y in range(0, state.y):
+    probability = 1.0/ (problem.x * problem.y - len(distribution))
+    for x in range(0, problem.x):
+        for y in range(0, problem.y):
             if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
@@ -242,12 +253,6 @@ def to_unit(coordinate, cell):
     return Unit(coordinate, cell)
 
 
-def leaving(from_symbol):
-    if from_symbol in 'H$':
-        return None
-    if from_symbol in '*b':
-        return 'B'
-    return None
 
     
 def arriving(from_symbol, to_symbol):
@@ -286,25 +291,13 @@ def sample(belief_state, food_dist):
     all_distances = add_distance_to_food(distance_to_base, future_state)
     return to_state(complete_state.grid, belief_state.reward, t=0, future_food=future_food, distances=distance)
 
-def sample_food(food_dist, state):
-    new_grid = deepcopy(state.grid)
-    while count_food(new_grid) < state.max_food:
+
+def sample_food(food_dist, grid, max_food):
+    new_grid = deepcopy(grid)
+    while count_food(new_grid) < max_food:
         x = sample_cell(food_dist)
         new_grid = add_food(new_grid, x)
-    new_state = replace_grid(new_grid, state)
-    return new_state
-
-
-def replace_grid(state, new_grid):
-    new_state = to_state(new_grid,
-                state.x,
-                state.y,
-                state.max_food,
-                state.reward,
-                state.t,
-                deepcopy(state.future_food),
-                deepcopy(state.distances))
-    return new_state
+    return new_grid
 
 
 def sample_future_food(food_dist, n=1):
@@ -324,7 +317,7 @@ def count_food(grid):
     return food
 
 
-def add_food(grid, sample): #Modifies state in place
+def add_food(grid, sample): #Modifies state in place!
     new_grid = deepcopy(grid)
     coordinate = sample[1]
     if coordinate:
@@ -361,25 +354,25 @@ def sample_cell(problem_distribution_arr):
     return cell
 
 
-def distance_to_base(state):
+def distance_to_base(state, problem):
     new_distance = []
     base = find_base(state.grid)
-    new_distance.append((base, dijkstra.dijkstra(base[0], state)))
+    new_distance.append((base, dijkstra.dijkstra(base[0], state, problem)))
     return new_distance
 
 
-def add_distance_to_food(distance, state):
+def add_distance_to_food(distance, state, problem):
     new_distance = deepcopy(distance)
     food = find_food(state.grid)
     for f in food:
-        new_distance.append((f, dijkstra.dijkstra(f[0], state)))
+        new_distance.append((f, dijkstra.dijkstra(f[0], state, problem)))
     return new_distance
 
 
 def add_distance_to_future(distance, state):
     new_distance = deepcopy(distance)
     for f in state.future_food:
-        new_distance.append((f, dijkstra.dijkstra(f, state )))
+        new_distance.append((f, dijkstra.dijkstra(f, state, problem)))
     return new_distance
 
 
@@ -397,7 +390,12 @@ def adjacent_coordinate(coordinate, action):
     next_y = coordinate[1] + y
     return next_x, next_y
 
-        
+
+def to_problem(x, y, max_food=0):
+    Problem = namedtuple("Problem", ["x", "y", "max_food"])
+    return Problem(x, y, max_food)
+
+
 if __name__ == '__main__':
     pass
     

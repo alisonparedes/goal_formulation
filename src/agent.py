@@ -59,7 +59,7 @@ def is_pay_day(cell_dict):
             return True
 
 
-def init_reality(reality_file_name, other_args):
+def init_reality(reality_file_name):
     """Constructs the initial state of the world from a file.
     param: reality_file_name: The path and name of a file illustrating the real world. See problem for format.
     return: Initial state of the world
@@ -74,10 +74,10 @@ def init_reality(reality_file_name, other_args):
             x = len(line) - 1
             y += 1
     grid_dict = problem.parse(reality_str)
-    return problem.to_state(grid_dict, x, y, max_food=int(other_args.max_food))
+    return problem.to_state(grid_dict), x, y
 
 
-def init_belief(belief_file_name, other_args):
+def init_belief(belief_file_name):
     """Constructs the agent's initial belief about the world from a file.
     param: belief_file_name: The path and name of a file illustrating the agent's belief. See problem for format.
     return: Agent's initial belief state
@@ -91,9 +91,7 @@ def init_belief(belief_file_name, other_args):
             x = len(line) - 1
             y += 1
     grid_dict = problem.parse(belief_str)
-    return problem.to_state(grid_dict, x, y, max_food=int(other_args.max_food))
-
-
+    return problem.to_state(grid_dict), x, y
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -127,18 +125,23 @@ if __name__ == '__main__':
     args = parse_args()
     reality_state, x, y = init_reality(args.real)  # Dimensions of reality are derived from input file
     belief_state = init_belief(args.belief)
-
+    harvester_world = problem.to_problem(x, y, args.max_food)
     time_step = 0
     print_step(time_step, belief_state, reality_state)
 
     while time_step < int(args.time):
         food_dist = problem.chance_of_food(belief_state)  # TODO: Share the same dice rolls between simulator and search
-        action = ohwow.ohwow(belief_state, n=int(args.sample), horizon=int(args.horizon))
-        new_world = simulator.simulate(belief_state, action[0], reality_state)
+        action = ohwow.ohwow(belief_state,
+                             problem=harvester_world,
+                             number_of_samples=int(args.sample),
+                             horizon=int(args.horizon))
+        new_world = simulator.simulate(belief_state,
+                                       action[0],
+                                       reality_state,
+                                       problem=harvester_world)
         new_observations = new_world.observations
         real_world = new_world.state
         belief_state = update_belief(belief_state, new_observations)
-
         time_step += 1
         time.sleep(0.25)
         print_step(time_step, belief_state, reality_state)

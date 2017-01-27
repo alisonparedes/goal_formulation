@@ -14,7 +14,7 @@ be fulfilled as the agent expected. The simulate function will return a new stat
 world and a set of observations for the agent to incorporate into its belief state. The problem module's transition
 function will handle how the world changes.
 '''
-def simulate(belief_state, action, real_world, problem_spec, State, maxfood=2): #TODO: Wh do I need a beleft state?
+def simulate(belief_state, action, real_world, problem): #TODO: Wh do I need a beleft state?
     '''
     Takes a state (a starting collection of units(?), an action, and a world (grid)  and returns a new world. Transition may not always be possible.
     '''

@@ -7,7 +7,7 @@ import bfs_g
 import problem
 
 
-def ohwow(belief_state, number_of_samples=1, horizon=1):
+def ohwow(belief_state, problem=None, number_of_samples=1, horizon=1):
     """
     """
 
