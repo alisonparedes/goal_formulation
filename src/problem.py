@@ -16,7 +16,7 @@ def to_state(grid_dict, reward=0, t=0, future_food=[], distances={}):
     return State(grid_dict, reward, t, future_food, distances)
 
     
-def parse(simstate): #Could recursively split first and rest and send rest to the parse function. Function returns a list of units and their coordinates.
+def parse(simstate):
     state = {}   
     y=0
     x=0    
@@ -54,37 +54,28 @@ def interleaved(known, world, problem_spec):
     return printable
 
 
-def empty(cell):
-    if cell:
-        return cell
-    else:
-        return '-'
-
-
 def applicable_actions(state, problem):
     harvester = find_harvester(state.grid)
-    return unit_actions(harvester.coordinate, state, problem)
+    actions = unit_actions(harvester.coordinate, state.grid, problem)
+    return actions
 
 
-def unit_actions(coordinate, state, problem):
+def unit_actions(coordinate, grid, problem):
     actions = []
     x = coordinate[0]
     y = coordinate[1]
-    if y-1 >= 0 and ((x, y-1) not in state.grid or state.grid[(x, y-1)] != '#'):
+    if y-1 >= 0 and ((x, y-1) not in grid or grid[(x, y-1)] != '#'):
         actions.append('N')
-    if y+1 < problem.y and ((x, y+1) not in state.grid or state.grid[(x, y+1)] != '#'):
+    if y+1 < problem.y and ((x, y+1) not in grid or grid[(x, y+1)] != '#'):
         actions.append('S')
-    if x+1 < problem.x and ((x+1, y) not in state.grid or state.grid[(x+1, y)] != '#'):
+    if x+1 < problem.x and ((x+1, y) not in grid or grid[(x+1, y)] != '#'):
         actions.append('E')
-    if x-1 >= 0 and ((x-1, y) not in state.grid or state.grid[(x-1, y)] != '#'):
+    if x-1 >= 0 and ((x-1, y) not in grid or grid[(x-1, y)] != '#'):
         actions.append('W')
     return actions
 
 
 def to_grid(s, problem_spec):
-    '''
-    Takes a dictionary and returns a 2D representation
-    '''
     grid = []
     w=problem_spec[0]
     h=problem_spec[1]
@@ -98,9 +89,6 @@ def to_grid(s, problem_spec):
 
 
 def to_dict(w):
-    '''
-    Takes a grid and returns a dictionary (an interim solution until the rest of problem's functions deal with grids
-    '''
     state={}
     x=0
     for col in w:
@@ -138,24 +126,22 @@ def move(state, action):
 
 
 def to_observation(dict, reward=0):
-    Observation = namedtuple("Observation", ["dict","reward"])
+    Observation = namedtuple("Observation", ["dict", "reward"])
     return Observation(dict, reward)
+
 
 def to_coordinate(coordinate, action):
     x=coordinate[0]
     y=coordinate[1]
     if action == 'N':
-        y += -1;
+        y += -1
     elif action == 'S':
-        y += 1;
+        y += 1
     elif action == 'E':
-        x += 1;
+        x += 1
     elif action == 'W':
-        x += -1;
+        x += -1
     return x, y
-
-
-
 
 
 def leaving_symbol(from_symbol):
@@ -164,11 +150,6 @@ def leaving_symbol(from_symbol):
     if from_symbol in '*b':
         return 'B'
     return None
-
-
-def to_observation(dict, reward):
-    Observation = namedtuple("Observation", ["dict", "reward"])
-    return Observation(dict, reward)
 
 
 def replace_food(grid, future_food, max_food):
@@ -181,7 +162,7 @@ def replace_food(grid, future_food, max_food):
     return new_grid, remaining_food
 
 
-def add_food(grid, coordinate):  # Maybe modify the grid?
+def add_food(grid, coordinate):
     new_grid = deepcopy(grid)
     if coordinate in new_grid:
         if new_grid[coordinate] in 'H$':
@@ -236,15 +217,8 @@ def no_chance(state):
 def find_harvester(grid):
     for coordinate, cell in grid.iteritems():
         if cell and cell in 'bH*$':
-            return to_unit(coordinate, cell)
+            return coordinate, cell
     return None
-
-
-def to_unit(coordinate, cell):
-    Unit = namedtuple("Unit", ["coordinate", "cell"])
-    return Unit(coordinate, cell)
-
-
 
     
 def arriving(from_symbol, to_symbol):
@@ -276,12 +250,13 @@ def find_food(grid):
     return food
 
 
-def sample(belief_state, food_dist):
-    complete_state = sample_food(food_dist, belief_state)
-    future_state = sample_future_food(food_dist, belief_state, n=100)
-    distance_to_base = distance_to_base(future_state)
-    all_distances = add_distance_to_food(distance_to_base, future_state)
-    return to_state(complete_state.grid, belief_state.reward, t=0, future_food=future_food, distances=distance)
+def sample(belief_state, food_dist, dimensions):
+    complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
+    future_food = sample_future_food(food_dist, n=100)
+    to_base = distance_to_base(complete_grid, dimensions)
+    food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
+    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions )
+    return to_state(complete_grid, belief_state.reward, distances=all_distances)
 
 
 def sample_food(food_dist, grid, max_food):
@@ -343,30 +318,30 @@ def sample_cell(problem_distribution_arr):
     while cummulative < p:
         i += 1
         cell = problem_distribution_arr[i]
-        probability=cell[0]
+        probability = cell[0]
         cummulative += probability
     return cell
 
 
-def distance_to_base(state, problem):
+def distance_to_base(grid, problem):
     new_distance = []
-    base = find_base(state.grid)
-    new_distance.append((base, dijkstra.dijkstra(base[0], state, problem)))
+    base = find_base(grid)
+    new_distance.append((base, dijkstra.dijkstra(base[0], grid, problem)))
     return new_distance
 
 
-def add_distance_to_food(distance, state, problem):
+def add_distance_to_food(grid, distance, problem):
     new_distance = deepcopy(distance)
-    food = find_food(state.grid)
+    food = find_food(grid)
     for f in food:
-        new_distance.append((f, dijkstra.dijkstra(f[0], state, problem)))
+        new_distance.append((f, dijkstra.dijkstra(f[0], grid, problem)))
     return new_distance
 
 
-def add_distance_to_future(distance, state):
+def add_distance_to_future(grid, distance, future_food, problem):
     new_distance = deepcopy(distance)
-    for f in state.future_food:
-        new_distance.append((f, dijkstra.dijkstra(f, state, problem)))
+    for f in future_food:
+        new_distance.append((f, dijkstra.dijkstra(f, grid, problem)))
     return new_distance
 
 

@@ -7,7 +7,7 @@ import unittest
 from problem import *
 import random
 
-class TestState(unittest.TestCase):
+class TestProblem(unittest.TestCase):
 
 
     def testParse(self):

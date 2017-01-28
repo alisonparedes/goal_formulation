@@ -9,7 +9,7 @@ from simulator import *
 class Test(unittest.TestCase):
 
 
-    def testSimulate(self):
+    def testSimulator(self):
         pass
 
 if __name__ == "__main__":

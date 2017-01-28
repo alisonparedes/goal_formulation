@@ -8,7 +8,7 @@ from relaxed_problem import *
 import problem
 from collections import namedtuple
 
-class Test(unittest.TestCase):
+class TestRelaxedProblem(unittest.TestCase):
 
 
     def testTransitionHB(self):

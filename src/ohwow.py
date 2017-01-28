@@ -7,12 +7,12 @@ import bfs_g
 import problem
 
 
-def ohwow(belief_state, problem=None, number_of_samples=1, horizon=1):
+def ohwow(belief_state, problem, number_of_samples=1, horizon=1):
     """
     """
 
-    sampled_worlds = sample(belief_state, number_of_samples)
-    actions_in_s = problem.applicable_actions(belief_state)
+    sampled_worlds = sample(belief_state, number_of_samples, problem)
+    actions_in_s = problem.applicable_actions(belief_state, problem)
 
     max_action = None
     max_expected_value = 0
@@ -43,10 +43,11 @@ def summarize_sample(possible_worlds, problem_spec):
     return summary_grid
 
 
-def sample(belief_state, number_of_samples):
+def sample(belief_state, number_of_samples, dimensions):
     sampled_worlds = []
+    food_dist = problem.chance_of_food(belief_state, dimensions)
     for i in range(number_of_samples):
-        world = problem.sample(belief_state, food_dist)
+        world = problem.sample(belief_state, food_dist, dimensions)
         sampled_worlds.append(world)
     return sampled_worlds
 

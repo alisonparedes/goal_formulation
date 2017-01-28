@@ -7,7 +7,7 @@ import unittest
 from bfs_g import *
 import problem
 
-class Test(unittest.TestCase):
+class TestBFSG(unittest.TestCase):
 
     '''
     def testSearch1to2(self):

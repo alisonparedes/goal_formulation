@@ -8,35 +8,22 @@ from ohwow import *
 import random
 
 
-class Test(unittest.TestCase):
+class TestOhWow(unittest.TestCase):
 
 
     def testSample(self):
-        random.seed(1) #Set-up
-        n = 2 #What is a good sample size?
-        problem_dist = [(0.5, (0, 0), 'F'),(0.5, None)]
-        belief_state={(0,1):'H',(3,3):'B'}
-        possible_worlds = sample(belief_state, problem_dist, n)
-        self.assertEquals(possible_worlds,[{(0, 1): 'H', (0, 0): 'F', (3, 3): 'B'}, {(0, 1): 'H', (3, 3): 'B'}],possible_worlds)
-        random.seed(None) #Tear down
-
-    def testApplicableActions(self):
-        random.seed(1) #Set-up
-        n = 10 #What is a good sample size?
-        problem_dist = [(0.5, (0, 0), 'F'),(0.5, None)]
-        belief_state={(1,1):'H',(3,3):'B'}
-        actions_in_s = applicable_actions(belief_state)
-        self.assertEquals(actions_in_s,['N', 'S', 'E', 'W'],actions_in_s)
-        random.seed(None) #Tear down
-
-    def testTransition(self):
-        random.seed(1) #Set-up
-        belief_state={(1,1):'H',(3,3):'B'}
-        action='N'
-        world={(1, 1): 'H', (0, 0): 'F', (3, 3): 'B'}
-        s_prime = transition(belief_state, action, world)
-        self.assertEquals(s_prime ,{(1, 0): 'H', (0, 0): 'F', (3, 3): 'B'},s_prime)
-        random.seed(None) #Tear down       
+        random.seed(1)
+        n = 1
+        harvester_world = problem.to_problem(x=4, y=4, max_food=1)
+        belief_state = problem.to_state({(0, 1):'H',(3, 3):'B'})
+        possible_worlds = sample(belief_state, n, harvester_world)
+        world = possible_worlds[0]
+        self.assertEquals(world.grid, {(0, 1): 'H', (3, 3): 'B', (0, 2): 'F'}, world.grid)
+        self.assertEquals(world.reward, 0, world.reward)
+        self.assertEquals(world.future_food, [], world.future_food)
+        self.assertEquals(world.t, 0, world.t)
+        self.assertEquals(world.distances, [], world.distances)
+        random.seed(None)
 
 
 if __name__ == "__main__":

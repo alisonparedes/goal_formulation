@@ -8,7 +8,7 @@ from dijkstra import *
 import problem
 
 
-class Test(unittest.TestCase):
+class TestDijkstra(unittest.TestCase):
 
     def testExpand(self):
         state_str = '#-\n-B'

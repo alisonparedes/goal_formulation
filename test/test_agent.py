@@ -9,7 +9,7 @@ import problem
 from collections import namedtuple
 
 
-class Test(unittest.TestCase):
+class TestAgent(unittest.TestCase):
 
     def testInitReality(self):
         file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
