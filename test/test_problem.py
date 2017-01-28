@@ -33,7 +33,7 @@ class TestState(unittest.TestCase):
         state_str = '-*--\n---F'
         grid = parse(state_str)
         state = to_state(grid)
-        harvester = find_harvester(state)
+        harvester = find_harvester(state.grid)
         self.assertEquals(harvester, ((1, 0), '*'), harvester)
 
     def testCalculateDistance(self):
@@ -48,27 +48,27 @@ class TestState(unittest.TestCase):
         grid = parse(state_str)
         action = 'E'
         state = to_state(grid)
-        new_state, _ = transition(state, action)
+        harvester_world = to_problem(x=2, y=2)
+        new_state, _ = transition(state, action, harvester_world)
         self.assertEquals(new_state.reward, 50, new_state.reward)
 
     def testTransitionBeliefStateGrow(self):
-        simstate = 'HF'
-        problem_spec = (2,1)
-        grid = parse(simstate)
+        state_str = 'HFB'
+        problem_spec = (3,1)
+        grid = parse(state_str)
         action = 'E'
-        State = namedtuple('State',['grid','reward','has_food'])
-        state = State(grid, reward=0, has_food=False)
-        new_food=(0,0)
-        new_state_and_observations = transition(state, action, problem_spec, State, new_food)
-        new_state = new_state_and_observations.state
-        self.assertEquals(new_state.grid, {(0, 0): 'F', (1, 0): '$'}, new_state.grid)
+        state = to_state(grid, future_food=[(0,0)])
+        harvester_world = to_problem(x=3, y=1, max_food=1)
+        new_state, _ = transition(state, action, harvester_world)
+        self.assertEquals(new_state.grid, {(2, 0): 'B', (0, 0): 'F', (1, 0): '$'}, new_state.grid)
 
     def testTransitionRealWorldFood(self):  # TODO: The real world should be more complete; every cell should be represented
         state_str = 'H-\nFB'
         grid = parse(state_str)
         action = 'S'
         state = to_state(grid)
-        new_state, _ = transition(state, action)
+        harvester_world = to_problem(x=2, y=2)
+        new_state, _ = transition(state, action, harvester_world)
         self.assertEquals(new_state.grid, {(0, 1): '$', (0, 0): None, (1, 1): 'B'}, new_state.grid)
 
     def testTransitionObservations(self):
@@ -76,7 +76,8 @@ class TestState(unittest.TestCase):
         grid = parse(simstate)
         state = to_state(grid)
         action = 'S'
-        _, observations = transition(state, action)
+        harvester_world = to_problem(x=4, y=2)
+        _, observations = transition(state, action, harvester_world)
         self.assertEquals(observations.dict, {(1, 0): None, (1, 1): 'H'}, observations.dict)
 
     def testTransitionReward(self):
@@ -85,7 +86,7 @@ class TestState(unittest.TestCase):
         action = 'W'
         initial_state = to_state(grid)
         harvester_world = to_problem(x=4, y=2)
-        new_state, observation = transition(initial_state, action)
+        new_state, observation = transition(initial_state, action, harvester_world)
         self.assertEquals(new_state.reward, 50, new_state.reward)
         self.assertEquals(observation.reward, 50, observation.reward)
 

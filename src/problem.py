@@ -62,7 +62,7 @@ def empty(cell):
 
 
 def applicable_actions(state, problem):
-    harvester = find_harvester(state)
+    harvester = find_harvester(state.grid)
     return unit_actions(harvester.coordinate, state, problem)
 
 
@@ -113,21 +113,23 @@ def to_dict(w):
     return state
 
 
-def transition(state, action):
-    new_grid = deepcopy(state.grid)
+def transition(state, action, harvester_world):
     new_from_cell, new_to_cell = move(state, action)
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
         observation = to_observation({(new_to_cell.coordinate): '#'})
         return state, observation
+    new_grid = deepcopy(state.grid)
     new_grid[new_from_cell[0]] = new_from_cell[1]
     new_grid[new_to_cell[0]] = new_to_cell[1]
+    new_grid, remaining_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
     observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
-    new_state = to_state(new_grid, reward=new_reward, future_food=None)
+    new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food)
     return new_state, observations
 
+
 def move(state, action):
-    harvester = find_harvester(state)
+    harvester = find_harvester(state.grid)
     new_from_symbol = leaving_symbol(harvester.cell)
     new_to_coordinate = to_coordinate(harvester.coordinate, action)
     to_symbol = state.grid.get(new_to_coordinate, None)
@@ -169,13 +171,13 @@ def to_observation(dict, reward):
     return Observation(dict, reward)
 
 
-def replace_food(future_food, grid, max_food):
+def replace_food(grid, future_food, max_food):
     if find_harvester(grid).cell != '$':
         return grid
     remaining_food = deepcopy(future_food)
     new_grid = deepcopy(grid)
     while (count_food(new_grid) < max_food):
-        new_grid = add_food(remaining_food.pop())
+        new_grid = add_food(new_grid, remaining_food.pop())
     return new_grid, remaining_food
 
 
@@ -231,8 +233,8 @@ def no_chance(state):
     return distribution
 
 
-def find_harvester(state):
-    for coordinate, cell in state.grid.iteritems():
+def find_harvester(grid):
+    for coordinate, cell in grid.iteritems():
         if cell and cell in 'bH*$':
             return to_unit(coordinate, cell)
     return None
@@ -307,7 +309,7 @@ def count_food(grid):
     return food
 
 
-def add_food(grid, sample): #Modifies state in place!
+def add_food(grid, sample):
     new_grid = deepcopy(grid)
     coordinate = sample[1]
     if coordinate:
@@ -321,6 +323,8 @@ def add_food(grid, sample): #Modifies state in place!
 
 
 def merge(unit_a, unit_b):
+    if not unit_a:
+        return unit_b
     if unit_a in 'b$*H' and unit_b in 'F':
         return '$'
     if unit_a in '$' and unit_b in 'B':
