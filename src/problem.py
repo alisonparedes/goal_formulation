@@ -81,20 +81,6 @@ def unit_actions(coordinate, state, problem):
     return actions
 
 
-def destination(coordinate, action):
-    x=coordinate[0]
-    y=coordinate[1]
-    if action == 'N':
-        y += -1;
-    elif action == 'S':
-        y += 1;
-    elif action == 'E':
-        x += 1;
-    elif action == 'W': 
-        x += -1;
-    return (x,y)
-
-
 def to_grid(s, problem_spec):
     '''
     Takes a dictionary and returns a 2D representation
@@ -129,38 +115,45 @@ def to_dict(w):
 
 def transition(state, action):
     new_grid = deepcopy(state.grid)
-    new_from_cell, new_to_cell = move(state.grid, action)
-    if new_to_cell in '#':  # Sometimes the action available in the beilef state is not really available
+    new_from_cell, new_to_cell = move(state, action)
+    if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
         observation = to_observation({(new_to_cell.coordinate): '#'})
         return state, observation
-    new_reward = reward(new_grid, state.reward)
-    observations = to_observation({new_from_cell, new_to_cell}, reward=new_reward)
-    new_state = to_state(grid=new_grid, reward=new_reward, t=0, future_food=remaining_food
+    new_grid[new_from_cell[0]] = new_from_cell[1]
+    new_grid[new_to_cell[0]] = new_to_cell[1]
+    new_reward = reward(new_grid) + state.reward
+    observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
+    new_state = to_state(new_grid, reward=new_reward, future_food=None)
     return new_state, observations
+
+def move(state, action):
+    harvester = find_harvester(state)
+    new_from_symbol = leaving_symbol(harvester.cell)
+    new_to_coordinate = to_coordinate(harvester.coordinate, action)
+    to_symbol = state.grid.get(new_to_coordinate, None)
+    new_to_symbol = arriving(harvester.cell, to_symbol)
+    return (harvester.coordinate, new_from_symbol), (new_to_coordinate, new_to_symbol)
 
 
 def to_observation(dict, reward=0):
     Observation = namedtuple("Observation", ["dict","reward"])
     return Observation(dict, reward)
 
+def to_coordinate(coordinate, action):
+    x=coordinate[0]
+    y=coordinate[1]
+    if action == 'N':
+        y += -1;
+    elif action == 'S':
+        y += 1;
+    elif action == 'E':
+        x += 1;
+    elif action == 'W':
+        x += -1;
+    return x, y
 
-def from_cell(grid, action):
-    harvester = find_harvester(grid)
-    new_symbol = leaving_symbol(harvester.cell)
-    return harvester.coordinate, new_symbol
 
 
-def to_cell(grid, action, from_symbol):
-    coordinate = destination(action)
-    new_symbol = grid.get(coordinate, None)
-    new_symbol = arriving(from_symbol, new_symbol)
-    return coordinate, new_symbol
-
-
-def move(grid, action):
-    new_from_cell = from_cell(grid, action)
-    new_to_cell = to_cell(grid, action, new_from_cell.cell)
-    return new_from_cell, new_to_cell
 
 
 def leaving_symbol(from_symbol):
@@ -169,7 +162,6 @@ def leaving_symbol(from_symbol):
     if from_symbol in '*b':
         return 'B'
     return None
-
 
 
 def to_observation(dict, reward):
@@ -197,12 +189,12 @@ def add_food(grid, coordinate):  # Maybe modify the grid?
     return new_grid
 
 
-def reward(state):
-    reward=0
-    base = find_base(state.grid)
+def reward(grid):
+    new_reward=0
+    base = find_base(grid)
     if base[1] == '*':
-        reward += 50
-    return reward
+        new_reward += 50
+    return new_reward
 
 
 def clear_visited(state_grid):
