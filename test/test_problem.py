@@ -42,25 +42,14 @@ class TestProblem(unittest.TestCase):
         coordinate = find_base(state)
         self.assertEquals(coordinate, ((1, 0), '*'), coordinate)
 
-    def testTransitionBeliefStateToBase(self):
-        state_str = '$B\n-F'
-        problem_spec = (2,2)
+    def testReplaceFood(self):
+        state_str = '-$\n-B'
         grid = parse(state_str)
-        action = 'E'
-        state = to_state(grid)
-        harvester_world = to_problem(x=2, y=2)
-        new_state, _ = transition(state, action, harvester_world)
-        self.assertEquals(new_state.reward, 50, new_state.reward)
-
-    def testTransitionBeliefStateGrow(self):
-        state_str = 'HFB'
-        problem_spec = (3,1)
-        grid = parse(state_str)
-        action = 'E'
-        state = to_state(grid, future_food=[(0,0)])
-        harvester_world = to_problem(x=3, y=1, max_food=1)
-        new_state, _ = transition(state, action, harvester_world)
-        self.assertEquals(new_state.grid, {(2, 0): 'B', (0, 0): 'F', (1, 0): '$'}, new_state.grid)
+        future_food = [(0, 0)]
+        state = to_state(grid, future_food=future_food)
+        harvester_world = to_problem(x=2, y=2, max_food=1)
+        new_grid, remaining_food = replace_food(grid, state.future_food, harvester_world.max_food)
+        self.assertEquals(new_grid,  {(1, 1): 'B', (0, 0): 'F', (1, 0): '$'})
 
     def testTransitionRealWorldFood(self):  # TODO: The real world should be more complete; every cell should be represented
         state_str = 'H-\nFB'
@@ -132,9 +121,8 @@ class TestProblem(unittest.TestCase):
     def testDistanceToBase(self):
         state_str = '-#\n-B'
         grid = parse(state_str)
-        state = to_state(grid)
         harvester_world = to_problem(x=2, y=2)
-        distance = distance_to_base(state, harvester_world)
+        distance = distance_to_base(grid, harvester_world)
         expected_distance = [(((1, 1), 'B'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
         self.assertEquals(distance, expected_distance, distance)
 
@@ -152,19 +140,13 @@ class TestProblem(unittest.TestCase):
     def testAddDistanceToFood(self):
         state_str = '-#\n-F'
         grid = parse(state_str)
-        state = to_state(grid)
         harvester_world = to_problem(x=2, y=2)
         distance = []
-        distance = add_distance_to_food(distance, state, harvester_world)
+        distance = add_distance_to_food(grid, distance, harvester_world)
         expected_distance = [(((1, 1), 'F'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
         self.assertEquals(distance, expected_distance, distance)
 
-    def testToProblem(self):
-        pass
-        # harvester_world = to_problem(1, 2, 3)
-        # self.assertEquals(harvester_world.max_food, 1, harvester_world.max_food)
-        # self.assertEquals(harvester_world.x, 2, harvester_world.x)
-        # self.assertEquals(harvester_world.y, 3, harvester_world.y)
+
 
 
 if __name__ == "__main__":

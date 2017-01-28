@@ -11,12 +11,24 @@ import dijkstra
 import random
 
 
+
+def to_problem(x, y, max_food=0):
+    Problem = namedtuple("Problem", ["x", "y", "max_food"])
+    return Problem(x, y, max_food)
+
+
 def to_state(grid_dict, reward=0, t=0, future_food=[], distances={}):
     State = namedtuple('State', ['grid', 'reward', 't', 'future_food', 'distances'])
     return State(grid_dict, reward, t, future_food, distances)
 
-    
+
+def to_observation(dict, reward=0):
+    Observation = namedtuple("Observation", ["dict", "reward"])
+    return Observation(dict, reward)
+
+
 def parse(simstate):
+    """Input"""
     state = {}   
     y=0
     x=0    
@@ -31,6 +43,7 @@ def parse(simstate):
 
 
 def interleaved(known, world, problem_spec):
+    """Output"""
     height=problem_spec[1]
     width=problem_spec[0]
     known_grid = to_grid(known, problem_spec)
@@ -54,9 +67,23 @@ def interleaved(known, world, problem_spec):
     return printable
 
 
+def to_grid(s, problem_spec):
+    grid = []
+    w=problem_spec[0]
+    h=problem_spec[1]
+    for _ in range(w):
+        grid.append([None]*h) #Meh
+    for coordinate, unit in s.iteritems():
+        x=coordinate[0]
+        y=coordinate[1]
+        grid[x][y]=unit
+    return grid
+
+
 def applicable_actions(state, problem):
-    harvester = find_harvester(state.grid)
-    actions = unit_actions(harvester.coordinate, state.grid, problem)
+    """Summarizes all actions available for all units."""
+    harvester_coordinate, _ = find_harvester(state.grid)
+    actions = unit_actions(harvester_coordinate, state.grid, problem)
     return actions
 
 
@@ -75,33 +102,8 @@ def unit_actions(coordinate, grid, problem):
     return actions
 
 
-def to_grid(s, problem_spec):
-    grid = []
-    w=problem_spec[0]
-    h=problem_spec[1]
-    for i in range(w): #TODO: I don't need i.
-        grid.append([None]*h) #Meh
-    for coordinate, unit in s.iteritems():
-        x=coordinate[0]
-        y=coordinate[1]
-        grid[x][y]=unit
-    return grid
-
-
-def to_dict(w):
-    state={}
-    x=0
-    for col in w:
-        y=0
-        for cell in col:
-            if cell:
-                state[(x,y)]=cell
-            y+=1
-        x+=1
-    return state
-
-
 def transition(state, action, harvester_world):
+    """Does a lot of stuff!"""
     new_from_cell, new_to_cell = move(state, action)
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
         observation = to_observation({(new_to_cell.coordinate): '#'})
@@ -117,17 +119,12 @@ def transition(state, action, harvester_world):
 
 
 def move(state, action):
-    harvester = find_harvester(state.grid)
-    new_from_symbol = leaving_symbol(harvester.cell)
-    new_to_coordinate = to_coordinate(harvester.coordinate, action)
+    harvester_coordinate, harvester_symbol = find_harvester(state.grid)
+    new_from_symbol = leaving_symbol(harvester_symbol)
+    new_to_coordinate = to_coordinate(harvester_coordinate, action)
     to_symbol = state.grid.get(new_to_coordinate, None)
-    new_to_symbol = arriving(harvester.cell, to_symbol)
-    return (harvester.coordinate, new_from_symbol), (new_to_coordinate, new_to_symbol)
-
-
-def to_observation(dict, reward=0):
-    Observation = namedtuple("Observation", ["dict", "reward"])
-    return Observation(dict, reward)
+    new_to_symbol = arriving(harvester_symbol, to_symbol)
+    return (harvester_coordinate, new_from_symbol), (new_to_coordinate, new_to_symbol)
 
 
 def to_coordinate(coordinate, action):
@@ -153,11 +150,12 @@ def leaving_symbol(from_symbol):
 
 
 def replace_food(grid, future_food, max_food):
-    if find_harvester(grid).cell != '$':
-        return grid
+    _, harvester_symbol = find_harvester(grid)
+    if harvester_symbol != '$':
+        return grid, future_food
     remaining_food = deepcopy(future_food)
     new_grid = deepcopy(grid)
-    while (count_food(new_grid) < max_food):
+    while count_food(new_grid) < max_food:
         new_grid = add_food(new_grid, remaining_food.pop())
     return new_grid, remaining_food
 
@@ -174,44 +172,10 @@ def add_food(grid, coordinate):
 
 def reward(grid):
     new_reward=0
-    base = find_base(grid)
-    if base[1] == '*':
+    _, base_symbol = find_base(grid)
+    if base_symbol == '*':
         new_reward += 50
     return new_reward
-
-
-def clear_visited(state_grid):
-    cleared = state_grid
-    x=0
-    for col in state_grid:
-        y=0
-        for cell in col:
-            if cell == '-':
-                cleared[x][y] = None
-            y += 1
-        x += 1
-    return cleared
-
-
-def chance_of_food(state, problem):
-    distribution = no_chance(state)
-    total_probability = 0.0
-    probability = 1.0/ (problem.x * problem.y - len(distribution))
-    for x in range(0, problem.x):
-        for y in range(0, problem.y):
-            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
-                distribution.append((probability, (x, y), 'F'))
-                total_probability += probability
-    distribution.append((1 - total_probability, None))
-    return distribution
-
-
-def no_chance(state):
-    distribution = []
-    for coordinate, unit in state.grid.iteritems():
-        if unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
-            distribution.append((0.0, coordinate))
-    return distribution
 
 
 def find_harvester(grid):
@@ -250,7 +214,30 @@ def find_food(grid):
     return food
 
 
+def chance_of_food(state, problem):
+    """Where food can grow now or later"""
+    distribution = no_chance(state)
+    total_probability = 0.0
+    probability = 1.0/ (problem.x * problem.y - len(distribution))
+    for x in range(0, problem.x):
+        for y in range(0, problem.y):
+            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
+                distribution.append((probability, (x, y), 'F'))
+                total_probability += probability
+    distribution.append((1 - total_probability, None))
+    return distribution
+
+
+def no_chance(state):
+    distribution = []
+    for coordinate, unit in state.grid.iteritems():
+        if unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
+            distribution.append((0.0, coordinate))
+    return distribution
+
+
 def sample(belief_state, food_dist, dimensions):
+    """Constructs a world from a belief state"""
     complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
     future_food = sample_future_food(food_dist, n=100)
     to_base = distance_to_base(complete_grid, dimensions)
@@ -262,8 +249,8 @@ def sample(belief_state, food_dist, dimensions):
 def sample_food(food_dist, grid, max_food):
     new_grid = deepcopy(grid)
     while count_food(new_grid) < max_food:
-        x = sample_cell(food_dist)
-        new_grid = add_food(new_grid, x)
+        _, coordinate, _ = sample_cell(food_dist)
+        new_grid = add_food(new_grid, coordinate)
     return new_grid
 
 
@@ -284,16 +271,14 @@ def count_food(grid):
     return food
 
 
-def add_food(grid, sample):
+def add_food(grid, coordinate):
     new_grid = deepcopy(grid)
-    coordinate = sample[1]
     if coordinate:
-        unit = sample[2]
         if coordinate in grid:
-            new_unit = merge(new_grid[coordinate], unit)
+            new_unit = merge(new_grid[coordinate], 'F')
             new_grid[coordinate] = new_unit
         else:
-            new_grid[coordinate] = unit
+            new_grid[coordinate] = 'F'
     return new_grid
 
 
@@ -324,6 +309,7 @@ def sample_cell(problem_distribution_arr):
 
 
 def distance_to_base(grid, problem):
+    """Distances can be used to look up the cost of an action"""
     new_distance = []
     base = find_base(grid)
     new_distance.append((base, dijkstra.dijkstra(base[0], grid, problem)))
@@ -360,10 +346,30 @@ def adjacent_coordinate(coordinate, action):
     return next_x, next_y
 
 
-def to_problem(x, y, max_food=0):
-    Problem = namedtuple("Problem", ["x", "y", "max_food"])
-    return Problem(x, y, max_food)
+def to_dict(w):
+    state={}
+    x=0
+    for col in w:
+        y=0
+        for cell in col:
+            if cell:
+                state[(x,y)]=cell
+            y+=1
+        x+=1
+    return state
 
+
+def clear_visited(state_grid):
+    cleared = state_grid
+    x=0
+    for col in state_grid:
+        y=0
+        for cell in col:
+            if cell == '-':
+                cleared[x][y] = None
+            y += 1
+        x += 1
+    return cleared
 
 if __name__ == '__main__':
     pass
