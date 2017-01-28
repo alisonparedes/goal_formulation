@@ -123,14 +123,14 @@ def print_step(time_step, state_a, state_b, dimensions):
 if __name__ == '__main__':
 
     args = parse_args()
-    reality_state, x, y = init_reality(args.real)  # Dimensions of reality are derived from input file
-    belief_state = init_belief(args.belief)
+    reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
+    belief_state, _, _ = init_belief(args.belief)
     harvester_world = problem.to_problem(x, y, args.max_food)
     time_step = 0
-    print_step(time_step, belief_state, reality_state)
+    print_step(time_step, belief_state, reality_state, harvester_world)
 
     while time_step < int(args.time):
-        food_dist = problem.chance_of_food(belief_state)  # TODO: Share the same dice rolls between simulator and search
+        food_dist = problem.chance_of_food(belief_state, harvester_world)  # TODO: Share the same dice rolls between simulator and search
         action = ohwow.ohwow(belief_state,
                              problem=harvester_world,
                              number_of_samples=int(args.sample),
@@ -144,5 +144,5 @@ if __name__ == '__main__':
         belief_state = update_belief(belief_state, new_observations)
         time_step += 1
         time.sleep(0.25)
-        print_step(time_step, belief_state, reality_state)
+        print_step(time_step, belief_state, reality_state, harvester_world)
 

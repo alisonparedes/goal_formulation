@@ -14,15 +14,17 @@ class TestOhWow(unittest.TestCase):
     def testSample(self):
         random.seed(1)
         n = 1
-        harvester_world = problem.to_problem(x=4, y=4, max_food=1)
-        belief_state = problem.to_state({(0, 1):'H',(3, 3):'B'})
+        state_str = '-#\n-b'
+        grid = problem.parse(state_str)
+        harvester_world = problem.to_problem(x=2, y=2, max_food=1)
+        belief_state = problem.to_state(grid)
         possible_worlds = sample(belief_state, n, harvester_world)
         world = possible_worlds[0]
-        self.assertEquals(world.grid, {(0, 1): 'H', (3, 3): 'B', (0, 2): 'F'}, world.grid)
+        self.assertEquals(world.grid, {(1, 1): 'b', (1, 0): '#', (0, 0): 'F'}, world.grid)
         self.assertEquals(world.reward, 0, world.reward)
         self.assertEquals(world.future_food, [], world.future_food)
         self.assertEquals(world.t, 0, world.t)
-        self.assertEquals(world.distances, [], world.distances)
+        self.assertEquals(world.distances, [(((1, 1), 'b'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)}), (((0, 0), 'F'), {(0, 1): ((0, 0), 1), (0, 0): ('*', 0), (1, 1): ((0, 1), 2)}), (((0, 1), 'F'), {(0, 1): ('*', 0), (0, 0): ((0, 1), 1), (1, 1): ((0, 1), 1)})], world.distances)
         random.seed(None)
 
 

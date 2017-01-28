@@ -327,8 +327,23 @@ def add_distance_to_food(grid, distance, problem):
 def add_distance_to_future(grid, distance, future_food, problem):
     new_distance = deepcopy(distance)
     for f in future_food:
-        new_distance.append((f, dijkstra.dijkstra(f, grid, problem)))
+        if not find_distances_to_food(new_distance, f):
+            new_distance.append(((f, 'F'), dijkstra.dijkstra(f, grid, problem)))
     return new_distance
+
+
+def find_distances_to_base(distances):
+    for d in distances:
+        if d[0][1] in 'Bb*':
+            return d
+    return None
+
+
+def find_distances_to_food(distances, food):
+    for d in distances:
+        if d[0][0] == food:
+            return d
+    return None
 
 
 def adjacent_coordinate(coordinate, action):

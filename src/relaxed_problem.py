@@ -38,7 +38,7 @@ def transition(state, action_and_coordinate, distances, State, horizon, maxfood)
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         next_state = hf(state, coordinate, distances, State, horizon)
     future_food = deepcopy(state.future_food)
-    while (world.count_food(next_state.grid) < maxfood):
+    while (problem.count_food(next_state.grid) < maxfood):
         next_state = problem.grow(next_state, future_food.pop(), State)
     return next_state
     #return s
@@ -99,18 +99,7 @@ def distance(from_cell, to_cell, distances):
     return d
 
 
-def find_distances_to_base(distances):
-    for d in distances:
-        if d[0][1] in 'Bb*':
-            return d
-    return None
 
-
-def find_distances_to_food(distances, food):
-    for d in distances:
-        if d[0][0] == food:
-            return d
-    return None
 
 '''
 Simulate moving harvester to food
