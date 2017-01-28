@@ -114,7 +114,7 @@ def print_args(args):
 
 
 def print_step(time_step, state_a, state_b, dimensions):
-    os.system('clear')
+    #os.system('clear')
     print "time: {0}".format(time_step)
     print "reward: {0}".format(state_b.reward)
     print(problem.interleaved(state_a.grid, state_b.grid, dimensions))
@@ -125,14 +125,14 @@ if __name__ == '__main__':
     args = parse_args()
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
     belief_state, _, _ = init_belief(args.belief)
-    harvester_world = problem.to_problem(x, y, args.max_food)
+    harvester_world = problem.to_problem(x, y, int(args.max_food))
     time_step = 0
     print_step(time_step, belief_state, reality_state, harvester_world)
 
     while time_step < int(args.time):
         food_dist = problem.chance_of_food(belief_state, harvester_world)  # TODO: Share the same dice rolls between simulator and search
         action = ohwow.ohwow(belief_state,
-                             problem=harvester_world,
+                             harvester_world,
                              number_of_samples=int(args.sample),
                              horizon=int(args.horizon))
         new_world = simulator.simulate(belief_state,

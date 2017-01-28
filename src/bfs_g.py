@@ -12,7 +12,7 @@ Returns total reward
 '''
 
 
-def search(initial_state, horizon, distances, State, return_plan=False, maxfood=1, here=None):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
+def search(initial_state, dimensions, horizon=1, return_plan=False):  #TODO: Get rid of goal test completely? For NRL scenario, scores, not goals, determine success.
     
     Node = namedtuple('Node',['state','previous','action', 'g','t']) #What kind of programming paradigm are factories a part of?
     Expanded = namedtuple('Expanded',['len','max_g','plan','t'])

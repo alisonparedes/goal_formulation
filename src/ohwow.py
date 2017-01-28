@@ -7,19 +7,19 @@ import bfs_g
 import problem
 
 
-def ohwow(belief_state, problem, number_of_samples=1, horizon=1):
+def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
     """
     """
 
-    sampled_worlds = sample(belief_state, number_of_samples, problem)
-    actions_in_s = problem.applicable_actions(belief_state, problem)
+    sampled_worlds = sample(belief_state, number_of_samples, dimensions)
+    actions_in_s = problem.applicable_actions(belief_state, dimensions)
 
     max_action = None
     max_expected_value = 0
     for action in actions_in_s:
         total_reward = 0.0
         for initial_state in sampled_worlds:
-            next_state = problem.transition(initial_state, action)
+            next_state, _ = problem.transition(initial_state, action, dimensions)
             total_reward += next_state.reward
             total_reward += bfs_g.search(next_state, horizon)
         expected_value = total_reward/float(number_of_samples)
