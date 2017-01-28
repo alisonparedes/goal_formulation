@@ -13,31 +13,25 @@ class Test(unittest.TestCase):
 
     def testInitReality(self):
         file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
-        Arguments = namedtuple("Arguments", ["max_food"])
-        max_food = 2
-        args = Arguments(max_food=max_food)
-        reality = init_reality(file_name, args)
+        reality, x, y = init_reality(file_name)
         self.assertEquals(reality.grid, {(0, 0): 'F', (1, 1): 'b'}, reality.grid)
         self.assertEquals(reality.reward, 0, reality.reward)
         self.assertEquals(reality.t, 0, reality.t)
         self.assertEquals(reality.future_food, [], reality.future_food)
-        self.assertEquals(reality.max_food, max_food, reality.max_food)
-        self.assertEquals(reality.x, 2, reality.x)
-        self.assertEquals(reality.y, 2, reality.y)
+        self.assertEquals(x, 2, x)
+        self.assertEquals(y, 2, y)
 
     def testInitBelief(self):
         file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
         Arguments = namedtuple("Arguments", ["max_food"])
         max_food = 2
         args = Arguments(max_food=max_food)
-        belief = init_belief(file_name, args)
+        belief, _, _ = init_belief(file_name)
         self.assertEquals(belief.grid, {(0, 0): 'F', (1, 1): 'b'}, belief.grid)
         self.assertEquals(belief.reward, 0, belief.reward)
         self.assertEquals(belief.t, 0, belief.t)
         self.assertEquals(belief.future_food, [], belief.future_food)
-        self.assertEquals(belief.max_food, max_food, belief.max_food)
-        self.assertEquals(belief.x, 2, belief.x)
-        self.assertEquals(belief.y, 2, belief.y)
+
 
     def testListExploredCell(self):
         belief_str = 'F-\n-b'
