@@ -25,19 +25,19 @@ class Test(unittest.TestCase):
         n = 10 #What is a good sample size?
         problem_dist = [(0.5, (0, 0), 'F'),(0.5, None)]
         belief_state={(1,1):'H',(3,3):'B'}
-        actions_in_s = applicable_actions(belief_state) 
-        self.assertEquals(actions_in_s,['N', 'S', 'E', 'W'],actions_in_s)       
+        actions_in_s = applicable_actions(belief_state)
+        self.assertEquals(actions_in_s,['N', 'S', 'E', 'W'],actions_in_s)
         random.seed(None) #Tear down
-        
+
     def testTransition(self):
         random.seed(1) #Set-up
         belief_state={(1,1):'H',(3,3):'B'}
         action='N'
         world={(1, 1): 'H', (0, 0): 'F', (3, 3): 'B'}
         s_prime = transition(belief_state, action, world)
-        self.assertEquals(s_prime ,{(1, 0): 'H', (0, 0): 'F', (3, 3): 'B'},s_prime)       
+        self.assertEquals(s_prime ,{(1, 0): 'H', (0, 0): 'F', (3, 3): 'B'},s_prime)
         random.seed(None) #Tear down       
-        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
