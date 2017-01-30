@@ -29,65 +29,62 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     #return [1,2]
 
 
-def transition(state, action_and_coordinate, dimensions, horizon):  # TODO: Why does the relaxed problem need to know the horizon
+def transition(state, action_and_coordinate, dimensions, time_left=1):  # TODO: Why does the relaxed problem need to know the horizon
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
-        next_state, t = hb(state, horizon)
+        next_state, action_cost = hb(state, time_left)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        next_state, t = hf(state, coordinate, horizon)
+        next_state, action_cost = hf(state, coordinate, time_left)
     future_food = deepcopy(state.future_food)
     while problem.count_food(next_state.grid) < dimensions.max_food:
-        next_state, t = problem.grow(next_state, future_food.pop())
-    return next_state, t
+        next_state, action_cost = problem.grow(next_state, future_food.pop())
+    return next_state, action_cost
     #return s
 
 
-def hb(state, horizon):
+def hb(state, time_left):
     """Simulates moving harvester to base.
     @returns new_state
     """
     new_grid = deepcopy(state.grid)
-
     harvester = problem.find_harvester(state.grid)
-    new_grid[harvester[0]] = problem.leaving(harvester[1])  # Harvester leaves its starting location
-
+    new_grid[harvester[0]] = problem.leaving_symbol(harvester[1])
     base = problem.find_base(state.grid)
     step_cost = distance(harvester, base, state.distances) # Look up cost to move to base
-    total_cost = state.t + step_cost # If new time is past horizon then harvester stops short of base. Use distances to figure out how far it gets.
     to_cell = base
-    if total_cost > horizon:
-        distance_to_base = find_distances_to_base(state.distances)[1]
-        next_step = harvester[0]
-        step_cost = 0
-        while state.t + step_cost < horizon:  # While total_cost < horizon get next step. Stops once total_cost = horizon.
-            policy = distance_to_base[next_step]  # Look up policy
-            next_step = policy[0]
-            step_cost += 1
-
-        if next_step in state.grid:
-            to_cell = next_step, state.grid[next_step]
-        else:
-            to_cell = next_step, None
-
+    if (time_left - step_cost) < 0:  # If new time is past horizon then harvester stops short of base.
+        distance_to_base = problem.find_distances_to_base(state.distances)[1]
+        to_cell = step(harvester[0], state.grid, time_left, distance_to_base)
     arriving_unit = problem.arriving(harvester[1], to_cell[1])
-    new_grid[to_cell[0]] = arriving_unit # May not make it all the way if takes too long
+    new_grid[to_cell[0]] = arriving_unit  # May not make it all the way if takes too long
     new_reward = state.reward + problem.reward(new_grid) - step_cost
-
     return problem.to_state(new_grid, new_reward, state.future_food), step_cost
+
+
+def step(next_step, grid, time_left, distance):
+    step_cost = 0
+    while time_left - step_cost > 0:  # While total_cost < horizon get next step. Stops once total_cost = horizon.
+        policy = distance[next_step]  # Look up policy
+        next_step = policy[0]
+        step_cost += 1
+    if next_step in grid:
+        return next_step, grid[next_step]
+    else:
+        return next_step, None
 
 
 def distance(from_cell, to_cell, distances):
     d = 1000  # Impossible
 
     if to_cell[1] in 'Bb*':
-        distances_to_base = find_distances_to_base(distances)[1]
+        distances_to_base = problem.find_distances_to_base(distances)[1]
         if from_cell[0] in distances_to_base:
             policy = distances_to_base[from_cell[0]]
             d = policy[1]
     else:
-        distances_to_food = find_distances_to_food(distances, to_cell[0])
+        distances_to_food = problem.find_distances_to_food(distances, to_cell[0])
         try:
             if from_cell[0] in distances_to_food[1]:
                 policy = distances_to_food[1][from_cell[0]]

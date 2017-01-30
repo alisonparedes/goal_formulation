@@ -43,8 +43,8 @@ def parse(simstate):
 
 def interleaved(known, world, problem_spec):
     """Output"""
-    height=problem_spec[1]
-    width=problem_spec[0]
+    height = problem_spec[1]
+    width = problem_spec[0]
     known_grid = to_grid(known, problem_spec)
     world_grid = to_grid(world, problem_spec)
     printable = ''
@@ -68,8 +68,8 @@ def interleaved(known, world, problem_spec):
 
 def to_grid(s, problem_spec):
     grid = []
-    w=problem_spec[0]
-    h=problem_spec[1]
+    w = problem_spec[0]
+    h = problem_spec[1]
     for _ in range(w):
         grid.append([None]*h) #Meh
     for coordinate, unit in s.iteritems():
@@ -127,8 +127,8 @@ def move(state, action):
 
 
 def to_coordinate(coordinate, action):
-    x=coordinate[0]
-    y=coordinate[1]
+    x = coordinate[0]
+    y = coordinate[1]
     if action == 'N':
         y += -1
     elif action == 'S':
