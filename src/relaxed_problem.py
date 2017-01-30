@@ -6,62 +6,63 @@ Created on Oct 25, 2016
 import problem
 from copy import deepcopy
 
+
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
     '''
     Returns an iterable list of actions applicable in the given state.
     '''
-    actions=[]
-    units=''
-    food_coordinates=[]
+    actions = []
+    units = ''
+    food_coordinates = []
     for coordinate, unit in s.grid.iteritems():
         if unit and unit in 'F':
             food_coordinates.append(coordinate)
         if unit and unit in 'HbBF$*':
             units += unit
-    if ('H' in units or '$' in units ) and ('B' in units):
+    if ('H' in units or '$' in units) and ('B' in units):
         actions.append('HB')
     if ('H' in units or '*' in units or 'b' in units) and ('F' in units):
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
-    '''if ('*' in units or '$' in units or '!' in units) and '@' in units:
-        actions.append('HS')'''
 
     return actions
     #return [1,2]
-    
-def transition(state, action_and_coordinate, distances, State, horizon, maxfood):
+
+
+def transition(state, action_and_coordinate, dimensions, horizon):  # TODO: Why does the relaxed problem need to know the horizon
     action = action_and_coordinate.split('_')[0]
     next_state = None
     if action == 'HB':
-        next_state = hb(state, distances, State, horizon)
+        next_state, t = hb(state, horizon)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
-        next_state = hf(state, coordinate, distances, State, horizon)
+        next_state, t = hf(state, coordinate, horizon)
     future_food = deepcopy(state.future_food)
-    while (problem.count_food(next_state.grid) < maxfood):
-        next_state = problem.grow(next_state, future_food.pop(), State)
-    return next_state
+    while problem.count_food(next_state.grid) < dimensions.max_food:
+        next_state, t = problem.grow(next_state, future_food.pop())
+    return next_state, t
     #return s
 
-def hb(state, distances, State, horizon):
-    '''
-    Simulate moving harvester to base
-    '''
+
+def hb(state, horizon):
+    """Simulates moving harvester to base.
+    @returns new_state
+    """
     new_grid = deepcopy(state.grid)
 
     harvester = problem.find_harvester(state.grid)
     new_grid[harvester[0]] = problem.leaving(harvester[1])  # Harvester leaves its starting location
 
     base = problem.find_base(state.grid)
-    step_cost = distance(harvester, base, distances) # Look up cost to move to base
+    step_cost = distance(harvester, base, state.distances) # Look up cost to move to base
     total_cost = state.t + step_cost # If new time is past horizon then harvester stops short of base. Use distances to figure out how far it gets.
     to_cell = base
     if total_cost > horizon:
-        distance_to_base = find_distances_to_base(distances)[1]
+        distance_to_base = find_distances_to_base(state.distances)[1]
         next_step = harvester[0]
         step_cost = 0
-        while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
-            policy = distance_to_base[next_step] # Look up policy
+        while state.t + step_cost < horizon:  # While total_cost < horizon get next step. Stops once total_cost = horizon.
+            policy = distance_to_base[next_step]  # Look up policy
             next_step = policy[0]
             step_cost += 1
 
@@ -72,11 +73,9 @@ def hb(state, distances, State, horizon):
 
     arriving_unit = problem.arriving(harvester[1], to_cell[1])
     new_grid[to_cell[0]] = arriving_unit # May not make it all the way if takes too long
+    new_reward = state.reward + problem.reward(new_grid) - step_cost
 
-    next_state = State(new_grid, state.reward, state.t, state.future_food)
-    new_reward = state.reward + problem.reward(next_state) - step_cost
-
-    return State(new_grid, new_reward, state.t + step_cost, state.future_food)
+    return problem.to_state(new_grid, new_reward, state.future_food), step_cost
 
 
 def distance(from_cell, to_cell, distances):
@@ -132,9 +131,9 @@ def hf(state, food_coordinate, distances, State, horizon):
 
     new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
 
-    next_state = State(new_grid, state.reward, state.t, state.future_food)
+    next_state = problem.to_state(new_grid, state.reward, state.t, state.future_food)
     new_reward = state.reward + problem.reward(next_state) - step_cost
-    return State(new_grid, new_reward, state.t + step_cost, state.future_food)
+    return problem.to_state(new_grid, new_reward, state.future_food), step_cost
 
 
 if __name__ == '__main__':

@@ -43,21 +43,14 @@ class TestBFSG(unittest.TestCase):
         plan=search(initial_state,goal_state,11)
         self.assertEquals(plan,[1,1,1,1,1,1,1,1,1],plan)
     '''
-    def testTransition(self):
-        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
-        Node = namedtuple('Node',['state','previous','action', 'g'])
-        initial_state = Node(State({(1, 1): 'B', (0, 0): 'H'},reward=0,has_food=False), previous=None, action=None, g=0) #TODO: Delegate creating an initial State object to problem?
-        action='HB'
-        next_state = transition(initial_state, action, State)
-        self.assertEquals(next_state, State({(1, 1): '*'},reward=80,has_food=False), next_state)
 
     def testReturnMaxG(self):
-        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
-        Node = namedtuple('Node',['state','previous','action', 'g'])
-        initial_state = State(state={(3, 0): 'B', (1, 2): 'H', (3, 2): 'F', (0, 0): 'F'}, reward=0, has_food=False)
-        horizon = 10;
-        max_g = search(initial_state, horizon, State)
-        self.assertEquals(max_g, 90.0, max_g)
+        state_str = '-#\n$B'
+        grid = problem.parse(state_str)
+        harvester_world = problem.to_problem(x=2, y=2)
+        initial_state = problem.to_state(grid)
+        max_g = search(initial_state, harvester_world, horizon=10)
+        self.assertEquals(max_g, 49.0, max_g)
 
     def testReturnPlan(self):
         State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.

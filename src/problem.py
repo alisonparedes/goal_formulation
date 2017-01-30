@@ -11,15 +11,14 @@ import dijkstra
 import random
 
 
-
 def to_problem(x, y, max_food=0):
     Problem = namedtuple("Problem", ["x", "y", "max_food"])
     return Problem(x, y, max_food)
 
 
-def to_state(grid_dict, reward=0, t=0, future_food=[], distances={}):
-    State = namedtuple('State', ['grid', 'reward', 't', 'future_food', 'distances'])
-    return State(grid_dict, reward, t, future_food, distances)
+def to_state(grid_dict, reward=0, future_food=[], distances={}):
+    State = namedtuple('State', ['grid', 'reward', 'future_food', 'distances'])
+    return State(grid_dict, reward, future_food, distances)
 
 
 def to_observation(dict, reward=0):
