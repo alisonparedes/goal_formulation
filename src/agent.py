@@ -105,13 +105,13 @@ def parse_args():
 
 
 def print_args(args):
-    print "reality: {0}".format(args.real)
+    print "reality: {0}".format(args.reality)
     print "belief: {0}".format(args.belief)
     print "horizon: {0}".format(args.horizon)
     print "sample: {0}".format(args.sample)
-    print "max_food: {0}".format(args.food)
+    print "max_food: {0}".format(args.max_food)
     print "time: {0}".format(args.time)
-
+    print "\n"
 
 def print_step(time_step, state_a, state_b, dimensions):
     #os.system('clear')
@@ -127,6 +127,7 @@ if __name__ == '__main__':
     belief_state, _, _ = init_belief(args.belief)
     harvester_world = problem.to_problem(x, y, int(args.max_food))
     time_step = 0
+    print_args(args)
     print_step(time_step, belief_state, reality_state, harvester_world)
 
     while time_step < int(args.time):
@@ -135,13 +136,11 @@ if __name__ == '__main__':
                              harvester_world,
                              number_of_samples=int(args.sample),
                              horizon=int(args.horizon))
-        new_world = simulator.simulate(belief_state,
-                                       action[0],
-                                       reality_state,
-                                       problem=harvester_world)
-        new_observations = new_world.observations
-        real_world = new_world.state
-        belief_state = update_belief(belief_state, new_observations)
+        real_world, observations = simulator.simulate(belief_state,
+                                                      action[0],
+                                                      reality_state,
+                                                      dimensions=harvester_world)
+        belief_state = update_belief(belief_state, observations)
         time_step += 1
         time.sleep(0.25)
         print_step(time_step, belief_state, reality_state, harvester_world)

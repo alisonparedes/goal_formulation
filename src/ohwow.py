@@ -21,7 +21,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
         for initial_state in sampled_worlds:
             next_state, _ = problem.transition(initial_state, action, dimensions)
             total_reward += next_state.reward
-            total_reward += bfs_g.search(next_state, horizon)
+            total_reward += bfs_g.search(next_state, dimensions, horizon)
         expected_value = total_reward/float(number_of_samples)
         if expected_value > max_expected_value:
             max_expected_value = expected_value

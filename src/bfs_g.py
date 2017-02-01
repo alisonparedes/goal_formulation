@@ -74,7 +74,7 @@ def expand(s_node, open_list, closed_list, max_g, dimensions):
     plan = s_node
     time = s_node.time
     for action in relaxed_problem.applicable_actions(s_node.state):
-        next_state, time = relaxed_problem.transition(s_node.state, action, dimensions)
+        next_state, time = relaxed_problem.transition(s_node.state, action, dimensions, time)
         g = next_state.reward
         result = to_node(state=next_state, previous=s_node, action=action, g=g, time=time)
         if g > max_g:

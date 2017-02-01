@@ -113,7 +113,7 @@ def transition(state, action, harvester_world):
     new_grid, remaining_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
     observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
-    new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food)
+    new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     return new_state, observations
 
 
@@ -242,7 +242,7 @@ def sample(belief_state, food_dist, dimensions):
     to_base = distance_to_base(complete_grid, dimensions)
     food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
     all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
-    return to_state(complete_grid, belief_state.reward, distances=all_distances)
+    return to_state(complete_grid, belief_state.reward, distances=all_distances, future_food=future_food)
 
 
 def sample_food(food_dist, grid, max_food):
