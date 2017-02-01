@@ -41,9 +41,7 @@ def transition(state, action_and_coordinate, dimensions, time_left=1):
         new_grid = problem.add_food(new_grid, remaining_food.pop())
 
     new_reward = state.reward + problem.reward(new_grid) - action_cost
-
     next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
-
     return next_state, action_cost
 
 
@@ -56,7 +54,7 @@ def hb(state, time_left):
     step_cost = distance((from_coordinate, current_from_symbol), (to_coordinate, to_symbol), state.distances)
     if (time_left - step_cost) < 0:  # If new time is past horizon then harvester stops short of base.
         distance_to_base = problem.find_distances_to_base(state.distances)[1]
-        to_coordinate, current_symbol = step(from_coordinate, state.grid, time_left, distance_to_base)
+        to_coordinate, to_symbol = step(from_coordinate, state.grid, time_left, distance_to_base)
     to_symbol = problem.arriving(current_from_symbol, to_symbol)
     from_symbol = problem.leaving_symbol(current_from_symbol)
     return from_coordinate, from_symbol, to_coordinate, to_symbol, step_cost

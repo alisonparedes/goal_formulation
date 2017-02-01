@@ -15,7 +15,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
     actions_in_s = problem.applicable_actions(belief_state, dimensions)
 
     max_action = None
-    max_expected_value = 0
+    max_expected_value = -1000
     for action in actions_in_s:
         total_reward = 0.0
         for initial_state in sampled_worlds:

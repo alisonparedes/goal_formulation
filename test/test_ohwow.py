@@ -23,7 +23,6 @@ class TestOhWow(unittest.TestCase):
         self.assertEquals(world.grid, {(1, 1): 'b', (1, 0): '#', (0, 0): 'F'}, world.grid)
         self.assertEquals(world.reward, 0, world.reward)
         self.assertEquals(world.future_food, [], world.future_food)
-        self.assertEquals(world.t, 0, world.t)
         self.assertEquals(world.distances, [(((1, 1), 'b'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)}), (((0, 0), 'F'), {(0, 1): ((0, 0), 1), (0, 0): ('*', 0), (1, 1): ((0, 1), 2)}), (((0, 1), 'F'), {(0, 1): ('*', 0), (0, 0): ((0, 1), 1), (1, 1): ((0, 1), 1)})], world.distances)
         random.seed(None)
 

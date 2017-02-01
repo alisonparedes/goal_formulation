@@ -136,7 +136,7 @@ if __name__ == '__main__':
                              harvester_world,
                              number_of_samples=int(args.sample),
                              horizon=int(args.horizon))
-        real_world, observations = simulator.simulate(belief_state,
+        reality_state, observations = simulator.simulate(belief_state,
                                                       action[0],
                                                       reality_state,
                                                       dimensions=harvester_world)
