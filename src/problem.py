@@ -241,7 +241,7 @@ def sample(belief_state, food_dist, dimensions):
     future_food = sample_future_food(food_dist, n=100)
     to_base = distance_to_base(complete_grid, dimensions)
     food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
-    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions )
+    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
     return to_state(complete_grid, belief_state.reward, distances=all_distances)
 
 

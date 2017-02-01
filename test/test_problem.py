@@ -147,7 +147,8 @@ class TestProblem(unittest.TestCase):
         self.assertEquals(distance, expected_distance, distance)
 
 
-
+    def testGrow(self):
+        pass
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

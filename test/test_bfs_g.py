@@ -48,17 +48,21 @@ class TestBFSG(unittest.TestCase):
         state_str = '-#\n$B'
         grid = problem.parse(state_str)
         harvester_world = problem.to_problem(x=2, y=2)
-        initial_state = problem.to_state(grid)
+        distances = problem.distance_to_base(grid, harvester_world)
+        distances = problem.add_distance_to_food(grid, distances, harvester_world)
+        initial_state = problem.to_state(grid, distances=distances)
         max_g = search(initial_state, harvester_world, horizon=10)
         self.assertEquals(max_g, 49.0, max_g)
 
     def testReturnPlan(self):
-        State = namedtuple('State',['state','reward','has_food']) #TODO: Problem should handle state structure.
-        Node = namedtuple('Node',['state','previous','action', 'g'])
-        initial_state = State(state={(3, 0): 'B', (1, 2): 'H', (3, 2): 'F', (0, 0): 'F'}, reward=0, has_food=False)
-        horizon = 10;
-        plan = search(initial_state, horizon, State, True)
-        self.assertEquals(plan, ['HF_3_2', 'HB', 'HF_0_0', 'HB'], plan)
+        state_str = '-#\n$B'
+        grid = problem.parse(state_str)
+        harvester_world = problem.to_problem(x=2, y=2)
+        distances = problem.distance_to_base(grid, harvester_world)
+        distances = problem.add_distance_to_food(grid, distances, harvester_world)
+        initial_state = problem.to_state(grid, distances=distances)
+        _ = search(initial_state, harvester_world, horizon=10, return_plan=True)
+        #self.assertEquals(plan, ['HF_3_2', 'HB', 'HF_0_0', 'HB'], plan)
 
 
 if __name__ == "__main__":

@@ -71,7 +71,7 @@ def get_plan(s):
 
 def expand(s_node, open_list, closed_list, max_g, dimensions):
     expanded = []
-    plan = None
+    plan = s_node
     time = s_node.time
     for action in relaxed_problem.applicable_actions(s_node.state):
         next_state, time = relaxed_problem.transition(s_node.state, action, dimensions)

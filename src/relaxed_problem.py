@@ -8,9 +8,6 @@ from copy import deepcopy
 
 
 def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) takes actions so state model needs to provide quick access to units' positions.  Although if world is small enough iterating through dictionary of positions may not be that big of a problem, .e.g one harvester and one base.
-    '''
-    Returns an iterable list of actions applicable in the given state.
-    '''
     actions = []
     units = ''
     food_coordinates = []
@@ -26,26 +23,28 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
 
     return actions
-    #return [1,2]
 
 
 def transition(state, action_and_coordinate, dimensions, time_left=1):
+
+    new_grid = deepcopy(state.grid)
     action = action_and_coordinate.split('_')[0]
     if action == 'HB':
         from_coordinate, from_symbol, to_coordinate, to_symbol, action_cost = hb(state, time_left)
     elif action == 'HF':
         coordinate = (int(action_and_coordinate.split('_')[1]), int(action_and_coordinate.split('_')[2]))
         from_coordinate, from_symbol, to_coordinate, to_symbol, action_cost = hf(state, coordinate, time_left)
-    new_grid = deepcopy(state.grid)
     new_grid[from_coordinate] = from_symbol
-    new_grid[to_coordinate] = to_symbol  # May not make it all the way if takes too long
-    new_reward = state.reward + problem.reward(new_grid) - action_cost
+    new_grid[to_coordinate] = to_symbol
     remaining_food = deepcopy(state.future_food)
-    while problem.count_food(next_state.grid) < dimensions.max_food:
-        next_state, action_cost = problem.grow(next_state, remaining_food.pop())
+    while problem.count_food(new_grid) < dimensions.max_food:
+        new_grid = problem.add_food(new_grid, remaining_food.pop())
+
+    new_reward = state.reward + problem.reward(new_grid) - action_cost
+
     next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
+
     return next_state, action_cost
-    #return s
 
 
 def hb(state, time_left):
@@ -60,13 +59,13 @@ def hb(state, time_left):
         to_coordinate, current_symbol = step(from_coordinate, state.grid, time_left, distance_to_base)
     to_symbol = problem.arriving(current_from_symbol, to_symbol)
     from_symbol = problem.leaving_symbol(current_from_symbol)
-    return (from_coordinate, from_symbol), (to_coordinate, to_symbol), step_cost
+    return from_coordinate, from_symbol, to_coordinate, to_symbol, step_cost
 
 
 def step(next_step, grid, time_left, distance):
     step_cost = 0
-    while time_left - step_cost > 0:  # While total_cost < horizon get next step. Stops once total_cost = horizon.
-        policy = distance[next_step]  # Look up policy
+    while time_left - step_cost > 0:
+        policy = distance[next_step]
         next_step = policy[0]
         step_cost += 1
     if next_step in grid:
@@ -95,42 +94,17 @@ def distance(from_cell, to_cell, distances):
     return d
 
 
+def hf(state, food_coordinate, time_left):
 
-
-'''
-Simulate moving harvester to food
-'''
-def hf(state, food_coordinate, distances, State, horizon):
-
-    new_grid = deepcopy(state.grid)
-
-    harvester = problem.find_harvester(state.grid)
-    food = (food_coordinate, 'F')
-
-    new_grid[harvester[0]] = problem.leaving(harvester[1])
-
-    step_cost = distance(harvester, food, distances) # Look up cost to move to base
-    total_cost = state.t + step_cost # If new time is past horizon then harvester stops short of base. Use distances to figure out how far it gets.
-    to_cell = food
-    if total_cost > horizon:
-        distance_to_food = find_distances_to_food(distances, food[0])[1]
-        next_step = harvester[0]
-        step_cost = 0
-        while(state.t + step_cost < horizon): # While total_cost < horizon get next step. Stops once total_cost = horizon.
-            policy = distance_to_food[next_step] # Look up policy
-            next_step = policy[0]
-            step_cost += 1
-
-        if next_step in state.grid:
-            to_cell = next_step, state.grid[next_step]
-        else:
-            to_cell = next_step, None
-
-    new_grid[to_cell[0]] = problem.arriving(harvester[1], to_cell[1]) # May not make it all the way if takes too long
-
-    next_state = problem.to_state(new_grid, state.reward, state.t, state.future_food)
-    new_reward = state.reward + problem.reward(next_state) - step_cost
-    return problem.to_state(new_grid, new_reward, state.future_food), step_cost
+    from_coordinate, current_from_symbol = problem.find_harvester(state.grid)
+    to_coordinate, to_symbol = food_coordinate, 'F'
+    step_cost = distance((from_coordinate, current_from_symbol), (to_coordinate, to_symbol), state.distances)
+    if (time_left - step_cost) < 0:  # If new time is past horizon then harvester stops short of base.
+        distance_to_food = problem.find_distances_to_food(state.distances, to_coordinate)[1]
+        to_coordinate, current_symbol = step(from_coordinate, state.grid, time_left, distance_to_food)
+    to_symbol = problem.arriving(current_from_symbol, to_symbol)
+    from_symbol = problem.leaving_symbol(current_from_symbol)
+    return from_coordinate, from_symbol, to_coordinate, to_symbol, step_cost
 
 
 if __name__ == '__main__':
