@@ -26,7 +26,6 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
         if expected_value > max_expected_value:
             max_expected_value = expected_value
             max_action = action
-
     return max_action, max_expected_value
 
 

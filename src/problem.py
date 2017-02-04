@@ -287,8 +287,12 @@ def add_food(grid, coordinate):
 def merge(unit_a, unit_b):
     if not unit_a:
         return unit_b
-    if unit_a in 'b$*H' and unit_b in 'F':
+    if unit_a in '$H' and unit_b in 'F':
         return '$'
+    if unit_a in '*' and unit_b in 'F':  # Hmm...
+        return '*'
+    if unit_a in 'b' and unit_b in 'F':
+        return 'b'
     if unit_a in '$' and unit_b in 'B':
         return '*'
     if unit_a in 'H' and unit_b in 'B':
