@@ -187,10 +187,12 @@ def find_harvester(grid):
 def arriving(from_symbol, to_symbol):
     if from_symbol == '$' and to_symbol == 'B':  # A harvester carrying food
         return '*' # Gets a reward
-    if from_symbol in '$H*b' and to_symbol == 'F':
+    if from_symbol in '$H' and to_symbol == 'F':
         return '$'
+    if from_symbol in 'b*' and to_symbol == 'F':
+        return '*'
     if from_symbol in 'H' and to_symbol == 'B':
-        return 'b' # Does not get a reward
+        return 'b'  # Does not get a reward
     if from_symbol in 'b*' and to_symbol and to_symbol in 'b*B':
         return 'b'
     if from_symbol in 'b*':
@@ -208,7 +210,7 @@ def find_base(grid):
 def find_food(grid):
     food = []
     for coordinate, unit in grid.iteritems():
-        if unit in 'F':
+        if unit and unit in 'F':
             food.append((coordinate, unit))
     return food
 
@@ -217,10 +219,10 @@ def chance_of_food(state, problem):
     """Where food can grow now or later"""
     distribution = no_chance(state)
     total_probability = 0.0
-    probability = 1.0/ (problem.x * problem.y - len(distribution))
+    probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or state.grid[(x, y)] not in 'b*B#':
+            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '*Bb'):  # Food can't grow on base
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
@@ -230,7 +232,7 @@ def chance_of_food(state, problem):
 def no_chance(state):
     distribution = []
     for coordinate, unit in state.grid.iteritems():
-        if unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
+        if unit and unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
             distribution.append((0.0, coordinate))
     return distribution
 
@@ -257,8 +259,9 @@ def sample_future_food(food_dist, n=1):
     food_sequence = []
     while n > 0:
         sampled_food = sample_cell(food_dist)[1]  #TODO: Use the same list of random numbers as the simulator
-        food_sequence.append(sampled_food)
-        n -= 1
+        if sampled_food:  # There is a small chance that we sampled no food
+            food_sequence.append(sampled_food)
+            n -= 1
     return food_sequence
 
 
