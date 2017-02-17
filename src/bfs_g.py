@@ -26,11 +26,11 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
     open_list = deque([i])
     closed_list = deque([])
     nodes_expanded = 0
-    max_g = 0
+    max_g = -1000
     plan = None
     while len(open_list) > 0:
         s = open_list.popleft()
-        if s.time > horizon:
+        if s.time >= horizon:
             break
         max_g, plan = expand(s, open_list, closed_list, max_g, dimensions, horizon)
         nodes_expanded += 1

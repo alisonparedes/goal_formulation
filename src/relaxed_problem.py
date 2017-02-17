@@ -152,5 +152,6 @@ if __name__ == '__main__':
     print "max_food: {0}".format(args.max_food)
     print "action: {0}".format(args.action)
     print "action cost: {0}".format(action_cost)
+    print "reward: {0}".format(next_state.reward)
     print(problem.interleaved(initial_state.grid, next_state.grid, harvester_world))
     random.seed(0)
