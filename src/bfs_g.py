@@ -17,7 +17,6 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
     #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
     open_list = deque([i])
     closed_list = deque([])  # TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
-    current_level = 1
     nodes_expanded = 0
     max_g = 0
     plan = None
@@ -28,7 +27,7 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
         s = open_list.popleft()
 
         #print(s.state)
-        current_level -= 1
+
         # if is_goal(s,goal):
         #    return get_plan(s)    
         max_g, plan, time = expand(s, open_list, closed_list, max_g, dimensions)

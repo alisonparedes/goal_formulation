@@ -90,8 +90,9 @@ def init_belief(belief_file_name):
             belief_str += line
             x = len(line) - 1
             y += 1
-    grid_dict = problem.parse(belief_str)
-    return problem.to_state(grid_dict), x, y
+    grid = problem.parse(belief_str)
+    return problem.to_state(grid), x, y
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -112,6 +113,7 @@ def print_args(args):
     print "max_food: {0}".format(args.max_food)
     print "time: {0}".format(args.time)
     print "\n"
+
 
 def print_step(time_step, state_a, state_b, dimensions):
     #os.system('clear')

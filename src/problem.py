@@ -6,7 +6,7 @@ Created on Aug 18, 2016
 
 
 from collections import namedtuple
-from copy import deepcopy
+from copy import deepcopy  # I am not sure if copy would have been sufficient
 import dijkstra
 import random
 
@@ -41,7 +41,7 @@ def parse(simstate):
     return state
 
 
-def interleaved(known, world, problem_spec):
+def interleaved(world, known, problem_spec):
     """Output"""
     height = problem_spec[1]
     width = problem_spec[0]
@@ -56,7 +56,7 @@ def interleaved(known, world, problem_spec):
             else:
                 printable += '-'
         printable += ' '
-        for x in range(width): #
+        for x in range(width):
             cell = known_grid[x][y] 
             if cell:
                 printable += cell
@@ -187,10 +187,8 @@ def find_harvester(grid):
 def arriving(from_symbol, to_symbol):
     if from_symbol == '$' and to_symbol == 'B':  # A harvester carrying food
         return '*' # Gets a reward
-    if from_symbol in '$H' and to_symbol == 'F':
+    if from_symbol in 'b*$H' and to_symbol == 'F':
         return '$'
-    if from_symbol in 'b*' and to_symbol == 'F':
-        return '*'
     if from_symbol in 'H' and to_symbol == 'B':
         return 'b'  # Does not get a reward
     if from_symbol in 'b*' and to_symbol and to_symbol in 'b*B':
@@ -289,7 +287,7 @@ def merge(unit_a, unit_b):
         return unit_b
     if unit_a in '$H' and unit_b in 'F':
         return '$'
-    if unit_a in '*' and unit_b in 'F':  # Hmm...
+    if unit_a in '*' and unit_b in 'F':
         return '*'
     if unit_a in 'b' and unit_b in 'F':
         return 'b'

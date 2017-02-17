@@ -26,7 +26,34 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
 
 
 def transition(state, action_and_coordinate, dimensions, time_left=1):
+    """
 
+    :param state: The easiest way to construct an initial state.
+
+    state_str = '---$\n---B'
+    grid = problem.parse(state_str)
+    distances = problem.distance_to_base(grid, harvester_world)
+    distances = problem.add_distance_to_food(grid, distances, harvester_world)
+    initial_state = problem.to_state(grid, distances=distances)
+
+    :param action_and_coordinate: Possible actions are HB and HF_X_Y
+
+    action = 'HB'
+    action = 'HF_3_1'
+
+    :param dimensions:
+
+    harvester_world = problem.to_problem(x=4, y=2)
+
+    :param time_left:
+
+    time_left=1
+
+    :return: next_state, action_cost
+
+    To visually compare initial state and action
+    print(problem.interleaved(state_a.grid, state_b.grid, dimensions))
+    """
     new_grid = deepcopy(state.grid)
     action = action_and_coordinate.split('_')[0]
     if action == 'HB':
@@ -54,7 +81,7 @@ def hb(state, time_left):
     step_cost = distance((from_coordinate, current_from_symbol), (to_coordinate, to_symbol), state.distances)
     if (time_left - step_cost) < 0:  # If new time is past horizon then harvester stops short of base.
         distance_to_base = problem.find_distances_to_base(state.distances)[1]
-        to_coordinate, to_symbol = step(from_coordinate, state.grid, time_left, distance_to_base)
+        to_coordinate, to_symbol, step_cost = step(from_coordinate, state.grid, time_left, distance_to_base)
     to_symbol = problem.arriving(current_from_symbol, to_symbol)
     from_symbol = problem.leaving_symbol(current_from_symbol)
     return from_coordinate, from_symbol, to_coordinate, to_symbol, step_cost
@@ -67,9 +94,9 @@ def step(next_step, grid, time_left, distance):
         next_step = policy[0]
         step_cost += 1
     if next_step in grid:
-        return next_step, grid[next_step]
+        return next_step, grid[next_step], step_cost
     else:
-        return next_step, None
+        return next_step, None, step_cost
 
 
 def distance(from_cell, to_cell, distances):
@@ -94,21 +121,36 @@ def distance(from_cell, to_cell, distances):
 
 def hf(state, food_coordinate, time_left):
 
-    from_coordinate, current_from_symbol = problem.find_harvester(state.grid)
+    from_coordinate, from_symbol = problem.find_harvester(state.grid)
     to_coordinate, to_symbol = food_coordinate, 'F'
-    step_cost = distance((from_coordinate, current_from_symbol), (to_coordinate, to_symbol), state.distances)
+    step_cost = distance((from_coordinate, from_symbol), (to_coordinate, to_symbol), state.distances)
     if (time_left - step_cost) < 0:  # If new time is past horizon then harvester stops short of base.
         distance_to_food = problem.find_distances_to_food(state.distances, to_coordinate)[1]
-        to_coordinate, current_symbol = step(from_coordinate, state.grid, time_left, distance_to_food)
-    to_symbol = problem.arriving(current_from_symbol, to_symbol)
-    from_symbol = problem.leaving_symbol(current_from_symbol)
+        to_coordinate, to_symbol, step_cost = step(from_coordinate, state.grid, time_left, distance_to_food)
+    to_symbol = problem.arriving(from_symbol, to_symbol)
+    from_symbol = problem.leaving_symbol(from_symbol)
     return from_coordinate, from_symbol, to_coordinate, to_symbol, step_cost
 
 
 if __name__ == '__main__':
-    foods = [(1,1),(2,2)]
-    a = deepcopy(foods)
-    b = deepcopy(foods)
-    a.pop()
-    print "a: {0}".format(a)
-    print "b: {0}".format(b)
+    import argparse
+    import agent
+    import random
+    random.seed(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("initial_state")
+    parser.add_argument("max_food")
+    parser.add_argument("action")
+    parser.add_argument("time_left")
+    args = parser.parse_args()
+    initial_state, x, y = agent.init_belief(args.initial_state)
+    harvester_world = problem.to_problem(x, y, int(args.max_food))
+    food_dist = problem.chance_of_food(initial_state, harvester_world)
+    initial_state = problem.sample(initial_state, food_dist, harvester_world)
+    next_state, action_cost = transition(initial_state, args.action, harvester_world, int(args.time_left))
+    print "initial_state: {0}".format(args.initial_state)
+    print "max_food: {0}".format(args.max_food)
+    print "action: {0}".format(args.action)
+    print "action cost: {0}".format(action_cost)
+    print(problem.interleaved(initial_state.grid, next_state.grid, harvester_world))
+    random.seed(0)

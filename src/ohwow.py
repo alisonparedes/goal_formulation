@@ -29,7 +29,17 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
     return max_action, max_expected_value
 
 
+def sample(belief_state, number_of_samples, dimensions):
+    sampled_worlds = []
+    food_dist = problem.chance_of_food(belief_state, dimensions)
+    for i in range(number_of_samples):
+        world = problem.sample(belief_state, food_dist, dimensions)
+        sampled_worlds.append(world)
+    return sampled_worlds
+
+
 def summarize_sample(possible_worlds, problem_spec):
+    """A utility function that I used for debugging"""
     summary_grid=[]
     for i in range(problem_spec[0]):
         summary_grid.append([])
@@ -40,15 +50,6 @@ def summarize_sample(possible_worlds, problem_spec):
             if unit in 'F':
                 summary_grid[coordinate[0]][coordinate[1]] += 1
     return summary_grid
-
-
-def sample(belief_state, number_of_samples, dimensions):
-    sampled_worlds = []
-    food_dist = problem.chance_of_food(belief_state, dimensions)
-    for i in range(number_of_samples):
-        world = problem.sample(belief_state, food_dist, dimensions)
-        sampled_worlds.append(world)
-    return sampled_worlds
 
 
 if __name__ == '__main__':
