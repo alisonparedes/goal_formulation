@@ -66,6 +66,22 @@ def interleaved(world, known, problem_spec):
     return printable
 
 
+def print_grid(world, problem_spec):
+    height = problem_spec[1]
+    width = problem_spec[0]
+    world_grid = to_grid(world, problem_spec)
+    printable = ''
+    for y in range(height):
+        for x in range(width):
+            cell = world_grid[x][y]
+            if cell:
+                printable += cell
+            else:
+                printable += '-'
+        printable += '\n'
+    return printable
+
+
 def to_grid(s, problem_spec):
     grid = []
     w = problem_spec[0]

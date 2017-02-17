@@ -13,31 +13,30 @@ def to_node(state, previous, action, g=0, time=0):
 
 
 def search(initial_state, dimensions, horizon=1, return_plan=False):
+    """
+    A breadth first search which keeps track of the maximum value of all nodes see up until a node exceeds the given
+    time horizon.
+    :param initial_state:
+    :param dimensions:
+    :param horizon:
+    :param return_plan:
+    :return:
+    """
     i = to_node(initial_state, previous=None, action=None, g=0, time=0)
-    #goal = Node(State(goal_state,0), previous=None, action=None, g=None) #g is N/A for goal test
     open_list = deque([i])
-    closed_list = deque([])  # TODO: Use a hash table. How would I build a hash table? and hash function? Can Python hash a dictionary?
+    closed_list = deque([])
     nodes_expanded = 0
     max_g = 0
     plan = None
-    time = 0
-
-    while len(open_list) > 0 and time < horizon: #depth < horizon:
-
+    while len(open_list) > 0:
         s = open_list.popleft()
-
-        #print(s.state)
-
-        # if is_goal(s,goal):
-        #    return get_plan(s)    
-        max_g, plan, time = expand(s, open_list, closed_list, max_g, dimensions)
+        if s.time > horizon:
+            break
+        max_g, plan = expand(s, open_list, closed_list, max_g, dimensions, horizon)
         nodes_expanded += 1
-
-    #print(nodes_generated)
-    #print(nodes_expanded)
     if return_plan:
-        print 'plan:', get_plan(plan), max_g
-    return max_g #Return highest reward, not plan
+        return get_plan(plan), max_g
+    return max_g
 
 
 '''
@@ -68,14 +67,13 @@ def get_plan(s):
     return plan
 
 
-def expand(s_node, open_list, closed_list, max_g, dimensions):
+def expand(s_node, open_list, closed_list, max_g, dimensions, horizon):
     expanded = []
     plan = s_node
-    time = s_node.time
     for action in relaxed_problem.applicable_actions(s_node.state):
-        next_state, time = relaxed_problem.transition(s_node.state, action, dimensions, time)
+        next_state, step_time = relaxed_problem.transition(s_node.state, action, dimensions, horizon)
         g = next_state.reward
-        result = to_node(state=next_state, previous=s_node, action=action, g=g, time=time)
+        result = to_node(state=next_state, previous=s_node, action=action, g=g, time=s_node.time + step_time)
         if g > max_g:
             max_g = g
             plan = result
@@ -83,8 +81,29 @@ def expand(s_node, open_list, closed_list, max_g, dimensions):
         open_list.append(result)
         closed_list.append(result.state)
         expanded.append(result)
-    return max_g, plan, time
+    return max_g, plan
 
 
 if __name__ == '__main__':
-    pass
+    import argparse
+    import agent
+    import random
+    import problem
+    random.seed(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("initial_state")
+    parser.add_argument("max_food")
+    parser.add_argument("horizon")
+    args = parser.parse_args()
+    initial_state, x, y = agent.init_belief(args.initial_state)
+    harvester_world = problem.to_problem(x, y, int(args.max_food))
+    food_dist = problem.chance_of_food(initial_state, harvester_world)
+    initial_state = problem.sample(initial_state, food_dist, harvester_world)
+    plan, max_g = search(initial_state, dimensions=harvester_world, horizon=int(args.horizon), return_plan=True)
+    print "initial_state: {0}".format(args.initial_state)
+    print "max_food: {0}".format(args.max_food)
+    print "horizon: {0}".format(args.horizon)
+    print "max_g: {0}".format(max_g)
+    print(plan)
+    print problem.print_grid(initial_state.grid, harvester_world)
+    random.seed(0)
