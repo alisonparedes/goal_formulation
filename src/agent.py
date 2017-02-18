@@ -24,26 +24,10 @@ def update_belief(state, observation):
         return state
     new_grid = update_cell(state.grid, observation.dict)
     new_reward = state.reward
-    if is_pay_day(observation.dict):
-        new_grid = del_explored_cell(new_grid)
+    if problem.found_food(observation.dict):
         new_reward = observation.reward
+        new_grid = problem.del_explored_cell(new_grid)
     return problem.to_state(new_grid, reward=new_reward)
-
-
-def del_explored_cell(grid):
-    explored = list_explored_cell(grid)
-    new_grid = deepcopy(grid)
-    for coordinate, _ in explored.iteritems():
-        del new_grid[coordinate]
-    return new_grid
-
-
-def list_explored_cell(grid):
-    explored = {}
-    for coordinate, cell in grid.iteritems():
-        if cell == '-':
-            explored[coordinate] = cell
-    return explored
 
 
 def update_cell(grid, cell_dict):
@@ -51,12 +35,6 @@ def update_cell(grid, cell_dict):
     for coordinate, cell in cell_dict.iteritems():  # Set of observations is much smaller than state
         new_grid[coordinate] = cell
     return new_grid
-
-
-def is_pay_day(cell_dict):
-    for coordinate, cell in cell_dict.iteritems():
-        if cell == '*':
-            return True
 
 
 def init_reality(reality_file_name):
@@ -139,6 +117,8 @@ if __name__ == '__main__':
     print_step(time_step, reality_state, belief_state, harvester_world)
 
     while time_step < int(args.time):
+        #print("reality: ", reality_state)
+        #print("belief: ", belief_state)
         action = ohwow.ohwow(belief_state,
                              harvester_world,
                              number_of_samples=int(args.sample),
@@ -149,7 +129,6 @@ if __name__ == '__main__':
                                                       dimensions=harvester_world)
         #print(action, observations)
         belief_state = update_belief(belief_state, observations)
-        print(belief_state)
         time_step += 1
         time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)

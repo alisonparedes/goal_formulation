@@ -89,9 +89,11 @@ def to_grid(s, problem_spec):
     for _ in range(w):
         grid.append([None]*h) #Meh
     for coordinate, unit in s.iteritems():
-        x=coordinate[0]
-        y=coordinate[1]
-        grid[x][y]=unit
+        x = coordinate[0]
+        y = coordinate[1]
+        if not unit:
+            unit = '-'
+        grid[x][y] = unit
     return grid
 
 
@@ -129,6 +131,8 @@ def transition(state, action, harvester_world):
     new_grid, remaining_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
     observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
+    if found_food(observations.dict):
+        new_grid = del_explored_cell(new_grid)
     new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     return new_state, observations
 
@@ -233,13 +237,13 @@ def find_food(grid):
 
 
 def chance_of_food(state, problem):
-    """Where food can grow now or later"""
+    """Food cannot grow in cells that have been explored e.g. unit == None"""
     distribution = no_chance(state)
     total_probability = 0.0
     probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*BbH$'):
+            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*BbH$'):
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
@@ -247,9 +251,10 @@ def chance_of_food(state, problem):
 
 
 def no_chance(state):
+    """Food cannot grow in cells that have been explored, e.g. unit == None"""
     distribution = []
     for coordinate, unit in state.grid.iteritems():
-        if unit and unit in 'b*B#H$':  # Food cannot grow in cell occupied by the base or an obstacle
+        if not unit or unit in 'b*B#H$':
             distribution.append((0.0, coordinate))
     return distribution
 
@@ -268,9 +273,8 @@ def sample_food(food_dist, grid, max_food):
     new_grid = deepcopy(grid)
     while count_food(new_grid) < max_food:
         cell = sample_cell(food_dist)
-        if cell:
-            coordinate = cell[1]
-            new_grid = add_food(new_grid, coordinate)
+        if cell and cell[1] not in grid:  # Food cannot grow where agent has already explored
+            new_grid = add_food(new_grid, cell[1])
     return new_grid
 
 
@@ -324,7 +328,7 @@ def merge(unit_a, unit_b):
 def sample_cell(problem_distribution_arr):
     p = random.random()
     cummulative = 0
-    i=-1
+    i =- 1
     while cummulative < p:
         i += 1
         cell = problem_distribution_arr[i]
@@ -399,17 +403,27 @@ def to_dict(w):
     return state
 
 
-def clear_visited(state_grid):
-    cleared = state_grid
-    x=0
-    for col in state_grid:
-        y=0
-        for cell in col:
-            if cell == '-':
-                cleared[x][y] = None
-            y += 1
-        x += 1
-    return cleared
+def found_food(cell_dict):
+    for coordinate, cell in cell_dict.iteritems():
+        if cell and cell in '$*':
+            return True
+
+
+def del_explored_cell(grid):
+    explored = list_explored_cell(grid)
+    new_grid = deepcopy(grid)
+    for coordinate, _ in explored.iteritems():
+        del new_grid[coordinate]
+    return new_grid
+
+
+def list_explored_cell(grid):
+    explored = {}
+    for coordinate, cell in grid.iteritems():
+        if not cell:
+            explored[coordinate] = cell
+    return explored
+
 
 if __name__ == '__main__':
     import argparse
