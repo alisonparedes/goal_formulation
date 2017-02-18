@@ -257,7 +257,7 @@ def no_chance(state):
 def sample(belief_state, food_dist, dimensions):
     """Constructs a world from a belief state"""
     complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
-    future_food = sample_future_food(food_dist, n=10000)
+    future_food = sample_future_food(food_dist, n=100)
     to_base = distance_to_base(complete_grid, dimensions)
     food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
     all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)

@@ -26,7 +26,7 @@ def update_belief(state, observation):
     new_reward = state.reward
     if is_pay_day(observation.dict):
         new_grid = del_explored_cell(new_grid)
-        new_reward += observation.reward
+        new_reward = observation.reward
     return problem.to_state(new_grid, reward=new_reward)
 
 
