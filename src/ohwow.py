@@ -34,7 +34,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
 def sample(belief_state, number_of_samples, dimensions):
     sampled_worlds = []
     food_dist = problem.chance_of_food(belief_state, dimensions)
-    #print(food_dist)
+    print(food_dist)
     for i in range(number_of_samples):
         world = problem.sample(belief_state, food_dist, dimensions)
         sampled_worlds.append(world)
