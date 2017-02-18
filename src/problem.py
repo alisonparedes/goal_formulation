@@ -239,7 +239,7 @@ def chance_of_food(state, problem):
     probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '*Bb'):  # Food can't grow on base
+            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):  # Food can't grow on base
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
