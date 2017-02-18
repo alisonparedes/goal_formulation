@@ -69,8 +69,8 @@ if __name__ == '__main__':
     if args.goal in 'B':
         goal_coordinate, _ = problem.find_base(initial_state.grid)
     else:
-        goal_coordiante = (int(args.goal.split('_')[1]), int(args.goal.split('_')[2]))
-    policy = dijkstra(goal_coordinate, initial_state, harvester_world)
+        goal_coordinate = (int(args.goal.split('_')[1]), int(args.goal.split('_')[2]))
+    policy = dijkstra(goal_coordinate, initial_state.grid, harvester_world)
     print "initial_state: {0}".format(args.initial_state)
     print "goal: {0}".format(args.goal)
     print(interleaved(policy, initial_state.grid, harvester_world))
