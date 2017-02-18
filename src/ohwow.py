@@ -41,9 +41,9 @@ def sample(belief_state, number_of_samples, dimensions):
 def summarize_sample(possible_worlds, problem_spec):
     """A utility function that I used for debugging"""
     summary_grid=[]
-    for i in range(problem_spec[0]):
+    for i in range(problem_spec.x):
         summary_grid.append([])
-        for j in range(problem_spec[1]):
+        for j in range(problem_spec.y):
             summary_grid[i].append(0)
     for world in possible_worlds:
         for coordinate, unit in world.grid.iteritems():
@@ -53,4 +53,23 @@ def summarize_sample(possible_worlds, problem_spec):
 
 
 if __name__ == '__main__':
-    pass
+    import argparse
+    import agent
+    import random
+    random.seed(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("initial_state")
+    parser.add_argument("max_food")
+    parser.add_argument("number_of_samples")
+    args = parser.parse_args()
+    belief_state, x, y = agent.init_belief(args.initial_state)
+    harvester_world = problem.to_problem(x, y, int(args.max_food))
+    food_dist = problem.chance_of_food(belief_state, harvester_world)
+    possible_worlds = sample(belief_state, int(args.number_of_samples), harvester_world)
+    print "initial_state: {0}".format(args.initial_state)
+    print "max_food: {0}".format(args.max_food)
+    print "number_of_samples: {0}".format(args.number_of_samples)
+    print(summarize_sample(possible_worlds, harvester_world))
+    for world in possible_worlds:
+        print(problem.interleaved(world.grid, belief_state.grid, harvester_world))
+    random.seed(0)
