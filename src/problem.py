@@ -239,7 +239,7 @@ def chance_of_food(state, problem):
     probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):  # Food can't grow on base
+            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
@@ -257,7 +257,7 @@ def no_chance(state):
 def sample(belief_state, food_dist, dimensions):
     """Constructs a world from a belief state"""
     complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
-    future_food = sample_future_food(food_dist, n=100)
+    future_food = sample_future_food(food_dist, n=10000)
     to_base = distance_to_base(complete_grid, dimensions)
     food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
     all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
@@ -267,8 +267,10 @@ def sample(belief_state, food_dist, dimensions):
 def sample_food(food_dist, grid, max_food):
     new_grid = deepcopy(grid)
     while count_food(new_grid) < max_food:
-        _, coordinate, _ = sample_cell(food_dist)
-        new_grid = add_food(new_grid, coordinate)
+        cell = sample_cell(food_dist)
+        if cell:
+            coordinate = cell[1]
+            new_grid = add_food(new_grid, coordinate)
     return new_grid
 
 

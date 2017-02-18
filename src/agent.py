@@ -126,14 +126,19 @@ if __name__ == '__main__':
 
     args = parse_args()
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
-    belief_state, _, _ = init_belief(args.belief)
     harvester_world = problem.to_problem(x, y, int(args.max_food))
+    food_dist = problem.chance_of_food(reality_state, harvester_world)
+    future_food = []
+    for i in range(1000):
+        future_food.append(problem.sample_cell(food_dist)[1])
+    reality_state = problem.to_state(reality_state.grid, future_food=future_food)
+    belief_state, _, _ = init_belief(args.belief)
+
     time_step = 0
     print_args(args)
-    print_step(time_step, belief_state, reality_state, harvester_world)
+    print_step(time_step, reality_state, belief_state, harvester_world)
 
     while time_step < int(args.time):
-        food_dist = problem.chance_of_food(belief_state, harvester_world)  # TODO: Share the same dice rolls between simulator and search
         action = ohwow.ohwow(belief_state,
                              harvester_world,
                              number_of_samples=int(args.sample),
@@ -145,5 +150,5 @@ if __name__ == '__main__':
         belief_state = update_belief(belief_state, observations)
         time_step += 1
         time.sleep(0.25)
-        print_step(time_step, belief_state, reality_state, harvester_world)
+        print_step(time_step, reality_state, belief_state, harvester_world)
 
