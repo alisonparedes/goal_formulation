@@ -407,5 +407,26 @@ def clear_visited(state_grid):
     return cleared
 
 if __name__ == '__main__':
-    pass
+    import argparse
+    import agent
+    import random
+    random.seed(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("initial_state")
+    parser.add_argument("max_food")
+    parser.add_argument("action")
+    args = parser.parse_args()
+    initial_state, x, y = agent.init_belief(args.initial_state)
+    harvester_world = to_problem(x, y, int(args.max_food))
+    food_dist = chance_of_food(initial_state, harvester_world)
+    initial_state = sample(initial_state, food_dist, harvester_world)
+    next_state, observations = transition(initial_state, args.action, harvester_world)
+    belief_state = agent.update_belief(initial_state, observations)
+    print "initial_state: {0}".format(args.initial_state)
+    print "max_food: {0}".format(args.max_food)
+    print "action: {0}".format(args.action)
+    print "reward: {0}".format(next_state.reward)
+    print(interleaved(initial_state.grid, next_state.grid, harvester_world))
+    print(interleaved(next_state.grid, belief_state.grid, harvester_world))
+    random.seed(0)
     
