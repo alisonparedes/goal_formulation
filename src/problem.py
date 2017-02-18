@@ -128,11 +128,12 @@ def transition(state, action, harvester_world):
     new_grid = deepcopy(state.grid)
     new_grid[new_from_cell[0]] = new_from_cell[1]
     new_grid[new_to_cell[0]] = new_to_cell[1]
+    if new_from_cell[1] and new_from_cell[1] in '*$':
+        new_grid = del_explored_cell(new_grid)
     new_grid, remaining_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
     observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
-    if found_food(observations.dict):
-        new_grid = del_explored_cell(new_grid)
+
     new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     return new_state, observations
 
@@ -184,7 +185,7 @@ def replace_food(grid, future_food, max_food):
 def add_food(grid, coordinate):
     new_grid = deepcopy(grid)
     if coordinate in new_grid:
-        if new_grid[coordinate] in 'H$':
+        if not new_grid[coordinate] or new_grid[coordinate] in 'H$':
             return grid  # new_grid[coordinate] = '$'
     else:
         new_grid[coordinate] = 'F'
@@ -243,7 +244,7 @@ def chance_of_food(state, problem):
     probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*BbH$'):
+            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
@@ -254,7 +255,7 @@ def no_chance(state):
     """Food cannot grow in cells that have been explored, e.g. unit == None"""
     distribution = []
     for coordinate, unit in state.grid.iteritems():
-        if not unit or unit in 'b*B#H$':
+        if not unit or unit in 'b*B#':
             distribution.append((0.0, coordinate))
     return distribution
 
