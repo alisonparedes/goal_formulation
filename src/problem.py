@@ -119,7 +119,7 @@ def unit_actions(coordinate, grid, problem):
 
 def transition(state, action, harvester_world):
     """Does a lot of stuff!"""
-    new_from_cell, new_to_cell = move(state, action)
+    new_from_cell, new_to_cell = move(state, action, harvester_world)
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
         observation = to_observation({(new_to_cell.coordinate): '#'})
         return state, observation
@@ -133,25 +133,27 @@ def transition(state, action, harvester_world):
     return new_state, observations
 
 
-def move(state, action):
+def move(state, action, harvester_world):
     harvester_coordinate, harvester_symbol = find_harvester(state.grid)
     new_from_symbol = leaving_symbol(harvester_symbol)
-    new_to_coordinate = to_coordinate(harvester_coordinate, action)
+    new_to_coordinate = to_coordinate(harvester_coordinate, action, harvester_world)
     to_symbol = state.grid.get(new_to_coordinate, None)
+    if to_symbol and to_symbol in '#':
+        return (harvester_coordinate, harvester_symbol), (harvester_coordinate, harvester_symbol)
     new_to_symbol = arriving(harvester_symbol, to_symbol)
     return (harvester_coordinate, new_from_symbol), (new_to_coordinate, new_to_symbol)
 
 
-def to_coordinate(coordinate, action):
+def to_coordinate(coordinate, action, harvester_world):
     x = coordinate[0]
     y = coordinate[1]
-    if action == 'N':
+    if action == 'N' and y - 1 >= 0:
         y += -1
-    elif action == 'S':
+    elif action == 'S' and y + 1 < harvester_world.y:
         y += 1
-    elif action == 'E':
+    elif action == 'E' and x + 1 < harvester_world.x:
         x += 1
-    elif action == 'W':
+    elif action == 'W' and x - 1 >= 0:
         x += -1
     return x, y
 
@@ -211,6 +213,7 @@ def arriving(from_symbol, to_symbol):
         return 'b'
     if from_symbol in 'b*':
         return 'H'
+
     return from_symbol
 
 
@@ -427,6 +430,5 @@ if __name__ == '__main__':
     print "action: {0}".format(args.action)
     print "reward: {0}".format(next_state.reward)
     print(interleaved(initial_state.grid, next_state.grid, harvester_world))
-    print(interleaved(next_state.grid, belief_state.grid, harvester_world))
     random.seed(0)
     
