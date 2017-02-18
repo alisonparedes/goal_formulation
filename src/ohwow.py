@@ -13,13 +13,15 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
 
     sampled_worlds = sample(belief_state, number_of_samples, dimensions)
     actions_in_s = problem.applicable_actions(belief_state, dimensions)
-
+    #print(belief_state.grid)
+    #print(summarize_sample(sampled_worlds, dimensions))
     max_action = None
     max_expected_value = -1000
     for action in actions_in_s:
         total_reward = 0.0
         for initial_state in sampled_worlds:
             next_state, _ = problem.transition(initial_state, action, dimensions)
+            #print(problem.interleaved(initial_state.grid, next_state.grid, dimensions))
             total_reward += next_state.reward
             total_reward += bfs_g.search(next_state, dimensions, horizon)
         expected_value = total_reward/float(number_of_samples)
@@ -32,6 +34,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
 def sample(belief_state, number_of_samples, dimensions):
     sampled_worlds = []
     food_dist = problem.chance_of_food(belief_state, dimensions)
+    #print(food_dist)
     for i in range(number_of_samples):
         world = problem.sample(belief_state, food_dist, dimensions)
         sampled_worlds.append(world)
@@ -47,7 +50,7 @@ def summarize_sample(possible_worlds, problem_spec):
             summary_grid[i].append(0)
     for world in possible_worlds:
         for coordinate, unit in world.grid.iteritems():
-            if unit in 'F':
+            if unit and unit in 'F':
                 summary_grid[coordinate[0]][coordinate[1]] += 1
     return summary_grid
 

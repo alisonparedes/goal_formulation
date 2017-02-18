@@ -181,7 +181,7 @@ def add_food(grid, coordinate):
     new_grid = deepcopy(grid)
     if coordinate in new_grid:
         if new_grid[coordinate] in 'H$':
-            new_grid[coordinate] = '$'
+            return grid  # new_grid[coordinate] = '$'
     else:
         new_grid[coordinate] = 'F'
     return new_grid
@@ -239,7 +239,7 @@ def chance_of_food(state, problem):
     probability = 1.0 / (problem.x * problem.y - len(distribution))
     for x in range(0, problem.x):
         for y in range(0, problem.y):
-            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):
+            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*BbH$'):
                 distribution.append((probability, (x, y), 'F'))
                 total_probability += probability
     distribution.append((1 - total_probability, None))
@@ -249,7 +249,7 @@ def chance_of_food(state, problem):
 def no_chance(state):
     distribution = []
     for coordinate, unit in state.grid.iteritems():
-        if unit and unit in 'b*B#':  # Food cannot grow in cell occupied by the base or an obstacle
+        if unit and unit in 'b*B#H$':  # Food cannot grow in cell occupied by the base or an obstacle
             distribution.append((0.0, coordinate))
     return distribution
 

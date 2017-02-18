@@ -147,6 +147,7 @@ if __name__ == '__main__':
                                                       action[0],
                                                       reality_state,
                                                       dimensions=harvester_world)
+        #print(action, observations)
         belief_state = update_belief(belief_state, observations)
         time_step += 1
         time.sleep(0.25)
