@@ -3,12 +3,11 @@ Created on Aug 18, 2016
 
 @author: lenovo
 '''
-
+import random
 
 from collections import namedtuple
 from copy import deepcopy  # I am not sure if copy would have been sufficient
 import dijkstra
-import random
 
 
 def to_problem(x, y, max_food=0):

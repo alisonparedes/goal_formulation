@@ -11,6 +11,7 @@ import argparse
 import time
 import problem
 from copy import deepcopy
+import sys
 
 
 def update_belief(state, observation):
@@ -130,6 +131,6 @@ if __name__ == '__main__':
         #print(action, observations)
         belief_state = update_belief(belief_state, observations)
         time_step += 1
-        time.sleep(0.25)
+        #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)
-
+    sys.exit(0)
