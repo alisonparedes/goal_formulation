@@ -133,4 +133,5 @@ if __name__ == '__main__':
         time_step += 1
         #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)
+    print("total reward: {0}\n".format(belief_state.reward))
     sys.exit(0)
