@@ -118,7 +118,7 @@ def unit_actions(coordinate, grid, problem):
     return actions
 
 
-def transition(state, action, harvester_world):
+def transition(state, action, harvester_world, known=False):
     """Does a lot of stuff!"""
     new_from_cell, new_to_cell = move(state, action, harvester_world)
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
@@ -129,9 +129,11 @@ def transition(state, action, harvester_world):
     new_grid[new_to_cell[0]] = new_to_cell[1]
     if new_from_cell[1] and new_from_cell[1] in '*$':
         new_grid = del_explored_cell(new_grid)
-    new_grid, remaining_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
+    new_grid, remaining_food, new_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
     observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
+    if known and new_food:
+        observations.dict[new_food] = 'F'
 
     new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     return new_state, observations
@@ -173,22 +175,24 @@ def leaving_symbol(from_symbol):
 def replace_food(grid, future_food, max_food):
     _, harvester_symbol = find_harvester(grid)
     if harvester_symbol != '$':
-        return grid, future_food
+        return grid, future_food, None
     remaining_food = deepcopy(future_food)
     new_grid = deepcopy(grid)
+    new_food = None
     while count_food(new_grid) < max_food:
-        new_grid = add_food(new_grid, remaining_food.pop())
-    return new_grid, remaining_food
+        new_grid, new_food = add_food(new_grid, remaining_food.pop())
+
+    return new_grid, remaining_food, new_food
 
 
 def add_food(grid, coordinate):
     new_grid = deepcopy(grid)
     if coordinate in new_grid:
         if not new_grid[coordinate] or new_grid[coordinate] in 'H$':
-            return grid  # new_grid[coordinate] = '$'
+            return grid, None  # new_grid[coordinate] = '$'
     else:
         new_grid[coordinate] = 'F'
-    return new_grid
+    return new_grid, coordinate
 
 
 def reward(grid):
@@ -259,33 +263,34 @@ def no_chance(state):
     return distribution
 
 
-def sample(belief_state, food_dist, dimensions):
+def sample(belief_state, dimensions):
     """Constructs a world from a belief state"""
-    complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
-    future_food = sample_future_food(food_dist, n=100)
+    complete_grid = sample_max_food(belief_state.grid, dimensions)
+    future_food = sample_n_future_food(belief_state.grid, dimensions, 1000)
     to_base = distance_to_base(complete_grid, dimensions)
     food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
     all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
     return to_state(complete_grid, belief_state.reward, distances=all_distances, future_food=future_food)
 
 
-def sample_food(food_dist, grid, max_food):
-    new_grid = deepcopy(grid)
-    while count_food(new_grid) < max_food:
-        cell = sample_cell(food_dist)
-        if cell and cell[1] not in grid:  # Food cannot grow where agent has already explored
-            new_grid = add_food(new_grid, cell[1])
-    return new_grid
+# def sample_food(food_dist, grid, max_food):
+#     new_grid = deepcopy(grid)
+#     print(food_dist)
+#     while count_food(new_grid) < max_food:
+#         cell = sample_cell(food_dist)
+#         if cell and cell[1] not in grid:  # Food cannot grow where agent has already explored
+#             new_grid = add_food(new_grid, cell[1])
+#     return new_grid
 
 
-def sample_future_food(food_dist, n=1):
-    food_sequence = []
-    while n > 0:
-        sampled_food = sample_cell(food_dist)[1]  #TODO: Use the same list of random numbers as the simulator
-        if sampled_food:  # There is a small chance that we sampled no food
-            food_sequence.append(sampled_food)
-            n -= 1
-    return food_sequence
+# def sample_future_food(food_dist, n=1):
+#     food_sequence = []
+#     while n > 0:
+#         sampled_food = sample_cell(food_dist)[1]  #TODO: Use the same list of random numbers as the simulator
+#         if sampled_food:  # There is a small chance that we sampled no food
+#             food_sequence.append(sampled_food)
+#             n -= 1
+#     return food_sequence
 
 
 def count_food(grid):
@@ -296,15 +301,15 @@ def count_food(grid):
     return food
 
 
-def add_food(grid, coordinate):
-    new_grid = deepcopy(grid)
-    if coordinate:
-        if coordinate in grid:
-            new_unit = merge(new_grid[coordinate], 'F')
-            new_grid[coordinate] = new_unit
-        else:
-            new_grid[coordinate] = 'F'
-    return new_grid
+# def add_food(grid, coordinate):
+#     new_grid = deepcopy(grid)
+#     if coordinate:
+#         if coordinate in grid:
+#             new_unit = merge(new_grid[coordinate], 'F')
+#             new_grid[coordinate] = new_unit
+#         else:
+#             new_grid[coordinate] = 'F'
+#     return new_grid
 
 
 def merge(unit_a, unit_b):
@@ -325,16 +330,16 @@ def merge(unit_a, unit_b):
     return unit_b
 
 
-def sample_cell(problem_distribution_arr):
-    p = random.random()
-    cummulative = 0
-    i =- 1
-    while cummulative < p:
-        i += 1
-        cell = problem_distribution_arr[i]
-        probability = cell[0]
-        cummulative += probability
-    return cell
+# def sample_cell(problem_distribution_arr):
+#     p = random.random()
+#     cummulative = 0
+#     i =- 1
+#     while cummulative < p:
+#         i += 1
+#         cell = problem_distribution_arr[i]
+#         probability = cell[0]
+#         cummulative += probability
+#     return cell
 
 
 def distance_to_base(grid, problem):
@@ -425,6 +430,54 @@ def list_explored_cell(grid):
     return explored
 
 
+def sample_cell(width, height):
+    sampled_x = random.randint(0, width - 1)
+    sampled_y = random.randint(0, height - 1)
+    return sampled_x, sampled_y
+
+
+def try_food(grid, coordinate):
+    if coordinate not in grid:
+        return coordinate
+    # Is in grid
+    if not grid[coordinate]:
+        return None
+    if grid[coordinate] in 'Bb*#H$':
+        return None
+
+
+def sample_max_food(grid, dimensions):
+    new_grid = deepcopy(grid)
+    while count_food(new_grid) < dimensions.max_food:
+        try_coordinate = sample_cell(dimensions.x, dimensions.y)
+        coordinate = try_food(grid, try_coordinate)
+        if coordinate:
+            new_grid[coordinate] = 'F'
+    return new_grid
+
+
+def try_future_food(grid, coordinate):
+    if coordinate not in grid:
+        return coordinate
+    if not grid[coordinate]:
+        return coordinate
+    if grid[coordinate] in 'Bb*#':
+        return None
+    if grid[coordinate] in 'H$':
+        return coordinate
+
+
+def sample_n_future_food(grid, harvester_world, n=1):
+    food_sequence = []
+    while n > 0:
+        try_coordinate = sample_cell(harvester_world.x, harvester_world.y)
+        coordinate = try_future_food(grid, try_coordinate)
+        if coordinate:
+            food_sequence.append(coordinate)
+            n -= 1
+    return food_sequence
+
+
 if __name__ == '__main__':
     import argparse
     import agent
@@ -437,14 +490,29 @@ if __name__ == '__main__':
     args = parser.parse_args()
     initial_state, x, y = agent.init_belief(args.initial_state)
     harvester_world = to_problem(x, y, int(args.max_food))
-    food_dist = chance_of_food(initial_state, harvester_world)
-    initial_state = sample(initial_state, food_dist, harvester_world)
-    next_state, observations = transition(initial_state, args.action, harvester_world)
-    belief_state = agent.update_belief(initial_state, observations)
+    complete_grid = sample_max_food(initial_state.grid, harvester_world)
+    future_food = sample_n_future_food(initial_state.grid, harvester_world, 10)
+    print(future_food)
+    # To replace food distribution in sampling the following need to work
+    # complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
+    # future_food = sample_future_food(food_dist, n=100)
+    to_base = distance_to_base(complete_grid, harvester_world)
+    food_distances = add_distance_to_food(complete_grid, to_base, harvester_world)
+    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, harvester_world)
+    new_state = to_state(complete_grid, initial_state.reward, distances=all_distances, future_food=future_food)
+    print(new_state.distances)
+
+
+    # food_dist = chance_of_food(initial_state, harvester_world)
+    # initial_state = sample(initial_state, food_dist, harvester_world)
+    # next_state, observations = transition(initial_state, args.action, harvester_world)
+    # belief_state = agent.update_belief(initial_state, observations)
     print "initial_state: {0}".format(args.initial_state)
     print "max_food: {0}".format(args.max_food)
-    print "action: {0}".format(args.action)
-    print "reward: {0}".format(next_state.reward)
-    print(interleaved(initial_state.grid, next_state.grid, harvester_world))
-    random.seed(0)
+    print print_grid(initial_state.grid, harvester_world)
+    print print_grid(complete_grid, harvester_world)
+    # print "action: {0}".format(args.action)
+    # print "reward: {0}".format(next_state.reward)
+    # print(interleaved(initial_state.grid, next_state.grid, harvester_world))
+    # random.seed(0)
     

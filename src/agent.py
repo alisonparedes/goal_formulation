@@ -81,6 +81,8 @@ def parse_args():
     parser.add_argument("sample")
     parser.add_argument("max_food")
     parser.add_argument("time")
+    parser.add_argument("seed")
+    parser.add_argument("known")
     return parser.parse_args()
 
 
@@ -91,6 +93,8 @@ def print_args(args):
     print "sample: {0}".format(args.sample)
     print "max_food: {0}".format(args.max_food)
     print "time: {0}".format(args.time)
+    print "seed: {0}".format(args.seed)
+    print "known: {0}".format(args.known)
     print "\n"
 
 
@@ -102,14 +106,15 @@ def print_step(time_step, state_a, state_b, dimensions):
 
 
 if __name__ == '__main__':
-
+    import random
     args = parse_args()
+    random.seed(int(args.seed))
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
     harvester_world = problem.to_problem(x, y, int(args.max_food))
-    food_dist = problem.chance_of_food(reality_state, harvester_world)
-    future_food = []
-    for i in range(1000):
-        future_food.append(problem.sample_cell(food_dist)[1])
+    # food_dist = problem.chance_of_food(reality_state, harvester_world)
+    future_food = problem.sample_n_future_food(reality_state.grid, harvester_world, 1000)
+    # for i in range(1000):
+    #     future_food.append(problem.sample_cell(food_dist)[1])
     reality_state = problem.to_state(reality_state.grid, future_food=future_food)
     belief_state, _, _ = init_belief(args.belief)
 
@@ -127,7 +132,8 @@ if __name__ == '__main__':
         reality_state, observations = simulator.simulate(belief_state,
                                                       action[0],
                                                       reality_state,
-                                                      dimensions=harvester_world)
+                                                      dimensions=harvester_world,
+                                                         known=int(args.known))
         #print(action, observations)
         belief_state = update_belief(belief_state, observations)
         time_step += 1

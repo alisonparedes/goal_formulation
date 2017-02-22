@@ -22,16 +22,23 @@ if __name__ == '__main__':
 
     dimensions = problem.to_problem(int(args.width), int(args.width))
 
-    for i in range(int(args.n_worlds)):
-        grid = {}
+    for w in range(int(args.n_worlds)):
+        reality = {}
+        belief = {}
         b_x, b_y = random_coordinate(int(args.width), int(args.height))
-        grid[(b_x, b_y)] = "b"
+        reality[(b_x, b_y)] = "b"
+        belief[(b_x, b_y)] = "b"
 
-        for _ in range(int(args.max_food)):
+        i = 0
+        while i < int(args.max_food):
             x, y = random_coordinate(int(args.width), int(args.height))
-            grid[(x, y)] = "F"
+            if (x, y) not in reality:
+                reality[(x, y)] = "F"
+                i += 1
 
-            with open("../test/{0}_{1}.world".format(args.file_name, i), "w") as world_file:
-                world_file.write(problem.print_grid(grid, dimensions))
+        with open("../test/{0}_{1}_real.world".format(args.file_name, w), "w") as world_file:
+            world_file.write(problem.print_grid(reality, dimensions))
+        with open("../test/{0}_{1}_belief.world".format(args.file_name, w), "w") as world_file:
+            world_file.write(problem.print_grid(belief, dimensions))
 
 
