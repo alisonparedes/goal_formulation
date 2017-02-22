@@ -180,7 +180,9 @@ def replace_food(grid, future_food, max_food):
     new_grid = deepcopy(grid)
     new_food = None
     while count_food(new_grid) < max_food:
-        new_grid, new_food = add_food(new_grid, remaining_food.pop())
+        try_coordinate = remaining_food.pop()
+        new_grid, new_food = add_food(new_grid, try_coordinate)
+        remaining_food.insert(0, try_coordinate)
 
     return new_grid, remaining_food, new_food
 
@@ -460,7 +462,8 @@ def try_future_food(grid, coordinate):
     if coordinate not in grid:
         return coordinate
     if not grid[coordinate]:
-        return coordinate
+    #     return coordinate
+        return None
     if grid[coordinate] in 'Bb*#':
         return None
     if grid[coordinate] in 'H$':
@@ -474,7 +477,7 @@ def sample_n_future_food(grid, harvester_world, n=1):
         coordinate = try_future_food(grid, try_coordinate)
         if coordinate:
             food_sequence.append(coordinate)
-            n -= 1
+        n -= 1
     return food_sequence
 
 
@@ -491,7 +494,7 @@ if __name__ == '__main__':
     initial_state, x, y = agent.init_belief(args.initial_state)
     harvester_world = to_problem(x, y, int(args.max_food))
     complete_grid = sample_max_food(initial_state.grid, harvester_world)
-    future_food = sample_n_future_food(initial_state.grid, harvester_world, 10)
+    future_food = sample_n_future_food(initial_state.grid, harvester_world, 100)
     print(future_food)
     # To replace food distribution in sampling the following need to work
     # complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)

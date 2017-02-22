@@ -65,8 +65,10 @@ def transition(state, action_and_coordinate, dimensions, time_left=1):
     new_grid[to_coordinate] = to_symbol
     remaining_food = deepcopy(state.future_food)
     while problem.count_food(new_grid) < dimensions.max_food:
-        new_grid, _ = problem.add_food(new_grid, remaining_food.pop())
-
+        try_coordinate = remaining_food.pop()
+        new_grid, new_food = problem.add_food(new_grid, try_coordinate)
+        #print(remaining_food)
+        remaining_food.insert(0, try_coordinate)
     new_reward = state.reward + problem.reward(new_grid) - action_cost
     next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     return next_state, action_cost
