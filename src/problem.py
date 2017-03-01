@@ -4,15 +4,16 @@ Created on Aug 18, 2016
 @author: lenovo
 '''
 import random
+import copy
 
 from collections import namedtuple
 from copy import deepcopy  # I am not sure if copy would have been sufficient
 import dijkstra
 
 
-def to_problem(x, y, max_food=0):
-    Problem = namedtuple("Problem", ["x", "y", "max_food"])
-    return Problem(x, y, max_food)
+def to_problem(x, y, max_food=0, known=False):
+    Problem = namedtuple("Problem", ["x", "y", "max_food", "known"])
+    return Problem(x, y, max_food, known)
 
 
 def to_state(grid_dict, reward=0, future_food=[], distances={}):
@@ -118,8 +119,10 @@ def unit_actions(coordinate, grid, problem):
     return actions
 
 
-def transition(state, action, harvester_world, known=False):
+def transition(state, action, harvester_world):
     """Does a lot of stuff!"""
+    print("Transition from:\n")
+    print(print_grid(state.grid, harvester_world))
     new_from_cell, new_to_cell = move(state, action, harvester_world)
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
         observation = to_observation({(new_to_cell.coordinate): '#'})
@@ -129,13 +132,22 @@ def transition(state, action, harvester_world, known=False):
     new_grid[new_to_cell[0]] = new_to_cell[1]
     if new_from_cell[1] and new_from_cell[1] in '*$':
         new_grid = del_explored_cell(new_grid)
-    new_grid, remaining_food, new_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
+    # new_grid, remaining_food, new_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
     new_reward = reward(new_grid) + state.reward
-    observations = to_observation({new_from_cell[0]: new_from_cell[1], new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
-    if known and new_food:
-        observations.dict[new_food] = 'F'
-
+    obs_from_sym = new_from_cell[1]
+    if not obs_from_sym:
+        obs_from_sym = '-'
+    observations = to_observation({new_from_cell[0]: obs_from_sym, new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
+    remaining_food = state.future_food
+    while count_food(new_grid) < harvester_world.max_food:
+        new_food, remaining_food = sample_replacement_food(new_grid, state.future_food)
+        new_grid[new_food] = 'F'
+        if harvester_world.known and new_food:
+            observations.dict[new_food] = 'F'
+    # new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
+    print("Transition to:\n")
+    print(print_grid(new_state.grid, harvester_world))
     return new_state, observations
 
 
@@ -268,11 +280,15 @@ def no_chance(state):
 def sample(belief_state, dimensions):
     """Constructs a world from a belief state"""
     complete_grid = sample_max_food(belief_state.grid, dimensions)
-    future_food = sample_n_future_food(belief_state.grid, dimensions, 1000)
-    to_base = distance_to_base(complete_grid, dimensions)
-    food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
-    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
-    return to_state(complete_grid, belief_state.reward, distances=all_distances, future_food=future_food)
+    if dimensions.known:
+        future_food = belief_state.future_food
+    else:
+        future_food = sample_n_future_food(dimensions, 100000)
+    distances = all_distances(complete_grid, dimensions)
+    # to_base = distance_to_base(complete_grid, dimensions)
+    # food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
+    # all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
+    return to_state(complete_grid, belief_state.reward, distances=distances, future_food=future_food)
 
 
 # def sample_food(food_dist, grid, max_food):
@@ -317,6 +333,8 @@ def count_food(grid):
 def merge(unit_a, unit_b):
     if not unit_a:
         return unit_b
+    if unit_a in '-':
+        return unit_b
     if unit_a in '$H' and unit_b in 'F':
         return '$'
     if unit_a in '*' and unit_b in 'F':
@@ -352,6 +370,15 @@ def distance_to_base(grid, problem):
     return new_distance
 
 
+def all_distances(grid, problem):
+    distances = []
+    for x in range(problem.x):
+        for y in range(problem.y):
+            if (x, y) not in grid or not grid[(x, y)] or grid[(x, y)] not in '#':
+                distances.append(((x, y), dijkstra.dijkstra((x, y), grid, problem)))
+    return distances
+
+
 def add_distance_to_food(grid, distance, problem):
     new_distance = deepcopy(distance)
     food = find_food(grid)
@@ -377,7 +404,7 @@ def find_distances_to_base(distances):
 
 def find_distances_to_food(distances, food):
     for d in distances:
-        if d[0][0] == food:
+        if d[0] == food:
             return d
     return None
 
@@ -427,7 +454,7 @@ def del_explored_cell(grid):
 def list_explored_cell(grid):
     explored = {}
     for coordinate, cell in grid.iteritems():
-        if not cell:
+        if cell and cell in '-':
             explored[coordinate] = cell
     return explored
 
@@ -441,16 +468,16 @@ def sample_cell(width, height):
 def try_food(grid, coordinate):
     if coordinate not in grid:
         return coordinate
-    # Is in grid
-    if not grid[coordinate]:
+    if grid[coordinate] and grid[coordinate] in 'Bb*#H$-':
         return None
-    if grid[coordinate] in 'Bb*#H$':
-        return None
+    return coordinate
 
 
 def sample_max_food(grid, dimensions):
+    #print(grid)
     new_grid = deepcopy(grid)
     while count_food(new_grid) < dimensions.max_food:
+        #print(try_coordinate)
         try_coordinate = sample_cell(dimensions.x, dimensions.y)
         coordinate = try_food(grid, try_coordinate)
         if coordinate:
@@ -458,30 +485,41 @@ def sample_max_food(grid, dimensions):
     return new_grid
 
 
+def sample_replacement_food(grid, future_food):
+    remaining_food = copy.copy(future_food)
+    while True:
+        try_x = remaining_food.pop()
+        try_y = remaining_food.pop()
+        print(try_x, try_y)
+        remaining_food.insert(0, try_x)
+        remaining_food.insert(0, try_y)
+        coordinate = try_food(grid, (try_x, try_y))
+        if coordinate:
+            return coordinate, remaining_food
+
+
 def try_future_food(grid, coordinate):
     if coordinate not in grid:
         return coordinate
-    if not grid[coordinate]:
-    #     return coordinate
-        return None
     if grid[coordinate] in 'Bb*#':
         return None
     if grid[coordinate] in 'H$':
         return coordinate
 
 
-def sample_n_future_food(grid, harvester_world, n=1):
+def sample_n_future_food(harvester_world, n=1):
     food_sequence = []
-    while n > 0:
-        try_coordinate = sample_cell(harvester_world.x, harvester_world.y)
-        coordinate = try_future_food(grid, try_coordinate)
-        if coordinate:
-            food_sequence.append(coordinate)
-        n -= 1
+    for _ in range(n):
+        food_sequence.append(random.randint(0, harvester_world.x - 1))
     return food_sequence
 
 
 if __name__ == '__main__':
+    # grid = {}
+    # harvester_world = to_problem(2, 2)
+    # d = all_distances(grid, harvester_world)
+    # print(d)
+    """
     import argparse
     import agent
     import random
@@ -518,4 +556,5 @@ if __name__ == '__main__':
     # print "reward: {0}".format(next_state.reward)
     # print(interleaved(initial_state.grid, next_state.grid, harvester_world))
     # random.seed(0)
+    """
     

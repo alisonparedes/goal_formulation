@@ -34,8 +34,10 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
             break
         max_g, plan = expand(s, open_list, closed_list, max_g, dimensions, horizon)
         nodes_expanded += 1
+    return_plan = True
     if return_plan:
-        return get_plan(plan), max_g
+#        return get_plan(plan), max_g
+        print(max_g, get_plan(plan))
     return max_g
 
 

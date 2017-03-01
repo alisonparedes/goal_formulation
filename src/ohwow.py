@@ -10,8 +10,10 @@ import problem
 def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
     """
     """
-
+    print("Oh wow:")
+    print(belief_state.future_food)
     sampled_worlds = sample(belief_state, number_of_samples, dimensions)
+    print(summarize_sample(sampled_worlds, dimensions))
     actions_in_s = problem.applicable_actions(belief_state, dimensions)
     max_action = None
     max_expected_value = -1000
@@ -25,7 +27,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
             total_reward += next_state.reward
             total_reward += bfs_g.search(next_state, dimensions, horizon)
         expected_value = total_reward/float(number_of_samples)
-        #print(action, expected_value)
+        print(action, expected_value)
         if expected_value > max_expected_value:
             max_expected_value = expected_value
             max_action = action

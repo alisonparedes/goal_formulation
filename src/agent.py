@@ -14,7 +14,7 @@ from copy import deepcopy
 import sys
 
 
-def update_belief(state, observation):
+def update_belief(state, observation, known=False, reality_state=None):
     """An agent can update its own belief state about the location of objects in the world and how much reward it has
     accumulated so far.
     :param state: A state object representing the agent's current belief state
@@ -28,7 +28,10 @@ def update_belief(state, observation):
     if problem.found_food(observation.dict):
         new_reward = observation.reward
         new_grid = problem.del_explored_cell(new_grid)
-    return problem.to_state(new_grid, reward=new_reward)
+    future_food = None
+    if known:
+        future_food = reality_state.future_food
+    return problem.to_state(new_grid, reward=new_reward, future_food=future_food)
 
 
 def update_cell(grid, cell_dict):
@@ -56,7 +59,7 @@ def init_reality(reality_file_name):
     return problem.to_state(grid_dict), x, y
 
 
-def init_belief(belief_file_name):
+def init_belief(belief_file_name, future_food=None):
     """Constructs the agent's initial belief about the world from a file.
     param: belief_file_name: The path and name of a file illustrating the agent's belief. See problem for format.
     return: Agent's initial belief state
@@ -70,7 +73,7 @@ def init_belief(belief_file_name):
             x = len(line) - 1
             y += 1
     grid = problem.parse(belief_str)
-    return problem.to_state(grid), x, y
+    return problem.to_state(grid, future_food=future_food), x, y
 
 
 def parse_args():
@@ -110,13 +113,17 @@ if __name__ == '__main__':
     args = parse_args()
     random.seed(int(args.seed))
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
-    harvester_world = problem.to_problem(x, y, int(args.max_food))
+    harvester_world = problem.to_problem(x, y, int(args.max_food), int(args.known))
     # food_dist = problem.chance_of_food(reality_state, harvester_world)
-    future_food = problem.sample_n_future_food(reality_state.grid, harvester_world, 1000)
+    future_food = problem.sample_n_future_food(harvester_world, 10000)
     # for i in range(1000):
     #     future_food.append(problem.sample_cell(food_dist)[1])
     reality_state = problem.to_state(reality_state.grid, future_food=future_food)
-    belief_state, _, _ = init_belief(args.belief)
+
+    if harvester_world.known:
+        belief_state, _, _ = init_belief(args.belief, future_food=future_food)
+    else:
+        belief_state, _, _ = init_belief(args.belief)
 
     time_step = 0
     print_args(args)
@@ -130,12 +137,11 @@ if __name__ == '__main__':
                              number_of_samples=int(args.sample),
                              horizon=int(args.horizon))
         reality_state, observations = simulator.simulate(belief_state,
-                                                      action[0],
-                                                      reality_state,
-                                                      dimensions=harvester_world,
-                                                         known=int(args.known))
-        #print(action, observations)
-        belief_state = update_belief(belief_state, observations)
+                                                         action[0],
+                                                         reality_state,
+                                                         dimensions=harvester_world)
+        print(action, observations)
+        belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
         time_step += 1
         #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)
