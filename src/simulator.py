@@ -16,8 +16,8 @@ def simulate(belief_state, action, real_world, dimensions):
     world and a set of observations for the agent to incorporate into its belief state. The problem module's transition
     function will handle how the world changes.
     """
-    print("Simulator:")
-    print(real_world.future_food)
+    # print("Simulator:")
+    # print(real_world.future_food)
     new_state, observations = problem.transition(real_world, action, dimensions)
     return new_state, observations
 

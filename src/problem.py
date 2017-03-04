@@ -121,33 +121,42 @@ def unit_actions(coordinate, grid, problem):
 
 def transition(state, action, harvester_world):
     """Does a lot of stuff!"""
-    print("Transition from:\n")
-    print(print_grid(state.grid, harvester_world))
+    # rint("Transition from:\n")
+    # print(print_grid(state.grid, harvester_world))
     new_from_cell, new_to_cell = move(state, action, harvester_world)
+
     if new_to_cell[1] and new_to_cell[1] in '#':  # Sometimes the action available in the beilef state is not really available
-        observation = to_observation({(new_to_cell.coordinate): '#'})
+        observation = to_observation({(new_to_cell[0]): '#'})
         return state, observation
+
     new_grid = deepcopy(state.grid)
     new_grid[new_from_cell[0]] = new_from_cell[1]
     new_grid[new_to_cell[0]] = new_to_cell[1]
+
     if new_from_cell[1] and new_from_cell[1] in '*$':
         new_grid = del_explored_cell(new_grid)
+
     # new_grid, remaining_food, new_food = replace_food(new_grid, state.future_food, harvester_world.max_food)
+
     new_reward = reward(new_grid) + state.reward
+
     obs_from_sym = new_from_cell[1]
     if not obs_from_sym:
         obs_from_sym = '-'
     observations = to_observation({new_from_cell[0]: obs_from_sym, new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
+
     remaining_food = state.future_food
     while count_food(new_grid) < harvester_world.max_food:
         new_food, remaining_food = sample_replacement_food(new_grid, state.future_food)
         new_grid[new_food] = 'F'
+
         if harvester_world.known and new_food:
             observations.dict[new_food] = 'F'
+
     # new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
     new_state = to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
-    print("Transition to:\n")
-    print(print_grid(new_state.grid, harvester_world))
+    # print("Transition to:\n")
+    # print(print_grid(new_state.grid, harvester_world))
     return new_state, observations
 
 
@@ -157,7 +166,7 @@ def move(state, action, harvester_world):
     new_to_coordinate = to_coordinate(harvester_coordinate, action, harvester_world)
     to_symbol = state.grid.get(new_to_coordinate, None)
     if to_symbol and to_symbol in '#':
-        return (harvester_coordinate, harvester_symbol), (harvester_coordinate, harvester_symbol)
+        return (harvester_coordinate, harvester_symbol), (new_to_coordinate, to_symbol)
     new_to_symbol = arriving(harvester_symbol, to_symbol)
     return (harvester_coordinate, new_from_symbol), (new_to_coordinate, new_to_symbol)
 
@@ -209,11 +218,11 @@ def add_food(grid, coordinate):
     return new_grid, coordinate
 
 
-def reward(grid):
-    new_reward=0
+def reward(grid, time=0):
+    new_reward = 0
     _, base_symbol = find_base(grid)
     if base_symbol == '*':
-        new_reward += 50
+        new_reward += 50 * pow(0.95, time)
     return new_reward
 
 
@@ -490,13 +499,12 @@ def sample_replacement_food(grid, future_food):
     while True:
         try_x = remaining_food.pop()
         try_y = remaining_food.pop()
-        print(try_x, try_y)
+        # print(try_x, try_y)
         remaining_food.insert(0, try_x)
         remaining_food.insert(0, try_y)
         coordinate = try_food(grid, (try_x, try_y))
         if coordinate:
             return coordinate, remaining_food
-
 
 def try_future_food(grid, coordinate):
     if coordinate not in grid:
@@ -519,7 +527,7 @@ if __name__ == '__main__':
     # harvester_world = to_problem(2, 2)
     # d = all_distances(grid, harvester_world)
     # print(d)
-    """
+
     import argparse
     import agent
     import random
@@ -532,29 +540,25 @@ if __name__ == '__main__':
     initial_state, x, y = agent.init_belief(args.initial_state)
     harvester_world = to_problem(x, y, int(args.max_food))
     complete_grid = sample_max_food(initial_state.grid, harvester_world)
-    future_food = sample_n_future_food(initial_state.grid, harvester_world, 100)
-    print(future_food)
+
     # To replace food distribution in sampling the following need to work
     # complete_grid = sample_food(food_dist, belief_state.grid, dimensions.max_food)
     # future_food = sample_future_food(food_dist, n=100)
-    to_base = distance_to_base(complete_grid, harvester_world)
-    food_distances = add_distance_to_food(complete_grid, to_base, harvester_world)
-    all_distances = add_distance_to_future(complete_grid, food_distances, future_food, harvester_world)
-    new_state = to_state(complete_grid, initial_state.reward, distances=all_distances, future_food=future_food)
-    print(new_state.distances)
-
-
+    distances = all_distances(complete_grid, harvester_world)
+    future_food = sample_n_future_food(harvester_world, 100)
+    new_state = to_state(complete_grid, initial_state.reward, distances=distances, future_food=future_food)
     # food_dist = chance_of_food(initial_state, harvester_world)
-    # initial_state = sample(initial_state, food_dist, harvester_world)
-    # next_state, observations = transition(initial_state, args.action, harvester_world)
+    initial_state = sample(initial_state, harvester_world)
+    next_state, observations = transition(initial_state, args.action, harvester_world)
     # belief_state = agent.update_belief(initial_state, observations)
     print "initial_state: {0}".format(args.initial_state)
     print "max_food: {0}".format(args.max_food)
-    print print_grid(initial_state.grid, harvester_world)
-    print print_grid(complete_grid, harvester_world)
-    # print "action: {0}".format(args.action)
+    # print print_grid(initial_state.grid, harvester_world)
+    # print print_grid(complete_grid, harvester_world)
+    print "action: {0}".format(args.action)
     # print "reward: {0}".format(next_state.reward)
-    # print(interleaved(initial_state.grid, next_state.grid, harvester_world))
+    print(interleaved(initial_state.grid, next_state.grid, harvester_world))
+    print(observations)
     # random.seed(0)
-    """
+
     

@@ -115,7 +115,7 @@ if __name__ == '__main__':
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
     harvester_world = problem.to_problem(x, y, int(args.max_food), int(args.known))
     # food_dist = problem.chance_of_food(reality_state, harvester_world)
-    future_food = problem.sample_n_future_food(harvester_world, 10000)
+    future_food = problem.sample_n_future_food(harvester_world, 100)
     # for i in range(1000):
     #     future_food.append(problem.sample_cell(food_dist)[1])
     reality_state = problem.to_state(reality_state.grid, future_food=future_food)
@@ -140,7 +140,7 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        print(action, observations)
+        # print(action, observations)
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
         time_step += 1
         #time.sleep(0.25)

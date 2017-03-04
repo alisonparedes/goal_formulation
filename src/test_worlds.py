@@ -15,6 +15,7 @@ if __name__ == '__main__':
     parser.add_argument("height")
     parser.add_argument("max_food")
     parser.add_argument("n_worlds")
+    parser.add_argument("n_obstacles")
     parser.add_argument("file_name")
     args = parser.parse_args()
 
@@ -34,6 +35,13 @@ if __name__ == '__main__':
             x, y = random_coordinate(int(args.width), int(args.height))
             if (x, y) not in reality:
                 reality[(x, y)] = "F"
+                i += 1
+
+        i = 0
+        while i < int(args.n_obstacles):
+            x, y = random_coordinate(int(args.width), int(args.height))
+            if (x, y) not in reality:
+                reality[(x, y)] = '#'
                 i += 1
 
         with open("../test/{0}_{1}_real.world".format(args.file_name, w), "w") as world_file:
