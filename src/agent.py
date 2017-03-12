@@ -12,6 +12,7 @@ import time
 import problem
 from copy import deepcopy
 import sys
+import random
 
 
 def update_belief(state, observation, known=False, reality_state=None):
@@ -104,7 +105,7 @@ def print_step(time_step, state_a, state_b, dimensions):
 
 
 if __name__ == '__main__':
-    import random
+
     args = parse_args()
     random.seed(int(args.seed))
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file

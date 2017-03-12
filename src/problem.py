@@ -32,7 +32,7 @@ def parse(simstate):
     y=0
     x=0    
     for cell in simstate:   
-        if cell in 'HbBF$*#':
+        if cell in 'HbBF$*#!':
             state[(x,y)]=cell       
         elif cell=='\n':
             y += 1
@@ -191,6 +191,8 @@ def leaving_symbol(from_symbol):
         return None
     if from_symbol in '*b':
         return 'B'
+    if from_symbol in '!':
+        return 'F'
     return None
 
 
@@ -223,27 +225,31 @@ def reward(grid, time=0):
     new_reward = 0
     _, base_symbol = find_base(grid)
     if base_symbol == '*':
+        #print(grid)
+        #print("time: {0}".format(time))
         new_reward += 50 * pow(0.95, time)
     return new_reward
 
 
 def find_harvester(grid):
     for coordinate, cell in grid.iteritems():
-        if cell and cell in 'bH*$':
+        if cell and cell in 'bH*$!':
             return coordinate, cell
     return None
 
     
 def arriving(from_symbol, to_symbol):
-    if from_symbol == '$' and to_symbol == 'B':  # A harvester carrying food
+    if from_symbol in '$!' and to_symbol == 'B':  # A harvester carrying food
         return '*' # Gets a reward
-    if from_symbol in 'b*$H' and to_symbol == 'F':
+    if from_symbol in 'b*H' and to_symbol == 'F':
         return '$'
+    if from_symbol in '$!' and to_symbol == 'F':
+        return '!'
     if from_symbol in 'H' and to_symbol == 'B':
         return 'b'  # Does not get a reward
     if from_symbol in 'b*' and to_symbol and to_symbol in 'b*B':
         return 'b'
-    if from_symbol in 'b*':
+    if from_symbol in 'b*!':
         return 'H'
 
     return from_symbol
@@ -259,7 +265,7 @@ def find_base(grid):
 def find_food(grid):
     food = []
     for coordinate, unit in grid.iteritems():
-        if unit and unit in 'F':
+        if unit and unit in 'F!':
             food.append((coordinate, unit))
     return food
 
@@ -293,7 +299,7 @@ def sample(belief_state, dimensions):
     if dimensions.known:
         future_food = belief_state.future_food
     else:
-        future_food = sample_n_future_food(dimensions, 100000)
+        future_food = sample_n_future_food(dimensions, 100)
     distances = all_distances(complete_grid, dimensions)
     # to_base = distance_to_base(complete_grid, dimensions)
     # food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
@@ -324,7 +330,7 @@ def sample(belief_state, dimensions):
 def count_food(grid):
     food = 0
     for coordinate, unit in grid.iteritems():
-        if unit == 'F':
+        if unit and unit in 'F!':
             food += 1
     return food
 
@@ -345,13 +351,15 @@ def merge(unit_a, unit_b):
         return unit_b
     if unit_a in '-':
         return unit_b
-    if unit_a in '$H' and unit_b in 'F':
+    if unit_a in 'H' and unit_b in 'F':
         return '$'
+    if unit_a in '$!' and unit_b in 'F':
+        return '!'
     if unit_a in '*' and unit_b in 'F':
         return '*'
     if unit_a in 'b' and unit_b in 'F':
         return 'b'
-    if unit_a in '$' and unit_b in 'B':
+    if unit_a in '!$' and unit_b in 'B':
         return '*'
     if unit_a in 'H' and unit_b in 'B':
         return 'b'
@@ -481,7 +489,7 @@ def sample_cell(width, height):
 def try_food(grid, coordinate):
     if coordinate not in grid:
         return coordinate
-    if grid[coordinate] and grid[coordinate] in 'Bb*#H$-':
+    if grid[coordinate] and grid[coordinate] in 'Bb*#H$-!':
         return None
     return coordinate
 
@@ -515,7 +523,7 @@ def try_future_food(grid, coordinate):
         return coordinate
     if grid[coordinate] in 'Bb*#':
         return None
-    if grid[coordinate] in 'H$':
+    if grid[coordinate] in 'H$!':
         return coordinate
 
 

@@ -14,11 +14,11 @@ def applicable_actions(s): #TODO: Units (or combinations of units, e.g. fleet) t
     for coordinate, unit in s.grid.iteritems():
         if unit and unit in 'F':
             food_coordinates.append(coordinate)
-        if unit and unit in 'HbBF$*':
+        if unit and unit in 'HbBF$*!':
             units += unit
-    if ('H' in units or '$' in units) and ('B' in units):
+    if ('H' in units or '$' in units or '!' in units) and ('B' in units):
         actions.append('HB')
-    if ('H' in units or '*' in units or 'b' in units) and ('F' in units):
+    if ('H' in units or '*' in units or 'b' in units or '$' in units or '!' in units) and ('F' in units):
         for food_coordinate in food_coordinates:
             actions.append('HF' + '_' + str(food_coordinate[0]) + '_' + str(food_coordinate[1]))
 
@@ -41,6 +41,9 @@ def transition(state, action_and_coordinate, dimensions, time_left=1, horizon=1)
     new_grid[from_coordinate] = from_symbol
     new_grid[to_coordinate] = to_symbol
 
+    if problem.found_food(state.grid, new_grid):
+        new_grid = problem.del_explored_cell(new_grid)
+
     remaining_food = copy(state.future_food)
     while problem.count_food(new_grid) < dimensions.max_food:
         # print(state.future_food)
@@ -55,7 +58,7 @@ def transition(state, action_and_coordinate, dimensions, time_left=1, horizon=1)
     #print("parent reward: {0} {1} {2}".format(state.reward, problem.reward(new_grid, horizon - time_left), action_cost))
     #print(new_grid)
     #print(horizon, time_left)
-    new_reward = state.reward + problem.reward(new_grid, horizon - time_left) - action_cost
+    new_reward = state.reward + problem.reward(new_grid, horizon - time_left + action_cost) - action_cost
     #next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
 
     next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
