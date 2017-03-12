@@ -28,7 +28,7 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
     q = 0
     while len(open_list) > 0:
         s = open_list.popleft()
-        # print(q, get_plan(s))
+        print(q, get_plan(s))
         q += 1
         # if s.previous:
             # compare_grid(s.state.grid, s.previous.state.grid)

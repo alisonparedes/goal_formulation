@@ -135,10 +135,10 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        print("action: {0} observations: {1}\n", action, observations)
-        print("old belief: {0}\n", belief_state.grid)
+        #print("action: {0} observations: {1}\n", action, observations)
+        #print("old belief: {0}\n", belief_state.grid)
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
-        print("new belief: {0}\n", belief_state.grid)
+        #print("new belief: {0}\n", belief_state.grid)
         time_step += 1
         #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)

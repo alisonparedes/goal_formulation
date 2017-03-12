@@ -133,7 +133,8 @@ def transition(state, action, harvester_world):
     new_grid[new_from_cell[0]] = new_from_cell[1]
     new_grid[new_to_cell[0]] = new_to_cell[1]
 
-    if new_from_cell[1] and new_from_cell[1] in '*$':
+    #if new_from_cell[1] and new_from_cell[1] in '*$':
+    if found_food(state.grid, new_grid):
         new_grid = del_explored_cell(new_grid)
 
     # new_grid, remaining_food, new_food = replace_food(new_grid, state.future_food, harvester_world.max_food)

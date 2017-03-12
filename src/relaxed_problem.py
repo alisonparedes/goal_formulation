@@ -52,7 +52,9 @@ def transition(state, action_and_coordinate, dimensions, time_left=1, horizon=1)
     #     new_grid, new_food = problem.add_food(new_grid, try_coordinate)
     #     #print(remaining_food)
     #     remaining_food.insert(0, try_coordinate)
-
+    #print("parent reward: {0} {1} {2}".format(state.reward, problem.reward(new_grid, horizon - time_left), action_cost))
+    #print(new_grid)
+    #print(horizon, time_left)
     new_reward = state.reward + problem.reward(new_grid, horizon - time_left) - action_cost
     #next_state = problem.to_state(new_grid, reward=new_reward, future_food=remaining_food, distances=state.distances)
 

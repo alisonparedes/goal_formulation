@@ -21,15 +21,16 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
 
         total_reward = 0.0
         for initial_state in sampled_worlds:
+            #print(action, initial_state.grid, initial_state.future_food)
             next_state, _ = problem.transition(initial_state, action, dimensions)
-            # print(action, next_state.reward)
+            #print(action, next_state.reward)
             #print(action, next_state.grid)
             #print(problem.print_grid(next_state.grid, dimensions))
             #print(problem.interleaved(initial_state.grid, next_state.grid, dimensions))
             total_reward += next_state.reward
             total_reward += bfs_g.search(next_state, dimensions, horizon)
         expected_value = total_reward/float(number_of_samples)
-        # print(action, expected_value)
+        print(action, expected_value)
         if expected_value > max_expected_value:
             max_expected_value = expected_value
             max_action = action

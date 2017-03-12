@@ -76,6 +76,8 @@ class TestAgent(unittest.TestCase):
         self.assertEquals(new_belief.grid, {(0, 0): 'F',  (1, 1): 'B', (0, 1): 'H'}, new_belief.grid)
         self.assertEquals(belief.grid, {(0, 0): 'F', (1, 1): 'b'}, belief.grid)
 
+
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

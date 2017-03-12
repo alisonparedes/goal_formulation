@@ -140,11 +140,31 @@ class TestProblem(unittest.TestCase):
     def testAddDistanceToFood(self):
         state_str = '-#\n-F'
         grid = parse(state_str)
-        harvester_world = to_problem(x=2, y=2)
+
         distance = []
         distance = add_distance_to_food(grid, distance, harvester_world)
         expected_distance = [(((1, 1), 'F'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
         self.assertEquals(distance, expected_distance, distance)
+
+    def testFoundFood(self):
+        old_belief = {(1, 2): '-', (1, 3): '-', (2, 1): 'H', (1, 1): '-', (2, 2): '-', (0, 3): 'B', (0, 2): '-'}
+        observation = {(3, 1): '$', (0, 3): 'B'}
+        food = found_food(old_belief, observation)
+        self.assertEquals(food, True, food)
+
+    def testFoundFood(self):
+        old_belief = {(1, 2): '-', (1, 3): '-', (2, 1): '$', (1, 1): '-', (2, 2): '-', (0, 3): 'B', (0, 2): '-'}
+        observation = {(3, 1): '$', (0, 3): 'B'}
+        food = found_food(old_belief, observation)
+        self.assertEquals(food, False, food)
+
+
+    def testTransitionToFood(self):
+        harvester_world = to_problem(x=4, y=4, max_food=1)
+        initial_state = to_state({(1, 2): '-', (1, 3): 'H', (2, 3): 'F', (1, 1): 'B'},
+                                 future_food=[3, 3, 3, 2, 3, 2, 2, 1])
+        new_state, _ = transition(initial_state, 'E', harvester_world)
+        self.assertEquals(new_state.grid, {(1, 2): 'F', (1, 3): None, (2, 3): '$', (1, 1): 'B'}, new_state.grid)
 
 
     def testGrow(self):
