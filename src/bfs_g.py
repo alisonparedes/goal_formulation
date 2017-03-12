@@ -15,15 +15,7 @@ def to_node(state, previous, action, g=0, time=0, step_time=0):
 
 
 def search(initial_state, dimensions, horizon=1, return_plan=False):
-    """
-    A breadth first search which keeps track of the maximum value of all nodes see up until a node exceeds the given
-    time horizon.
-    :param initial_state:
-    :param dimensions:
-    :param horizon:
-    :param return_plan:
-    :return:
-    """
+
     #print("New search:")
     #print(test_problem.print_grid(initial_state.grid, dimensions))
     #print(initial_state.future_food)

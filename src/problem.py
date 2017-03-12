@@ -446,9 +446,12 @@ def to_dict(w):
     return state
 
 
-def found_food(cell_dict):
+def found_food(old_belief, cell_dict):
     for coordinate, cell in cell_dict.iteritems():
-        if cell and cell in '$*':
+        if cell and cell in '$':
+            for _, belief_cell in old_belief.iteritems():
+                if belief_cell and belief_cell in '$':
+                    return False
             return True
 
 

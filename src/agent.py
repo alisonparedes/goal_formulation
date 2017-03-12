@@ -15,17 +15,12 @@ import sys
 
 
 def update_belief(state, observation, known=False, reality_state=None):
-    """An agent can update its own belief state about the location of objects in the world and how much reward it has
-    accumulated so far.
-    :param state: A state object representing the agent's current belief state
-    :param observation: An observation object
-    :return Agent's new belief state
-    """
+
     if not observation:
         return state
     new_grid = update_cell(state.grid, observation.dict)
     new_reward = state.reward
-    if problem.found_food(observation.dict):
+    if problem.found_food(state.grid, observation.dict):
         new_reward = observation.reward
         new_grid = problem.del_explored_cell(new_grid)
     future_food = None
@@ -140,8 +135,10 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        # print(action, observations)
+        print("action: {0} observations: {1}\n", action, observations)
+        print("old belief: {0}\n", belief_state.grid)
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
+        print("new belief: {0}\n", belief_state.grid)
         time_step += 1
         #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)
