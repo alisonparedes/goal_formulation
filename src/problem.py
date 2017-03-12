@@ -249,7 +249,9 @@ def arriving(from_symbol, to_symbol):
         return 'b'  # Does not get a reward
     if from_symbol in 'b*' and to_symbol and to_symbol in 'b*B':
         return 'b'
-    if from_symbol in 'b*!':
+    if from_symbol in '!':
+        return '$'
+    if from_symbol in 'b*':
         return 'H'
 
     return from_symbol
