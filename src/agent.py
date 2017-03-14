@@ -57,7 +57,7 @@ def update_belief(state, observations, known=False, reality_state=None):
     new_reward = observations.reward
 
     if not state.has_food and observations.has_food:
-        state.explored_dict = {}
+        state.explored_dict.clear()
 
     future_food = None
     if known:
