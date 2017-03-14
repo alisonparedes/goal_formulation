@@ -10,22 +10,22 @@ import problem
 
 class TestDijkstra(unittest.TestCase):
 
-    def testExpand(self):
-        state_str = '#-\n-B'
-        grid = problem.parse(state_str)
-        state = problem.to_state(grid)
-        harvester_world = problem.to_problem(x=2, y=2)
-        policy = dijkstra((1, 1), state, harvester_world)
+    def testDijkstra(self):
+        state_str = '#-\n-b'
+        base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(state_str)
+        state = problem.to_state(base, harvester, food, obstacle, defender, enemy, has_food)
+        world = problem.to_problem(x=2, y=2)
+        policy = dijkstra((1, 1), state, world)
         self.assertEquals(policy,  {(0, 1): ((1, 1), 1), (1, 0): ((1, 1), 1), (1, 1): ('*', 0)}, policy)
 
-    def testDijkstra(self):
+    def testExpand(self):
         state_str = 'H-\n-B'
-        grid = problem.parse(state_str)
-        state = problem.to_state(grid)
-        harvester_world = problem.to_problem(x=2, y=2)
+        base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(state_str)
+        state = problem.to_state(base, harvester, food, obstacle, defender, enemy, has_food)
+        world = problem.to_problem(x=2, y=2)
         open_list = []
-        policy = [[None] * harvester_world.y for _ in range(harvester_world.x)]
-        expand(((1, 1), 0), open_list, policy, state, harvester_world)
+        policy = [[None] * world.y for _ in range(world.x)]
+        expand(((1, 1), 0), open_list, policy, state, world)
         self.assertEquals(open_list, [((1, 0), 1), ((0, 1), 1)],  open_list)
         self.assertEquals(policy,  [[None, ((1, 1), 1)], [((1, 1), 1), None]], policy)
 

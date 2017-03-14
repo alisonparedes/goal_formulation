@@ -11,9 +11,15 @@ class TestProblem(unittest.TestCase):
 
 
     def testParse(self):
-        state_str = '-H--\n---H'
-        state = parse(state_str)
-        self.assertDictEqual(state, {(1,0):'H', (3,1):'H'}, state)
+        state_str = '-bF#DE\n------'
+        base, harvester, food, obstacle, defender, enemy, has_food = parse(state_str)
+        self.assertDictEqual(base, {(1, 0): 'b'}, base)
+        self.assertDictEqual(harvester, {(1, 0): 'b'}, harvester)
+        self.assertDictEqual(food, {(2, 0): 'F'}, food)
+        self.assertDictEqual(obstacle, {(3, 0): '#'}, obstacle)
+        self.assertDictEqual(defender, {(4, 0): 'D'}, defender)
+        self.assertDictEqual(enemy, {(5, 0): 'E'}, enemy)
+        self.assertEquals(has_food, False, has_food)
 
     def testActions(self):
         state_str = '-H--\n---B'
@@ -126,17 +132,6 @@ class TestProblem(unittest.TestCase):
         expected_distance = [(((1, 1), 'B'), {(0, 1): ((1, 1), 1), (0, 0): ((0, 1), 2), (1, 1): ('*', 0)})]
         self.assertEquals(distance, expected_distance, distance)
 
-    def testSampleFood(self):
-        state_str = '-#\n-B'
-        grid = parse(state_str)
-        state = to_state(grid)
-        harvester_world = to_problem(x=2, y=2, max_food=2)
-        food_dist = chance_of_food(state, harvester_world)
-        random.seed(1)
-        new_grid = sample_food(food_dist, grid, harvester_world.max_food)
-        random.seed(None)
-        self.assertEquals(new_grid, {(0, 1): 'F', (1, 0): '#', (0, 0): 'F', (1, 1): 'B'}, new_grid)
-
     def testAddDistanceToFood(self):
         state_str = '-#\n-F'
         grid = parse(state_str)
@@ -167,8 +162,41 @@ class TestProblem(unittest.TestCase):
         self.assertEquals(new_state.grid, {(1, 2): 'F', (1, 3): None, (2, 3): '$', (1, 1): 'B'}, new_state.grid)
 
 
-    def testGrow(self):
-        pass
+    def testSampleMaxFood(self):
+        random.seed(1)
+        state_str = '-b-#DE\n------'
+        base, harvester, food, obstacle, defender, enemy, has_food = parse(state_str)
+        state = to_state(base, harvester, food=food, obstacle=obstacle, defender=defender, enemy=enemy, has_food=has_food)
+        world = to_problem(6, 2, max_food=1)
+        new_food_dict = sample_max_food(state, world)
+        self.assertEquals(new_food_dict, {(0, 1): 'F'}, new_food_dict)
+        random.seed(None)
+
+    def testSample(self):
+        random.seed(1)
+        state_str = '-b-#DE\n------'
+        base, harvester, food, obstacle, defender, enemy, has_food = parse(state_str)
+        belief_state = to_state(base, harvester, food=food, obstacle=obstacle, defender=defender, enemy=enemy, has_food=has_food)
+        world = to_problem(6, 2, max_food=1)
+        complete_state = sample(belief_state, world)
+        self.assertEquals(complete_state.food_dict, {(0, 1): 'F'}, complete_state.food_dict)
+
+    def testTransition(self):
+        state_str = '#F-\n--b'
+        base, harvester, food, obstacle, defender, enemy, has_food = parse(state_str)
+        initial_state = to_state(base, harvester, food=food, obstacle=obstacle, defender=defender, enemy=enemy, has_food=has_food)
+        world = to_problem(3, 2, max_food=1)
+        next_state = transition(initial_state, 'N', world)
+        self.assertEquals(next_state, 1, next_state)
+
+    def testPrintGrid(self):
+        state_str = '#FD\nEHB'
+        base, harvester, food, obstacle, defender, enemy, has_food = parse(state_str)
+        state = to_state(base, harvester, food=food, obstacle=obstacle, defender=defender, enemy=enemy, has_food=has_food)
+        world = to_problem(3, 2, max_food=1)
+        printable = print_grid(state, world)
+        print(printable)
+        self.assertEquals(True, True, True)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

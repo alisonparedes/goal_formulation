@@ -23,14 +23,17 @@ class TestAgent(unittest.TestCase):
 
     def testInitBelief(self):
         file_name = "/home/aifs2/alison/IdeaProjects/goal_formulation/test/tiny_01.txt"
-        Arguments = namedtuple("Arguments", ["max_food"])
-        max_food = 2
-        args = Arguments(max_food=max_food)
         belief, _, _ = init_belief(file_name)
-        self.assertEquals(belief.grid, {(0, 0): 'F', (1, 1): 'b'}, belief.grid)
+        self.assertDictEqual(belief.base_dict, {(1, 0): 'b'}, belief.base_dict)
+        self.assertDictEqual(belief.harvester_dict, {(1, 0): 'b'}, belief.harvester_dict)
+        self.assertDictEqual(belief.food_dict, {(2, 0): 'F'}, belief.food_dict)
+        self.assertDictEqual(belief.obstacle_dict, {(3, 0): '#'}, belief.obstacle_dict)
+        self.assertDictEqual(belief.defender_dict, {(4, 0): 'D'}, belief.defender_dict)
+        self.assertDictEqual(belief.enemy_dict, {(5, 0): 'E'}, belief.enemy_dict)
+        self.assertDictEqual(belief.explored_dict, {}, belief.explored_dict)
+        self.assertEquals(belief.has_food, False, belief.has_food)
         self.assertEquals(belief.reward, 0, belief.reward)
-        self.assertEquals(belief.t, 0, belief.t)
-        self.assertEquals(belief.future_food, [], belief.future_food)
+        self.assertEquals(belief.future_food, None, belief.future_food)
 
 
     def testListExploredCell(self):
