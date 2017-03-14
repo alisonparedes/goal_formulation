@@ -69,7 +69,14 @@ def init_belief(belief_file_name, future_food=None):
             x = len(line) - 1
             y += 1
     base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(belief_str)
-    return problem.to_state(base, harvester, food, obstacle, defender, enemy, has_food, future_food=future_food), x, y
+    return problem.to_state(base,
+                            harvester,
+                            food=food,
+                            obstacle=obstacle,
+                            defender=defender,
+                            enemy=enemy,
+                            has_food=has_food,
+                            future_food=future_food), x, y
 
 
 def parse_args():
