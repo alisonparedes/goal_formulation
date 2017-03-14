@@ -70,6 +70,7 @@ def update_belief(state, observations, known=False, reality_state=None):
                             defender=state.defender_dict,
                             enemy=state.enemy_dict,
                             explored=state.explored_dict,
+                            has_food=observations.has_food,
                             reward=new_reward,
                             future_food=future_food)
 
