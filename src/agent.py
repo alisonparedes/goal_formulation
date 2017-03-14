@@ -20,37 +20,57 @@ def update_belief(state, observations, known=False, reality_state=None):
     if not observations:
         return state
 
-    for obstacle, add_delete in observations.obstacle.iteritems():
-        if add_delete == 1:
-            state.obstacle_dict[obstacle] = '#'
+    if observations.obstacle:
+        for obstacle, add_delete in observations.obstacle.iteritems():
+            if add_delete == 1:
+                state.obstacle_dict[obstacle] = '#'
 
-    for harvester, add_delete in observations.harvester.iteritems():
-        if add_delete == 1:
-            state.harvester_dict[harvester] = 'H'
-        else:
-            del state.harvester_dict[harvester]
+    if observations.harvester:
+        for harvester, add_delete in observations.harvester.iteritems():
+            if add_delete == 1:
+                state.harvester_dict[harvester] = 'H'
+            else:
+                del state.harvester_dict[harvester]
+                state.explored_dict[harvester] = '-'
 
-    for food, add_delete in observations.food.iteritems():
-        if add_delete == 1:
-            state.food_dict[food] = 'F'
-        else:
-            del state.food_dict[food]
+    if observations.food:
+        for food, add_delete in observations.food.iteritems():
+            if add_delete == 1:
+                state.food_dict[food] = 'F'
+            else:
+                del state.food_dict[food]
 
-    for defender, add_delete in observations.defender.iteritems():
-        if add_delete == 1:
-            state.defender_dict[defender] = 'D'
-        else:
-            del state.defender_dict[defender]
+    if observations.defender:
+        for defender, add_delete in observations.defender.iteritems():
+            if add_delete == 1:
+                state.defender_dict[defender] = 'D'
+            else:
+                del state.defender_dict[defender]
 
-    new_grid = update_cell(state.grid, observation.dict)
-    new_reward = state.reward
-    if problem.found_food(state.grid, observation.dict):
-        new_reward = observation.reward
-        new_grid = problem.del_explored_cell(new_grid)
+    if observations.enemy:
+        for enemy, add_delete in observations.enemy.iteritems():
+            if add_delete == 1:
+                state.enemy_dict[enemy] = 'E'
+            else:
+                del state.enemy_dict[enemy]
+
+    new_reward = observations.reward
+
+    if not state.has_food and observations.has_food:
+        state.explored_dict = {}
+
     future_food = None
     if known:
         future_food = reality_state.future_food
-    return problem.to_state(new_grid, reward=new_reward, future_food=future_food)
+
+    return problem.to_state(state.base_dict,
+                            state.harvester_dict,
+                            food=state.food_dict,
+                            obstacle=state.obstacle_dict,
+                            defender=state.defender_dict,
+                            enemy=state.enemy_dict,
+                            reward=new_reward,
+                            future_food=future_food)
 
 
 # def update_cell(grid, cell_dict):
