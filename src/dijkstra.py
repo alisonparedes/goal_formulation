@@ -21,7 +21,7 @@ def dijkstra(goal_coordinate, state, dimensions):
 def expand(start, open_list, policy, state, dimensions):
     start_coordinate = start[0]
     cost = start[1]
-    for direction in problem.unit_actions(start_coordinate, state, dimensions):
+    for direction in problem.basic_actions(start_coordinate, state, dimensions):
         x, y = problem.adjacent_coordinate(start_coordinate, direction)
         if not policy[x][y]:
             open_list.append(((x, y), cost + 1))

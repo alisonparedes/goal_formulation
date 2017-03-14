@@ -33,9 +33,9 @@ def to_state(base, harvester, food=None, obstacle=None, defender=None, enemy=Non
     return State(base, harvester, food, obstacle, defender, enemy, explored, has_food, reward, future_food, distances)
 
 
-def to_observation(dict, reward=0):
-    Observation = namedtuple("Observation", ["dict", "reward"])
-    return Observation(dict, reward)
+def to_observation(obstacle=None, harvester=None, food=None, defender=None, enemy=None, reward=0, has_food=False):
+    Observation = namedtuple("Observation", ["obstacle", "harvester", "food", "defender", "enemy", "reward", "has_food"])
+    return Observation(obstacle, harvester, food, defender, enemy, reward, has_food)
 
 
 def parse(simstate):
@@ -92,32 +92,21 @@ def parse(simstate):
     return base, harvester, food, obstacle, defender, enemy, has_food
 
 
-def interleaved(world, known, problem_spec):
-    """Output"""
-    height = problem_spec[1]
-    width = problem_spec[0]
-    #known_grid = to_grid(known, problem_spec)
-    #world_grid = to_grid(world, problem_spec)
+def interleaved(reality, belief, world):
+    reality_grid = to_ascii_array(reality, world)
+    belief_grid = to_ascii_array(belief, world)
     printable = ''
-    for y in range(height):
-        for x in range(width):
-            cell = world_grid[x][y]
-            if cell:
-                printable += cell
-            else:
-                printable += '-'
+    for y in range(world.y):
+        for x in range(world.x):
+            printable += reality_grid[x][y]
         printable += ' '
-        for x in range(width):
-            cell = known_grid[x][y] 
-            if cell:
-                printable += cell
-            else:
-                printable += '?'
+        for x in range(world.x):
+            printable += belief_grid[x][y]
         printable += '\n'
     return printable
 
 
-def print_grid(state, world):
+def to_ascii_array(state, world):
 
     state_grid = [[" " for _ in range(world.y)] for _ in range(world.x)]
 
@@ -162,6 +151,11 @@ def print_grid(state, world):
         else:
             state_grid[enemy_x][enemy_y] = 'E'
 
+    return state_grid
+
+
+def state_to_string(state, world):
+    state_grid = to_ascii_array(state, world)
     printable = ''
     for y in range(world.y):
         for x in range(world.x):
@@ -170,32 +164,24 @@ def print_grid(state, world):
     return printable
 
 
-def to_grid(s, problem_spec):
-    grid = []
-    w = problem_spec[0]
-    h = problem_spec[1]
-    for _ in range(w):
-        grid.append([None]*h) #Meh
-    for coordinate, unit in s.iteritems():
-        x = coordinate[0]
-        y = coordinate[1]
-        if not unit:
-            unit = '-'
-        grid[x][y] = unit
-    return grid
-
-
-def applicable_actions(state, problem):
-    """Summarizes all actions available for all units."""
-    harvester_coordinate, _ = find_harvester(state.grid)
-    actions = unit_actions(harvester_coordinate, state.grid, problem)
+def basic_actions(start, state, problem):
+    actions = []
+    x, y = start
+    if y-1 >= 0 and ((x, y-1) not in state.obstacle_dict):
+        actions.append('N')
+    if y+1 < problem.y and ((x, y+1) not in state.obstacle_dict):
+        actions.append('S')
+    if x+1 < problem.x and ((x+1, y) not in state.obstacle_dict):
+        actions.append('E')
+    if x-1 >= 0 and ((x-1, y) not in state.obstacle_dict):
+        actions.append('W')
     return actions
 
 
-def unit_actions(coordinate, state, problem):
+def applicable_actions(state, problem):
     actions = []
-    x = coordinate[0]
-    y = coordinate[1]
+    harvester, _ = state.harvester_dict.iteritems().next()
+    x, y = harvester
     if y-1 >= 0 and ((x, y-1) not in state.obstacle_dict):
         actions.append('N')
         actions.append('ND')
@@ -237,8 +223,9 @@ def transition(state, action, world):
         new_x -= 1
         if new_x < 0:
             return state, None
+
     if (new_x, new_y) in state.obstacle_dict:
-        return state, to_observation({(x, new_y): '#'})
+        return state, to_observation(observation_obstacle_dict={(new_y, new_y): 1})
 
     new_harvester_dict = copy.copy(state.harvester_dict)
     new_food_dict = copy.copy(state.food_dict)
@@ -248,16 +235,26 @@ def transition(state, action, world):
     new_defender_dict = copy.copy(state.defender_dict)
     new_enemy_dict = copy.copy(state.enemy_dict)
     remaining_food = copy.copy(state.future_food)
+    observation_harvester_dict = {}
+    observation_explored_dict = {}
+    observation_food_dict = {}
+    observation_defender_dict = {}
+    observation_enemy_dict = {}
 
     del new_harvester_dict[harvester]
     new_harvester_dict[(new_x, new_y)] = 'H'
+    observation_harvester_dict[(new_x, new_y)] = 1
     new_explored_dict[harvester] = '-'
+    observation_harvester_dict[harvester] = -1
+    observation_explored_dict[harvester] = 1
 
     if move_defender_too:
         if len(state.defender_dict) > 0:
             defender, _ = state.defender_dict.iteritems().next()
             del new_defender_dict[defender]
+            observation_defender_dict[defender] = -1
         new_defender_dict[(new_x, new_y)] = 'D'
+        observation_defender_dict[(new_x, new_y)] = 1
         new_reward -= 10
         #new_explored_dict[defender] = '-'
 
@@ -268,7 +265,9 @@ def transition(state, action, world):
                 new_enemy_x_y, _ = policy[enemy]
                 if new_enemy_x_y not in new_defender_dict:
                     del new_enemy_dict[enemy]
+                    observation_enemy_dict[enemy] = -1
                     new_enemy_dict[new_enemy_x_y] = 'E'
+                    observation_enemy_dict[new_enemy_x_y] = 1
                 break
         if harvester in new_enemy_dict:
             new_reward -= 10
@@ -279,6 +278,7 @@ def transition(state, action, world):
 
     if not state.has_food and (new_x, new_y) in state.food_dict:
         del new_food_dict[(new_x, new_y)]
+        observation_food_dict[(new_x, new_y)] = -1
         new_has_food = True
         new_explored_dict = {}
         while len(new_food_dict) < world.max_food:
@@ -293,6 +293,8 @@ def transition(state, action, world):
                         and try_coordinate not in new_harvester_dict \
                         and try_coordinate not in new_explored_dict:
                     new_food_dict[try_coordinate] = 'F'
+                    if world.known:
+                        observation_food_dict[try_coordinate] = 1
                     break
 
 
@@ -308,85 +310,16 @@ def transition(state, action, world):
                           future_food=remaining_food,
                           distances=state.distances)
 
-    return next_state, {}  # observations
 
+    observations = to_observation(obstacle=None,
+                                  harvester=observation_harvester_dict,
+                                  food=observation_food_dict,
+                                  defender=observation_defender_dict,
+                                  enemy=observation_enemy_dict,
+                                  reward=new_reward,
+                                  has_food=new_has_food)
 
-
-    '''
-
-
-
-
-
-
-
-
-    obs_from_sym = new_from_cell[1]
-    if not obs_from_sym:
-        obs_from_sym = '-'
-    observations = to_observation({new_from_cell[0]: obs_from_sym, new_to_cell[0]: new_to_cell[1]}, reward=new_reward)
-
-    remaining_food = state.future_food
-    while count_food(new_grid) < harvester_world.max_food:
-        new_food, remaining_food = sample_replacement_food(new_grid, state.future_food)
-        new_grid[new_food] = 'F'
-
-        if harvester_world.known and new_food:
-            observations.dict[new_food] = 'F'
-
-
-    '''
-
-
-def to_coordinate(coordinate, action, harvester_world):
-    x = coordinate[0]
-    y = coordinate[1]
-    if action in 'ND' and y - 1 >= 0:
-        y += -1
-    elif action in 'SD' and y + 1 < harvester_world.y:
-        y += 1
-    elif action in 'ED' and x + 1 < harvester_world.x:
-        x += 1
-    elif action in 'WD' and x - 1 >= 0:
-        x += -1
-    return x, y
-
-
-
-def replace_food(grid, future_food, max_food):
-    _, harvester_symbol = find_harvester(grid)
-    if harvester_symbol != '$':
-        return grid, future_food, None
-    remaining_food = deepcopy(future_food)
-    new_grid = deepcopy(grid)
-    new_food = None
-    while count_food(new_grid) < max_food:
-        try_coordinate = remaining_food.pop()
-        new_grid, new_food = add_food(new_grid, try_coordinate)
-        remaining_food.insert(0, try_coordinate)
-
-    return new_grid, remaining_food, new_food
-
-
-def add_food(grid, coordinate):  # Combine this with replace_food above
-    new_grid = deepcopy(grid)
-    if coordinate in new_grid:
-        if not new_grid[coordinate] or new_grid[coordinate] in 'H$':
-            return grid, None  # new_grid[coordinate] = '$'
-    else:
-        new_grid[coordinate] = 'F'
-    return new_grid, coordinate
-
-
-def reward(grid, time=0):
-    new_reward = 0
-    _, base_symbol = find_base(grid)
-    if base_symbol == '*':
-        #print(grid)
-        #print("time: {0}".format(time))
-        new_reward += 50 * pow(0.95, time)
-    return new_reward
-
+    return next_state, observations
 
 
 def chance_of_food(state, problem):
@@ -437,8 +370,6 @@ def sample(belief_state, dimensions):
     return complete_state
 
 
-
-
 def all_distances(state, problem):
     distances = []
     for x in range(problem.x):
@@ -446,22 +377,6 @@ def all_distances(state, problem):
             if (x, y) not in state.obstacle_dict:
                 distances.append(((x, y), dijkstra.dijkstra((x, y), state, problem)))
     return distances
-
-
-
-
-def find_distances_to_base(distances):
-    for d in distances:
-        if d[0][1] in 'Bb*':
-            return d
-    return None
-
-
-def find_distances_to_food(distances, food):
-    for d in distances:
-        if d[0] == food:
-            return d
-    return None
 
 
 def adjacent_coordinate(coordinate, action):
@@ -492,14 +407,10 @@ def to_dict(w):
     return state
 
 
-
-
 def sample_cell(width, height):
     sampled_x = random.randint(0, width - 1)
     sampled_y = random.randint(0, height - 1)
     return sampled_x, sampled_y
-
-
 
 
 def sample_max_food(state, dimensions):
@@ -515,19 +426,6 @@ def sample_max_food(state, dimensions):
                 and try_coordinate not in state.explored_dict:
             new_food_dict[try_coordinate] = 'F'
     return new_food_dict
-
-
-#def sample_replacement_food(state, future_food):
-#    remaining_food = copy.copy(future_food)
-
-
-def try_future_food(grid, coordinate):
-    if coordinate not in grid:
-        return coordinate
-    if grid[coordinate] in 'Bb*#':
-        return None
-    if grid[coordinate] in 'H$!':
-        return coordinate
 
 
 def sample_n_future_food(harvester_world, n=1):

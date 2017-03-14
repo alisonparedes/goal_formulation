@@ -15,10 +15,33 @@ import sys
 import random
 
 
-def update_belief(state, observation, known=False, reality_state=None):
+def update_belief(state, observations, known=False, reality_state=None):
 
-    if not observation:
+    if not observations:
         return state
+
+    for obstacle, add_delete in observations.obstacle.iteritems():
+        if add_delete == 1:
+            state.obstacle_dict[obstacle] = '#'
+
+    for harvester, add_delete in observations.harvester.iteritems():
+        if add_delete == 1:
+            state.harvester_dict[harvester] = 'H'
+        else:
+            del state.harvester_dict[harvester]
+
+    for food, add_delete in observations.food.iteritems():
+        if add_delete == 1:
+            state.food_dict[food] = 'F'
+        else:
+            del state.food_dict[food]
+
+    for defender, add_delete in observations.defender.iteritems():
+        if add_delete == 1:
+            state.defender_dict[defender] = 'D'
+        else:
+            del state.defender_dict[defender]
+
     new_grid = update_cell(state.grid, observation.dict)
     new_reward = state.reward
     if problem.found_food(state.grid, observation.dict):
@@ -30,11 +53,11 @@ def update_belief(state, observation, known=False, reality_state=None):
     return problem.to_state(new_grid, reward=new_reward, future_food=future_food)
 
 
-def update_cell(grid, cell_dict):
-    new_grid = deepcopy(grid)
-    for coordinate, cell in cell_dict.iteritems():  # Set of observations is much smaller than state
-        new_grid[coordinate] = cell
-    return new_grid
+# def update_cell(grid, cell_dict):
+#     new_grid = deepcopy(grid)
+#     for coordinate, cell in cell_dict.iteritems():  # Set of observations is much smaller than state
+#         new_grid[coordinate] = cell
+#     return new_grid
 
 
 def init_reality(reality_file_name):
@@ -51,8 +74,14 @@ def init_reality(reality_file_name):
             reality_str += line
             x = len(line) - 1
             y += 1
-    grid_dict = problem.parse(reality_str)
-    return problem.to_state(grid_dict), x, y
+    base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(reality_str)
+    return problem.to_state(base,
+                            harvester,
+                            food=food,
+                            obstacle=obstacle,
+                            defender=defender,
+                            enemy=enemy,
+                            has_food=has_food), x, y
 
 
 def init_belief(belief_file_name, future_food=None):
@@ -104,11 +133,11 @@ def print_args(args):
     print "\n"
 
 
-def print_step(time_step, state_a, state_b, dimensions):
+def print_step(time_step, reality, belief, dimensions):
     #os.system('clear')
     print "time: {0}".format(time_step)
-    print "reward: {0}".format(state_b.reward)
-    print(problem.interleaved(state_a.grid, state_b.grid, dimensions))
+    print "reward: {0}".format(belief.reward)
+    print(problem.interleaved(reality, belief, dimensions))
 
 
 if __name__ == '__main__':
@@ -121,7 +150,14 @@ if __name__ == '__main__':
     future_food = problem.sample_n_future_food(harvester_world, 100)
     # for i in range(1000):
     #     future_food.append(problem.sample_cell(food_dist)[1])
-    reality_state = problem.to_state(reality_state.grid, future_food=future_food)
+    reality_state = problem.to_state(reality_state.base_dict,
+                                     reality_state.harvester_dict,
+                                     food=reality_state.food_dict,
+                                     obstacle=reality_state.obstacle_dict,
+                                     defender=reality_state.defender_dict,
+                                     enemy=reality_state.enemy_dict,
+                                     has_food=reality_state.has_food,
+                                     future_food=future_food)
 
     if harvester_world.known:
         belief_state, _, _ = init_belief(args.belief, future_food=future_food)
