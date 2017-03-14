@@ -142,8 +142,6 @@ def print_grid(state, world):
     if harvester in state.base_dict:
         if state.has_food:
             state_grid[harvester_x][harvester_y] = '*'
-        else:
-            state_grid[harvester_x][harvester_y] = 'b'
     elif state.has_food:
         state_grid[harvester_x][harvester_y] = '$'
     else:
@@ -153,27 +151,14 @@ def print_grid(state, world):
     if defender_item:
         defender, _ = defender_item
         defender_x, defender_y = defender
-        if defender in state.harvester_dict:
-            state_grid[defender_x][defender_y] = 'd'
-        if defender in state.base_dict:
-            state_grid[defender_x][defender_y] = 'b'
-        elif defender in state.food_dict:
-            state_grid[defender_x][defender_y] = 'd'
-        else:
-            state_grid[defender_x][defender_y] = 'D'
+        state_grid[defender_x][defender_y] = 'D'
 
     enemy_item = next(state.enemy_dict.iteritems(), None)
     if enemy_item:
         enemy, _ = enemy_item
         enemy_x, enemy_y = enemy
         if enemy in state.harvester_dict:
-            state_grid[enemy_x][enemy_y] = 'e'
-        elif enemy in state.base_dict:
-            state_grid[enemy_x][enemy_y] = 'b'
-        elif enemy in state.food_dict:
-            state_grid[enemy_x][enemy_y] = 'e'
-        elif enemy in state.defender_dict:
-            state_grid[enemy_x][enemy_y] = 'x'
+            state_grid[enemy_x][enemy_y] = 'X'
         else:
             state_grid[enemy_x][enemy_y] = 'E'
 
@@ -232,6 +217,7 @@ def transition(state, action, world):
     move_defender_too = False
     if len(action) > 1 and action[1] == 'D':
         move_defender_too = True
+
     harvester, _ = state.harvester_dict.iteritems().next()
     new_x, new_y = harvester
 
@@ -260,6 +246,7 @@ def transition(state, action, world):
     new_has_food = state.has_food
     new_reward = state.reward
     new_defender_dict = copy.copy(state.defender_dict)
+    new_enemy_dict = copy.copy(state.enemy_dict)
     remaining_food = copy.copy(state.future_food)
 
     del new_harvester_dict[harvester]
@@ -267,10 +254,24 @@ def transition(state, action, world):
     new_explored_dict[harvester] = '-'
 
     if move_defender_too:
-        defender, _ = state.defender_dict.iteritems().next()
-        del new_defender_dict[defender]
+        if len(state.defender_dict) > 0:
+            defender, _ = state.defender_dict.iteritems().next()
+            del new_defender_dict[defender]
         new_defender_dict[(new_x, new_y)] = 'D'
+        new_reward -= 10
         #new_explored_dict[defender] = '-'
+
+    if len(state.enemy_dict) > 0:
+        enemy, _ = state.enemy_dict.iteritems().next()
+        for goal, policy in state.distances:
+            if goal == harvester:
+                new_enemy_x_y, _ = policy[enemy]
+                if new_enemy_x_y not in new_defender_dict:
+                    del new_enemy_dict[enemy]
+                    new_enemy_dict[new_enemy_x_y] = 'E'
+                break
+        if harvester in new_enemy_dict:
+            new_reward -= 10
 
     if state.has_food and (new_x, new_y) in state.base_dict:
         new_reward += 50
@@ -291,8 +292,9 @@ def transition(state, action, world):
                         and try_coordinate not in state.obstacle_dict \
                         and try_coordinate not in new_harvester_dict \
                         and try_coordinate not in new_explored_dict:
+                    new_food_dict[try_coordinate] = 'F'
                     break
-            new_food_dict[try_coordinate] = 'F'
+
 
     next_state = to_state(state.base_dict,
                           new_harvester_dict,
@@ -300,7 +302,7 @@ def transition(state, action, world):
                           obstacle=state.obstacle_dict,
                           defender=new_defender_dict,
                           explored=new_explored_dict,
-                          enemy=state.enemy_dict,
+                          enemy=new_enemy_dict,
                           has_food=new_has_food,
                           reward=new_reward,
                           future_food=remaining_food,
