@@ -184,16 +184,16 @@ def applicable_actions(state, problem):
     x, y = harvester
     if y-1 >= 0 and ((x, y-1) not in state.obstacle_dict):
         actions.append('N')
-        actions.append('ND')
+        #actions.append('ND')
     if y+1 < problem.y and ((x, y+1) not in state.obstacle_dict):
         actions.append('S')
-        actions.append('SD')
+        #actions.append('SD')
     if x+1 < problem.x and ((x+1, y) not in state.obstacle_dict):
         actions.append('E')
-        actions.append('ED')
+        #actions.append('ED')
     if x-1 >= 0 and ((x-1, y) not in state.obstacle_dict):
         actions.append('W')
-        actions.append('WD')
+        #actions.append('WD')
     return actions
 
 

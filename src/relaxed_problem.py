@@ -16,12 +16,12 @@ def applicable_actions(state):
     for food, _ in state.food_dict.iteritems():
         if harvester != food:
             actions.append((food, False))
-            actions.append((food, True))
+            #actions.append((food, True))
 
     base, _ = state.base_dict.iteritems().next()
     if harvester != base:
         actions.append((base, False))
-        actions.append((base, True))
+        #actions.append((base, True))
 
     return actions
 
