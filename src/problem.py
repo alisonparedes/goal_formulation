@@ -85,6 +85,11 @@ def parse(simstate):
         elif cell == 'E':
             enemy[(x, y)] = cell
 
+        elif cell == '!':
+            harvester[(x, y)] = cell
+            enemy[(x, y)] = cell
+
+
         elif cell == '\n':
             y += 1
             x =- 1 #Hmm...
@@ -147,7 +152,7 @@ def to_ascii_array(state, world):
         enemy, _ = enemy_item
         enemy_x, enemy_y = enemy
         if enemy in state.harvester_dict:
-            state_grid[enemy_x][enemy_y] = 'X'
+            state_grid[enemy_x][enemy_y] = '!'
         else:
             state_grid[enemy_x][enemy_y] = 'E'
 
@@ -184,16 +189,16 @@ def applicable_actions(state, problem):
     x, y = harvester
     if y-1 >= 0 and ((x, y-1) not in state.obstacle_dict):
         actions.append('N')
-        #actions.append('ND')
+        actions.append('ND')
     if y+1 < problem.y and ((x, y+1) not in state.obstacle_dict):
         actions.append('S')
-        #actions.append('SD')
+        actions.append('SD')
     if x+1 < problem.x and ((x+1, y) not in state.obstacle_dict):
         actions.append('E')
-        #actions.append('ED')
+        actions.append('ED')
     if x-1 >= 0 and ((x-1, y) not in state.obstacle_dict):
         actions.append('W')
-        #actions.append('WD')
+        actions.append('WD')
     return actions
 
 
@@ -261,7 +266,7 @@ def transition(state, action, world):
     if len(state.enemy_dict) > 0:
         enemy, _ = state.enemy_dict.iteritems().next()
         for goal, policy in state.distances:
-            if goal == harvester:
+            if goal == (new_x, new_y):  # TODO: Consider a better name for these variables
                 new_enemy_x_y, _ = policy[enemy]
                 if new_enemy_x_y not in new_defender_dict:
                     del new_enemy_dict[enemy]
@@ -269,7 +274,7 @@ def transition(state, action, world):
                     new_enemy_dict[new_enemy_x_y] = 'E'
                     observation_enemy_dict[new_enemy_x_y] = 1
                 break
-        if harvester in new_enemy_dict:
+        if (new_x, new_y) in new_enemy_dict:
             new_reward -= 10
 
     if state.has_food and (new_x, new_y) in state.base_dict:
@@ -452,6 +457,7 @@ if __name__ == '__main__':
 
     initial_state, x, y = agent.init_belief(args.initial_state)
     world = to_problem(x, y, int(args.max_food))
+
     # complete_state = sample_max_food(initial_state, harvester_world)
     distances = all_distances(initial_state, world)
     future_food = sample_n_future_food(world, 100)
@@ -467,13 +473,18 @@ if __name__ == '__main__':
                              distances=distances,
                              future_food=future_food)
     # initial_state = sample(initial_state, harvester_world)
-    next_state, observations = transition(initial_state, args.action, world)
 
     print "initial_state: {0}".format(args.initial_state)
     print "max_food: {0}".format(args.max_food)
     print "action: {0}".format(args.action)
-    print(print_grid(initial_state, world))
-    print(print_grid(next_state, world))
+
+    next_state, observations = transition(initial_state, args.action, world)
+
+    print(state_to_string(initial_state, world))
+    print(state_to_string(next_state, world))
+    print "reward: {0}".format(next_state.reward)
+    print "has_food: {0}".format(next_state.has_food)
+    print "observation: {0}".format(observations)
     #print(observations)
 
 

@@ -59,58 +59,55 @@ def transition(state, action, world, time_left=1, horizon=1):
             step_count += 1
             destination = next_step
             distance = step_count
-            #for goal, policy in state.distances:
-            #    if goal == destination:
-            #        destination_policy = policy
-            #        break
 
+    deploy_defender = False
 
     if len(state.enemy_dict) > 0:
-        enemy, _ = state.enemy_dict.iteritems().next()
-        new_enemy = enemy
+        turn = True
         next_step, distance = destination_policy[harvester]
-        step_count = 0
+        step_count = 1
+        turn = not turn
+
+        enemy, _ = state.enemy_dict.iteritems().next()
+        #enemy_policy = None
+        #for goal, policy in state.distances:
+        #    if goal == next_step:
+        #        enemy_policy = policy
+        #        break
+
         enemy_step = enemy
-        while distance > 0:
-            next_step, = destination_policy[next_step]
-            step_count += 1
-            destination = next_step
-            distance = step_count
-            enemy_policy = None
-            for goal, policy in state.distances:
-                if goal == next_step:
-                    enemy_policy = policy
-                    break
-            enemy_step, = enemy_policy[enemy_step]
-            if enemy_step in state.defender_dict:
-                new_enemy = enemy_step
+        #enemy_step, _ = enemy_policy[enemy_step]
+        new_enemy = enemy_step
+
+        while step_count < distance or not turn:
+
+            if enemy_step == next_step:
                 destination = next_step
-                break
-            elif enemy_step == next_step:
-                new_enemy = enemy_step
-                destination = next_step
+                distance = step_count
+                deploy_defender = True
                 break
 
+            else:
+                if turn:
+                    next_step, _ = destination_policy[next_step]
+                    step_count += 1
+                    turn = not turn
+                else:
+                    enemy_policy = None
+                    for goal, policy in state.distances:
+                        if goal == next_step:
+                            enemy_policy = policy
+                            break
+                    new_enemy = enemy_step
+                    enemy_step, _ = enemy_policy[enemy_step]
+                    turn = not turn
+
+        del new_enemy_dict[enemy]
+        new_enemy_dict[new_enemy] = 'E'
 
     del new_harvester_dict[harvester]
     new_harvester_dict[destination] = 'H'
     #new_explored_dict[harvester] = '-'
-
-    if move_defender_too:
-        if len(state.defender_dict) > 0:
-            defender, _ = state.defender_dict.iteritems().next()
-            del new_defender_dict[defender]
-        new_defender_dict[destination] = 'D'
-        new_reward -= 10
-        #new_explored_dict[defender] = '-'
-
-    if len(state.enemy_dict) > 0:
-        enemy, _ = state.enemy_dict.iteritems().next()
-        del new_enemy_dict[enemy]
-        new_enemy_dict[new_enemy] = 'E'
-
-        if destination in new_enemy_dict:
-            new_reward -= 10
 
     if state.has_food and destination in state.base_dict:
         new_reward += 50 * pow(0.95, horizon - time_left + distance)
@@ -136,17 +133,40 @@ def transition(state, action, world, time_left=1, horizon=1):
 
     new_reward -= distance
 
+    alt_reward = new_reward
+    if deploy_defender:
+        new_reward -= 10
+
     next_state = problem.to_state(state.base_dict,
                                   new_harvester_dict,
                                   food=new_food_dict,
                                   obstacle=state.obstacle_dict,
-                                  defender=new_defender_dict,
+                                  defender=state.defender_dict,
                                   explored=new_explored_dict,
                                   enemy=new_enemy_dict,
                                   has_food=new_has_food,
                                   reward=new_reward,
                                   future_food=remaining_food,
                                   distances=state.distances)
+
+    if deploy_defender:
+        new_defender_dict[destination] = 'D'
+        if len(state.defender_dict) > 0:
+            defender, _ = state.defender_dict.iteritems().next()
+            del new_defender_dict[defender]
+        alt_reward -= 20
+
+    alt_state = problem.to_state(state.base_dict,
+                                 new_harvester_dict,
+                                 food=new_food_dict,
+                                 obstacle=state.obstacle_dict,
+                                 defender=new_defender_dict,
+                                 explored=new_explored_dict,
+                                 enemy=new_enemy_dict,
+                                 has_food=new_has_food,
+                                 reward=alt_reward,
+                                 future_food=remaining_food,
+                                 distances=state.distances)
 
     return next_state, distance
 
@@ -178,9 +198,10 @@ if __name__ == '__main__':
     print(initial_state)
     next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y)), defender_too), world, int(args.time_left), int(args.time_left))
 
+    print(problem.state_to_string(initial_state, world))
+    print(problem.state_to_string(next_state, world))
+
     print "action cost: {0}".format(action_cost)
     print "reward: {0}".format(next_state.reward)
 
-    print(problem.state_to_string(initial_state, world))
-    print(problem.state_to_string(next_state, world))
     print(next_state)
