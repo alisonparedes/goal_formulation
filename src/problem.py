@@ -225,7 +225,7 @@ def transition(state, action, world):
             return state, None
 
     if (new_x, new_y) in state.obstacle_dict:
-        return state, to_observation(observation_obstacle_dict={(new_y, new_y): 1})
+        return state, to_observation(obstacle={(new_x, new_y): 1})
 
     new_harvester_dict = copy.copy(state.harvester_dict)
     new_food_dict = copy.copy(state.food_dict)
@@ -276,26 +276,29 @@ def transition(state, action, world):
         new_reward += 50
         new_has_food = False
 
-    if not state.has_food and (new_x, new_y) in state.food_dict:
-        del new_food_dict[(new_x, new_y)]
-        observation_food_dict[(new_x, new_y)] = -1
-        new_has_food = True
-        new_explored_dict = {}
-        while len(new_food_dict) < world.max_food:
-            while True:
-                try_x = remaining_food.pop()
-                try_y = remaining_food.pop()
-                remaining_food.insert(0, try_x)
-                remaining_food.insert(0, try_y)
-                try_coordinate = (try_x, try_y)
-                if try_coordinate not in state.base_dict \
-                        and try_coordinate not in state.obstacle_dict \
-                        and try_coordinate not in new_harvester_dict \
-                        and try_coordinate not in new_explored_dict:
-                    new_food_dict[try_coordinate] = 'F'
-                    if world.known:
-                        observation_food_dict[try_coordinate] = 1
-                    break
+    if (new_x, new_y) in state.food_dict:
+        if state.has_food:
+            observation_food_dict[(new_x, new_y)] = 1
+        else:
+            del new_food_dict[(new_x, new_y)]
+            observation_food_dict[(new_x, new_y)] = -1
+            new_has_food = True
+            new_explored_dict = {}
+            while len(new_food_dict) < world.max_food:
+                while True:
+                    try_x = remaining_food.pop()
+                    try_y = remaining_food.pop()
+                    remaining_food.insert(0, try_x)
+                    remaining_food.insert(0, try_y)
+                    try_coordinate = (try_x, try_y)
+                    if try_coordinate not in state.base_dict \
+                            and try_coordinate not in state.obstacle_dict \
+                            and try_coordinate not in new_harvester_dict \
+                            and try_coordinate not in new_explored_dict:
+                        new_food_dict[try_coordinate] = 'F'
+                        if world.known:
+                            observation_food_dict[try_coordinate] = 1
+                        break
 
 
     next_state = to_state(state.base_dict,

@@ -38,7 +38,8 @@ def update_belief(state, observations, known=False, reality_state=None):
             if add_delete == 1:
                 state.food_dict[food] = 'F'
             else:
-                del state.food_dict[food]
+                if food in state.food_dict:
+                    del state.food_dict[food]
 
     if observations.defender:
         for defender, add_delete in observations.defender.iteritems():
@@ -201,7 +202,7 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        #print("action: {0} observations: {1}\n", action, observations)
+        #print("action: {0} observations: {1}\n".format(action, observations))
         #print("old belief: {0}\n".format(belief_state))
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
         #print("new belief: {0}\n".format(belief_state))
