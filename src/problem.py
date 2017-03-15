@@ -81,6 +81,7 @@ def parse(simstate):
         elif cell == 'd':
             harvester[(x, y)] = cell
             defender[(x, y)] = cell
+            base[(x, y)] = cell
 
         elif cell == 'E':
             enemy[(x, y)] = cell
@@ -260,7 +261,7 @@ def transition(state, action, world):
             observation_defender_dict[defender] = -1
         new_defender_dict[(new_x, new_y)] = 'D'
         observation_defender_dict[(new_x, new_y)] = 1
-        new_reward -= 10
+        new_reward -= 20
         #new_explored_dict[defender] = '-'
 
     if len(state.enemy_dict) > 0:

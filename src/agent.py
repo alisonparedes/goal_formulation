@@ -173,6 +173,7 @@ if __name__ == '__main__':
     future_food = problem.sample_n_future_food(harvester_world, 100)
     # for i in range(1000):
     #     future_food.append(problem.sample_cell(food_dist)[1])
+    distances = problem.all_distances(reality_state, harvester_world)
     reality_state = problem.to_state(reality_state.base_dict,
                                      reality_state.harvester_dict,
                                      food=reality_state.food_dict,
@@ -180,7 +181,8 @@ if __name__ == '__main__':
                                      defender=reality_state.defender_dict,
                                      enemy=reality_state.enemy_dict,
                                      has_food=reality_state.has_food,
-                                     future_food=future_food)
+                                     future_food=future_food,
+                                     distances=distances)
 
     if harvester_world.known:
         belief_state, _, _ = init_belief(args.belief, future_food=future_food)
@@ -202,7 +204,7 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        #print("action: {0} observations: {1}\n".format(action, observations))
+        print("action: {0} observations: {1}\n".format(action, observations))
         #print("old belief: {0}\n".format(belief_state))
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
         #print("new belief: {0}\n".format(belief_state))
