@@ -52,6 +52,7 @@ def transition(state, action, world, time_left=1, horizon=1):
     if distance > time_left:
         next_step, _ = destination_policy[harvester]
         step_count = 1
+        distance = step_count
         while step_count < time_left:
             next_step, _ = destination_policy[next_step]
             step_count += 1
@@ -174,5 +175,5 @@ if __name__ == '__main__':
     print "action: ({0}, {1}) defender? {2}".format(args.destination_x, args.destination_y, args.defender_too)
     print "action cost: {0}".format(action_cost)
     print "reward: {0}".format(next_state.reward)
-    print(problem.print_grid(initial_state, world))
-    print(problem.print_grid(next_state, world))
+    print(problem.state_to_string(initial_state, world))
+    print(problem.state_to_string(next_state, world))
