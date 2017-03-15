@@ -15,20 +15,16 @@ def applicable_actions(state):
 
     for food, _ in state.food_dict.iteritems():
         if harvester != food:
-            actions.append((food, False))
-            #actions.append((food, True))
+            actions.append(food)
 
     base, _ = state.base_dict.iteritems().next()
     if harvester != base:
-        actions.append((base, False))
-        #actions.append((base, True))
+        actions.append(base)
 
     return actions
 
 
-def transition(state, action, world, time_left=1, horizon=1):
-
-    destination, move_defender_too = action
+def transition(state, destination, world, time_left=1, horizon=1):
 
     harvester, _ = state.harvester_dict.iteritems().next()
 
@@ -167,8 +163,12 @@ def transition(state, action, world, time_left=1, horizon=1):
                                  reward=alt_reward,
                                  future_food=remaining_food,
                                  distances=state.distances)
+    result = [(next_state, distance)]
 
-    return next_state, distance
+    if deploy_defender:
+        result.append((alt_state, distance))
+
+    return result
 
 
 if __name__ == '__main__':
@@ -181,27 +181,25 @@ if __name__ == '__main__':
     parser.add_argument("max_food")
     parser.add_argument("destination_x")
     parser.add_argument("destination_y")
-    parser.add_argument("defender_too")
     parser.add_argument("time_left")
     args = parser.parse_args()
+
     initial_state, x, y = agent.init_belief(args.initial_state)
     world = problem.to_problem(x, y, int(args.max_food))
     initial_state = problem.sample(initial_state, world)
-    defender_too = False
-    if args.defender_too == 'True':
-        defender_too = True
 
     print "initial_state: {0}".format(args.initial_state)
     print "max_food: {0}".format(args.max_food)
-    print "action: ({0}, {1}) defender? {2}".format(args.destination_x, args.destination_y, args.defender_too)
+    print "action: ({0}, {1})".format(args.destination_x, args.destination_y)
 
     print(initial_state)
-    next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y)), defender_too), world, int(args.time_left), int(args.time_left))
+    next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y))), world, int(args.time_left), int(args.time_left))
 
     print(problem.state_to_string(initial_state, world))
     print(problem.state_to_string(next_state, world))
 
     print "action cost: {0}".format(action_cost)
     print "reward: {0}".format(next_state.reward)
+    print "distance: {0}".format(action_cost)
 
     print(next_state)

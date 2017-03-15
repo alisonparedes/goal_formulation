@@ -16,9 +16,7 @@ def to_node(state, previous, action, g=0, time=0, step_time=0):
 
 def search(initial_state, dimensions, horizon=1, return_plan=False):
 
-    #print("New search:")
-    #print(test_problem.print_grid(initial_state.grid, dimensions))
-    #print(initial_state.future_food)
+    #print(initial_state)
     i = to_node(initial_state, previous=None, action=None, g=0, time=0, step_time=0)
     open_list = deque([i])
     closed_list = deque([])
@@ -110,27 +108,20 @@ def get_plan(s):
 
 def expand(s_node, open_list, closed_list, max_g, dimensions, horizon):
     expanded = []
-
-    #print("Expanding node: ")
-    #print(test_problem.print_grid(s_node.state.grid, dimensions))
-    #print(s_node.state.future_food)
-    #print("Parent node:")
-    #if s_node.previous:
-        #print(test_problem.print_grid(s_node.previous.state.grid, dimensions))
-        #print(s_node.previous.state.future_food)
-
+    #@print(s_node.state)
     for action in relaxed_problem.applicable_actions(s_node.state):
+        #print(action)
+        next_states = relaxed_problem.transition(s_node.state, action, dimensions, horizon - s_node.time, horizon)
 
-        next_state, step_time = relaxed_problem.transition(s_node.state, action, dimensions, horizon - s_node.time, horizon)
-
-        result = to_node(state=next_state, previous=s_node, action=action, g=next_state.reward, time=s_node.time + step_time, step_time=step_time)
-        # if g > max_g:
-        #    max_g = g
-        #    plan = result
-        # TODO: if node.state not in closed_list
-        open_list.append(result)
-        closed_list.append(result.state)
-        expanded.append(result)
+        for next_state, step_time in next_states:
+            result = to_node(state=next_state, previous=s_node, action=action, g=next_state.reward, time=s_node.time + step_time, step_time=step_time)
+            # if g > max_g:
+            #    max_g = g
+            #    plan = result
+            # TODO: if node.state not in closed_list
+            open_list.append(result)
+            closed_list.append(result.state)
+            expanded.append(result)
 
 
 
