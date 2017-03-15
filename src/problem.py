@@ -108,7 +108,7 @@ def interleaved(reality, belief, world):
 
 def to_ascii_array(state, world):
 
-    state_grid = [[" " for _ in range(world.y)] for _ in range(world.x)]
+    state_grid = [["x" for _ in range(world.y)] for _ in range(world.x)]
 
     for explored, _ in state.explored_dict.iteritems():
         explored_x, explored_y = explored

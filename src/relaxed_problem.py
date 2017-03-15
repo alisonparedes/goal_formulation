@@ -53,6 +53,7 @@ def transition(state, action, world, time_left=1, horizon=1):
         next_step, _ = destination_policy[harvester]
         step_count = 1
         distance = step_count
+        destination = next_step
         while step_count < time_left:
             next_step, _ = destination_policy[next_step]
             step_count += 1
@@ -169,11 +170,17 @@ if __name__ == '__main__':
     defender_too = False
     if args.defender_too == 'True':
         defender_too = True
-    next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y)), defender_too), world, int(args.time_left), int(args.time_left))
+
     print "initial_state: {0}".format(args.initial_state)
     print "max_food: {0}".format(args.max_food)
     print "action: ({0}, {1}) defender? {2}".format(args.destination_x, args.destination_y, args.defender_too)
+
+    print(initial_state)
+    next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y)), defender_too), world, int(args.time_left), int(args.time_left))
+
     print "action cost: {0}".format(action_cost)
     print "reward: {0}".format(next_state.reward)
+
     print(problem.state_to_string(initial_state, world))
     print(problem.state_to_string(next_state, world))
+    print(next_state)
