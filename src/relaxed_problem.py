@@ -26,7 +26,8 @@ def applicable_actions(state):
 
 
 def transition(state, destination, world, time_left=1, horizon=1):
-
+    print(destination, time_left)
+    print(problem.state_to_string(state, world))
     harvester, _ = state.harvester_dict.iteritems().next()
 
     new_harvester_dict = copy.copy(state.harvester_dict)
@@ -98,9 +99,10 @@ def transition(state, destination, world, time_left=1, horizon=1):
                     #        break
                     enemy_policy = dijkstra.dijkstra(next_step, state, world, enemy=True)
                     new_enemy = enemy_step
-                    try_enemy_step, _ = enemy_policy[enemy_step]
-                    if try_enemy_step not in state.defender_dict:
-                        new_enemy = try_enemy_step
+                    if enemy_step in enemy_policy:
+                        try_enemy_step, _ = enemy_policy[enemy_step]
+                        if try_enemy_step not in state.defender_dict:
+                            new_enemy = try_enemy_step
                     turn = not turn
 
         del new_enemy_dict[enemy]

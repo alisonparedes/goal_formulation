@@ -314,40 +314,41 @@ def transition(state, action, world):
         #    if goal == (new_x, new_y):
         #        new_enemy_x_y, _ = policy[enemy]
         policy = dijkstra.dijkstra((new_x, new_y), state, world, enemy=True)
-        new_enemy_x_y, _ = policy[enemy]
-        if new_enemy_x_y == '*':
-            new_enemy_x_y = (new_x, new_y)
-        if new_enemy_x_y not in new_defender_dict:
-            del new_enemy_dict[enemy]
-            observation_enemy_dict[enemy] = -1
-            new_enemy_dict[new_enemy_x_y] = 'E'
-            observation_enemy_dict[new_enemy_x_y] = 1
-            #new_reward -= 10
-        else:
-            new_enemy_x, new_enemy_y = new_enemy_x_y
-            if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
+        if enemy in policy:
+            new_enemy_x_y, _ = policy[enemy]
+            if new_enemy_x_y == '*':
+                new_enemy_x_y = (new_x, new_y)
+            if new_enemy_x_y not in new_defender_dict:
                 del new_enemy_dict[enemy]
                 observation_enemy_dict[enemy] = -1
-                new_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
-                observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
+                new_enemy_dict[new_enemy_x_y] = 'E'
+                observation_enemy_dict[new_enemy_x_y] = 1
+                #new_reward -= 10
+            else:
+                new_enemy_x, new_enemy_y = new_enemy_x_y
+                if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
+                    del new_enemy_dict[enemy]
+                    observation_enemy_dict[enemy] = -1
+                    new_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
+                    observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
 
-            elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
-                del new_enemy_dict[enemy]
-                observation_enemy_dict[enemy] = -1
-                new_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
-                observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
+                elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
+                    del new_enemy_dict[enemy]
+                    observation_enemy_dict[enemy] = -1
+                    new_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
+                    observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
 
-            elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
-                del new_enemy_dict[enemy]
-                observation_enemy_dict[enemy] = -1
-                new_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
-                observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
+                elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
+                    del new_enemy_dict[enemy]
+                    observation_enemy_dict[enemy] = -1
+                    new_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
+                    observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
 
-            elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
-                del new_enemy_dict[enemy]
-                observation_enemy_dict[enemy] = -1
-                new_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
-                observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1
+                elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
+                    del new_enemy_dict[enemy]
+                    observation_enemy_dict[enemy] = -1
+                    new_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
+                    observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1
 
         if (new_x, new_y) in new_enemy_dict:
             new_reward -= 10
