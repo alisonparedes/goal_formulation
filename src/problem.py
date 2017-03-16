@@ -285,6 +285,7 @@ def transition(state, action, world):
     new_defender_dict = copy.copy(state.defender_dict)
     new_enemy_dict = copy.copy(state.enemy_dict)
     remaining_food = copy.copy(state.future_food)
+
     observation_harvester_dict = {}
     observation_explored_dict = {}
     observation_food_dict = {}
@@ -321,8 +322,8 @@ def transition(state, action, world):
                 new_enemy_x_y = (new_x, new_y)
             if new_enemy_x_y not in new_defender_dict:
                 del new_enemy_dict[enemy]
-                observation_enemy_dict[enemy] = -1
                 new_enemy_dict[new_enemy_x_y] = 'E'
+                observation_enemy_dict[enemy] = -1
                 observation_enemy_dict[new_enemy_x_y] = 1
                 #new_reward -= 10
             else:
@@ -378,8 +379,8 @@ def transition(state, action, world):
                             and try_coordinate not in new_harvester_dict \
                             and try_coordinate not in new_explored_dict:
                         new_food_dict[try_coordinate] = 'F'
-                        if world.known:
-                            observation_food_dict[try_coordinate] = 1
+                        #if world.known:
+                        observation_food_dict[try_coordinate] = 1
                         break
 
 

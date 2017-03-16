@@ -11,16 +11,53 @@ from collections import namedtuple
 
 def simulate(belief_state, action, real_world, dimensions):
     """
-    Simulate expects the state of the world and the action the agent wishes to take in this world--its action may or may not
-    be fulfilled as the agent expected. The simulate function will return a new state of the
-    world and a set of observations for the agent to incorporate into its belief state. The problem module's transition
-    function will handle how the world changes.
+    Decides what agent can see
     """
     # print("Simulator:")
     # print(real_world.future_food)
     new_state, observations = problem.transition(real_world, action, dimensions)
+
+    new_observation_food = observations.food
+    new_observation_enemy = {}
+
+    if observations.food:
+        for food, add_delete in observations.food.iteritems():
+            if food in belief_state.food_dict and add_delete == -1:
+                new_observation_food[food] = add_delete
+            elif food in new_state.harvester_dict and add_delete == 1:
+                new_observation_food[food] = add_delete
+            elif dimensions.known:
+                new_observation_food[food] = add_delete
+
+    if observations.enemy:
+        for enemy, add_delete in observations.enemy.iteritems():
+            if enemy in belief_state.enemy_dict and add_delete == -1:
+                new_observation_enemy[enemy] = add_delete
+            elif add_delete == 1:
+                enemy_x, enemy_y = enemy
+                if (enemy_x + 1, enemy_y) in new_state.harvester_dict\
+                    or (enemy_x + 1, enemy_y) in new_state.defender_dict\
+                    or (enemy_x - 1, enemy_y) in new_state.harvester_dict\
+                    or (enemy_x - 1, enemy_y) in new_state.defender_dict\
+                    or (enemy_x, enemy_y + 1) in new_state.harvester_dict\
+                    or (enemy_x, enemy_y + 1) in new_state.defender_dict\
+                    or (enemy_x, enemy_y - 1) in new_state.harvester_dict\
+                    or (enemy_x, enemy_y - 1) in new_state.defender_dict:
+                    new_observation_enemy[enemy] = add_delete
+            elif dimensions.known:
+                new_observation_enemy[enemy] = add_delete
+
     #print(new_state.enemy_dict)
-    return new_state, observations
+
+    new_observations = problem.to_observation(obstacle=observations.obstacle,
+                                              harvester=observations.harvester,
+                                              food=new_observation_food,
+                                              defender=observations.defender,
+                                              enemy=new_observation_enemy,
+                                              reward=observations.reward,
+                                              has_food=observations.has_food)
+
+    return new_state, new_observations
 
 
 if __name__ == '__main__':
