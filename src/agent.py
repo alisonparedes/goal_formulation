@@ -160,7 +160,7 @@ def print_step(time_step, reality, belief, dimensions):
     #os.system('clear')
     print "time: {0}".format(time_step)
     print "reward: {0}".format(belief.reward)
-    print(problem.interleaved(reality, belief, dimensions))
+    print(problem.interleaved(reality, belief, dimensions, known=False))
 
 
 if __name__ == '__main__':
@@ -204,7 +204,7 @@ if __name__ == '__main__':
                                                          action[0],
                                                          reality_state,
                                                          dimensions=harvester_world)
-        print("action: {0} observations: {1}\n".format(action, observations))
+        #print("action: {0} observations: {1}\n".format(action, observations))
         #print("old belief: {0}\n".format(belief_state))
         belief_state = update_belief(belief_state, observations, harvester_world.known, reality_state)
         #print("new belief: {0}\n".format(belief_state))

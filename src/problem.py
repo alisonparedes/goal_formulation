@@ -129,9 +129,9 @@ def parse(simstate):
     return base, harvester, food, obstacle, defender, enemy, has_food
 
 
-def interleaved(reality, belief, world):
+def interleaved(reality, belief, world, known=True):
     reality_grid = to_ascii_array(reality, world)
-    belief_grid = to_ascii_array(belief, world)
+    belief_grid = to_ascii_array(belief, world, known)
     printable = ''
     for y in range(world.y):
         for x in range(world.x):
@@ -143,9 +143,9 @@ def interleaved(reality, belief, world):
     return printable
 
 
-def to_ascii_array(state, world, belief=False):
+def to_ascii_array(state, world, known=True):
     default_char = '-'
-    if belief:
+    if not known:
         default_char = '?'
     state_grid = [[default_char for _ in range(world.y)] for _ in range(world.x)]
 
