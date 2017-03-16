@@ -174,6 +174,8 @@ def to_ascii_array(state, world, belief=False):
             state_grid[harvester_x][harvester_y] = 'b'
     elif state.has_food:
         state_grid[harvester_x][harvester_y] = '$'
+    elif harvester in state.food_dict:
+        state_grid[harvester_x][harvester_y] = 'f'
     else:
         state_grid[harvester_x][harvester_y] = 'H'
 
@@ -181,7 +183,10 @@ def to_ascii_array(state, world, belief=False):
     if defender_item:
         defender, _ = defender_item
         defender_x, defender_y = defender
-        state_grid[defender_x][defender_y] = 'D'
+        if defender in state.harvester_dict:
+            state_grid[defender_x][defender_y] = 'd'
+        else:
+            state_grid[defender_x][defender_y] = 'D'
 
     enemy_item = next(state.enemy_dict.iteritems(), None)
     if enemy_item:
@@ -205,17 +210,21 @@ def state_to_string(state, world):
     return printable
 
 
-def basic_actions(start, state, problem):
+def basic_actions(start, state, problem, enemy=False):
     actions = []
     x, y = start
     if y-1 >= 0 and ((x, y-1) not in state.obstacle_dict):
-        actions.append('N')
+        if not enemy or (x, y-1) not in state.defender_dict:
+            actions.append('N')
     if y+1 < problem.y and ((x, y+1) not in state.obstacle_dict):
-        actions.append('S')
+        if not enemy or (x, y+1) not in state.defender_dict:
+            actions.append('S')
     if x+1 < problem.x and ((x+1, y) not in state.obstacle_dict):
-        actions.append('E')
+        if not enemy or (x+1, y) not in state.defender_dict:
+            actions.append('E')
     if x-1 >= 0 and ((x-1, y) not in state.obstacle_dict):
-        actions.append('W')
+        if not enemy or (x-1, y) not in state.defender_dict:
+            actions.append('W')
     return actions
 
 
@@ -301,43 +310,45 @@ def transition(state, action, world):
 
     if len(state.enemy_dict) > 0:
         enemy, _ = state.enemy_dict.iteritems().next()
-        for goal, policy in state.distances:
-            if goal == (new_x, new_y):
-                new_enemy_x_y, _ = policy[enemy]
-                if new_enemy_x_y == '*':
-                    new_enemy_x_y = (new_x, new_y)
-                if new_enemy_x_y not in new_defender_dict:
-                    del new_enemy_dict[enemy]
-                    observation_enemy_dict[enemy] = -1
-                    new_enemy_dict[new_enemy_x_y] = 'E'
-                    observation_enemy_dict[new_enemy_x_y] = 1
-                    #new_reward -= 10
-                else:
-                    new_enemy_x, new_enemy_y = new_enemy_x_y
-                    if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
-                        del new_enemy_dict[enemy]
-                        observation_enemy_dict[enemy] = -1
-                        new_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
-                        observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
+        #for goal, policy in state.distances:
+        #    if goal == (new_x, new_y):
+        #        new_enemy_x_y, _ = policy[enemy]
+        policy = dijkstra.dijkstra((new_x, new_y), state, world, enemy=True)
+        new_enemy_x_y, _ = policy[enemy]
+        if new_enemy_x_y == '*':
+            new_enemy_x_y = (new_x, new_y)
+        if new_enemy_x_y not in new_defender_dict:
+            del new_enemy_dict[enemy]
+            observation_enemy_dict[enemy] = -1
+            new_enemy_dict[new_enemy_x_y] = 'E'
+            observation_enemy_dict[new_enemy_x_y] = 1
+            #new_reward -= 10
+        else:
+            new_enemy_x, new_enemy_y = new_enemy_x_y
+            if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
+                del new_enemy_dict[enemy]
+                observation_enemy_dict[enemy] = -1
+                new_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
+                observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
 
-                    elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
-                        del new_enemy_dict[enemy]
-                        observation_enemy_dict[enemy] = -1
-                        new_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
-                        observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
+            elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
+                del new_enemy_dict[enemy]
+                observation_enemy_dict[enemy] = -1
+                new_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
+                observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
 
-                    elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
-                        del new_enemy_dict[enemy]
-                        observation_enemy_dict[enemy] = -1
-                        new_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
-                        observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
+            elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
+                del new_enemy_dict[enemy]
+                observation_enemy_dict[enemy] = -1
+                new_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
+                observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
 
-                    elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
-                        del new_enemy_dict[enemy]
-                        observation_enemy_dict[enemy] = -1
-                        new_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
-                        observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1
-                break
+            elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
+                del new_enemy_dict[enemy]
+                observation_enemy_dict[enemy] = -1
+                new_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
+                observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1
+
         if (new_x, new_y) in new_enemy_dict:
             new_reward -= 10
 
@@ -393,46 +404,21 @@ def transition(state, action, world):
     return next_state, observations
 
 
-def chance_of_food(state, problem):
-    """Food cannot grow in cells that have been explored e.g. unit == None"""
-    distribution = no_chance(state)
-    total_probability = 0.0
-    probability = 1.0 / (problem.x * problem.y - len(distribution))
-    for x in range(0, problem.x):
-        for y in range(0, problem.y):
-            if (x, y) not in state.grid or not state.grid[(x, y)] or (state.grid[(x, y)] and state.grid[(x, y)] not in '#*Bb'):
-                distribution.append((probability, (x, y), 'F'))
-                total_probability += probability
-    distribution.append((1 - total_probability, None))
-    return distribution
-
-
-def no_chance(state):
-    """Food cannot grow in cells that have been explored, e.g. unit == None"""
-    distribution = []
-    for coordinate, unit in state.grid.iteritems():
-        if not unit or unit in 'b*B#':
-            distribution.append((0.0, coordinate))
-    return distribution
-
-
 def sample(belief_state, dimensions):
     """Constructs a world from a belief state"""
     new_food_dict = sample_max_food(belief_state, dimensions)
+    new_enemy_dict = sample_enemy(belief_state, dimensions)
     if dimensions.known:
         future_food = belief_state.future_food
     else:
         future_food = sample_n_future_food(dimensions, 100)
     distances = all_distances(belief_state, dimensions)
-    # to_base = distance_to_base(complete_grid, dimensions)
-    # food_distances = add_distance_to_food(complete_grid, to_base, dimensions)
-    # all_distances = add_distance_to_future(complete_grid, food_distances, future_food, dimensions)
     complete_state = to_state(belief_state.base_dict,
                               belief_state.harvester_dict,
                               food= new_food_dict,
                               obstacle=belief_state.obstacle_dict,
                               defender=belief_state.defender_dict,
-                              enemy=belief_state.enemy_dict,
+                              enemy=new_enemy_dict,
                               explored=belief_state.explored_dict,
                               has_food=belief_state.has_food,
                               reward=belief_state.reward,
@@ -497,6 +483,21 @@ def sample_max_food(state, dimensions):
                 and try_coordinate not in state.explored_dict:
             new_food_dict[try_coordinate] = 'F'
     return new_food_dict
+
+def sample_enemy(state, dimensions):
+
+    #print(grid)
+    new_enemy_dict = deepcopy(state.enemy_dict)
+    while len(new_enemy_dict) < 1:
+        #print(try_coordinate)
+        try_coordinate = sample_cell(dimensions.x, dimensions.y)
+        if try_coordinate not in state.base_dict \
+                and try_coordinate not in state.obstacle_dict \
+                and try_coordinate not in state.harvester_dict \
+                and try_coordinate not in state.explored_dict:
+            new_enemy_dict[try_coordinate] = 'E'
+    return new_enemy_dict
+
 
 
 def sample_n_future_food(harvester_world, n=1):

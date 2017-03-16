@@ -5,6 +5,7 @@ Created on Oct 25, 2016
 '''
 import problem
 import copy
+import dijkstra
 
 
 def applicable_actions(state):
@@ -90,11 +91,12 @@ def transition(state, destination, world, time_left=1, horizon=1):
                     step_count += 1
                     turn = not turn
                 else:
-                    enemy_policy = None
-                    for goal, policy in state.distances:
-                        if goal == next_step:
-                            enemy_policy = policy
-                            break
+                    #enemy_policy = None
+                    #for goal, policy in state.distances:
+                    #    if goal == next_step:
+                    #        enemy_policy = policy
+                    #        break
+                    enemy_policy = dijkstra.dijkstra(next_step, state, world, enemy=True)
                     new_enemy = enemy_step
                     try_enemy_step, _ = enemy_policy[enemy_step]
                     if try_enemy_step not in state.defender_dict:
