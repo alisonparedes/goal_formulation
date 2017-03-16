@@ -26,8 +26,8 @@ def applicable_actions(state):
 
 
 def transition(state, destination, world, time_left=1, horizon=1):
-    print(destination, time_left)
-    print(problem.state_to_string(state, world))
+    #print(destination, time_left)
+    #print(problem.state_to_string(state, world))
     harvester, _ = state.harvester_dict.iteritems().next()
 
     new_harvester_dict = copy.copy(state.harvester_dict)
@@ -138,7 +138,7 @@ def transition(state, destination, world, time_left=1, horizon=1):
 
     alt_reward = new_reward
     if deploy_defender:
-        new_reward -= 1
+        new_reward -= 1 * distance
 
     next_state = problem.to_state(state.base_dict,
                                   new_harvester_dict,

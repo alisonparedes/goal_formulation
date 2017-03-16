@@ -297,6 +297,7 @@ def transition(state, action, world):
     new_explored_dict[harvester] = '-'
     observation_harvester_dict[harvester] = -1
     observation_explored_dict[harvester] = 1
+    new_reward -= 1
 
     if move_defender_too:
         if len(state.defender_dict) > 0:
