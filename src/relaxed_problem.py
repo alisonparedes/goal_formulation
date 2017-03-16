@@ -145,12 +145,38 @@ def transition(state, destination, world, time_left=1, horizon=1):
                                   future_food=remaining_food,
                                   distances=state.distances)
 
+    alt_enemy_dict = copy.copy(new_enemy_dict)
     if deploy_defender:
         new_defender_dict[destination] = 'D'
         if len(state.defender_dict) > 0:
             defender, _ = state.defender_dict.iteritems().next()
             del new_defender_dict[defender]
         alt_reward -= 20
+        if new_enemy in new_defender_dict:
+            new_enemy_x, new_enemy_y = new_enemy
+            if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
+                del alt_enemy_dict[enemy]
+                #observation_enemy_dict[enemy] = -1
+                alt_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
+                #observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
+
+            elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
+                del alt_enemy_dict[enemy]
+                #observation_enemy_dict[enemy] = -1
+                alt_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
+                #observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
+
+            elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
+                del alt_enemy_dict[enemy]
+                #observation_enemy_dict[enemy] = -1
+                alt_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
+                #observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
+
+            elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
+                del alt_enemy_dict[enemy]
+                #observation_enemy_dict[enemy] = -1
+                alt_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
+                #observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1
 
     alt_state = problem.to_state(state.base_dict,
                                  new_harvester_dict,
@@ -158,7 +184,7 @@ def transition(state, destination, world, time_left=1, horizon=1):
                                  obstacle=state.obstacle_dict,
                                  defender=new_defender_dict,
                                  explored=new_explored_dict,
-                                 enemy=new_enemy_dict,
+                                 enemy=alt_enemy_dict,
                                  has_food=new_has_food,
                                  reward=alt_reward,
                                  future_food=remaining_food,
@@ -193,13 +219,15 @@ if __name__ == '__main__':
     print "action: ({0}, {1})".format(args.destination_x, args.destination_y)
 
     print(initial_state)
-    next_state, action_cost = transition(initial_state, ((int(args.destination_x), int(args.destination_y))), world, int(args.time_left), int(args.time_left))
+    next_states = transition(initial_state, (int(args.destination_x), int(args.destination_y)), world, int(args.time_left), int(args.time_left))
 
     print(problem.state_to_string(initial_state, world))
-    print(problem.state_to_string(next_state, world))
 
-    print "action cost: {0}".format(action_cost)
-    print "reward: {0}".format(next_state.reward)
-    print "distance: {0}".format(action_cost)
+    for next_state, action_cost in next_states:
+        print(problem.state_to_string(next_state, world))
 
-    print(next_state)
+        print "action cost: {0}".format(action_cost)
+        print "reward: {0}".format(next_state.reward)
+        print "distance: {0}".format(action_cost)
+
+        print(next_state)

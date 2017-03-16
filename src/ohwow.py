@@ -23,7 +23,7 @@ def ohwow(belief_state, dimensions, number_of_samples=1, horizon=1):
         for initial_state in sampled_worlds:
             #print(action, belief_state)
             next_state, _ = problem.transition(initial_state, action, dimensions)
-            #print(action, next_state)
+            print(action, next_state)
             #print(action, next_state.grid)
             #print(problem.print_grid(next_state.grid, dimensions))
             #print(problem.interleaved(initial_state.grid, next_state.grid, dimensions))
