@@ -30,6 +30,14 @@ def to_state(base, harvester, food=None, obstacle=None, defender=None, enemy=Non
                                  'distances'])
     if not explored:
         explored = {}
+    if not defender:
+        defender = {}
+    if not obstacle:
+        obstacle = {}
+    if not food:
+        food = {}
+    if not enemy:
+        enemy = {}
     return State(base, harvester, food, obstacle, defender, enemy, explored, has_food, reward, future_food, distances)
 
 
@@ -81,7 +89,7 @@ def parse(simstate):
         elif cell == 'd':
             harvester[(x, y)] = cell
             defender[(x, y)] = cell
-            base[(x, y)] = cell
+            #base[(x, y)] = cell
 
         elif cell == 'E':
             enemy[(x, y)] = cell
@@ -89,6 +97,29 @@ def parse(simstate):
         elif cell == '!':
             harvester[(x, y)] = cell
             enemy[(x, y)] = cell
+
+        elif cell == '0':
+            harvester[(x, y)] = cell
+            enemy[(x, y)] = cell
+            base[(x, y)] = cell
+
+        elif cell == '1':
+            enemy[(x, y)] = cell
+            base[(x, y)] = cell
+
+        elif cell == '2':
+            defender[(x, y)] = cell
+            base[(x, y)] = cell
+
+        elif cell == '3':
+            enemy[(x, y)] = cell
+            harvester[(x, y)] = cell
+            has_food = True
+
+        elif cell == '4':
+            food[(x, y)] = cell
+            harvester[(x, y)] = cell
+            has_food = True
 
 
         elif cell == '\n':
@@ -112,9 +143,11 @@ def interleaved(reality, belief, world):
     return printable
 
 
-def to_ascii_array(state, world):
-
-    state_grid = [["x" for _ in range(world.y)] for _ in range(world.x)]
+def to_ascii_array(state, world, belief=False):
+    default_char = '-'
+    if belief:
+        default_char = '?'
+    state_grid = [[default_char for _ in range(world.y)] for _ in range(world.x)]
 
     for explored, _ in state.explored_dict.iteritems():
         explored_x, explored_y = explored
@@ -137,6 +170,8 @@ def to_ascii_array(state, world):
     if harvester in state.base_dict:
         if state.has_food:
             state_grid[harvester_x][harvester_y] = '*'
+        else:
+            state_grid[harvester_x][harvester_y] = 'b'
     elif state.has_food:
         state_grid[harvester_x][harvester_y] = '$'
     else:
@@ -261,7 +296,7 @@ def transition(state, action, world):
             observation_defender_dict[defender] = -1
         new_defender_dict[(new_x, new_y)] = 'D'
         observation_defender_dict[(new_x, new_y)] = 1
-        new_reward -= 20
+        new_reward -= 1
         #new_explored_dict[defender] = '-'
 
     if len(state.enemy_dict) > 0:
@@ -355,7 +390,6 @@ def transition(state, action, world):
                                   enemy=observation_enemy_dict,
                                   reward=new_reward,
                                   has_food=new_has_food)
-
     return next_state, observations
 
 

@@ -16,6 +16,7 @@ if __name__ == '__main__':
     parser.add_argument("max_food")
     parser.add_argument("n_worlds")
     parser.add_argument("n_obstacles")
+    parser.add_argument("enemy")
     parser.add_argument("file_name")
     args = parser.parse_args()
 
@@ -24,29 +25,53 @@ if __name__ == '__main__':
     dimensions = problem.to_problem(int(args.width), int(args.width))
 
     for w in range(int(args.n_worlds)):
-        reality = {}
-        belief = {}
+        harvester_dict = {}
+        food_dict = {}
+        defender_dict = {}
+        enemy_dict = {}
+        obstacle_dict = {}
+        base_dict = {}
+
         b_x, b_y = random_coordinate(int(args.width), int(args.height))
-        reality[(b_x, b_y)] = "b"
-        belief[(b_x, b_y)] = "b"
+        base_dict[(b_x, b_y)] = "b"
+        harvester_dict[(b_x, b_y)] = "b"
 
         i = 0
         while i < int(args.max_food):
             x, y = random_coordinate(int(args.width), int(args.height))
-            if (x, y) not in reality:
-                reality[(x, y)] = "F"
+            if (x, y) not in base_dict:
+                food_dict[(x, y)] = "F"
                 i += 1
 
         i = 0
         while i < int(args.n_obstacles):
             x, y = random_coordinate(int(args.width), int(args.height))
-            if (x, y) not in reality:
-                reality[(x, y)] = '#'
+            if (x, y) not in base_dict \
+                    and (x, y) not in food_dict:
+                obstacle_dict[(x, y)] = '#'
                 i += 1
 
+        i = 0
+        while i < int(args.enemy):
+            x, y = random_coordinate(int(args.width), int(args.height))
+            if (x, y) not in base_dict \
+                    and (x, y) not in food_dict\
+                    and (x, y not in obstacle_dict):
+                enemy_dict[(x, y)] = 'E'
+                i += 1
+
+        belief = problem.to_state(base_dict,
+                                  harvester_dict)
+
+        reality = problem.to_state(base_dict,
+                                   harvester_dict,
+                                   food=food_dict,
+                                   obstacle=obstacle_dict,
+                                   enemy=enemy_dict)
+
         with open("../test/{0}_{1}_real.world".format(args.file_name, w), "w") as world_file:
-            world_file.write(problem.print_grid(reality, dimensions))
+            world_file.write(problem.state_to_string(reality, dimensions))
         with open("../test/{0}_{1}_belief.world".format(args.file_name, w), "w") as world_file:
-            world_file.write(problem.print_grid(belief, dimensions))
+            world_file.write(problem.state_to_string(belief, dimensions))
 
 

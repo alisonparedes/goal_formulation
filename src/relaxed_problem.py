@@ -60,7 +60,7 @@ def transition(state, destination, world, time_left=1, horizon=1):
 
     if len(state.enemy_dict) > 0:
         turn = True
-        next_step, distance = destination_policy[harvester]
+        next_step, _ = destination_policy[harvester]
         step_count = 1
         turn = not turn
 
@@ -73,13 +73,14 @@ def transition(state, destination, world, time_left=1, horizon=1):
 
         enemy_step = enemy
         #enemy_step, _ = enemy_policy[enemy_step]
-        new_enemy = enemy_step
+        new_enemy = enemy_step  # TODO: I might not need to store the previous step any more
 
         while step_count < distance or not turn:
 
             if enemy_step == next_step:
                 destination = next_step
                 distance = step_count
+                new_enemy = enemy_step
                 deploy_defender = True
                 break
 
@@ -95,7 +96,9 @@ def transition(state, destination, world, time_left=1, horizon=1):
                             enemy_policy = policy
                             break
                     new_enemy = enemy_step
-                    enemy_step, _ = enemy_policy[enemy_step]
+                    try_enemy_step, _ = enemy_policy[enemy_step]
+                    if try_enemy_step not in state.defender_dict:
+                        new_enemy = try_enemy_step
                     turn = not turn
 
         del new_enemy_dict[enemy]
@@ -131,7 +134,7 @@ def transition(state, destination, world, time_left=1, horizon=1):
 
     alt_reward = new_reward
     if deploy_defender:
-        new_reward -= 10
+        new_reward -= 1
 
     next_state = problem.to_state(state.base_dict,
                                   new_harvester_dict,
@@ -151,29 +154,29 @@ def transition(state, destination, world, time_left=1, horizon=1):
         if len(state.defender_dict) > 0:
             defender, _ = state.defender_dict.iteritems().next()
             del new_defender_dict[defender]
-        alt_reward -= 20
+        alt_reward -= 10
         if new_enemy in new_defender_dict:
             new_enemy_x, new_enemy_y = new_enemy
             if new_enemy_x + 1 < world.x and (new_enemy_x + 1, new_enemy_y) not in state.obstacle_dict:
-                del alt_enemy_dict[enemy]
+                del alt_enemy_dict[new_enemy]
                 #observation_enemy_dict[enemy] = -1
                 alt_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 'E'
                 #observation_enemy_dict[(new_enemy_x + 1, new_enemy_y)] = 1
 
             elif new_enemy_x - 1 >= 0 and (new_enemy_x - 1, new_enemy_y) not in state.obstacle_dict:
-                del alt_enemy_dict[enemy]
+                del alt_enemy_dict[new_enemy]
                 #observation_enemy_dict[enemy] = -1
                 alt_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 'E'
                 #observation_enemy_dict[(new_enemy_x - 1, new_enemy_y)] = 1
 
             elif new_enemy_y + 1 < world.y and (new_enemy_x, new_enemy_y + 1) not in state.obstacle_dict:
-                del alt_enemy_dict[enemy]
+                del alt_enemy_dict[new_enemy]
                 #observation_enemy_dict[enemy] = -1
                 alt_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 'E'
                 #observation_enemy_dict[(new_enemy_x, new_enemy_y + 1)] = 1
 
             elif new_enemy_y - 1 >= 0 and (new_enemy_x, new_enemy_y - 1) not in state.obstacle_dict:
-                del alt_enemy_dict[enemy]
+                del alt_enemy_dict[new_enemy]
                 #observation_enemy_dict[enemy] = -1
                 alt_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 'E'
                 #observation_enemy_dict[(new_enemy_x, new_enemy_y - 1)] = 1

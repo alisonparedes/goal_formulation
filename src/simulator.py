@@ -19,6 +19,7 @@ def simulate(belief_state, action, real_world, dimensions):
     # print("Simulator:")
     # print(real_world.future_food)
     new_state, observations = problem.transition(real_world, action, dimensions)
+    #print(new_state.enemy_dict)
     return new_state, observations
 
 

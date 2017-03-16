@@ -6,7 +6,7 @@ Created on Sep 1, 2016
 from collections import namedtuple, deque
 import relaxed_problem
 import copy
-import problem as test_problem
+import problem
 
 
 def to_node(state, previous, action, g=0, time=0, step_time=0):
@@ -27,6 +27,7 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
     while len(open_list) > 0:
         s = open_list.popleft()
         #print(q, get_plan(s))
+
         q += 1
         # if s.previous:
             # compare_grid(s.state.grid, s.previous.state.grid)
@@ -39,7 +40,12 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
         else:
             expand(s, open_list, closed_list, max_g, dimensions, horizon)
             nodes_expanded += 1
+
+    #for action, state in get_plan(plan):
+    #    print("action: {0}\n".format(action))
+    #    print(problem.state_to_string(state, dimensions))
     #return_plan = True
+    #print(max_g, get_plan(plan))
     if return_plan:
 #        return get_plan(plan), max_g
         print(max_g, get_plan(plan))
@@ -101,7 +107,7 @@ def get_plan(s):
     i = s
     plan = []
     while i.previous:
-        plan.insert(HEAD, (i.action, i.step_time, i.g))
+        plan.insert(HEAD, (i.action, i.g, i.time))
         i = i.previous
     return plan
 
@@ -114,6 +120,8 @@ def expand(s_node, open_list, closed_list, max_g, dimensions, horizon):
         next_states = relaxed_problem.transition(s_node.state, action, dimensions, horizon - s_node.time, horizon)
 
         for next_state, step_time in next_states:
+            #if s_node.time + step_time > 10:
+            #    print("hmm...", step_time, s_node.time, action, horizon, s_node.state)
             result = to_node(state=next_state, previous=s_node, action=action, g=next_state.reward, time=s_node.time + step_time, step_time=step_time)
             # if g > max_g:
             #    max_g = g
