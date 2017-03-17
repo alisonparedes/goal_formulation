@@ -59,7 +59,7 @@ def transition(state, destination, world, time_left=1, horizon=1):
             distance = step_count
 
     deploy_defender = False
-
+    defender, _ = state.defender_dict.iteritems().next()
     if len(state.enemy_dict) > 0:
         turn = True
         next_step, _ = destination_policy[harvester]
@@ -138,7 +138,9 @@ def transition(state, destination, world, time_left=1, horizon=1):
 
     alt_reward = new_reward
     if deploy_defender:
-        new_reward -= 1 * distance
+        destination_x, destination_y = destination
+        defender_x, defender_y = defender
+        alt_reward -= 1 * (abs(destination_x - defender_x) + abs(destination_y - defender_y))
 
     next_state = problem.to_state(state.base_dict,
                                   new_harvester_dict,

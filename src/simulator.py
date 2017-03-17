@@ -49,7 +49,8 @@ def simulate(belief_state, action, real_world, dimensions):
                     or (enemy_x, enemy_y + 1) in new_state.harvester_dict\
                     or (enemy_x, enemy_y + 1) in new_state.defender_dict\
                     or (enemy_x, enemy_y - 1) in new_state.harvester_dict\
-                    or (enemy_x, enemy_y - 1) in new_state.defender_dict:
+                    or (enemy_x, enemy_y - 1) in new_state.defender_dict\
+                        or len(belief_state.enemy_dict) > 0:
                     new_observation_enemy[enemy] = add_delete
             elif dimensions.known:
                 new_observation_enemy[enemy] = add_delete

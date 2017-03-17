@@ -83,6 +83,7 @@ def parse(simstate):
     obstacle = {}
     defender = {}
     enemy = {}
+    explored = {}
     has_food = False
     y = 0
     x = 0
@@ -91,6 +92,7 @@ def parse(simstate):
         if cell == 'b':
             harvester[(x, y)] = cell
             base[(x, y)] = cell
+            defender[(x, y)] = cell
 
         elif cell == 'H':
             harvester[(x, y)] = cell
@@ -151,12 +153,15 @@ def parse(simstate):
             harvester[(x, y)] = cell
             has_food = True
 
+        elif cell == 'x':
+            explored[(x, y)] = cell
+
 
         elif cell == '\n':
             y += 1
             x =- 1 #Hmm...
         x += 1    
-    return base, harvester, food, obstacle, defender, enemy, has_food
+    return base, harvester, food, obstacle, defender, enemy, has_food, explored
 
 
 def interleaved(reality, belief, world, known=True):
@@ -213,10 +218,11 @@ def to_ascii_array(state, world, known=True):
     if defender_item:
         defender, _ = defender_item
         defender_x, defender_y = defender
-        if defender in state.harvester_dict:
-            state_grid[defender_x][defender_y] = 'd'
-        else:
-            state_grid[defender_x][defender_y] = 'D'
+        if defender not in state.base_dict:
+            if defender in state.harvester_dict:
+                state_grid[defender_x][defender_y] = 'd'
+            else:
+                state_grid[defender_x][defender_y] = 'D'
 
     enemy_item = next(state.enemy_dict.iteritems(), None)
     if enemy_item:
@@ -305,7 +311,22 @@ def transition(state, action, world):
             return state, None
 
     if (new_x, new_y) in state.obstacle_dict:
-        return state, to_observation(obstacle={(new_x, new_y): 1}, reward=state.reward - 1)
+        new_reward = state.reward - 1
+        observation = to_observation(obstacle={(new_x, new_y): 1},
+                                     reward=new_reward,
+                                     has_food=state.has_food)
+        next_state = to_state(state.base_dict,
+                              state.harvester_dict,
+                              food=state.food_dict,
+                              obstacle=state.obstacle_dict,
+                              defender=state.defender_dict,
+                              explored=state.explored_dict,
+                              enemy=state.enemy_dict,
+                              has_food=state.has_food,
+                              reward=new_reward,
+                              future_food=state.future_food,
+                              distances=state.distances)
+        return next_state, observation
 
     new_harvester_dict = copy.copy(state.harvester_dict)
     new_food_dict = copy.copy(state.food_dict)
@@ -337,7 +358,8 @@ def transition(state, action, world):
             observation_defender_dict[defender] = -1
         new_defender_dict[(new_x, new_y)] = 'D'
         observation_defender_dict[(new_x, new_y)] = 1
-        new_reward -= 1
+        defender_x, defender_y = defender
+        new_reward -= 1 * (abs(new_x - defender_x) + abs(new_y - defender_y))
         #new_explored_dict[defender] = '-'
 
     if len(state.enemy_dict) > 0:

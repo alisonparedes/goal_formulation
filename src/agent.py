@@ -98,14 +98,15 @@ def init_reality(reality_file_name):
             reality_str += line
             x = len(line) - 1
             y += 1
-    base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(reality_str)
+    base, harvester, food, obstacle, defender, enemy, has_food, explored = problem.parse(reality_str)
     return problem.to_state(base,
                             harvester,
                             food=food,
                             obstacle=obstacle,
                             defender=defender,
                             enemy=enemy,
-                            has_food=has_food), x, y
+                            has_food=has_food,
+                            explored=explored), x, y
 
 
 def init_belief(belief_file_name, future_food=None):
@@ -121,7 +122,7 @@ def init_belief(belief_file_name, future_food=None):
             belief_str += line
             x = len(line) - 1
             y += 1
-    base, harvester, food, obstacle, defender, enemy, has_food = problem.parse(belief_str)
+    base, harvester, food, obstacle, defender, enemy, has_food, explored = problem.parse(belief_str)
     return problem.to_state(base,
                             harvester,
                             food=food,
@@ -129,7 +130,8 @@ def init_belief(belief_file_name, future_food=None):
                             defender=defender,
                             enemy=enemy,
                             has_food=has_food,
-                            future_food=future_food), x, y
+                            future_food=future_food,
+                            explored=explored), x, y
 
 
 def parse_args():
@@ -162,7 +164,10 @@ def print_step(time_step, reality, belief, dimensions):
     print "time: {0}".format(time_step)
     print "new reward: {0}".format(belief.step_reward)
     print "tot reward: {0}".format(belief.reward)
-    print(problem.interleaved(reality, belief, dimensions, known=False))
+    known = False
+    if dimensions.known == 1:
+        known = True
+    print(problem.interleaved(reality, belief, dimensions, known=known))
 
 
 if __name__ == '__main__':
@@ -216,5 +221,5 @@ if __name__ == '__main__':
         time_step += 1
         #time.sleep(0.25)
         print_step(time_step, reality_state, belief_state, harvester_world)
-    print("total reward: {0}\n".format(belief_state.reward))
+    print("summary: {0} {1}\n".format(belief_state.reward, args.belief))
     sys.exit(0)

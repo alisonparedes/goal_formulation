@@ -17,6 +17,7 @@ if __name__ == '__main__':
     parser.add_argument("n_worlds")
     parser.add_argument("n_obstacles")
     parser.add_argument("enemy")
+    parser.add_argument("scenario")
     parser.add_argument("file_name")
     args = parser.parse_args()
 
@@ -31,6 +32,7 @@ if __name__ == '__main__':
         enemy_dict = {}
         obstacle_dict = {}
         base_dict = {}
+        belief_food_dict = {}
 
         b_x, b_y = random_coordinate(int(args.width), int(args.height))
         base_dict[(b_x, b_y)] = "b"
@@ -41,6 +43,8 @@ if __name__ == '__main__':
             x, y = random_coordinate(int(args.width), int(args.height))
             if (x, y) not in base_dict:
                 food_dict[(x, y)] = "F"
+                if int(args.scenario) == 1 and len(belief_food_dict) == 0:
+                    belief_food_dict[(x, y)] = 'F'
                 i += 1
 
         i = 0
@@ -61,7 +65,8 @@ if __name__ == '__main__':
                 i += 1
 
         belief = problem.to_state(base_dict,
-                                  harvester_dict)
+                                  harvester_dict,
+                                  food=belief_food_dict)
 
         reality = problem.to_state(base_dict,
                                    harvester_dict,
