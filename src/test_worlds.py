@@ -21,7 +21,7 @@ if __name__ == '__main__':
     parser.add_argument("file_name")
     args = parser.parse_args()
 
-    random.seed(1)
+    #random.seed(1)
 
     dimensions = problem.to_problem(int(args.width), int(args.height))
 
@@ -33,6 +33,7 @@ if __name__ == '__main__':
         obstacle_dict = {}
         base_dict = {}
         belief_food_dict = {}
+        belief_obstacle_dict = {}
 
         b_x, b_y = random_coordinate(int(args.width), int(args.height))
         base_dict[(b_x, b_y)] = "b"
@@ -47,13 +48,15 @@ if __name__ == '__main__':
                     belief_food_dict[(x, y)] = 'F'
                 i += 1
 
-        i = 0
-        while i < int(args.n_obstacles):
+        #i = 0
+        while len(obstacle_dict) < int(args.n_obstacles):
             x, y = random_coordinate(int(args.width), int(args.height))
             if (x, y) not in base_dict \
                     and (x, y) not in food_dict:
                 obstacle_dict[(x, y)] = '#'
-                i += 1
+                if int(args.scenario) == 3:
+                    belief_obstacle_dict[(x, y)] = '#'
+                #i += 1
 
         i = 0
         while i < int(args.enemy):
@@ -66,7 +69,8 @@ if __name__ == '__main__':
 
         belief = problem.to_state(base_dict,
                                   harvester_dict,
-                                  food=belief_food_dict)
+                                  food=belief_food_dict,
+                                  obstacle=belief_obstacle_dict)
 
         reality = problem.to_state(base_dict,
                                    harvester_dict,
