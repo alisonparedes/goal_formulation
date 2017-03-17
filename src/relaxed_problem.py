@@ -122,10 +122,19 @@ def transition(state, destination, world, time_left=1, horizon=1):
         new_explored_dict = {}
         while len(new_food_dict) < world.max_food:
             while True:
+
                 try_x = remaining_food.pop()
-                try_y = remaining_food.pop()
                 remaining_food.insert(0, try_x)
+                while try_x >= world.x:
+                    try_x = remaining_food.pop()
+                    remaining_food.insert(0, try_x)
+
+                try_y = remaining_food.pop()
                 remaining_food.insert(0, try_y)
+                while try_y >= world.y:
+                    try_y = remaining_food.pop()
+                    remaining_food.insert(0, try_y)
+
                 try_coordinate = (try_x, try_y)
                 if try_coordinate not in state.base_dict \
                         and try_coordinate not in state.obstacle_dict \

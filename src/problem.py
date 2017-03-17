@@ -64,6 +64,11 @@ def to_state(base,
                  step_reward)
 
 
+def hashable_state(state):
+    hashable = tuple(key for key in sorted(state.base_dict))
+    print len(hashable)
+
+
 def to_observation(obstacle=None, harvester=None, food=None, defender=None, enemy=None, reward=0, has_food=False, step_reward=0):
     Observation = namedtuple("Observation", ["obstacle",
                                              "harvester",
@@ -422,9 +427,17 @@ def transition(state, action, world):
             while len(new_food_dict) < world.max_food:
                 while True:
                     try_x = remaining_food.pop()
-                    try_y = remaining_food.pop()
                     remaining_food.insert(0, try_x)
+                    while try_x >= world.x:
+                        try_x = remaining_food.pop()
+                        remaining_food.insert(0, try_x)
+
+                    try_y = remaining_food.pop()
                     remaining_food.insert(0, try_y)
+                    while try_y >= world.y:
+                        try_y = remaining_food.pop()
+                        remaining_food.insert(0, try_y)
+
                     try_coordinate = (try_x, try_y)
                     if try_coordinate not in state.base_dict \
                             and try_coordinate not in state.obstacle_dict \
@@ -600,6 +613,7 @@ if __name__ == '__main__':
     print "action: {0}".format(args.action)
 
     next_state, observations = transition(initial_state, args.action, world)
+    hashable_state(next_state)
 
     print(state_to_string(initial_state, world))
     print(state_to_string(next_state, world))

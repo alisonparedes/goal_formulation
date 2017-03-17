@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     random.seed(1)
 
-    dimensions = problem.to_problem(int(args.width), int(args.width))
+    dimensions = problem.to_problem(int(args.width), int(args.height))
 
     for w in range(int(args.n_worlds)):
         harvester_dict = {}
