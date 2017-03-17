@@ -6,6 +6,7 @@ Created on Sep 28, 2016
 
 import problem
 from collections import namedtuple
+import copy
 
 
 
@@ -17,15 +18,21 @@ def simulate(belief_state, action, real_world, dimensions):
     # print(real_world.future_food)
     new_state, observations = problem.transition(real_world, action, dimensions)
 
-    new_observation_food = observations.food
+    new_observation_food = {}
     new_observation_enemy = {}
+    hypothetical_food_dict = copy.copy(belief_state.food_dict)
 
     if observations.food:
         for food, add_delete in observations.food.iteritems():
             if food in belief_state.food_dict and add_delete == -1:
                 new_observation_food[food] = add_delete
+                del hypothetical_food_dict[food]
             elif food in new_state.harvester_dict and add_delete == 1:
                 new_observation_food[food] = add_delete
+                hypothetical_food_dict[food] = 'F'
+            elif len(hypothetical_food_dict) < 1 and dimensions.max_food >= 2:
+                new_observation_food[food] = add_delete
+                hypothetical_food_dict[food] = 'F'
             elif dimensions.known:
                 new_observation_food[food] = add_delete
 
@@ -55,7 +62,9 @@ def simulate(belief_state, action, real_world, dimensions):
                                               defender=observations.defender,
                                               enemy=new_observation_enemy,
                                               reward=observations.reward,
-                                              has_food=observations.has_food)
+                                              has_food=observations.has_food,
+                                              step_reward=observations.reward - belief_state.reward)
+
 
     return new_state, new_observations
 

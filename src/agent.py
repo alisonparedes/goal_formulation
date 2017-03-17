@@ -73,7 +73,8 @@ def update_belief(state, observations, known=False, reality_state=None):
                             explored=state.explored_dict,
                             has_food=observations.has_food,
                             reward=new_reward,
-                            future_food=future_food)
+                            future_food=future_food,
+                            step_reward=observations.step_reward)
 
 
 # def update_cell(grid, cell_dict):
@@ -159,7 +160,8 @@ def print_args(args):
 def print_step(time_step, reality, belief, dimensions):
     #os.system('clear')
     print "time: {0}".format(time_step)
-    print "reward: {0}".format(belief.reward)
+    print "new reward: {0}".format(belief.step_reward)
+    print "tot reward: {0}".format(belief.reward)
     print(problem.interleaved(reality, belief, dimensions, known=False))
 
 
@@ -168,7 +170,10 @@ if __name__ == '__main__':
     args = parse_args()
     random.seed(int(args.seed))
     reality_state, x, y = init_reality(args.reality)  # Dimensions of reality are derived from input file
-    harvester_world = problem.to_problem(x, y, int(args.max_food), int(args.known))
+    problem_has_enemy = False
+    if len(reality_state.enemy_dict) > 0:
+        problem_has_enemy = True
+    harvester_world = problem.to_problem(x, y, int(args.max_food), int(args.known), enemy=problem_has_enemy)
     # food_dist = problem.chance_of_food(reality_state, harvester_world)
     future_food = problem.sample_n_future_food(harvester_world, 100)
     # for i in range(1000):

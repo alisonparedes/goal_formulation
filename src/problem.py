@@ -11,12 +11,23 @@ from copy import deepcopy  # I am not sure if copy would have been sufficient
 import dijkstra
 
 
-def to_problem(x, y, max_food=0, known=False):
-    Problem = namedtuple("Problem", ["x", "y", "max_food", "known"])
-    return Problem(x, y, max_food, known)
+def to_problem(x, y, max_food=0, known=False, enemy=False):
+    Problem = namedtuple("Problem", ["x", "y", "max_food", "known", "enemy"])
+    return Problem(x, y, max_food, known, enemy)
 
 
-def to_state(base, harvester, food=None, obstacle=None, defender=None, enemy=None, explored=None, has_food=False, reward=0, future_food=[], distances={}):
+def to_state(base,
+             harvester,
+             food=None,
+             obstacle=None,
+             defender=None,
+             enemy=None,
+             explored=None,
+             has_food=False,
+             reward=0,
+             future_food=[],
+             distances={},
+             step_reward=0):
     State = namedtuple('State', ['base_dict',
                                  'harvester_dict',
                                  'food_dict',
@@ -27,7 +38,8 @@ def to_state(base, harvester, food=None, obstacle=None, defender=None, enemy=Non
                                  'has_food',
                                  'reward',
                                  'future_food',
-                                 'distances'])
+                                 'distances',
+                                 'step_reward'])
     if not explored:
         explored = {}
     if not defender:
@@ -38,12 +50,30 @@ def to_state(base, harvester, food=None, obstacle=None, defender=None, enemy=Non
         food = {}
     if not enemy:
         enemy = {}
-    return State(base, harvester, food, obstacle, defender, enemy, explored, has_food, reward, future_food, distances)
+    return State(base,
+                 harvester,
+                 food,
+                 obstacle,
+                 defender,
+                 enemy,
+                 explored,
+                 has_food,
+                 reward,
+                 future_food,
+                 distances,
+                 step_reward)
 
 
-def to_observation(obstacle=None, harvester=None, food=None, defender=None, enemy=None, reward=0, has_food=False):
-    Observation = namedtuple("Observation", ["obstacle", "harvester", "food", "defender", "enemy", "reward", "has_food"])
-    return Observation(obstacle, harvester, food, defender, enemy, reward, has_food)
+def to_observation(obstacle=None, harvester=None, food=None, defender=None, enemy=None, reward=0, has_food=False, step_reward=0):
+    Observation = namedtuple("Observation", ["obstacle",
+                                             "harvester",
+                                             "food",
+                                             "defender",
+                                             "enemy",
+                                             "reward",
+                                             "has_food",
+                                             "step_reward"])
+    return Observation(obstacle, harvester, food, defender, enemy, reward, has_food, step_reward)
 
 
 def parse(simstate):
@@ -275,7 +305,7 @@ def transition(state, action, world):
             return state, None
 
     if (new_x, new_y) in state.obstacle_dict:
-        return state, to_observation(obstacle={(new_x, new_y): 1})
+        return state, to_observation(obstacle={(new_x, new_y): 1}, reward=state.reward - 1)
 
     new_harvester_dict = copy.copy(state.harvester_dict)
     new_food_dict = copy.copy(state.food_dict)
@@ -410,7 +440,9 @@ def transition(state, action, world):
 def sample(belief_state, dimensions):
     """Constructs a world from a belief state"""
     new_food_dict = sample_max_food(belief_state, dimensions)
-    new_enemy_dict = sample_enemy(belief_state, dimensions)
+    new_enemy_dict = copy.copy(belief_state.enemy_dict)
+    if dimensions.enemy:
+        new_enemy_dict = sample_enemy(belief_state, dimensions)
     if dimensions.known:
         future_food = belief_state.future_food
     else:
