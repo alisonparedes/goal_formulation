@@ -144,6 +144,7 @@ def parse_args():
     parser.add_argument("time")
     parser.add_argument("seed")
     parser.add_argument("known")
+    parser.add_argument("scenario")
     return parser.parse_args()
 
 
@@ -178,7 +179,12 @@ if __name__ == '__main__':
     problem_has_enemy = False
     if len(reality_state.enemy_dict) > 0:
         problem_has_enemy = True
-    harvester_world = problem.to_problem(x, y, int(args.max_food), int(args.known), enemy=problem_has_enemy)
+    harvester_world = problem.to_problem(x,
+                                         y,
+                                         int(args.max_food),
+                                         int(args.known),
+                                         enemy=problem_has_enemy,
+                                         scenario=int(args.scenario))
     # food_dist = problem.chance_of_food(reality_state, harvester_world)
     future_food = problem.sample_n_future_food(harvester_world, 100)
     # for i in range(1000):

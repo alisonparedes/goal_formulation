@@ -33,6 +33,9 @@ def simulate(belief_state, action, real_world, dimensions):
             elif len(hypothetical_food_dict) < 1 and dimensions.max_food >= 2:
                 new_observation_food[food] = add_delete
                 hypothetical_food_dict[food] = 'F'
+            elif dimensions.scenario == 2:
+                new_observation_food[food] = add_delete
+                hypothetical_food_dict[food] = 'F'
             elif dimensions.known:
                 new_observation_food[food] = add_delete
 

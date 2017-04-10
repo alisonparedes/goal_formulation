@@ -45,9 +45,11 @@ def transition(state, destination, world, time_left=1, horizon=1):
             destination_policy = policy
             break
 
-    _, distance = destination_policy[harvester]
+    distance = 1000
+    if harvester in destination_policy:
+        _, distance = destination_policy[harvester]
 
-    if distance > time_left:
+    if distance < 1000 and distance > time_left:
         next_step, _ = destination_policy[harvester]
         step_count = 1
         distance = step_count

@@ -39,14 +39,16 @@ if __name__ == '__main__':
         base_dict[(b_x, b_y)] = "b"
         harvester_dict[(b_x, b_y)] = "b"
 
-        i = 0
-        while i < int(args.max_food):
+        #i = 0
+        while len(food_dict) < int(args.max_food):
             x, y = random_coordinate(int(args.width), int(args.height))
             if (x, y) not in base_dict:
                 food_dict[(x, y)] = "F"
                 if int(args.scenario) == 1 and len(belief_food_dict) == 0:
                     belief_food_dict[(x, y)] = 'F'
-                i += 1
+                elif int(args.scenario) == 2:
+                    belief_food_dict[(x, y)] = 'F'
+                #i += 1
 
         #i = 0
         while len(obstacle_dict) < int(args.n_obstacles):

@@ -11,9 +11,9 @@ from copy import deepcopy  # I am not sure if copy would have been sufficient
 import dijkstra
 
 
-def to_problem(x, y, max_food=0, known=False, enemy=False):
-    Problem = namedtuple("Problem", ["x", "y", "max_food", "known", "enemy"])
-    return Problem(x, y, max_food, known, enemy)
+def to_problem(x, y, max_food=0, known=False, enemy=False, scenario=0):
+    Problem = namedtuple("Problem", ["x", "y", "max_food", "known", "enemy", "scenario"])
+    return Problem(x, y, max_food, known, enemy, scenario)
 
 
 def to_state(base,
