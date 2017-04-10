@@ -1,0 +1,248 @@
+initial_state: ../test/initial_state_01.txt
+max_food: 0
+action: N
+F 
+ b
+
+FH
+ B
+
+initial_state: ../test/initial_state_02.txt
+max_food: 0
+action: S
+F 
+HB
+
+F 
+HB
+
+initial_state: ../test/initial_state_03.txt
+max_food: 0
+action: E
+H 
+ B
+
+-H
+ B
+
+initial_state: ../test/initial_state_04.txt
+max_food: 0
+action: W
+  
+HB
+
+  
+HB
+
+initial_state: ../test/initial_state_05.txt
+max_food: 0
+action: N
+ $
+ B
+
+ $
+ B
+
+initial_state: ../test/initial_state_06.txt
+max_food: 0
+action: S
+$ 
+ B
+
+- 
+$B
+
+initial_state: ../test/initial_state_07.txt
+max_food: 0
+action: E
+F 
+HB
+
+F 
+-b
+
+initial_state: ../test/initial_state_08.txt
+max_food: 0
+action: W
+  
+ b
+
+  
+HB
+
+initial_state: ../test/initial_state_09.txt
+max_food: 1
+action: N
+F 
+ b
+
+FH
+ B
+
+initial_state: ../test/initial_state_10.txt
+max_food: 1
+action: E
+FH
+ B
+
+FH
+ B
+
+initial_state: ../test/initial_state_11.txt
+max_food: 1
+action: N
+F 
+HB
+
+$ 
+FB
+
+initial_state: ../test/initial_state_12.txt
+max_food: 1
+action: S
+$ 
+ B
+
+- 
+$B
+
+initial_state: ../test/initial_state_13.txt
+max_food: 1
+action: N
+F#
+ b
+
+F#
+ b
+
+initial_state: ../test/initial_state_14.txt
+max_food: 1
+action: N
+ #
+HB
+
+H#
+-B
+
+initial_state: ../test/initial_state_15.txt
+max_food: 1
+action: W
+$#
+ B
+
+$#
+ B
+
+initial_state: ../test/initial_state_16.txt
+max_food: 1
+action: N
+F#
+ b
+
+F#
+ b
+
+initial_state: ../test/initial_state_17.txt
+max_food: 1
+action: N
+F#  
+ #  
+    
+ # b
+
+F#  
+ #  
+   H
+ # B
+
+initial_state: ../test/initial_state_18.txt
+max_food: 1
+action: S
+F#H 
+ #  
+    
+ # B
+
+F#- 
+ #H 
+    
+ # B
+
+initial_state: ../test/initial_state_19.txt
+max_food: 1
+action: E
+F#  
+ #  
+    
+ # b
+
+F#  
+ #  
+    
+ # b
+
+initial_state: ../test/initial_state_20.txt
+max_food: 1
+action: E
+F#  
+ #$ 
+    
+ # B
+
+F#  
+ #-$
+    
+ # B
+
+initial_state: ../test/initial_state_21.txt
+max_food: 1
+action: W
+F#  
+ #$ 
+    
+ # B
+
+F#  
+ #$ 
+    
+ # B
+
+initial_state: ../test/initial_state_22.txt
+max_food: 1
+action: E
+F#  
+ #  
+    
+H# B
+
+F#  
+ #  
+    
+H# B
+
+initial_state: ../test/initial_state_23.txt
+max_food: 1
+action: E
+F#  
+ #  
+  $ 
+ # B
+
+F#  
+ #  
+  -$
+ # B
+
+initial_state: ../test/initial_state_24.txt
+max_food: 1
+action: S
+F#  
+ # H
+    
+ # B
+
+F#  
+ # -
+   H
+ # B
+

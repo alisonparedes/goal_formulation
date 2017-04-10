@@ -1,0 +1,7190 @@
+reality: ../test/baseline_4x4_0_real.world
+belief: ../test/baseline_4x4_0_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxxx xxxx
+xxxF xxxx
+xxxx xxxx
+Bxxx Bxxx
+
+time: 1
+reward: 0
+xxxx xxxx
+xxxF xxxx
+Hxxx Hxxx
+Bxxx Bxxx
+
+time: 2
+reward: 0
+xxxx xxxx
+xxxF xxxx
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 3
+reward: 0
+xxxx xxxx
+xHxF xHxx
+--xx --xx
+Bxxx Bxxx
+
+time: 4
+reward: 0
+xxxx xxxx
+x-xF x-xx
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 5
+reward: 0
+xxxx xxxx
+xHxF xHxx
+--xx --xx
+Bxxx Bxxx
+
+time: 6
+reward: 0
+xxxx xxxx
+x-HF x-Hx
+--xx --xx
+Bxxx Bxxx
+
+time: 7
+reward: 0
+xxHx xxHx
+x--F x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 8
+reward: 0
+xH-x xH-x
+x--F x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 9
+reward: 0
+x-Hx x-Hx
+x--F x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 10
+reward: 0
+x--x x--x
+x-HF x-Hx
+--xx --xx
+Bxxx Bxxx
+
+time: 11
+reward: 0
+x--x x--x
+xH-F xH-x
+--xx --xx
+Bxxx Bxxx
+
+time: 12
+reward: 0
+x--x x--x
+x--F x--x
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 13
+reward: 0
+x--x x--x
+x--F x--x
+--Hx --Hx
+Bxxx Bxxx
+
+time: 14
+reward: 0
+x--x x--x
+x--F x--x
+---H ---H
+Bxxx Bxxx
+
+time: 15
+reward: 0
+x--x x--x
+x--F x--x
+---- ----
+BxxH BxxH
+
+time: 16
+reward: 0
+x--x x--x
+x--F x--x
+---H ---H
+Bxx- Bxx-
+
+time: 17
+reward: 0
+xxxx xxxx
+xxx$ xxx$
+xFxx xxxx
+Bxxx Bxxx
+
+time: 18
+reward: 0
+xxxx xxxx
+xxx- xxx-
+xFx$ xxx$
+Bxxx Bxxx
+
+time: 19
+reward: 0
+xxxx xxxx
+xxx- xxx-
+xFx- xxx-
+Bxx$ Bxx$
+
+time: 20
+reward: 0
+xxxx xxxx
+xxx- xxx-
+xFx- xxx-
+Bx$- Bx$-
+
+time: 21
+reward: 0
+xxxx xxxx
+xxx- xxx-
+xFx- xxx-
+B$-- B$--
+
+time: 22
+reward: 50
+xxxx xxxx
+xxx- xxx-
+xFx- xxx-
+B--- B---
+
+time: 23
+reward: 50
+xxxx xxxx
+xxx- xxx-
+HFx- Hxx-
+B--- B---
+
+time: 24
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x$xx x$xx
+BxFx Bxxx
+
+time: 25
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+B$Fx B$xx
+
+time: 26
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+B-Fx B-xx
+
+time: 27
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+BHFx BHxx
+
+time: 28
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+Bx$F Bx$x
+
+time: 29
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+B$-F B$-x
+
+time: 30
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+B--F B--x
+
+time: 31
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+BH-F BH-x
+
+time: 32
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xHxx xHxx
+B--F B--x
+
+time: 33
+reward: 150
+xxxx xxxx
+xxxx xxxx
+x-Hx x-Hx
+B--F B--x
+
+time: 34
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xH-x xH-x
+B--F B--x
+
+time: 35
+reward: 150
+xxxx xxxx
+xHxx xHxx
+x--x x--x
+B--F B--x
+
+time: 36
+reward: 150
+xxxx xxxx
+x-Hx x-Hx
+x--x x--x
+B--F B--x
+
+time: 37
+reward: 150
+xxHx xxHx
+x--x x--x
+x--x x--x
+B--F B--x
+
+time: 38
+reward: 150
+xx-x xx-x
+x-Hx x-Hx
+x--x x--x
+B--F B--x
+
+time: 39
+reward: 150
+xx-x xx-x
+x--H x--H
+x--x x--x
+B--F B--x
+
+time: 40
+reward: 150
+xx-x xx-x
+x--- x---
+x--H x--H
+B--F B--x
+
+time: 41
+reward: 150
+xx-x xx-x
+x--- x---
+x-H- x-H-
+B--F B--x
+
+time: 42
+reward: 150
+xx-x xx-x
+x--- x---
+xH-- xH--
+B--F B--x
+
+time: 43
+reward: 150
+xx-x xx-x
+x--- x---
+x-H- x-H-
+B--F B--x
+
+time: 44
+reward: 150
+xx-x xx-x
+x--- x---
+xH-- xH--
+B--F B--x
+
+time: 45
+reward: 150
+xx-x xx-x
+xH-- xH--
+x--- x---
+B--F B--x
+
+time: 46
+reward: 150
+xx-x xx-x
+H--- H---
+x--- x---
+B--F B--x
+
+time: 47
+reward: 150
+Hx-x Hx-x
+---- ----
+x--- x---
+B--F B--x
+
+time: 48
+reward: 150
+-H-x -H-x
+---- ----
+x--- x---
+B--F B--x
+
+time: 49
+reward: 150
+---x ---x
+-H-- -H--
+x--- x---
+B--F B--x
+
+time: 50
+reward: 150
+---x ---x
+---- ----
+xH-- xH--
+B--F B--x
+
+time: 51
+reward: 150
+---x ---x
+---- ----
+x-H- x-H-
+B--F B--x
+
+time: 52
+reward: 150
+---x ---x
+---- ----
+x--H x--H
+B--F B--x
+
+time: 53
+reward: 150
+---x ---x
+---- ----
+x-H- x-H-
+B--F B--x
+
+time: 54
+reward: 150
+---x ---x
+---- ----
+x--H x--H
+B--F B--x
+
+time: 55
+reward: 150
+---x ---x
+---- ----
+x-H- x-H-
+B--F B--x
+
+time: 56
+reward: 150
+---x ---x
+---- ----
+x--H x--H
+B--F B--x
+
+time: 57
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+Bxx$ Bxx$
+
+time: 58
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+Bx$- Bx$-
+
+time: 59
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+B$-- B$--
+
+time: 60
+reward: 200
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+B--- B---
+
+time: 61
+reward: 200
+xxxx xxxx
+xxFx xxxx
+Hxxx Hxxx
+B--- B---
+
+time: 62
+reward: 200
+xxxx xxxx
+HxFx Hxxx
+-xxx -xxx
+B--- B---
+
+time: 63
+reward: 200
+Hxxx Hxxx
+-xFx -xxx
+-xxx -xxx
+B--- B---
+
+time: 64
+reward: 200
+-Hxx -Hxx
+-xFx -xxx
+-xxx -xxx
+B--- B---
+
+time: 65
+reward: 200
+--xx --xx
+-HFx -Hxx
+-xxx -xxx
+B--- B---
+
+time: 66
+reward: 200
+xxxx xxxx
+xx$x xx$x
+xFxx xxxx
+Bxxx Bxxx
+
+time: 67
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF$x xx$x
+Bxxx Bxxx
+
+time: 68
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+Bx$x Bx$x
+
+time: 69
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+B$-x B$-x
+
+time: 70
+reward: 250
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+B--x B--x
+
+time: 71
+reward: 250
+xxxx xxxx
+xx-x xx-x
+HF-x Hx-x
+B--x B--x
+
+time: 72
+reward: 250
+xxxx xxxx
+Hx-x Hx-x
+-F-x -x-x
+B--x B--x
+
+time: 73
+reward: 250
+xxxx xxxx
+-H-x -H-x
+-F-x -x-x
+B--x B--x
+
+time: 74
+reward: 250
+xxxx xxxx
+xxxx xxxx
+x$xF x$xx
+Bxxx Bxxx
+
+time: 75
+reward: 250
+xxxx xxxx
+xxxx xxxx
+x-xF x-xx
+B$xx B$xx
+
+time: 76
+reward: 300
+xxxx xxxx
+xxxx xxxx
+x-xF x-xx
+B-xx B-xx
+
+time: 77
+reward: 300
+xxxx xxxx
+xxxx xxxx
+x-xF x-xx
+BHxx BHxx
+
+time: 78
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xHxF xHxx
+B-xx B-xx
+
+time: 79
+reward: 300
+xxxx xxxx
+xHxx xHxx
+x-xF x-xx
+B-xx B-xx
+
+time: 80
+reward: 300
+xxxx xxxx
+H-xx H-xx
+x-xF x-xx
+B-xx B-xx
+
+time: 81
+reward: 300
+xxxx xxxx
+-Hxx -Hxx
+x-xF x-xx
+B-xx B-xx
+
+time: 82
+reward: 300
+xxxx xxxx
+--Hx --Hx
+x-xF x-xx
+B-xx B-xx
+
+time: 83
+reward: 300
+xxxx xxxx
+---x ---x
+x-HF x-Hx
+B-xx B-xx
+
+time: 84
+reward: 300
+xxxx xxxx
+--Hx --Hx
+x--F x--x
+B-xx B-xx
+
+time: 85
+reward: 300
+xxHx xxHx
+---x ---x
+x--F x--x
+B-xx B-xx
+
+time: 86
+reward: 300
+xH-x xH-x
+---x ---x
+x--F x--x
+B-xx B-xx
+
+time: 87
+reward: 300
+x-Hx x-Hx
+---x ---x
+x--F x--x
+B-xx B-xx
+
+time: 88
+reward: 300
+x--x x--x
+--Hx --Hx
+x--F x--x
+B-xx B-xx
+
+time: 89
+reward: 300
+x--x x--x
+---x ---x
+x-HF x-Hx
+B-xx B-xx
+
+time: 90
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx$ xxx$
+BxFx Bxxx
+
+time: 91
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+BxF$ Bxx$
+
+time: 92
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+Bx$- Bx$-
+
+time: 93
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+B$F- B$--
+
+time: 94
+reward: 350
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+B-F- B---
+
+time: 95
+reward: 350
+xxxx xxxx
+xxxx xxxx
+Hxx- Hxx-
+B-F- B---
+
+time: 96
+reward: 350
+xxxx xxxx
+xxxx xxxx
+-Hx- -Hx-
+B-F- B---
+
+time: 97
+reward: 350
+xxxx xxxx
+xHxx xHxx
+--x- --x-
+B-F- B---
+
+time: 98
+reward: 350
+xxxx xxxx
+x-Hx x-Hx
+--x- --x-
+B-F- B---
+
+time: 99
+reward: 350
+xxxx xxxx
+x--H x--H
+--x- --x-
+B-F- B---
+
+time: 100
+reward: 350
+xxxx xxxx
+x-H- x-H-
+--x- --x-
+B-F- B---
+
+total reward: 350
+
+reality: ../test/baseline_4x4_1_real.world
+belief: ../test/baseline_4x4_1_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxxx xxxx
+xBxx xBxx
+xxxx xxxx
+xxFx xxxx
+
+time: 1
+reward: 0
+xxxx xxxx
+xBxx xBxx
+xHxx xHxx
+xxFx xxxx
+
+time: 2
+reward: 0
+xxxx xxxx
+xBxx xBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 3
+reward: 0
+xxxx xxxx
+xBHx xBHx
+x-xx x-xx
+xxFx xxxx
+
+time: 4
+reward: 0
+xxxx xxxx
+xB-x xB-x
+x-xx x-xx
+xxFx xxxx
+
+time: 5
+reward: 0
+xxxx xxxx
+xBHx xBHx
+x-xx x-xx
+xxFx xxxx
+
+time: 6
+reward: 0
+xxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xxFx xxxx
+
+time: 7
+reward: 0
+xxxx xxxx
+xBHx xBHx
+x--x x--x
+xxFx xxxx
+
+time: 8
+reward: 0
+xxxx xxxx
+xB-x xB-x
+x--x x--x
+xxFx xxxx
+
+time: 9
+reward: 0
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xxFx xxxx
+
+time: 10
+reward: 0
+xxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xxFx xxxx
+
+time: 11
+reward: 0
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xxFx xxxx
+
+time: 12
+reward: 0
+xxxx xxxx
+xB-x xB-x
+H--x H--x
+xxFx xxxx
+
+time: 13
+reward: 0
+xxxx xxxx
+xB-x xB-x
+-H-x -H-x
+xxFx xxxx
+
+time: 14
+reward: 0
+xxxx xxxx
+xB-x xB-x
+--Hx --Hx
+xxFx xxxx
+
+time: 15
+reward: 0
+xxxx xxxx
+xB-x xB-x
+-H-x -H-x
+xxFx xxxx
+
+time: 16
+reward: 0
+xxxx xxxx
+xB-x xB-x
+--Hx --Hx
+xxFx xxxx
+
+time: 17
+reward: 0
+xxxx xxxx
+xBHx xBHx
+---x ---x
+xxFx xxxx
+
+time: 18
+reward: 0
+xxxx xxxx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 19
+reward: 0
+xHxx xHxx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 20
+reward: 0
+H-xx H-xx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 21
+reward: 0
+-Hxx -Hxx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 22
+reward: 0
+--xx --xx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 23
+reward: 0
+--xx --xx
+xBHx xBHx
+---x ---x
+xxFx xxxx
+
+time: 24
+reward: 0
+--Hx --Hx
+xB-x xB-x
+---x ---x
+xxFx xxxx
+
+time: 25
+reward: 0
+---x ---x
+xBHx xBHx
+---x ---x
+xxFx xxxx
+
+time: 26
+reward: 0
+---x ---x
+xB-x xB-x
+--Hx --Hx
+xxFx xxxx
+
+time: 27
+reward: 0
+---x ---x
+xB-x xB-x
+---H ---H
+xxFx xxxx
+
+time: 28
+reward: 0
+---x ---x
+xB-x xB-x
+--H- --H-
+xxFx xxxx
+
+time: 29
+reward: 0
+---x ---x
+xBHx xBHx
+---- ----
+xxFx xxxx
+
+time: 30
+reward: 0
+---x ---x
+xB-H xB-H
+---- ----
+xxFx xxxx
+
+time: 31
+reward: 0
+---x ---x
+xBH- xBH-
+---- ----
+xxFx xxxx
+
+time: 32
+reward: 0
+---x ---x
+xB-H xB-H
+---- ----
+xxFx xxxx
+
+time: 33
+reward: 0
+---x ---x
+xB-- xB--
+---H ---H
+xxFx xxxx
+
+time: 34
+reward: 0
+---x ---x
+xB-- xB--
+--H- --H-
+xxFx xxxx
+
+time: 35
+reward: 0
+---x ---x
+xB-- xB--
+-H-- -H--
+xxFx xxxx
+
+time: 36
+reward: 0
+---x ---x
+xB-- xB--
+---- ----
+xHFx xHxx
+
+time: 37
+reward: 0
+xxxx xxxx
+xBxx xBxx
+xFxx xxxx
+xx$x xx$x
+
+time: 38
+reward: 0
+xxxx xxxx
+xBxx xBxx
+xF$x xx$x
+xx-x xx-x
+
+time: 39
+reward: 0
+xxxx xxxx
+xB$x xB$x
+xF-x xx-x
+xx-x xx-x
+
+time: 40
+reward: 50
+xxxx xxxx
+xB-x xB-x
+xF-x xx-x
+xx-x xx-x
+
+time: 41
+reward: 50
+xxxx xxxx
+xBxx xBxx
+x$xx x$xx
+xxFx xxxx
+
+time: 42
+reward: 100
+xxxx xxxx
+xBxx xBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 43
+reward: 100
+xxxx xxxx
+HBxx HBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 44
+reward: 100
+xxxx xxxx
+-Bxx -Bxx
+H-xx H-xx
+xxFx xxxx
+
+time: 45
+reward: 100
+xxxx xxxx
+-Bxx -Bxx
+-Hxx -Hxx
+xxFx xxxx
+
+time: 46
+reward: 100
+xxxx xxxx
+-Bxx -Bxx
+--xx --xx
+xxFx xxxx
+
+time: 47
+reward: 100
+xxxx xxxx
+-BHx -BHx
+--xx --xx
+xxFx xxxx
+
+time: 48
+reward: 100
+xxxx xxxx
+-B-x -B-x
+--Hx --Hx
+xxFx xxxx
+
+time: 49
+reward: 100
+xxxx xxxx
+-B-x -B-x
+---H ---H
+xxFx xxxx
+
+time: 50
+reward: 100
+xxxx xxxx
+-B-x -B-x
+---- ----
+xxFH xxxH
+
+time: 51
+reward: 100
+xxxx xxxx
+-B-x -B-x
+---H ---H
+xxF- xxx-
+
+time: 52
+reward: 100
+xxxx xxxx
+-B-H -B-H
+---- ----
+xxF- xxx-
+
+time: 53
+reward: 100
+xxxH xxxH
+-B-- -B--
+---- ----
+xxF- xxx-
+
+time: 54
+reward: 100
+xxH- xxH-
+-B-- -B--
+---- ----
+xxF- xxx-
+
+time: 55
+reward: 100
+xH-- xH--
+-B-- -B--
+---- ----
+xxF- xxx-
+
+time: 56
+reward: 100
+x--- x---
+-B-- -B--
+---- ----
+xxF- xxx-
+
+time: 57
+reward: 100
+x--- x---
+-B-- -B--
+-H-- -H--
+xxF- xxx-
+
+time: 58
+reward: 100
+x--- x---
+-B-- -B--
+---- ----
+xHF- xHx-
+
+time: 59
+reward: 100
+x--- x---
+-B-- -B--
+---- ----
+H-F- H-x-
+
+time: 60
+reward: 100
+x--- x---
+-B-- -B--
+---- ----
+-HF- -Hx-
+
+time: 61
+reward: 100
+xxxx xxxx
+xBxx xBxx
+xxxx xxxx
+xx$F xx$x
+
+time: 62
+reward: 100
+xxxx xxxx
+xBxx xBxx
+xx$x xx$x
+xx-F xx-x
+
+time: 63
+reward: 100
+xxxx xxxx
+xB$x xB$x
+xx-x xx-x
+xx-F xx-x
+
+time: 64
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xx-x xx-x
+xx-F xx-x
+
+time: 65
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xx-F xx-x
+
+time: 66
+reward: 150
+xxxx xxxx
+xB-x xB-x
+H--x H--x
+xx-F xx-x
+
+time: 67
+reward: 150
+xxxx xxxx
+xB-x xB-x
+-H-x -H-x
+xx-F xx-x
+
+time: 68
+reward: 150
+xxxx xxxx
+xB-x xB-x
+---x ---x
+xx-F xx-x
+
+time: 69
+reward: 150
+xxxx xxxx
+xBHx xBHx
+---x ---x
+xx-F xx-x
+
+time: 70
+reward: 150
+xxxx xxxx
+xB-H xB-H
+---x ---x
+xx-F xx-x
+
+time: 71
+reward: 150
+xxxx xxxx
+xB-- xB--
+---H ---H
+xx-F xx-x
+
+time: 72
+reward: 150
+xxxx xxxx
+xB-- xB--
+--H- --H-
+xx-F xx-x
+
+time: 73
+reward: 150
+xxxx xxxx
+xBH- xBH-
+---- ----
+xx-F xx-x
+
+time: 74
+reward: 150
+xxxx xxxx
+xB-- xB--
+--H- --H-
+xx-F xx-x
+
+time: 75
+reward: 150
+xxxx xxxx
+xBH- xBH-
+---- ----
+xx-F xx-x
+
+time: 76
+reward: 150
+xxxx xxxx
+xB-- xB--
+---- ----
+xx-F xx-x
+
+time: 77
+reward: 150
+xxxx xxxx
+HB-- HB--
+---- ----
+xx-F xx-x
+
+time: 78
+reward: 150
+Hxxx Hxxx
+-B-- -B--
+---- ----
+xx-F xx-x
+
+time: 79
+reward: 150
+-Hxx -Hxx
+-B-- -B--
+---- ----
+xx-F xx-x
+
+time: 80
+reward: 150
+--Hx --Hx
+-B-- -B--
+---- ----
+xx-F xx-x
+
+time: 81
+reward: 150
+---x ---x
+-BH- -BH-
+---- ----
+xx-F xx-x
+
+time: 82
+reward: 150
+---x ---x
+-B-- -B--
+--H- --H-
+xx-F xx-x
+
+time: 83
+reward: 150
+---x ---x
+-B-- -B--
+---- ----
+xxHF xxHx
+
+time: 84
+reward: 150
+xxxx xxxx
+xBxx xBxx
+xxxx xxxx
+Fxx$ xxx$
+
+time: 85
+reward: 150
+xxxx xxxx
+xBxx xBxx
+xxx$ xxx$
+Fxx- xxx-
+
+time: 86
+reward: 150
+xxxx xxxx
+xBx$ xBx$
+xxx- xxx-
+Fxx- xxx-
+
+time: 87
+reward: 150
+xxxx xxxx
+xB$- xB$-
+xxx- xxx-
+Fxx- xxx-
+
+time: 88
+reward: 200
+xxxx xxxx
+xB-- xB--
+xxx- xxx-
+Fxx- xxx-
+
+time: 89
+reward: 200
+xxxx xxxx
+xB-- xB--
+xHx- xHx-
+Fxx- xxx-
+
+time: 90
+reward: 200
+xxxx xxxx
+xB-- xB--
+x-H- x-H-
+Fxx- xxx-
+
+time: 91
+reward: 200
+xxxx xxxx
+xBH- xBH-
+x--- x---
+Fxx- xxx-
+
+time: 92
+reward: 200
+xxHx xxHx
+xB-- xB--
+x--- x---
+Fxx- xxx-
+
+time: 93
+reward: 200
+xH-x xH-x
+xB-- xB--
+x--- x---
+Fxx- xxx-
+
+time: 94
+reward: 200
+x-Hx x-Hx
+xB-- xB--
+x--- x---
+Fxx- xxx-
+
+time: 95
+reward: 200
+xH-x xH-x
+xB-- xB--
+x--- x---
+Fxx- xxx-
+
+time: 96
+reward: 200
+H--x H--x
+xB-- xB--
+x--- x---
+Fxx- xxx-
+
+time: 97
+reward: 200
+---x ---x
+HB-- HB--
+x--- x---
+Fxx- xxx-
+
+time: 98
+reward: 200
+---x ---x
+-B-- -B--
+H--- H---
+Fxx- xxx-
+
+time: 99
+reward: 200
+xxxx xxxx
+xBFx xBxx
+xxxx xxxx
+$xxx $xxx
+
+time: 100
+reward: 200
+xxxx xxxx
+xBFx xBxx
+$xxx $xxx
+-xxx -xxx
+
+total reward: 200
+
+reality: ../test/baseline_4x4_2_real.world
+belief: ../test/baseline_4x4_2_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+Bxxx Bxxx
+xxxF xxxx
+xxxx xxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+BHxx BHxx
+xxxF xxxx
+xxxx xxxx
+xxxx xxxx
+
+time: 2
+reward: 0
+B-xx B-xx
+xHxF xHxx
+xxxx xxxx
+xxxx xxxx
+
+time: 3
+reward: 0
+B-xx B-xx
+x-HF x-Hx
+xxxx xxxx
+xxxx xxxx
+
+time: 4
+reward: 0
+B-Hx B-Hx
+x--F x--x
+xxxx xxxx
+xxxx xxxx
+
+time: 5
+reward: 0
+B--x B--x
+x-HF x-Hx
+xxxx xxxx
+xxxx xxxx
+
+time: 6
+reward: 0
+B--x B--x
+x--F x--x
+xxHx xxHx
+xxxx xxxx
+
+time: 7
+reward: 0
+B--x B--x
+x--F x--x
+xH-x xH-x
+xxxx xxxx
+
+time: 8
+reward: 0
+B--x B--x
+x--F x--x
+H--x H--x
+xxxx xxxx
+
+time: 9
+reward: 0
+B--x B--x
+x--F x--x
+---x ---x
+Hxxx Hxxx
+
+time: 10
+reward: 0
+B--x B--x
+x--F x--x
+H--x H--x
+-xxx -xxx
+
+time: 11
+reward: 0
+B--x B--x
+x--F x--x
+-H-x -H-x
+-xxx -xxx
+
+time: 12
+reward: 0
+B--x B--x
+x--F x--x
+--Hx --Hx
+-xxx -xxx
+
+time: 13
+reward: 0
+B--x B--x
+x-HF x-Hx
+---x ---x
+-xxx -xxx
+
+time: 14
+reward: 0
+B--x B--x
+xH-F xH-x
+---x ---x
+-xxx -xxx
+
+time: 15
+reward: 0
+B--x B--x
+x-HF x-Hx
+---x ---x
+-xxx -xxx
+
+time: 16
+reward: 0
+Bxxx Bxxx
+xxx$ xxx$
+xFxx xxxx
+xxxx xxxx
+
+time: 17
+reward: 0
+Bxx$ Bxx$
+xxx- xxx-
+xFxx xxxx
+xxxx xxxx
+
+time: 18
+reward: 0
+Bx$- Bx$-
+xxx- xxx-
+xFxx xxxx
+xxxx xxxx
+
+time: 19
+reward: 0
+B$-- B$--
+xxx- xxx-
+xFxx xxxx
+xxxx xxxx
+
+time: 20
+reward: 50
+B--- B---
+xxx- xxx-
+xFxx xxxx
+xxxx xxxx
+
+time: 21
+reward: 50
+B--- B---
+Hxx- Hxx-
+xFxx xxxx
+xxxx xxxx
+
+time: 22
+reward: 50
+B--- B---
+-Hx- -Hx-
+xFxx xxxx
+xxxx xxxx
+
+time: 23
+reward: 50
+Bxxx Bxxx
+xxxx xxxx
+x$xx x$xx
+xxFx xxxx
+
+time: 24
+reward: 50
+Bxxx Bxxx
+x$xx x$xx
+x-xx x-xx
+xxFx xxxx
+
+time: 25
+reward: 50
+B$xx B$xx
+x-xx x-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 26
+reward: 100
+B-xx B-xx
+x-xx x-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 27
+reward: 100
+B-xx B-xx
+H-xx H-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 28
+reward: 100
+B-xx B-xx
+--xx --xx
+H-xx H-xx
+xxFx xxxx
+
+time: 29
+reward: 100
+B-xx B-xx
+--xx --xx
+-Hxx -Hxx
+xxFx xxxx
+
+time: 30
+reward: 100
+B-xx B-xx
+--xx --xx
+--xx --xx
+xHFx xHxx
+
+time: 31
+reward: 100
+Bxxx Bxxx
+xxxx xxxx
+xxxx xxxx
+xx$F xx$x
+
+time: 32
+reward: 100
+Bxxx Bxxx
+xxxx xxxx
+xx$x xx$x
+xx-F xx-x
+
+time: 33
+reward: 100
+Bxxx Bxxx
+xx$x xx$x
+xx-x xx-x
+xx-F xx-x
+
+time: 34
+reward: 100
+Bx$x Bx$x
+xx-x xx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 35
+reward: 100
+B$-x B$-x
+xx-x xx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 36
+reward: 150
+B--x B--x
+xx-x xx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 37
+reward: 150
+B--x B--x
+Hx-x Hx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 38
+reward: 150
+B--x B--x
+-x-x -x-x
+Hx-x Hx-x
+xx-F xx-x
+
+time: 39
+reward: 150
+B--x B--x
+-x-x -x-x
+-H-x -H-x
+xx-F xx-x
+
+time: 40
+reward: 150
+B--x B--x
+-x-x -x-x
+---x ---x
+xH-F xH-x
+
+time: 41
+reward: 150
+B--x B--x
+-x-x -x-x
+-H-x -H-x
+x--F x--x
+
+time: 42
+reward: 150
+B--x B--x
+-x-x -x-x
+--Hx --Hx
+x--F x--x
+
+time: 43
+reward: 150
+B--x B--x
+-x-x -x-x
+-H-x -H-x
+x--F x--x
+
+time: 44
+reward: 150
+B--x B--x
+-H-x -H-x
+---x ---x
+x--F x--x
+
+time: 45
+reward: 150
+B--x B--x
+--Hx --Hx
+---x ---x
+x--F x--x
+
+time: 46
+reward: 150
+B--x B--x
+---H ---H
+---x ---x
+x--F x--x
+
+time: 47
+reward: 150
+B--x B--x
+---- ----
+---H ---H
+x--F x--x
+
+time: 48
+reward: 150
+Bxxx Bxxx
+xxxx xxxx
+xxxx xxxx
+Fxx$ xxx$
+
+time: 49
+reward: 150
+Bxxx Bxxx
+xxxx xxxx
+xxx$ xxx$
+Fxx- xxx-
+
+time: 50
+reward: 150
+Bxxx Bxxx
+xxx$ xxx$
+xxx- xxx-
+Fxx- xxx-
+
+time: 51
+reward: 150
+Bxx$ Bxx$
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 52
+reward: 150
+Bx$- Bx$-
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 53
+reward: 150
+B$-- B$--
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 54
+reward: 200
+B--- B---
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 55
+reward: 200
+B--- B---
+Hxx- Hxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 56
+reward: 200
+B--- B---
+-Hx- -Hx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 57
+reward: 200
+B--- B---
+--x- --x-
+xHx- xHx-
+Fxx- xxx-
+
+time: 58
+reward: 200
+B--- B---
+--x- --x-
+x-x- x-x-
+FHx- xHx-
+
+time: 59
+reward: 200
+Bxxx Bxxx
+xxFx xxxx
+xxxx xxxx
+$xxx $xxx
+
+time: 60
+reward: 200
+Bxxx Bxxx
+xxFx xxxx
+$xxx $xxx
+-xxx -xxx
+
+time: 61
+reward: 200
+Bxxx Bxxx
+$xFx $xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 62
+reward: 250
+Bxxx Bxxx
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 63
+reward: 250
+BHxx BHxx
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 64
+reward: 250
+B-Hx B-Hx
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 65
+reward: 250
+Bxxx Bxxx
+xx$x xx$x
+xFxx xxxx
+xxxx xxxx
+
+time: 66
+reward: 250
+Bx$x Bx$x
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 67
+reward: 250
+B$-x B$-x
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 68
+reward: 300
+B--x B--x
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 69
+reward: 300
+BH-x BH-x
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 70
+reward: 300
+B--x B--x
+xH-x xH-x
+xFxx xxxx
+xxxx xxxx
+
+time: 71
+reward: 300
+Bxxx Bxxx
+xxxx xxxx
+x$xF x$xx
+xxxx xxxx
+
+time: 72
+reward: 300
+Bxxx Bxxx
+x$xx x$xx
+x-xF x-xx
+xxxx xxxx
+
+time: 73
+reward: 300
+B$xx B$xx
+x-xx x-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 74
+reward: 350
+B-xx B-xx
+x-xx x-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 75
+reward: 350
+B-xx B-xx
+H-xx H-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 76
+reward: 350
+B-xx B-xx
+-Hxx -Hxx
+x-xF x-xx
+xxxx xxxx
+
+time: 77
+reward: 350
+B-xx B-xx
+--xx --xx
+xHxF xHxx
+xxxx xxxx
+
+time: 78
+reward: 350
+B-xx B-xx
+--xx --xx
+x-HF x-Hx
+xxxx xxxx
+
+time: 79
+reward: 350
+B-xx B-xx
+--xx --xx
+xH-F xH-x
+xxxx xxxx
+
+time: 80
+reward: 350
+B-xx B-xx
+--xx --xx
+x-HF x-Hx
+xxxx xxxx
+
+time: 81
+reward: 350
+B-xx B-xx
+--xx --xx
+xH-F xH-x
+xxxx xxxx
+
+time: 82
+reward: 350
+B-xx B-xx
+--xx --xx
+x-HF x-Hx
+xxxx xxxx
+
+time: 83
+reward: 350
+B-xx B-xx
+--Hx --Hx
+x--F x--x
+xxxx xxxx
+
+time: 84
+reward: 350
+B-xx B-xx
+---H ---H
+x--F x--x
+xxxx xxxx
+
+time: 85
+reward: 350
+B-xx B-xx
+--H- --H-
+x--F x--x
+xxxx xxxx
+
+time: 86
+reward: 350
+B-xx B-xx
+---- ----
+x-HF x-Hx
+xxxx xxxx
+
+time: 87
+reward: 350
+B-xx B-xx
+---- ----
+x--F x--x
+xxHx xxHx
+
+time: 88
+reward: 350
+B-xx B-xx
+---- ----
+x-HF x-Hx
+xx-x xx-x
+
+time: 89
+reward: 350
+Bxxx Bxxx
+xxxx xxxx
+xxx$ xxx$
+Fxxx xxxx
+
+time: 90
+reward: 350
+Bxxx Bxxx
+xxx$ xxx$
+xxx- xxx-
+Fxxx xxxx
+
+time: 91
+reward: 350
+Bxx$ Bxx$
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 92
+reward: 350
+Bx$- Bx$-
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 93
+reward: 350
+B$-- B$--
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 94
+reward: 400
+B--- B---
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 95
+reward: 400
+B--- B---
+Hxx- Hxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 96
+reward: 400
+B--- B---
+-Hx- -Hx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 97
+reward: 400
+B--- B---
+--x- --x-
+xHx- xHx-
+Fxxx xxxx
+
+time: 98
+reward: 400
+B--- B---
+--x- --x-
+x-H- x-H-
+Fxxx xxxx
+
+time: 99
+reward: 400
+B--- B---
+--x- --x-
+x--- x---
+FxHx xxHx
+
+time: 100
+reward: 400
+B--- B---
+--x- --x-
+x--- x---
+FH-x xH-x
+
+total reward: 400
+
+reality: ../test/baseline_4x4_3_real.world
+belief: ../test/baseline_4x4_3_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxxB xxxB
+xxxx xxxx
+xFxx xxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+xxxB xxxB
+xxxH xxxH
+xFxx xxxx
+xxxx xxxx
+
+time: 2
+reward: 0
+xxxB xxxB
+xxH- xxH-
+xFxx xxxx
+xxxx xxxx
+
+time: 3
+reward: 0
+xxHB xxHB
+xx-- xx--
+xFxx xxxx
+xxxx xxxx
+
+time: 4
+reward: 0
+xH-B xH-B
+xx-- xx--
+xFxx xxxx
+xxxx xxxx
+
+time: 5
+reward: 0
+x--B x--B
+xH-- xH--
+xFxx xxxx
+xxxx xxxx
+
+time: 6
+reward: 0
+xxxB xxxB
+xxxx xxxx
+x$xx x$xx
+xxFx xxxx
+
+time: 7
+reward: 0
+xxxB xxxB
+x$xx x$xx
+x-xx x-xx
+xxFx xxxx
+
+time: 8
+reward: 0
+x$xB x$xB
+x-xx x-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 9
+reward: 0
+x-$B x-$B
+x-xx x-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 10
+reward: 50
+x--B x--B
+x-xx x-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 11
+reward: 50
+x--B x--B
+x-xH x-xH
+x-xx x-xx
+xxFx xxxx
+
+time: 12
+reward: 50
+x--B x--B
+x-H- x-H-
+x-xx x-xx
+xxFx xxxx
+
+time: 13
+reward: 50
+x--B x--B
+x--- x---
+x-Hx x-Hx
+xxFx xxxx
+
+time: 14
+reward: 50
+xxxB xxxB
+xxxx xxxx
+xxxx xxxx
+xx$F xx$x
+
+time: 15
+reward: 50
+xxxB xxxB
+xxxx xxxx
+xx$x xx$x
+xx-F xx-x
+
+time: 16
+reward: 50
+xxxB xxxB
+xx$x xx$x
+xx-x xx-x
+xx-F xx-x
+
+time: 17
+reward: 50
+xx$B xx$B
+xx-x xx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 18
+reward: 100
+xx-B xx-B
+xx-x xx-x
+xx-x xx-x
+xx-F xx-x
+
+time: 19
+reward: 100
+xx-B xx-B
+xx-H xx-H
+xx-x xx-x
+xx-F xx-x
+
+time: 20
+reward: 100
+xx-B xx-B
+xx-- xx--
+xx-H xx-H
+xx-F xx-x
+
+time: 21
+reward: 100
+xx-B xx-B
+xx-- xx--
+xxH- xxH-
+xx-F xx-x
+
+time: 22
+reward: 100
+xx-B xx-B
+xx-- xx--
+xH-- xH--
+xx-F xx-x
+
+time: 23
+reward: 100
+xx-B xx-B
+xH-- xH--
+x--- x---
+xx-F xx-x
+
+time: 24
+reward: 100
+xH-B xH-B
+x--- x---
+x--- x---
+xx-F xx-x
+
+time: 25
+reward: 100
+x--B x--B
+xH-- xH--
+x--- x---
+xx-F xx-x
+
+time: 26
+reward: 100
+x--B x--B
+x--- x---
+xH-- xH--
+xx-F xx-x
+
+time: 27
+reward: 100
+x--B x--B
+x--- x---
+H--- H---
+xx-F xx-x
+
+time: 28
+reward: 100
+x--B x--B
+H--- H---
+---- ----
+xx-F xx-x
+
+time: 29
+reward: 100
+x--B x--B
+---- ----
+H--- H---
+xx-F xx-x
+
+time: 30
+reward: 100
+x--B x--B
+---- ----
+---- ----
+Hx-F Hx-x
+
+time: 31
+reward: 100
+x--B x--B
+---- ----
+---- ----
+-H-F -H-x
+
+time: 32
+reward: 100
+x--B x--B
+---- ----
+-H-- -H--
+---F ---x
+
+time: 33
+reward: 100
+x--B x--B
+-H-- -H--
+---- ----
+---F ---x
+
+time: 34
+reward: 100
+x--B x--B
+---- ----
+-H-- -H--
+---F ---x
+
+time: 35
+reward: 100
+x--B x--B
+---- ----
+---- ----
+-H-F -H-x
+
+time: 36
+reward: 100
+x--B x--B
+---- ----
+---- ----
+--HF --Hx
+
+time: 37
+reward: 100
+x--B x--B
+---- ----
+--H- --H-
+---F ---x
+
+time: 38
+reward: 100
+x--B x--B
+--H- --H-
+---- ----
+---F ---x
+
+time: 39
+reward: 100
+x-HB x-HB
+---- ----
+---- ----
+---F ---x
+
+time: 40
+reward: 100
+x--B x--B
+--H- --H-
+---- ----
+---F ---x
+
+time: 41
+reward: 100
+x--B x--B
+---- ----
+--H- --H-
+---F ---x
+
+time: 42
+reward: 100
+x--B x--B
+--H- --H-
+---- ----
+---F ---x
+
+time: 43
+reward: 100
+x--B x--B
+---- ----
+--H- --H-
+---F ---x
+
+time: 44
+reward: 100
+x--B x--B
+---- ----
+---- ----
+--HF --Hx
+
+time: 45
+reward: 100
+xxxB xxxB
+xxxx xxxx
+xxxx xxxx
+Fxx$ xxx$
+
+time: 46
+reward: 100
+xxxB xxxB
+xxxx xxxx
+xxx$ xxx$
+Fxx- xxx-
+
+time: 47
+reward: 100
+xxxB xxxB
+xxx$ xxx$
+xxx- xxx-
+Fxx- xxx-
+
+time: 48
+reward: 150
+xxxB xxxB
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 49
+reward: 150
+xxHB xxHB
+xxx- xxx-
+xxx- xxx-
+Fxx- xxx-
+
+time: 50
+reward: 150
+xx-B xx-B
+xxH- xxH-
+xxx- xxx-
+Fxx- xxx-
+
+time: 51
+reward: 150
+xx-B xx-B
+xH-- xH--
+xxx- xxx-
+Fxx- xxx-
+
+time: 52
+reward: 150
+xx-B xx-B
+x--- x---
+xHx- xHx-
+Fxx- xxx-
+
+time: 53
+reward: 150
+xx-B xx-B
+x--- x---
+H-x- H-x-
+Fxx- xxx-
+
+time: 54
+reward: 150
+xxxB xxxB
+xxFx xxxx
+xxxx xxxx
+$xxx $xxx
+
+time: 55
+reward: 150
+xxxB xxxB
+xxFx xxxx
+$xxx $xxx
+-xxx -xxx
+
+time: 56
+reward: 150
+xxxB xxxB
+$xFx $xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 57
+reward: 150
+$xxB $xxB
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 58
+reward: 150
+-$xB -$xB
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 59
+reward: 150
+--$B --$B
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 60
+reward: 200
+---B ---B
+-xFx -xxx
+-xxx -xxx
+-xxx -xxx
+
+time: 61
+reward: 200
+---B ---B
+-xFH -xxH
+-xxx -xxx
+-xxx -xxx
+
+time: 62
+reward: 200
+---B ---B
+-xF- -xx-
+-xxH -xxH
+-xxx -xxx
+
+time: 63
+reward: 200
+---B ---B
+-xF- -xx-
+-xH- -xH-
+-xxx -xxx
+
+time: 64
+reward: 200
+---B ---B
+-xF- -xx-
+-H-- -H--
+-xxx -xxx
+
+time: 65
+reward: 200
+---B ---B
+-xF- -xx-
+--H- --H-
+-xxx -xxx
+
+time: 66
+reward: 200
+---B ---B
+-xF- -xx-
+---- ----
+-xHx -xHx
+
+time: 67
+reward: 200
+---B ---B
+-xF- -xx-
+---- ----
+-H-x -H-x
+
+time: 68
+reward: 200
+---B ---B
+-xF- -xx-
+-H-- -H--
+---x ---x
+
+time: 69
+reward: 200
+---B ---B
+-HF- -Hx-
+---- ----
+---x ---x
+
+time: 70
+reward: 200
+xxxB xxxB
+xx$x xx$x
+xFxx xxxx
+xxxx xxxx
+
+time: 71
+reward: 200
+xx$B xx$B
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 72
+reward: 250
+xx-B xx-B
+xx-x xx-x
+xFxx xxxx
+xxxx xxxx
+
+time: 73
+reward: 250
+xx-B xx-B
+xx-H xx-H
+xFxx xxxx
+xxxx xxxx
+
+time: 74
+reward: 250
+xx-B xx-B
+xx-- xx--
+xFxH xxxH
+xxxx xxxx
+
+time: 75
+reward: 250
+xx-B xx-B
+xx-- xx--
+xFH- xxH-
+xxxx xxxx
+
+time: 76
+reward: 250
+xxxB xxxB
+xxxx xxxx
+x$xF x$xx
+xxxx xxxx
+
+time: 77
+reward: 250
+xxxB xxxB
+x$xx x$xx
+x-xF x-xx
+xxxx xxxx
+
+time: 78
+reward: 250
+x$xB x$xB
+x-xx x-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 79
+reward: 250
+x-$B x-$B
+x-xx x-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 80
+reward: 300
+x--B x--B
+x-xx x-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 81
+reward: 300
+x--B x--B
+x-xH x-xH
+x-xF x-xx
+xxxx xxxx
+
+time: 82
+reward: 300
+x--B x--B
+x-H- x-H-
+x-xF x-xx
+xxxx xxxx
+
+time: 83
+reward: 300
+x--B x--B
+xH-- xH--
+x-xF x-xx
+xxxx xxxx
+
+time: 84
+reward: 300
+x--B x--B
+x--- x---
+xHxF xHxx
+xxxx xxxx
+
+time: 85
+reward: 300
+x--B x--B
+x--- x---
+x-xF x-xx
+xHxx xHxx
+
+time: 86
+reward: 300
+x--B x--B
+x--- x---
+x-xF x-xx
+H-xx H-xx
+
+time: 87
+reward: 300
+x--B x--B
+x--- x---
+x-xF x-xx
+-Hxx -Hxx
+
+time: 88
+reward: 300
+x--B x--B
+x--- x---
+xHxF xHxx
+--xx --xx
+
+time: 89
+reward: 300
+x--B x--B
+x--- x---
+H-xF H-xx
+--xx --xx
+
+time: 90
+reward: 300
+x--B x--B
+x--- x---
+-HxF -Hxx
+--xx --xx
+
+time: 91
+reward: 300
+x--B x--B
+xH-- xH--
+--xF --xx
+--xx --xx
+
+time: 92
+reward: 300
+x--B x--B
+x--- x---
+-HxF -Hxx
+--xx --xx
+
+time: 93
+reward: 300
+x--B x--B
+x--- x---
+--HF --Hx
+--xx --xx
+
+time: 94
+reward: 300
+x--B x--B
+x-H- x-H-
+---F ---x
+--xx --xx
+
+time: 95
+reward: 300
+x--B x--B
+x--- x---
+--HF --Hx
+--xx --xx
+
+time: 96
+reward: 300
+xxxB xxxB
+xxxx xxxx
+xxx$ xxx$
+Fxxx xxxx
+
+time: 97
+reward: 300
+xxxB xxxB
+xxx$ xxx$
+xxx- xxx-
+Fxxx xxxx
+
+time: 98
+reward: 350
+xxxB xxxB
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 99
+reward: 350
+xxHB xxHB
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+time: 100
+reward: 350
+xH-B xH-B
+xxx- xxx-
+xxx- xxx-
+Fxxx xxxx
+
+total reward: 350
+
+reality: ../test/baseline_4x4_4_real.world
+belief: ../test/baseline_4x4_4_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxxF xxxx
+xxxx xxxx
+xxxx xxxx
+Bxxx Bxxx
+
+time: 1
+reward: 0
+xxxF xxxx
+xxxx xxxx
+Hxxx Hxxx
+Bxxx Bxxx
+
+time: 2
+reward: 0
+xxxF xxxx
+xxxx xxxx
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 3
+reward: 0
+xxxF xxxx
+xHxx xHxx
+--xx --xx
+Bxxx Bxxx
+
+time: 4
+reward: 0
+xxxF xxxx
+x-xx x-xx
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 5
+reward: 0
+xxxF xxxx
+xHxx xHxx
+--xx --xx
+Bxxx Bxxx
+
+time: 6
+reward: 0
+xxxF xxxx
+x-Hx x-Hx
+--xx --xx
+Bxxx Bxxx
+
+time: 7
+reward: 0
+xxHF xxHx
+x--x x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 8
+reward: 0
+xH-F xH-x
+x--x x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 9
+reward: 0
+x-HF x-Hx
+x--x x--x
+--xx --xx
+Bxxx Bxxx
+
+time: 10
+reward: 0
+x--F x--x
+x-Hx x-Hx
+--xx --xx
+Bxxx Bxxx
+
+time: 11
+reward: 0
+x--F x--x
+xH-x xH-x
+--xx --xx
+Bxxx Bxxx
+
+time: 12
+reward: 0
+x--F x--x
+x--x x--x
+-Hxx -Hxx
+Bxxx Bxxx
+
+time: 13
+reward: 0
+x--F x--x
+x--x x--x
+--Hx --Hx
+Bxxx Bxxx
+
+time: 14
+reward: 0
+x--F x--x
+x--x x--x
+---H ---H
+Bxxx Bxxx
+
+time: 15
+reward: 0
+x--F x--x
+x--x x--x
+---- ----
+BxxH BxxH
+
+time: 16
+reward: 0
+x--F x--x
+x--x x--x
+---H ---H
+Bxx- Bxx-
+
+time: 17
+reward: 0
+x--F x--x
+x--H x--H
+---- ----
+Bxx- Bxx-
+
+time: 18
+reward: 0
+x--F x--x
+x-H- x-H-
+---- ----
+Bxx- Bxx-
+
+time: 19
+reward: 0
+x--F x--x
+x--- x---
+--H- --H-
+Bxx- Bxx-
+
+time: 20
+reward: 0
+x--F x--x
+x--- x---
+-H-- -H--
+Bxx- Bxx-
+
+time: 21
+reward: 0
+x--F x--x
+x--- x---
+--H- --H-
+Bxx- Bxx-
+
+time: 22
+reward: 0
+x--F x--x
+x--- x---
+-H-- -H--
+Bxx- Bxx-
+
+time: 23
+reward: 0
+x--F x--x
+x--- x---
+---- ----
+BHx- BHx-
+
+time: 24
+reward: 0
+x--F x--x
+x--- x---
+---- ----
+B-H- B-H-
+
+time: 25
+reward: 0
+x--F x--x
+x--- x---
+--H- --H-
+B--- B---
+
+time: 26
+reward: 0
+x--F x--x
+x-H- x-H-
+---- ----
+B--- B---
+
+time: 27
+reward: 0
+x--F x--x
+xH-- xH--
+---- ----
+B--- B---
+
+time: 28
+reward: 0
+x--F x--x
+H--- H---
+---- ----
+B--- B---
+
+time: 29
+reward: 0
+H--F H--x
+---- ----
+---- ----
+B--- B---
+
+time: 30
+reward: 0
+-H-F -H-x
+---- ----
+---- ----
+B--- B---
+
+time: 31
+reward: 0
+--HF --Hx
+---- ----
+---- ----
+B--- B---
+
+time: 32
+reward: 0
+xxx$ xxx$
+xxxx xxxx
+xFxx xxxx
+Bxxx Bxxx
+
+time: 33
+reward: 0
+xxx- xxx-
+xxx$ xxx$
+xFxx xxxx
+Bxxx Bxxx
+
+time: 34
+reward: 0
+xxx- xxx-
+xxx- xxx-
+xFx$ xxx$
+Bxxx Bxxx
+
+time: 35
+reward: 0
+xxx- xxx-
+xxx- xxx-
+xFx- xxx-
+Bxx$ Bxx$
+
+time: 36
+reward: 0
+xxx- xxx-
+xxx- xxx-
+xFx- xxx-
+Bx$- Bx$-
+
+time: 37
+reward: 0
+xxx- xxx-
+xxx- xxx-
+xFx- xxx-
+B$-- B$--
+
+time: 38
+reward: 50
+xxx- xxx-
+xxx- xxx-
+xFx- xxx-
+B--- B---
+
+time: 39
+reward: 50
+xxx- xxx-
+xxx- xxx-
+HFx- Hxx-
+B--- B---
+
+time: 40
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x$xx x$xx
+BxFx Bxxx
+
+time: 41
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+B$Fx B$xx
+
+time: 42
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+B-Fx B-xx
+
+time: 43
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x-xx x-xx
+BHFx BHxx
+
+time: 44
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+Bx$F Bx$x
+
+time: 45
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+B$-F B$-x
+
+time: 46
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xxxx xxxx
+B--F B--x
+
+time: 47
+reward: 150
+xxxx xxxx
+xxxx xxxx
+Hxxx Hxxx
+B--F B--x
+
+time: 48
+reward: 150
+xxxx xxxx
+xxxx xxxx
+-Hxx -Hxx
+B--F B--x
+
+time: 49
+reward: 150
+xxxx xxxx
+xxxx xxxx
+--Hx --Hx
+B--F B--x
+
+time: 50
+reward: 150
+xxxx xxxx
+xxHx xxHx
+---x ---x
+B--F B--x
+
+time: 51
+reward: 150
+xxHx xxHx
+xx-x xx-x
+---x ---x
+B--F B--x
+
+time: 52
+reward: 150
+xH-x xH-x
+xx-x xx-x
+---x ---x
+B--F B--x
+
+time: 53
+reward: 150
+x--x x--x
+xH-x xH-x
+---x ---x
+B--F B--x
+
+time: 54
+reward: 150
+xH-x xH-x
+x--x x--x
+---x ---x
+B--F B--x
+
+time: 55
+reward: 150
+x--x x--x
+xH-x xH-x
+---x ---x
+B--F B--x
+
+time: 56
+reward: 150
+xH-x xH-x
+x--x x--x
+---x ---x
+B--F B--x
+
+time: 57
+reward: 150
+x-Hx x-Hx
+x--x x--x
+---x ---x
+B--F B--x
+
+time: 58
+reward: 150
+x--H x--H
+x--x x--x
+---x ---x
+B--F B--x
+
+time: 59
+reward: 150
+x--- x---
+x--H x--H
+---x ---x
+B--F B--x
+
+time: 60
+reward: 150
+x--- x---
+x-H- x-H-
+---x ---x
+B--F B--x
+
+time: 61
+reward: 150
+x--- x---
+xH-- xH--
+---x ---x
+B--F B--x
+
+time: 62
+reward: 150
+x--- x---
+H--- H---
+---x ---x
+B--F B--x
+
+time: 63
+reward: 150
+x--- x---
+---- ----
+H--x H--x
+B--F B--x
+
+time: 64
+reward: 150
+x--- x---
+---- ----
+-H-x -H-x
+B--F B--x
+
+time: 65
+reward: 150
+x--- x---
+-H-- -H--
+---x ---x
+B--F B--x
+
+time: 66
+reward: 150
+x--- x---
+---- ----
+-H-x -H-x
+B--F B--x
+
+time: 67
+reward: 150
+x--- x---
+---- ----
+--Hx --Hx
+B--F B--x
+
+time: 68
+reward: 150
+x--- x---
+---- ----
+---H ---H
+B--F B--x
+
+time: 69
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+Bxx$ Bxx$
+
+time: 70
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+Bx$- Bx$-
+
+time: 71
+reward: 150
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+B$-- B$--
+
+time: 72
+reward: 200
+xxxx xxxx
+xxFx xxxx
+xxxx xxxx
+B--- B---
+
+time: 73
+reward: 200
+xxxx xxxx
+xxFx xxxx
+Hxxx Hxxx
+B--- B---
+
+time: 74
+reward: 200
+xxxx xxxx
+xxFx xxxx
+-Hxx -Hxx
+B--- B---
+
+time: 75
+reward: 200
+xxxx xxxx
+xHFx xHxx
+--xx --xx
+B--- B---
+
+time: 76
+reward: 200
+xxxx xxxx
+xx$x xx$x
+xFxx xxxx
+Bxxx Bxxx
+
+time: 77
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF$x xx$x
+Bxxx Bxxx
+
+time: 78
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+Bx$x Bx$x
+
+time: 79
+reward: 200
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+B$-x B$-x
+
+time: 80
+reward: 250
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+B--x B--x
+
+time: 81
+reward: 250
+xxxx xxxx
+xx-x xx-x
+xF-x xx-x
+BH-x BH-x
+
+time: 82
+reward: 250
+xxxx xxxx
+xxxx xxxx
+x$xF x$xx
+Bxxx Bxxx
+
+time: 83
+reward: 250
+xxxx xxxx
+xxxx xxxx
+x-xF x-xx
+B$xx B$xx
+
+time: 84
+reward: 300
+xxxx xxxx
+xxxx xxxx
+x-xF x-xx
+B-xx B-xx
+
+time: 85
+reward: 300
+xxxx xxxx
+xxxx xxxx
+H-xF H-xx
+B-xx B-xx
+
+time: 86
+reward: 300
+xxxx xxxx
+xxxx xxxx
+-HxF -Hxx
+B-xx B-xx
+
+time: 87
+reward: 300
+xxxx xxxx
+xxxx xxxx
+--HF --Hx
+B-xx B-xx
+
+time: 88
+reward: 300
+xxxx xxxx
+xxHx xxHx
+---F ---x
+B-xx B-xx
+
+time: 89
+reward: 300
+xxxx xxxx
+xx-x xx-x
+--HF --Hx
+B-xx B-xx
+
+time: 90
+reward: 300
+xxxx xxxx
+xxHx xxHx
+---F ---x
+B-xx B-xx
+
+time: 91
+reward: 300
+xxxx xxxx
+xH-x xH-x
+---F ---x
+B-xx B-xx
+
+time: 92
+reward: 300
+xxxx xxxx
+x-Hx x-Hx
+---F ---x
+B-xx B-xx
+
+time: 93
+reward: 300
+xxxx xxxx
+x--x x--x
+--HF --Hx
+B-xx B-xx
+
+time: 94
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx$ xxx$
+BxFx Bxxx
+
+time: 95
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+BxF$ Bxx$
+
+time: 96
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+Bx$- Bx$-
+
+time: 97
+reward: 300
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+B$F- B$--
+
+time: 98
+reward: 350
+xxxx xxxx
+xxxx xxxx
+xxx- xxx-
+B-F- B---
+
+time: 99
+reward: 350
+xxxx xxxx
+xxxx xxxx
+Hxx- Hxx-
+B-F- B---
+
+time: 100
+reward: 350
+xxxx xxxx
+xxxx xxxx
+-Hx- -Hx-
+B-F- B---
+
+total reward: 350
+
+reality: ../test/baseline_4x4_5_real.world
+belief: ../test/baseline_4x4_5_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxxx xxxx
+xxxF xxxx
+Bxxx Bxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+xxxx xxxx
+xxxF xxxx
+BHxx BHxx
+xxxx xxxx
+
+time: 2
+reward: 0
+xxxx xxxx
+xHxF xHxx
+B-xx B-xx
+xxxx xxxx
+
+time: 3
+reward: 0
+xxxx xxxx
+x-HF x-Hx
+B-xx B-xx
+xxxx xxxx
+
+time: 4
+reward: 0
+xxxx xxxx
+x--F x--x
+B-Hx B-Hx
+xxxx xxxx
+
+time: 5
+reward: 0
+xxxx xxxx
+x--F x--x
+B--x B--x
+xxHx xxHx
+
+time: 6
+reward: 0
+xxxx xxxx
+x--F x--x
+B-Hx B-Hx
+xx-x xx-x
+
+time: 7
+reward: 0
+xxxx xxxx
+x--F x--x
+BH-x BH-x
+xx-x xx-x
+
+time: 8
+reward: 0
+xxxx xxxx
+xH-F xH-x
+B--x B--x
+xx-x xx-x
+
+time: 9
+reward: 0
+xxxx xxxx
+H--F H--x
+B--x B--x
+xx-x xx-x
+
+time: 10
+reward: 0
+xxxx xxxx
+-H-F -H-x
+B--x B--x
+xx-x xx-x
+
+time: 11
+reward: 0
+xxxx xxxx
+---F ---x
+BH-x BH-x
+xx-x xx-x
+
+time: 12
+reward: 0
+xxxx xxxx
+---F ---x
+B--x B--x
+xH-x xH-x
+
+time: 13
+reward: 0
+xxxx xxxx
+---F ---x
+BH-x BH-x
+x--x x--x
+
+time: 14
+reward: 0
+xxxx xxxx
+-H-F -H-x
+B--x B--x
+x--x x--x
+
+time: 15
+reward: 0
+xHxx xHxx
+---F ---x
+B--x B--x
+x--x x--x
+
+time: 16
+reward: 0
+x-xx x-xx
+-H-F -H-x
+B--x B--x
+x--x x--x
+
+time: 17
+reward: 0
+x-xx x-xx
+--HF --Hx
+B--x B--x
+x--x x--x
+
+time: 18
+reward: 0
+xxxx xxxx
+xxx$ xxx$
+BFxx Bxxx
+xxxx xxxx
+
+time: 19
+reward: 0
+xxxx xxxx
+xxx- xxx-
+BFx$ Bxx$
+xxxx xxxx
+
+time: 20
+reward: 0
+xxxx xxxx
+xxx- xxx-
+BF$- Bx$-
+xxxx xxxx
+
+time: 21
+reward: 0
+xxxx xxxx
+xxx- xxx-
+B$-- B$--
+xxxx xxxx
+
+time: 22
+reward: 50
+xxxx xxxx
+xxx- xxx-
+BF-- B---
+xxxx xxxx
+
+time: 23
+reward: 50
+xxxx xxxx
+Hxx- Hxx-
+BF-- B---
+xxxx xxxx
+
+time: 24
+reward: 50
+xxxx xxxx
+-Hx- -Hx-
+BF-- B---
+xxxx xxxx
+
+time: 25
+reward: 50
+xHxx xHxx
+--x- --x-
+BF-- B---
+xxxx xxxx
+
+time: 26
+reward: 50
+x-Hx x-Hx
+--x- --x-
+BF-- B---
+xxxx xxxx
+
+time: 27
+reward: 50
+x--x x--x
+--H- --H-
+BF-- B---
+xxxx xxxx
+
+time: 28
+reward: 50
+x--x x--x
+---- ----
+BFH- B-H-
+xxxx xxxx
+
+time: 29
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+xxHx xxHx
+
+time: 30
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+xH-x xH-x
+
+time: 31
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+x-Hx x-Hx
+
+time: 32
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+xH-x xH-x
+
+time: 33
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+H--x H--x
+
+time: 34
+reward: 50
+x--x x--x
+---- ----
+BF-- B---
+---x ---x
+
+time: 35
+reward: 50
+xxxx xxxx
+xxxx xxxx
+B$xx B$xx
+xxFx xxxx
+
+time: 36
+reward: 100
+xxxx xxxx
+xxxx xxxx
+B-xx B-xx
+xxFx xxxx
+
+time: 37
+reward: 100
+xxxx xxxx
+xxxx xxxx
+BHxx BHxx
+xxFx xxxx
+
+time: 38
+reward: 100
+xxxx xxxx
+xHxx xHxx
+B-xx B-xx
+xxFx xxxx
+
+time: 39
+reward: 100
+xxxx xxxx
+x-xx x-xx
+BHxx BHxx
+xxFx xxxx
+
+time: 40
+reward: 100
+xxxx xxxx
+x-xx x-xx
+B-xx B-xx
+xHFx xHxx
+
+time: 41
+reward: 100
+xxxx xxxx
+x-xx x-xx
+BHxx BHxx
+x-Fx x-xx
+
+time: 42
+reward: 100
+xxxx xxxx
+x-xx x-xx
+B-xx B-xx
+xHFx xHxx
+
+time: 43
+reward: 100
+xxxx xxxx
+x-xx x-xx
+BHxx BHxx
+x-Fx x-xx
+
+time: 44
+reward: 100
+xxxx xxxx
+xHxx xHxx
+B-xx B-xx
+x-Fx x-xx
+
+time: 45
+reward: 100
+xxxx xxxx
+x-Hx x-Hx
+B-xx B-xx
+x-Fx x-xx
+
+time: 46
+reward: 100
+xxxx xxxx
+xH-x xH-x
+B-xx B-xx
+x-Fx x-xx
+
+time: 47
+reward: 100
+xxxx xxxx
+x-Hx x-Hx
+B-xx B-xx
+x-Fx x-xx
+
+time: 48
+reward: 100
+xxxx xxxx
+x--H x--H
+B-xx B-xx
+x-Fx x-xx
+
+time: 49
+reward: 100
+xxxx xxxx
+x-H- x-H-
+B-xx B-xx
+x-Fx x-xx
+
+time: 50
+reward: 100
+xxxx xxxx
+x--- x---
+B-Hx B-Hx
+x-Fx x-xx
+
+time: 51
+reward: 100
+xxxx xxxx
+x-H- x-H-
+B--x B--x
+x-Fx x-xx
+
+time: 52
+reward: 100
+xxxx xxxx
+x--- x---
+B-Hx B-Hx
+x-Fx x-xx
+
+time: 53
+reward: 100
+xxxx xxxx
+xxxx xxxx
+Bxxx Bxxx
+xx$F xx$x
+
+time: 54
+reward: 100
+xxxx xxxx
+xxxx xxxx
+Bx$x Bx$x
+xx-F xx-x
+
+time: 55
+reward: 100
+xxxx xxxx
+xxxx xxxx
+B$-x B$-x
+xx-F xx-x
+
+time: 56
+reward: 150
+xxxx xxxx
+xxxx xxxx
+B--x B--x
+xx-F xx-x
+
+time: 57
+reward: 150
+xxxx xxxx
+xxxx xxxx
+BH-x BH-x
+xx-F xx-x
+
+time: 58
+reward: 150
+xxxx xxxx
+xHxx xHxx
+B--x B--x
+xx-F xx-x
+
+time: 59
+reward: 150
+xxxx xxxx
+x-Hx x-Hx
+B--x B--x
+xx-F xx-x
+
+time: 60
+reward: 150
+xxxx xxxx
+x--x x--x
+B-Hx B-Hx
+xx-F xx-x
+
+time: 61
+reward: 150
+xxxx xxxx
+x-Hx x-Hx
+B--x B--x
+xx-F xx-x
+
+time: 62
+reward: 150
+xxxx xxxx
+x--H x--H
+B--x B--x
+xx-F xx-x
+
+time: 63
+reward: 150
+xxxH xxxH
+x--- x---
+B--x B--x
+xx-F xx-x
+
+time: 64
+reward: 150
+xxH- xxH-
+x--- x---
+B--x B--x
+xx-F xx-x
+
+time: 65
+reward: 150
+xH-- xH--
+x--- x---
+B--x B--x
+xx-F xx-x
+
+time: 66
+reward: 150
+H--- H---
+x--- x---
+B--x B--x
+xx-F xx-x
+
+time: 67
+reward: 150
+---- ----
+H--- H---
+B--x B--x
+xx-F xx-x
+
+time: 68
+reward: 150
+---- ----
+---- ----
+B--x B--x
+xx-F xx-x
+
+time: 69
+reward: 150
+---- ----
+---- ----
+B--x B--x
+Hx-F Hx-x
+
+time: 70
+reward: 150
+---- ----
+---- ----
+B--x B--x
+-H-F -H-x
+
+time: 71
+reward: 150
+---- ----
+---- ----
+B--x B--x
+--HF --Hx
+
+time: 72
+reward: 150
+xxxx xxxx
+xxxx xxxx
+Bxxx Bxxx
+Fxx$ xxx$
+
+time: 73
+reward: 150
+xxxx xxxx
+xxxx xxxx
+Bxx$ Bxx$
+Fxx- xxx-
+
+time: 74
+reward: 150
+xxxx xxxx
+xxxx xxxx
+Bx$- Bx$-
+Fxx- xxx-
+
+time: 75
+reward: 150
+xxxx xxxx
+xxxx xxxx
+B$-- B$--
+Fxx- xxx-
+
+time: 76
+reward: 200
+xxxx xxxx
+xxxx xxxx
+B--- B---
+Fxx- xxx-
+
+time: 77
+reward: 200
+xxxx xxxx
+xxxx xxxx
+BH-- BH--
+Fxx- xxx-
+
+time: 78
+reward: 200
+xxxx xxxx
+xxxx xxxx
+B--- B---
+FHx- xHx-
+
+time: 79
+reward: 200
+xxxx xxxx
+xxxx xxxx
+BH-- BH--
+F-x- x-x-
+
+time: 80
+reward: 200
+xxxx xxxx
+xHxx xHxx
+B--- B---
+F-x- x-x-
+
+time: 81
+reward: 200
+xxxx xxxx
+H-xx H-xx
+B--- B---
+F-x- x-x-
+
+time: 82
+reward: 200
+xxxx xxxx
+-Hxx -Hxx
+B--- B---
+F-x- x-x-
+
+time: 83
+reward: 200
+xxxx xxxx
+--Hx --Hx
+B--- B---
+F-x- x-x-
+
+time: 84
+reward: 200
+xxxx xxxx
+-H-x -H-x
+B--- B---
+F-x- x-x-
+
+time: 85
+reward: 200
+xxxx xxxx
+---x ---x
+BH-- BH--
+F-x- x-x-
+
+time: 86
+reward: 200
+xxxx xxxx
+---x ---x
+B-H- B-H-
+F-x- x-x-
+
+time: 87
+reward: 200
+xxxx xxxx
+--Hx --Hx
+B--- B---
+F-x- x-x-
+
+time: 88
+reward: 200
+xxxx xxxx
+-H-x -H-x
+B--- B---
+F-x- x-x-
+
+time: 89
+reward: 200
+xxxx xxxx
+--Hx --Hx
+B--- B---
+F-x- x-x-
+
+time: 90
+reward: 200
+xxxx xxxx
+-H-x -H-x
+B--- B---
+F-x- x-x-
+
+time: 91
+reward: 200
+xxxx xxxx
+H--x H--x
+B--- B---
+F-x- x-x-
+
+time: 92
+reward: 200
+xxxx xxxx
+-H-x -H-x
+B--- B---
+F-x- x-x-
+
+time: 93
+reward: 200
+xHxx xHxx
+---x ---x
+B--- B---
+F-x- x-x-
+
+time: 94
+reward: 200
+x-Hx x-Hx
+---x ---x
+B--- B---
+F-x- x-x-
+
+time: 95
+reward: 200
+xH-x xH-x
+---x ---x
+B--- B---
+F-x- x-x-
+
+time: 96
+reward: 200
+H--x H--x
+---x ---x
+B--- B---
+F-x- x-x-
+
+time: 97
+reward: 200
+-H-x -H-x
+---x ---x
+B--- B---
+F-x- x-x-
+
+time: 98
+reward: 200
+---x ---x
+-H-x -H-x
+B--- B---
+F-x- x-x-
+
+time: 99
+reward: 200
+---x ---x
+--Hx --Hx
+B--- B---
+F-x- x-x-
+
+time: 100
+reward: 200
+---x ---x
+---H ---H
+B--- B---
+F-x- x-x-
+
+total reward: 200
+
+reality: ../test/baseline_4x4_6_real.world
+belief: ../test/baseline_4x4_6_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+Fxxx xxxx
+Bxxx Bxxx
+xxxx xxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+Fxxx xxxx
+Bxxx Bxxx
+Hxxx Hxxx
+xxxx xxxx
+
+time: 2
+reward: 0
+Fxxx xxxx
+Bxxx Bxxx
+-xxx -xxx
+xxxx xxxx
+
+time: 3
+reward: 0
+Fxxx xxxx
+BHxx BHxx
+-xxx -xxx
+xxxx xxxx
+
+time: 4
+reward: 0
+Fxxx xxxx
+B-Hx B-Hx
+-xxx -xxx
+xxxx xxxx
+
+time: 5
+reward: 0
+Fxxx xxxx
+B--x B--x
+-xHx -xHx
+xxxx xxxx
+
+time: 6
+reward: 0
+Fxxx xxxx
+B--x B--x
+-x-x -x-x
+xxHx xxHx
+
+time: 7
+reward: 0
+Fxxx xxxx
+B--x B--x
+-xHx -xHx
+xx-x xx-x
+
+time: 8
+reward: 0
+Fxxx xxxx
+B-Hx B-Hx
+-x-x -x-x
+xx-x xx-x
+
+time: 9
+reward: 0
+Fxxx xxxx
+B--x B--x
+-xHx -xHx
+xx-x xx-x
+
+time: 10
+reward: 0
+Fxxx xxxx
+B--x B--x
+-H-x -H-x
+xx-x xx-x
+
+time: 11
+reward: 0
+Fxxx xxxx
+BH-x BH-x
+---x ---x
+xx-x xx-x
+
+time: 12
+reward: 0
+FHxx xHxx
+B--x B--x
+---x ---x
+xx-x xx-x
+
+time: 13
+reward: 0
+F-xx x-xx
+BH-x BH-x
+---x ---x
+xx-x xx-x
+
+time: 14
+reward: 0
+F-xx x-xx
+B--x B--x
+---x ---x
+xx-x xx-x
+
+time: 15
+reward: 0
+F-xx x-xx
+BH-x BH-x
+---x ---x
+xx-x xx-x
+
+time: 16
+reward: 0
+FHxx xHxx
+B--x B--x
+---x ---x
+xx-x xx-x
+
+time: 17
+reward: 0
+F-Hx x-Hx
+B--x B--x
+---x ---x
+xx-x xx-x
+
+time: 18
+reward: 0
+F--x x--x
+B-Hx B-Hx
+---x ---x
+xx-x xx-x
+
+time: 19
+reward: 0
+F--x x--x
+B--H B--H
+---x ---x
+xx-x xx-x
+
+time: 20
+reward: 0
+F--x x--x
+B--- B---
+---H ---H
+xx-x xx-x
+
+time: 21
+reward: 0
+F--x x--x
+B--- B---
+--H- --H-
+xx-x xx-x
+
+time: 22
+reward: 0
+F--x x--x
+B--- B---
+-H-- -H--
+xx-x xx-x
+
+time: 23
+reward: 0
+F--x x--x
+BH-- BH--
+---- ----
+xx-x xx-x
+
+time: 24
+reward: 0
+F--x x--x
+B--- B---
+---- ----
+xx-x xx-x
+
+time: 25
+reward: 0
+F--x x--x
+B--- B---
+H--- H---
+xx-x xx-x
+
+time: 26
+reward: 0
+F--x x--x
+B--- B---
+-H-- -H--
+xx-x xx-x
+
+time: 27
+reward: 0
+F--x x--x
+BH-- BH--
+---- ----
+xx-x xx-x
+
+time: 28
+reward: 0
+F--x x--x
+B--- B---
+---- ----
+xx-x xx-x
+
+time: 29
+reward: 0
+$xxx $xxx
+Bxxx Bxxx
+xFxx xxxx
+xxxx xxxx
+
+time: 30
+reward: 50
+-xxx -xxx
+Bxxx Bxxx
+xFxx xxxx
+xxxx xxxx
+
+time: 31
+reward: 50
+-xxx -xxx
+BHxx BHxx
+xFxx xxxx
+xxxx xxxx
+
+time: 32
+reward: 50
+xxxx xxxx
+Bxxx Bxxx
+x$xx x$xx
+xxFx xxxx
+
+time: 33
+reward: 50
+xxxx xxxx
+B$xx B$xx
+x-xx x-xx
+xxFx xxxx
+
+time: 34
+reward: 100
+xxxx xxxx
+B-xx B-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 35
+reward: 100
+xxxx xxxx
+BHxx BHxx
+x-xx x-xx
+xxFx xxxx
+
+time: 36
+reward: 100
+xxxx xxxx
+B-Hx B-Hx
+x-xx x-xx
+xxFx xxxx
+
+time: 37
+reward: 100
+xxxx xxxx
+BH-x BH-x
+x-xx x-xx
+xxFx xxxx
+
+time: 38
+reward: 100
+xHxx xHxx
+B--x B--x
+x-xx x-xx
+xxFx xxxx
+
+time: 39
+reward: 100
+x-xx x-xx
+BH-x BH-x
+x-xx x-xx
+xxFx xxxx
+
+time: 40
+reward: 100
+x-xx x-xx
+B--x B--x
+xHxx xHxx
+xxFx xxxx
+
+time: 41
+reward: 100
+x-xx x-xx
+B--x B--x
+x-xx x-xx
+xHFx xHxx
+
+time: 42
+reward: 100
+xxxx xxxx
+Bxxx Bxxx
+xxxx xxxx
+xx$F xx$x
+
+time: 43
+reward: 100
+xxxx xxxx
+Bxxx Bxxx
+xx$x xx$x
+xx-F xx-x
+
+time: 44
+reward: 100
+xxxx xxxx
+Bx$x Bx$x
+xx-x xx-x
+xx-F xx-x
+
+time: 45
+reward: 100
+xxxx xxxx
+B$-x B$-x
+xx-x xx-x
+xx-F xx-x
+
+time: 46
+reward: 150
+xxxx xxxx
+B--x B--x
+xx-x xx-x
+xx-F xx-x
+
+time: 47
+reward: 150
+xxxx xxxx
+B--x B--x
+Hx-x Hx-x
+xx-F xx-x
+
+time: 48
+reward: 150
+xxxx xxxx
+B--x B--x
+-H-x -H-x
+xx-F xx-x
+
+time: 49
+reward: 150
+xxxx xxxx
+B--x B--x
+--Hx --Hx
+xx-F xx-x
+
+time: 50
+reward: 150
+xxxx xxxx
+B-Hx B-Hx
+---x ---x
+xx-F xx-x
+
+time: 51
+reward: 150
+xxHx xxHx
+B--x B--x
+---x ---x
+xx-F xx-x
+
+time: 52
+reward: 150
+xH-x xH-x
+B--x B--x
+---x ---x
+xx-F xx-x
+
+time: 53
+reward: 150
+x--x x--x
+BH-x BH-x
+---x ---x
+xx-F xx-x
+
+time: 54
+reward: 150
+x--x x--x
+B--x B--x
+-H-x -H-x
+xx-F xx-x
+
+time: 55
+reward: 150
+x--x x--x
+B--x B--x
+H--x H--x
+xx-F xx-x
+
+time: 56
+reward: 150
+x--x x--x
+B--x B--x
+-H-x -H-x
+xx-F xx-x
+
+time: 57
+reward: 150
+x--x x--x
+B--x B--x
+---x ---x
+xH-F xH-x
+
+time: 58
+reward: 150
+x--x x--x
+B--x B--x
+---x ---x
+x-HF x-Hx
+
+time: 59
+reward: 150
+x--x x--x
+B--x B--x
+--Hx --Hx
+x--F x--x
+
+time: 60
+reward: 150
+x--x x--x
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 61
+reward: 150
+x-Hx x-Hx
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 62
+reward: 150
+x--H x--H
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 63
+reward: 150
+x-H- x-H-
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 64
+reward: 150
+x--- x---
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 65
+reward: 150
+x--- x---
+BH-x BH-x
+---x ---x
+x--F x--x
+
+time: 66
+reward: 150
+x--- x---
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 67
+reward: 150
+x--- x---
+B--H B--H
+---x ---x
+x--F x--x
+
+time: 68
+reward: 150
+x--- x---
+B-H- B-H-
+---x ---x
+x--F x--x
+
+time: 69
+reward: 150
+x--- x---
+B--- B---
+--Hx --Hx
+x--F x--x
+
+time: 70
+reward: 150
+x--- x---
+B--- B---
+---x ---x
+x-HF x-Hx
+
+time: 71
+reward: 150
+x--- x---
+B--- B---
+--Hx --Hx
+x--F x--x
+
+time: 72
+reward: 150
+x--- x---
+B--- B---
+---H ---H
+x--F x--x
+
+time: 73
+reward: 150
+x--- x---
+B--- B---
+--H- --H-
+x--F x--x
+
+time: 74
+reward: 150
+x--- x---
+B--- B---
+-H-- -H--
+x--F x--x
+
+time: 75
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+x--F x--x
+
+time: 76
+reward: 150
+x--- x---
+B--- B---
+---- ----
+x--F x--x
+
+time: 77
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+x--F x--x
+
+time: 78
+reward: 150
+x--- x---
+B--- B---
+---- ----
+x--F x--x
+
+time: 79
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+x--F x--x
+
+time: 80
+reward: 150
+x--- x---
+B--- B---
+---- ----
+x--F x--x
+
+time: 81
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+x--F x--x
+
+time: 82
+reward: 150
+x--- x---
+B--- B---
+---- ----
+H--F H--x
+
+time: 83
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 84
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 85
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 86
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 87
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 88
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 89
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 90
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 91
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 92
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 93
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 94
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+time: 95
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 96
+reward: 150
+x--- x---
+B--- B---
+---- ----
+H--F H--x
+
+time: 97
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 98
+reward: 150
+x--- x---
+B--- B---
+---- ----
+H--F H--x
+
+time: 99
+reward: 150
+x--- x---
+B--- B---
+H--- H---
+---F ---x
+
+time: 100
+reward: 150
+x--- x---
+B--- B---
+---- ----
+---F ---x
+
+total reward: 150
+
+reality: ../test/baseline_4x4_7_real.world
+belief: ../test/baseline_4x4_7_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+Fxxx xxxx
+xBxx xBxx
+xxxx xxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+Fxxx xxxx
+xBxx xBxx
+xHxx xHxx
+xxxx xxxx
+
+time: 2
+reward: 0
+Fxxx xxxx
+xBxx xBxx
+x-xx x-xx
+xxxx xxxx
+
+time: 3
+reward: 0
+Fxxx xxxx
+xBHx xBHx
+x-xx x-xx
+xxxx xxxx
+
+time: 4
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+x-xx x-xx
+xxxx xxxx
+
+time: 5
+reward: 0
+Fxxx xxxx
+xBHx xBHx
+x-xx x-xx
+xxxx xxxx
+
+time: 6
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xxxx xxxx
+
+time: 7
+reward: 0
+Fxxx xxxx
+xBHx xBHx
+x--x x--x
+xxxx xxxx
+
+time: 8
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+x--x x--x
+xxxx xxxx
+
+time: 9
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xxxx xxxx
+
+time: 10
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xxxx xxxx
+
+time: 11
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xxxx xxxx
+
+time: 12
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+H--x H--x
+xxxx xxxx
+
+time: 13
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+-H-x -H-x
+xxxx xxxx
+
+time: 14
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+--Hx --Hx
+xxxx xxxx
+
+time: 15
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+-H-x -H-x
+xxxx xxxx
+
+time: 16
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+--Hx --Hx
+xxxx xxxx
+
+time: 17
+reward: 0
+Fxxx xxxx
+xBHx xBHx
+---x ---x
+xxxx xxxx
+
+time: 18
+reward: 0
+Fxxx xxxx
+xB-x xB-x
+---x ---x
+xxxx xxxx
+
+time: 19
+reward: 0
+FHxx xHxx
+xB-x xB-x
+---x ---x
+xxxx xxxx
+
+time: 20
+reward: 0
+$xxx $xxx
+xBxx xBxx
+xFxx xxxx
+xxxx xxxx
+
+time: 21
+reward: 0
+-xxx -xxx
+$Bxx $Bxx
+xFxx xxxx
+xxxx xxxx
+
+time: 22
+reward: 50
+-xxx -xxx
+-Bxx -Bxx
+xFxx xxxx
+xxxx xxxx
+
+time: 23
+reward: 50
+xxxx xxxx
+xBxx xBxx
+x$xx x$xx
+xxFx xxxx
+
+time: 24
+reward: 100
+xxxx xxxx
+xBxx xBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 25
+reward: 100
+xHxx xHxx
+xBxx xBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 26
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x-xx x-xx
+xxFx xxxx
+
+time: 27
+reward: 100
+x-xx x-xx
+xBxx xBxx
+xHxx xHxx
+xxFx xxxx
+
+time: 28
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x-Hx x-Hx
+xxFx xxxx
+
+time: 29
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x--H x--H
+xxFx xxxx
+
+time: 30
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x-H- x-H-
+xxFx xxxx
+
+time: 31
+reward: 100
+x-xx x-xx
+xBxx xBxx
+xH-- xH--
+xxFx xxxx
+
+time: 32
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x--- x---
+xHFx xHxx
+
+time: 33
+reward: 100
+x-xx x-xx
+xBxx xBxx
+x--- x---
+H-Fx H-xx
+
+time: 34
+reward: 100
+x-xx x-xx
+xBxx xBxx
+H--- H---
+--Fx --xx
+
+time: 35
+reward: 100
+x-xx x-xx
+HBxx HBxx
+---- ----
+--Fx --xx
+
+time: 36
+reward: 100
+H-xx H-xx
+-Bxx -Bxx
+---- ----
+--Fx --xx
+
+time: 37
+reward: 100
+-Hxx -Hxx
+-Bxx -Bxx
+---- ----
+--Fx --xx
+
+time: 38
+reward: 100
+--Hx --Hx
+-Bxx -Bxx
+---- ----
+--Fx --xx
+
+time: 39
+reward: 100
+---x ---x
+-BHx -BHx
+---- ----
+--Fx --xx
+
+time: 40
+reward: 100
+---x ---x
+-B-H -B-H
+---- ----
+--Fx --xx
+
+time: 41
+reward: 100
+---x ---x
+-B-- -B--
+---H ---H
+--Fx --xx
+
+time: 42
+reward: 100
+---x ---x
+-B-H -B-H
+---- ----
+--Fx --xx
+
+time: 43
+reward: 100
+---H ---H
+-B-- -B--
+---- ----
+--Fx --xx
+
+time: 44
+reward: 100
+---- ----
+-B-H -B-H
+---- ----
+--Fx --xx
+
+time: 45
+reward: 100
+---- ----
+-B-- -B--
+---H ---H
+--Fx --xx
+
+time: 46
+reward: 100
+---- ----
+-B-- -B--
+---- ----
+--FH --xH
+
+time: 47
+reward: 100
+xxxx xxxx
+xBxx xBxx
+xxxx xxxx
+xx$F xx$x
+
+time: 48
+reward: 100
+xxxx xxxx
+xBxx xBxx
+xx$x xx$x
+xx-F xx-x
+
+time: 49
+reward: 100
+xxxx xxxx
+xB$x xB$x
+xx-x xx-x
+xx-F xx-x
+
+time: 50
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xx-x xx-x
+xx-F xx-x
+
+time: 51
+reward: 150
+xxxx xxxx
+xBHx xBHx
+xx-x xx-x
+xx-F xx-x
+
+time: 52
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xxHx xxHx
+xx-F xx-x
+
+time: 53
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xx-F xx-x
+
+time: 54
+reward: 150
+xxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xx-F xx-x
+
+time: 55
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xx-F xx-x
+
+time: 56
+reward: 150
+xxxx xxxx
+xB-x xB-x
+x-Hx x-Hx
+xx-F xx-x
+
+time: 57
+reward: 150
+xxxx xxxx
+xB-x xB-x
+xH-x xH-x
+xx-F xx-x
+
+time: 58
+reward: 150
+xxxx xxxx
+xB-x xB-x
+H--x H--x
+xx-F xx-x
+
+time: 59
+reward: 150
+xxxx xxxx
+HB-x HB-x
+---x ---x
+xx-F xx-x
+
+time: 60
+reward: 150
+xxxx xxxx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 61
+reward: 150
+xxxx xxxx
+-B-x -B-x
+-H-x -H-x
+xx-F xx-x
+
+time: 62
+reward: 150
+xxxx xxxx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 63
+reward: 150
+xxxx xxxx
+-B-x -B-x
+-H-x -H-x
+xx-F xx-x
+
+time: 64
+reward: 150
+xxxx xxxx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 65
+reward: 150
+xxxx xxxx
+HB-x HB-x
+---x ---x
+xx-F xx-x
+
+time: 66
+reward: 150
+xxxx xxxx
+-B-x -B-x
+H--x H--x
+xx-F xx-x
+
+time: 67
+reward: 150
+xxxx xxxx
+-B-x -B-x
+-H-x -H-x
+xx-F xx-x
+
+time: 68
+reward: 150
+xxxx xxxx
+-B-x -B-x
+--Hx --Hx
+xx-F xx-x
+
+time: 69
+reward: 150
+xxxx xxxx
+-BHx -BHx
+---x ---x
+xx-F xx-x
+
+time: 70
+reward: 150
+xxxx xxxx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 71
+reward: 150
+xHxx xHxx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 72
+reward: 150
+x-xx x-xx
+-B-x -B-x
+---x ---x
+xx-F xx-x
+
+time: 73
+reward: 150
+x-xx x-xx
+-BHx -BHx
+---x ---x
+xx-F xx-x
+
+time: 74
+reward: 150
+x-xx x-xx
+-B-H -B-H
+---x ---x
+xx-F xx-x
+
+time: 75
+reward: 150
+x-xx x-xx
+-BH- -BH-
+---x ---x
+xx-F xx-x
+
+time: 76
+reward: 150
+x-xx x-xx
+-B-- -B--
+--Hx --Hx
+xx-F xx-x
+
+time: 77
+reward: 150
+x-xx x-xx
+-B-- -B--
+---x ---x
+xxHF xxHx
+
+time: 78
+reward: 150
+x-xx x-xx
+-B-- -B--
+---x ---x
+xH-F xH-x
+
+time: 79
+reward: 150
+x-xx x-xx
+-B-- -B--
+-H-x -H-x
+x--F x--x
+
+time: 80
+reward: 150
+x-xx x-xx
+-B-- -B--
+--Hx --Hx
+x--F x--x
+
+time: 81
+reward: 150
+x-xx x-xx
+-B-- -B--
+---H ---H
+x--F x--x
+
+time: 82
+reward: 150
+x-xx x-xx
+-B-H -B-H
+---- ----
+x--F x--x
+
+time: 83
+reward: 150
+x-xH x-xH
+-B-- -B--
+---- ----
+x--F x--x
+
+time: 84
+reward: 150
+x-H- x-H-
+-B-- -B--
+---- ----
+x--F x--x
+
+time: 85
+reward: 150
+xH-- xH--
+-B-- -B--
+---- ----
+x--F x--x
+
+time: 86
+reward: 150
+x--- x---
+-B-- -B--
+---- ----
+x--F x--x
+
+time: 87
+reward: 150
+x--- x---
+HB-- HB--
+---- ----
+x--F x--x
+
+time: 88
+reward: 150
+x--- x---
+-B-- -B--
+H--- H---
+x--F x--x
+
+time: 89
+reward: 150
+x--- x---
+-B-- -B--
+---- ----
+H--F H--x
+
+time: 90
+reward: 150
+x--- x---
+-B-- -B--
+H--- H---
+---F ---x
+
+time: 91
+reward: 150
+x--- x---
+HB-- HB--
+---- ----
+---F ---x
+
+time: 92
+reward: 150
+H--- H---
+-B-- -B--
+---- ----
+---F ---x
+
+time: 93
+reward: 150
+---- ----
+HB-- HB--
+---- ----
+---F ---x
+
+time: 94
+reward: 150
+---- ----
+-B-- -B--
+H--- H---
+---F ---x
+
+time: 95
+reward: 150
+---- ----
+-B-- -B--
+---- ----
+H--F H--x
+
+time: 96
+reward: 150
+---- ----
+-B-- -B--
+---- ----
+-H-F -H-x
+
+time: 97
+reward: 150
+---- ----
+-B-- -B--
+---- ----
+--HF --Hx
+
+time: 98
+reward: 150
+xxxx xxxx
+xBxx xBxx
+xxxx xxxx
+Fxx$ xxx$
+
+time: 99
+reward: 150
+xxxx xxxx
+xBxx xBxx
+xxx$ xxx$
+Fxx- xxx-
+
+time: 100
+reward: 150
+xxxx xxxx
+xBx$ xBx$
+xxx- xxx-
+Fxx- xxx-
+
+total reward: 150
+
+reality: ../test/baseline_4x4_8_real.world
+belief: ../test/baseline_4x4_8_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xFxx xxxx
+Bxxx Bxxx
+xxxx xxxx
+xxxx xxxx
+
+time: 1
+reward: 0
+xFxx xxxx
+Bxxx Bxxx
+Hxxx Hxxx
+xxxx xxxx
+
+time: 2
+reward: 0
+xFxx xxxx
+Bxxx Bxxx
+-xxx -xxx
+xxxx xxxx
+
+time: 3
+reward: 0
+xFxx xxxx
+BHxx BHxx
+-xxx -xxx
+xxxx xxxx
+
+time: 4
+reward: 0
+xFxx xxxx
+B-Hx B-Hx
+-xxx -xxx
+xxxx xxxx
+
+time: 5
+reward: 0
+xFxx xxxx
+B--x B--x
+-xHx -xHx
+xxxx xxxx
+
+time: 6
+reward: 0
+xFxx xxxx
+B--x B--x
+-x-x -x-x
+xxHx xxHx
+
+time: 7
+reward: 0
+xFxx xxxx
+B--x B--x
+-xHx -xHx
+xx-x xx-x
+
+time: 8
+reward: 0
+xFxx xxxx
+B-Hx B-Hx
+-x-x -x-x
+xx-x xx-x
+
+time: 9
+reward: 0
+xFxx xxxx
+B--x B--x
+-xHx -xHx
+xx-x xx-x
+
+time: 10
+reward: 0
+xFxx xxxx
+B--x B--x
+-H-x -H-x
+xx-x xx-x
+
+time: 11
+reward: 0
+xFxx xxxx
+BH-x BH-x
+---x ---x
+xx-x xx-x
+
+time: 12
+reward: 0
+x$xx x$xx
+Bxxx Bxxx
+xFxx xxxx
+xxxx xxxx
+
+time: 13
+reward: 0
+x-xx x-xx
+B$xx B$xx
+xFxx xxxx
+xxxx xxxx
+
+time: 14
+reward: 50
+x-xx x-xx
+B-xx B-xx
+xFxx xxxx
+xxxx xxxx
+
+time: 15
+reward: 50
+x-xx x-xx
+BHxx BHxx
+xFxx xxxx
+xxxx xxxx
+
+time: 16
+reward: 50
+xxxx xxxx
+Bxxx Bxxx
+x$xx x$xx
+xxFx xxxx
+
+time: 17
+reward: 50
+xxxx xxxx
+B$xx B$xx
+x-xx x-xx
+xxFx xxxx
+
+time: 18
+reward: 100
+xxxx xxxx
+B-xx B-xx
+x-xx x-xx
+xxFx xxxx
+
+time: 19
+reward: 100
+xxxx xxxx
+B-xx B-xx
+H-xx H-xx
+xxFx xxxx
+
+time: 20
+reward: 100
+xxxx xxxx
+B-xx B-xx
+-Hxx -Hxx
+xxFx xxxx
+
+time: 21
+reward: 100
+xxxx xxxx
+B-xx B-xx
+--Hx --Hx
+xxFx xxxx
+
+time: 22
+reward: 100
+xxxx xxxx
+Bxxx Bxxx
+xxxx xxxx
+xx$F xx$x
+
+time: 23
+reward: 100
+xxxx xxxx
+Bxxx Bxxx
+xx$x xx$x
+xx-F xx-x
+
+time: 24
+reward: 100
+xxxx xxxx
+Bx$x Bx$x
+xx-x xx-x
+xx-F xx-x
+
+time: 25
+reward: 100
+xxxx xxxx
+B$-x B$-x
+xx-x xx-x
+xx-F xx-x
+
+time: 26
+reward: 150
+xxxx xxxx
+B--x B--x
+xx-x xx-x
+xx-F xx-x
+
+time: 27
+reward: 150
+xxxx xxxx
+B--x B--x
+Hx-x Hx-x
+xx-F xx-x
+
+time: 28
+reward: 150
+xxxx xxxx
+B--x B--x
+-H-x -H-x
+xx-F xx-x
+
+time: 29
+reward: 150
+xxxx xxxx
+B--x B--x
+---x ---x
+xH-F xH-x
+
+time: 30
+reward: 150
+xxxx xxxx
+B--x B--x
+---x ---x
+x-HF x-Hx
+
+time: 31
+reward: 150
+xxxx xxxx
+B--x B--x
+--Hx --Hx
+x--F x--x
+
+time: 32
+reward: 150
+xxxx xxxx
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 33
+reward: 150
+xxxx xxxx
+B--x B--x
+--Hx --Hx
+x--F x--x
+
+time: 34
+reward: 150
+xxxx xxxx
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 35
+reward: 150
+xxHx xxHx
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 36
+reward: 150
+xH-x xH-x
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 37
+reward: 150
+x--x x--x
+BH-x BH-x
+---x ---x
+x--F x--x
+
+time: 38
+reward: 150
+x--x x--x
+B-Hx B-Hx
+---x ---x
+x--F x--x
+
+time: 39
+reward: 150
+x-Hx x-Hx
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 40
+reward: 150
+x--H x--H
+B--x B--x
+---x ---x
+x--F x--x
+
+time: 41
+reward: 150
+x--- x---
+B--H B--H
+---x ---x
+x--F x--x
+
+time: 42
+reward: 150
+x--- x---
+B--- B---
+---H ---H
+x--F x--x
+
+time: 43
+reward: 150
+xxxx xxxx
+Bxxx Bxxx
+xxxx xxxx
+Fxx$ xxx$
+
+time: 44
+reward: 150
+xxxx xxxx
+Bxxx Bxxx
+xxx$ xxx$
+Fxx- xxx-
+
+time: 45
+reward: 150
+xxxx xxxx
+Bxx$ Bxx$
+xxx- xxx-
+Fxx- xxx-
+
+time: 46
+reward: 150
+xxxx xxxx
+Bx$- Bx$-
+xxx- xxx-
+Fxx- xxx-
+
+time: 47
+reward: 150
+xxxx xxxx
+B$-- B$--
+xxx- xxx-
+Fxx- xxx-
+
+time: 48
+reward: 200
+xxxx xxxx
+B--- B---
+xxx- xxx-
+Fxx- xxx-
+
+time: 49
+reward: 200
+xxxx xxxx
+B--- B---
+Hxx- Hxx-
+Fxx- xxx-
+
+time: 50
+reward: 200
+xxxx xxxx
+B--- B---
+-Hx- -Hx-
+Fxx- xxx-
+
+time: 51
+reward: 200
+xxxx xxxx
+B--- B---
+--x- --x-
+FHx- xHx-
+
+time: 52
+reward: 200
+xxxx xxxx
+B--- B---
+-Hx- -Hx-
+F-x- x-x-
+
+time: 53
+reward: 200
+xxxx xxxx
+B--- B---
+--H- --H-
+F-x- x-x-
+
+time: 54
+reward: 200
+xxxx xxxx
+B-H- B-H-
+---- ----
+F-x- x-x-
+
+time: 55
+reward: 200
+xxHx xxHx
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 56
+reward: 200
+xx-H xx-H
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 57
+reward: 200
+xxH- xxH-
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 58
+reward: 200
+xH-- xH--
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 59
+reward: 200
+H--- H---
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 60
+reward: 200
+---- ----
+B--- B---
+---- ----
+F-x- x-x-
+
+time: 61
+reward: 200
+---- ----
+B--- B---
+H--- H---
+F-x- x-x-
+
+time: 62
+reward: 200
+xxxx xxxx
+BxFx Bxxx
+xxxx xxxx
+$xxx $xxx
+
+time: 63
+reward: 200
+xxxx xxxx
+BxFx Bxxx
+$xxx $xxx
+-xxx -xxx
+
+time: 64
+reward: 250
+xxxx xxxx
+BxFx Bxxx
+-xxx -xxx
+-xxx -xxx
+
+time: 65
+reward: 250
+xxxx xxxx
+BHFx BHxx
+-xxx -xxx
+-xxx -xxx
+
+time: 66
+reward: 250
+xxxx xxxx
+Bx$x Bx$x
+xFxx xxxx
+xxxx xxxx
+
+time: 67
+reward: 250
+xxxx xxxx
+B$-x B$-x
+xFxx xxxx
+xxxx xxxx
+
+time: 68
+reward: 300
+xxxx xxxx
+B--x B--x
+xFxx xxxx
+xxxx xxxx
+
+time: 69
+reward: 300
+Hxxx Hxxx
+B--x B--x
+xFxx xxxx
+xxxx xxxx
+
+time: 70
+reward: 300
+-xxx -xxx
+B--x B--x
+xFxx xxxx
+xxxx xxxx
+
+time: 71
+reward: 300
+-xxx -xxx
+BH-x BH-x
+xFxx xxxx
+xxxx xxxx
+
+time: 72
+reward: 300
+xxxx xxxx
+Bxxx Bxxx
+x$xF x$xx
+xxxx xxxx
+
+time: 73
+reward: 300
+xxxx xxxx
+B$xx B$xx
+x-xF x-xx
+xxxx xxxx
+
+time: 74
+reward: 350
+xxxx xxxx
+B-xx B-xx
+x-xF x-xx
+xxxx xxxx
+
+time: 75
+reward: 350
+xxxx xxxx
+BHxx BHxx
+x-xF x-xx
+xxxx xxxx
+
+time: 76
+reward: 350
+xxxx xxxx
+B-Hx B-Hx
+x-xF x-xx
+xxxx xxxx
+
+time: 77
+reward: 350
+xxxx xxxx
+BH-x BH-x
+x-xF x-xx
+xxxx xxxx
+
+time: 78
+reward: 350
+xxxx xxxx
+B--x B--x
+xHxF xHxx
+xxxx xxxx
+
+time: 79
+reward: 350
+xxxx xxxx
+B--x B--x
+H-xF H-xx
+xxxx xxxx
+
+time: 80
+reward: 350
+xxxx xxxx
+B--x B--x
+--xF --xx
+xxxx xxxx
+
+time: 81
+reward: 350
+xxxx xxxx
+BH-x BH-x
+--xF --xx
+xxxx xxxx
+
+time: 82
+reward: 350
+xxxx xxxx
+B-Hx B-Hx
+--xF --xx
+xxxx xxxx
+
+time: 83
+reward: 350
+xxHx xxHx
+B--x B--x
+--xF --xx
+xxxx xxxx
+
+time: 84
+reward: 350
+xx-x xx-x
+B-Hx B-Hx
+--xF --xx
+xxxx xxxx
+
+time: 85
+reward: 350
+xx-x xx-x
+B--H B--H
+--xF --xx
+xxxx xxxx
+
+time: 86
+reward: 350
+xx-x xx-x
+B-H- B-H-
+--xF --xx
+xxxx xxxx
+
+time: 87
+reward: 350
+xx-x xx-x
+B--- B---
+--HF --Hx
+xxxx xxxx
+
+time: 88
+reward: 350
+xx-x xx-x
+B-H- B-H-
+---F ---x
+xxxx xxxx
+
+time: 89
+reward: 350
+xx-x xx-x
+B--- B---
+--HF --Hx
+xxxx xxxx
+
+time: 90
+reward: 350
+xx-x xx-x
+B--- B---
+---F ---x
+xxHx xxHx
+
+time: 91
+reward: 350
+xx-x xx-x
+B--- B---
+---F ---x
+xH-x xH-x
+
+time: 92
+reward: 350
+xx-x xx-x
+B--- B---
+-H-F -H-x
+x--x x--x
+
+time: 93
+reward: 350
+xx-x xx-x
+B--- B---
+---F ---x
+xH-x xH-x
+
+time: 94
+reward: 350
+xx-x xx-x
+B--- B---
+---F ---x
+H--x H--x
+
+time: 95
+reward: 350
+xx-x xx-x
+B--- B---
+---F ---x
+-H-x -H-x
+
+time: 96
+reward: 350
+xx-x xx-x
+B--- B---
+-H-F -H-x
+---x ---x
+
+time: 97
+reward: 350
+xx-x xx-x
+BH-- BH--
+---F ---x
+---x ---x
+
+time: 98
+reward: 350
+xx-x xx-x
+B-H- B-H-
+---F ---x
+---x ---x
+
+time: 99
+reward: 350
+xxHx xxHx
+B--- B---
+---F ---x
+---x ---x
+
+time: 100
+reward: 350
+xx-H xx-H
+B--- B---
+---F ---x
+---x ---x
+
+total reward: 350
+
+reality: ../test/baseline_4x4_9_real.world
+belief: ../test/baseline_4x4_9_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+reward: 0
+xxFx xxxx
+xxxx xxxx
+xxxB xxxB
+xxxx xxxx
+
+time: 1
+reward: 0
+xxFx xxxx
+xxxx xxxx
+xxHB xxHB
+xxxx xxxx
+
+time: 2
+reward: 0
+xxFx xxxx
+xxHx xxHx
+xx-B xx-B
+xxxx xxxx
+
+time: 3
+reward: 0
+xxFx xxxx
+xH-x xH-x
+xx-B xx-B
+xxxx xxxx
+
+time: 4
+reward: 0
+xxFx xxxx
+x-Hx x-Hx
+xx-B xx-B
+xxxx xxxx
+
+time: 5
+reward: 0
+xxFx xxxx
+x--x x--x
+xxHB xxHB
+xxxx xxxx
+
+time: 6
+reward: 0
+xxFx xxxx
+x-Hx x-Hx
+xx-B xx-B
+xxxx xxxx
+
+time: 7
+reward: 0
+xxFx xxxx
+x--x x--x
+xxHB xxHB
+xxxx xxxx
+
+time: 8
+reward: 0
+xxFx xxxx
+x--x x--x
+xH-B xH-B
+xxxx xxxx
+
+time: 9
+reward: 0
+xxFx xxxx
+xH-x xH-x
+x--B x--B
+xxxx xxxx
+
+time: 10
+reward: 0
+xxFx xxxx
+x-Hx x-Hx
+x--B x--B
+xxxx xxxx
+
+time: 11
+reward: 0
+xxFx xxxx
+x--x x--x
+x-HB x-HB
+xxxx xxxx
+
+time: 12
+reward: 0
+xxFx xxxx
+x--x x--x
+x--B x--B
+xxxx xxxx
+
+time: 13
+reward: 0
+xxFx xxxx
+x--x x--x
+x-HB x-HB
+xxxx xxxx
+
+time: 14
+reward: 0
+xxFx xxxx
+x-Hx x-Hx
+x--B x--B
+xxxx xxxx
+
+time: 15
+reward: 0
+xxFx xxxx
+x--x x--x
+x-HB x-HB
+xxxx xxxx
+
+time: 16
+reward: 0
+xxFx xxxx
+x--x x--x
+x--B x--B
+xxHx xxHx
+
+time: 17
+reward: 0
+xxFx xxxx
+x--x x--x
+x-HB x-HB
+xx-x xx-x
+
+time: 18
+reward: 0
+xxFx xxxx
+x--x x--x
+xH-B xH-B
+xx-x xx-x
+
+time: 19
+reward: 0
+xxFx xxxx
+x--x x--x
+x--B x--B
+xH-x xH-x
+
+time: 20
+reward: 0
+xxFx xxxx
+x--x x--x
+x--B x--B
+x-Hx x-Hx
+
+time: 21
+reward: 0
+xxFx xxxx
+x--x x--x
+x-HB x-HB
+x--x x--x
+
+time: 22
+reward: 0
+xxFx xxxx
+x--x x--x
+xH-B xH-B
+x--x x--x
+
+time: 23
+reward: 0
+xxFx xxxx
+xH-x xH-x
+x--B x--B
+x--x x--x
+
+time: 24
+reward: 0
+xxFx xxxx
+x-Hx x-Hx
+x--B x--B
+x--x x--x
+
+time: 25
+reward: 0
+xx$x xx$x
+xxxx xxxx
+xFxB xxxB
+xxxx xxxx
+
+time: 26
+reward: 0
+xx-x xx-x
+xx$x xx$x
+xFxB xxxB
+xxxx xxxx
+
+time: 27
+reward: 0
+xx-x xx-x
+xx-x xx-x
+xF$B xx$B
+xxxx xxxx
+
+time: 28
+reward: 50
+xx-x xx-x
+xx-x xx-x
+xF-B xx-B
+xxxx xxxx
+
+time: 29
+reward: 50
+xx-x xx-x
+xx-H xx-H
+xF-B xx-B
+xxxx xxxx
+
+time: 30
+reward: 50
+xx-x xx-x
+xxH- xxH-
+xF-B xx-B
+xxxx xxxx
+
+time: 31
+reward: 50
+xx-x xx-x
+xH-- xH--
+xF-B xx-B
+xxxx xxxx
+
+time: 32
+reward: 50
+xx-x xx-x
+H--- H---
+xF-B xx-B
+xxxx xxxx
+
+time: 33
+reward: 50
+xx-x xx-x
+-H-- -H--
+xF-B xx-B
+xxxx xxxx
+
+time: 34
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x$xB x$xB
+xxFx xxxx
+
+time: 35
+reward: 50
+xxxx xxxx
+xxxx xxxx
+x-$B x-$B
+xxFx xxxx
+
+time: 36
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x--B x--B
+xxFx xxxx
+
+time: 37
+reward: 100
+xxxx xxxx
+xxxx xxxx
+x-HB x-HB
+xxFx xxxx
+
+time: 38
+reward: 100
+xxxx xxxx
+xxHx xxHx
+x--B x--B
+xxFx xxxx
+
+time: 39
+reward: 100
+xxxx xxxx
+xH-x xH-x
+x--B x--B
+xxFx xxxx
+
+time: 40
+reward: 100
+xxxx xxxx
+x-Hx x-Hx
+x--B x--B
+xxFx xxxx
+
+time: 41
+reward: 100
+xxxx xxxx
+x--x x--x
+x-HB x-HB
+xxFx xxxx
+
+time: 42
+reward: 100
+xxxx xxxx
+x-Hx x-Hx
+x--B x--B
+xxFx xxxx
+
+time: 43
+reward: 100
+xxxx xxxx
+xH-x xH-x
+x--B x--B
+xxFx xxxx
+
+time: 44
+reward: 100
+xxxx xxxx
+x-Hx x-Hx
+x--B x--B
+xxFx xxxx
+
+time: 45
+reward: 100
+xxHx xxHx
+x--x x--x
+x--B x--B
+xxFx xxxx
+
+time: 46
+reward: 100
+xx-x xx-x
+x-Hx x-Hx
+x--B x--B
+xxFx xxxx
+
+time: 47
+reward: 100
+xx-x xx-x
+x--H x--H
+x--B x--B
+xxFx xxxx
+
+time: 48
+reward: 100
+xx-x xx-x
+x-H- x-H-
+x--B x--B
+xxFx xxxx
+
+time: 49
+reward: 100
+xx-x xx-x
+xH-- xH--
+x--B x--B
+xxFx xxxx
+
+time: 50
+reward: 100
+xx-x xx-x
+x--- x---
+xH-B xH-B
+xxFx xxxx
+
+time: 51
+reward: 100
+xx-x xx-x
+x--- x---
+H--B H--B
+xxFx xxxx
+
+time: 52
+reward: 100
+xx-x xx-x
+x--- x---
+---B ---B
+HxFx Hxxx
+
+time: 53
+reward: 100
+xx-x xx-x
+x--- x---
+---B ---B
+-HFx -Hxx
+
+time: 54
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xxxB xxxB
+xx$F xx$x
+
+time: 55
+reward: 100
+xxxx xxxx
+xxxx xxxx
+xx$B xx$B
+xx-F xx-x
+
+time: 56
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xx-B xx-B
+xx-F xx-x
+
+time: 57
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xxHB xxHB
+xx-F xx-x
+
+time: 58
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xx-B xx-B
+xx-F xx-x
+
+time: 59
+reward: 150
+xxxx xxxx
+xxxx xxxx
+xxxB xxxB
+Fxx$ xxx$
+
+time: 60
+reward: 200
+xxxx xxxx
+xxxx xxxx
+xxxB xxxB
+Fxx- xxx-
+
+time: 61
+reward: 200
+xxxx xxxx
+xxxx xxxx
+xxHB xxHB
+Fxx- xxx-
+
+time: 62
+reward: 200
+xxxx xxxx
+xxHx xxHx
+xx-B xx-B
+Fxx- xxx-
+
+time: 63
+reward: 200
+xxxx xxxx
+xH-x xH-x
+xx-B xx-B
+Fxx- xxx-
+
+time: 64
+reward: 200
+xxxx xxxx
+x--x x--x
+xH-B xH-B
+Fxx- xxx-
+
+time: 65
+reward: 200
+xxxx xxxx
+x--x x--x
+x-HB x-HB
+Fxx- xxx-
+
+time: 66
+reward: 200
+xxxx xxxx
+x-Hx x-Hx
+x--B x--B
+Fxx- xxx-
+
+time: 67
+reward: 200
+xxxx xxxx
+xH-x xH-x
+x--B x--B
+Fxx- xxx-
+
+time: 68
+reward: 200
+xxxx xxxx
+x-Hx x-Hx
+x--B x--B
+Fxx- xxx-
+
+time: 69
+reward: 200
+xxHx xxHx
+x--x x--x
+x--B x--B
+Fxx- xxx-
+
+time: 70
+reward: 200
+xH-x xH-x
+x--x x--x
+x--B x--B
+Fxx- xxx-
+
+time: 71
+reward: 200
+x--x x--x
+xH-x xH-x
+x--B x--B
+Fxx- xxx-
+
+time: 72
+reward: 200
+x--x x--x
+H--x H--x
+x--B x--B
+Fxx- xxx-
+
+time: 73
+reward: 200
+x--x x--x
+-H-x -H-x
+x--B x--B
+Fxx- xxx-
+
+time: 74
+reward: 200
+x--x x--x
+---x ---x
+xH-B xH-B
+Fxx- xxx-
+
+time: 75
+reward: 200
+x--x x--x
+---x ---x
+x--B x--B
+FHx- xHx-
+
+time: 76
+reward: 200
+x--x x--x
+---x ---x
+x--B x--B
+F-H- x-H-
+
+time: 77
+reward: 200
+x--x x--x
+---x ---x
+x-HB x-HB
+F--- x---
+
+time: 78
+reward: 200
+x--x x--x
+--Hx --Hx
+x--B x--B
+F--- x---
+
+time: 79
+reward: 200
+x-Hx x-Hx
+---x ---x
+x--B x--B
+F--- x---
+
+time: 80
+reward: 200
+x--x x--x
+--Hx --Hx
+x--B x--B
+F--- x---
+
+time: 81
+reward: 200
+x--x x--x
+-H-x -H-x
+x--B x--B
+F--- x---
+
+time: 82
+reward: 200
+x--x x--x
+---x ---x
+xH-B xH-B
+F--- x---
+
+time: 83
+reward: 200
+x--x x--x
+-H-x -H-x
+x--B x--B
+F--- x---
+
+time: 84
+reward: 200
+x--x x--x
+--Hx --Hx
+x--B x--B
+F--- x---
+
+time: 85
+reward: 200
+x--x x--x
+-H-x -H-x
+x--B x--B
+F--- x---
+
+time: 86
+reward: 200
+x--x x--x
+---x ---x
+xH-B xH-B
+F--- x---
+
+time: 87
+reward: 200
+x--x x--x
+---x ---x
+H--B H--B
+F--- x---
+
+time: 88
+reward: 200
+x--x x--x
+H--x H--x
+---B ---B
+F--- x---
+
+time: 89
+reward: 200
+x--x x--x
+-H-x -H-x
+---B ---B
+F--- x---
+
+time: 90
+reward: 200
+x--x x--x
+--Hx --Hx
+---B ---B
+F--- x---
+
+time: 91
+reward: 200
+x--x x--x
+---H ---H
+---B ---B
+F--- x---
+
+time: 92
+reward: 200
+x--H x--H
+---- ----
+---B ---B
+F--- x---
+
+time: 93
+reward: 200
+x-H- x-H-
+---- ----
+---B ---B
+F--- x---
+
+time: 94
+reward: 200
+xH-- xH--
+---- ----
+---B ---B
+F--- x---
+
+time: 95
+reward: 200
+H--- H---
+---- ----
+---B ---B
+F--- x---
+
+time: 96
+reward: 200
+---- ----
+H--- H---
+---B ---B
+F--- x---
+
+time: 97
+reward: 200
+---- ----
+---- ----
+H--B H--B
+F--- x---
+
+time: 98
+reward: 200
+xxxx xxxx
+xxFx xxxx
+xxxB xxxB
+$xxx $xxx
+
+time: 99
+reward: 200
+xxxx xxxx
+xxFx xxxx
+$xxB $xxB
+-xxx -xxx
+
+time: 100
+reward: 200
+xxxx xxxx
+xxFx xxxx
+-$xB -$xB
+-xxx -xxx
+
+total reward: 200
+

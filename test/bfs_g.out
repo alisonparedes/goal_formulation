@@ -1,0 +1,208 @@
+initial_state: ../test/initial_state_01.txt
+max_food: 0
+horizon: 10
+max_g: 46
+['HF_0_0', 'HB']
+F-
+-b
+
+initial_state: ../test/initial_state_02.txt
+max_food: 0
+horizon: 10
+max_g: 47
+['HB', 'HF_0_0', 'HB']
+F-
+HB
+
+initial_state: ../test/initial_state_03.txt
+max_food: 0
+horizon: 10
+max_g: -2
+['HB']
+H-
+-B
+
+initial_state: ../test/initial_state_04.txt
+max_food: 0
+horizon: 10
+max_g: -1
+['HB']
+--
+HB
+
+initial_state: ../test/initial_state_05.txt
+max_food: 0
+horizon: 10
+max_g: 49
+['HB']
+-$
+-B
+
+initial_state: ../test/initial_state_06.txt
+max_food: 0
+horizon: 10
+max_g: 48
+['HB']
+$-
+-B
+
+initial_state: ../test/initial_state_07.txt
+max_food: 0
+horizon: 10
+max_g: 47
+['HB', 'HF_0_0', 'HB']
+F-
+HB
+
+initial_state: ../test/initial_state_08.txt
+max_food: 0
+horizon: 10
+max_g: -1000
+[]
+--
+-*
+
+initial_state: ../test/initial_state_09.txt
+max_food: 1
+horizon: 10
+max_g: 142
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_1_0', 'HB']
+F-
+-b
+
+initial_state: ../test/initial_state_10.txt
+max_food: 1
+horizon: 10
+max_g: 189
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_1_0', 'HB', 'HF_0_0', 'HB']
+FH
+-B
+
+initial_state: ../test/initial_state_11.txt
+max_food: 1
+horizon: 10
+max_g: 189
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_1_0', 'HB', 'HF_0_0', 'HB']
+F-
+HB
+
+initial_state: ../test/initial_state_12.txt
+max_food: 1
+horizon: 10
+max_g: 190
+['HB', 'HF_1_0', 'HB', 'HF_0_0', 'HB', 'HF_0_1', 'HB']
+$F
+-B
+
+initial_state: ../test/initial_state_13.txt
+max_food: 1
+horizon: 10
+max_g: 140
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_0_0', 'HB']
+F#
+-b
+
+initial_state: ../test/initial_state_14.txt
+max_food: 1
+horizon: 10
+max_g: 141
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_0_0', 'HB']
+F#
+HB
+
+initial_state: ../test/initial_state_15.txt
+max_food: 1
+horizon: 10
+max_g: 190
+['HB', 'HF_0_1', 'HB', 'HF_0_0', 'HB', 'HF_0_1', 'HB']
+$#
+FB
+
+initial_state: ../test/initial_state_16.txt
+max_food: 1
+horizon: 10
+max_g: 140
+['HF_0_0', 'HB', 'HF_0_1', 'HB', 'HF_0_0', 'HB']
+F#
+-*
+
+initial_state: ../test/initial_state_17.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HF_0_0']
+F#--
+-#--
+----
+-#-b
+
+initial_state: ../test/initial_state_18.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HB']
+F#H-
+-#--
+----
+-#-B
+
+initial_state: ../test/initial_state_19.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HF_0_0']
+F#--
+-#--
+----
+-#-*
+
+initial_state: ../test/initial_state_20.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HB']
+F#--
+-#$-
+----
+-#-B
+
+initial_state: ../test/initial_state_21.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HB']
+F#--
+-#$-
+----
+-#-B
+
+initial_state: ../test/initial_state_22.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HB']
+F#--
+-#--
+----
+H#-B
+
+initial_state: ../test/initial_state_23.txt
+max_food: 1
+horizon: 2
+max_g: 48
+['HB']
+F#--
+-#--
+--$-
+-#-B
+
+initial_state: ../test/initial_state_24.txt
+max_food: 1
+horizon: 2
+max_g: -2
+['HB']
+F#--
+-#-H
+----
+-#-B
+

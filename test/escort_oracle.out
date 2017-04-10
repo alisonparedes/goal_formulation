@@ -1,0 +1,8200 @@
+reality: ../test/escort_4x4_3_0_real.world
+belief: ../test/escort_4x4_3_0_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+b--- b---
+-#FE -#FE
+---# ---#
+---# ---#
+
+time: 1
+new reward: -1
+tot reward: -1
+BH-- BH--
+-#E- -#E-
+---# ---#
+---# ---#
+
+time: 2
+new reward: -3
+tot reward: -4
+B-dE B-dE
+-#F- -#F-
+---# ---#
+---# ---#
+
+time: 3
+new reward: -1
+tot reward: -5
+B-D- B-D-
+-#$E -#$E
+-F-# -F-#
+---# ---#
+
+time: 4
+new reward: -1
+tot reward: -6
+B-d- B-d-
+-#E- -#E-
+-F-# -F-#
+---# ---#
+
+time: 5
+new reward: -1
+tot reward: -7
+B$D- B$D-
+-#-- -#--
+-FE# -FE#
+---# ---#
+
+time: 6
+new reward: 49
+tot reward: 42
+b-D- b-D-
+-#-- -#--
+-E-# -E-#
+---# ---#
+
+time: 7
+new reward: -1
+tot reward: 41
+B-D- B-D-
+H#-- H#--
+EF-# EF-#
+---# ---#
+
+time: 8
+new reward: -1
+tot reward: 40
+b-D- b-D-
+E#-- E#--
+-F-# -F-#
+---# ---#
+
+time: 9
+new reward: -1
+tot reward: 39
+EHD- EHD-
+-#-- -#--
+-F-# -F-#
+---# ---#
+
+time: 10
+new reward: -1
+tot reward: 38
+BEd- BEd-
+-#-- -#--
+-F-# -F-#
+---# ---#
+
+time: 11
+new reward: -1
+tot reward: 37
+E-D- E-D-
+-#H- -#H-
+-F-# -F-#
+---# ---#
+
+time: 12
+new reward: -1
+tot reward: 36
+B-D- B-D-
+E#-- E#--
+-FH# -FH#
+---# ---#
+
+time: 13
+new reward: -1
+tot reward: 35
+B-D- B-D-
+-#-- -#--
+E$-# E$-#
+--F# --F#
+
+time: 14
+new reward: -1
+tot reward: 34
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 15
+new reward: -1
+tot reward: 33
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 16
+new reward: -1
+tot reward: 32
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 17
+new reward: -1
+tot reward: 31
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 18
+new reward: -1
+tot reward: 30
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 19
+new reward: -1
+tot reward: 29
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 20
+new reward: -1
+tot reward: 28
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 21
+new reward: -1
+tot reward: 27
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 22
+new reward: -1
+tot reward: 26
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 23
+new reward: -1
+tot reward: 25
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 24
+new reward: -1
+tot reward: 24
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 25
+new reward: -1
+tot reward: 23
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 26
+new reward: -1
+tot reward: 22
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 27
+new reward: -1
+tot reward: 21
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 28
+new reward: -1
+tot reward: 20
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 29
+new reward: -1
+tot reward: 19
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 30
+new reward: -1
+tot reward: 18
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 31
+new reward: -1
+tot reward: 17
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 32
+new reward: -1
+tot reward: 16
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 33
+new reward: -1
+tot reward: 15
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 34
+new reward: -1
+tot reward: 14
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 35
+new reward: -1
+tot reward: 13
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 36
+new reward: -1
+tot reward: 12
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 37
+new reward: -1
+tot reward: 11
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 38
+new reward: -1
+tot reward: 10
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 39
+new reward: -1
+tot reward: 9
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 40
+new reward: -1
+tot reward: 8
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 41
+new reward: -1
+tot reward: 7
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 42
+new reward: -1
+tot reward: 6
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 43
+new reward: -1
+tot reward: 5
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 44
+new reward: -1
+tot reward: 4
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 45
+new reward: -1
+tot reward: 3
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 46
+new reward: -1
+tot reward: 2
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 47
+new reward: -1
+tot reward: 1
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 48
+new reward: -1
+tot reward: 0
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 49
+new reward: -1
+tot reward: -1
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 50
+new reward: -1
+tot reward: -2
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 51
+new reward: -1
+tot reward: -3
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 52
+new reward: -1
+tot reward: -4
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 53
+new reward: -1
+tot reward: -5
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 54
+new reward: -1
+tot reward: -6
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 55
+new reward: -1
+tot reward: -7
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 56
+new reward: -1
+tot reward: -8
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 57
+new reward: -1
+tot reward: -9
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 58
+new reward: -1
+tot reward: -10
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 59
+new reward: -1
+tot reward: -11
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 60
+new reward: -1
+tot reward: -12
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 61
+new reward: -1
+tot reward: -13
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 62
+new reward: -1
+tot reward: -14
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 63
+new reward: -1
+tot reward: -15
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 64
+new reward: -1
+tot reward: -16
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 65
+new reward: -1
+tot reward: -17
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 66
+new reward: -1
+tot reward: -18
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 67
+new reward: -1
+tot reward: -19
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 68
+new reward: -1
+tot reward: -20
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 69
+new reward: -1
+tot reward: -21
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 70
+new reward: -1
+tot reward: -22
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 71
+new reward: -1
+tot reward: -23
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 72
+new reward: -1
+tot reward: -24
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 73
+new reward: -1
+tot reward: -25
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 74
+new reward: -1
+tot reward: -26
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 75
+new reward: -1
+tot reward: -27
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 76
+new reward: -1
+tot reward: -28
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 77
+new reward: -1
+tot reward: -29
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 78
+new reward: -1
+tot reward: -30
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 79
+new reward: -1
+tot reward: -31
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 80
+new reward: -1
+tot reward: -32
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 81
+new reward: -1
+tot reward: -33
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 82
+new reward: -1
+tot reward: -34
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 83
+new reward: -1
+tot reward: -35
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 84
+new reward: -1
+tot reward: -36
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 85
+new reward: -1
+tot reward: -37
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 86
+new reward: -1
+tot reward: -38
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 87
+new reward: -1
+tot reward: -39
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 88
+new reward: -1
+tot reward: -40
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 89
+new reward: -1
+tot reward: -41
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 90
+new reward: -1
+tot reward: -42
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 91
+new reward: -1
+tot reward: -43
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 92
+new reward: -1
+tot reward: -44
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 93
+new reward: -1
+tot reward: -45
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 94
+new reward: -1
+tot reward: -46
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 95
+new reward: -1
+tot reward: -47
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 96
+new reward: -1
+tot reward: -48
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 97
+new reward: -1
+tot reward: -49
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 98
+new reward: -1
+tot reward: -50
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+time: 99
+new reward: -1
+tot reward: -51
+B-D- B-D-
+-#-- -#--
+E--# E--#
+$-F# $-F#
+
+time: 100
+new reward: -1
+tot reward: -52
+B-D- B-D-
+-#-- -#--
+-E-# -E-#
+-$F# -$F#
+
+summary: -52 ../test/escort_4x4_3_0_real.world
+
+reality: ../test/escort_4x4_3_1_real.world
+belief: ../test/escort_4x4_3_1_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#--- #---
+b-E# b-E#
+--#- --#-
+-F-- -F--
+
+time: 1
+new reward: -1
+tot reward: -1
+#--- #---
+BE-# BE-#
+H-#- H-#-
+-F-- -F--
+
+time: 2
+new reward: -1
+tot reward: -2
+#--- #---
+B--# B--#
+-E#- -E#-
+HF-- HF--
+
+time: 3
+new reward: -4
+tot reward: -6
+#--- #---
+B--# B--#
+-F#- -F#-
+-dE- -dE-
+
+time: 4
+new reward: -1
+tot reward: -7
+#--- #---
+B--# B--#
+-$#- -$#-
+-DE- -DE-
+
+time: 5
+new reward: -1
+tot reward: -8
+#--- #---
+B$-# B$-#
+-F#- -F#-
+-DE- -DE-
+
+time: 6
+new reward: 49
+tot reward: 41
+#--- #---
+b--# b--#
+-F#- -F#-
+-DE- -DE-
+
+time: 7
+new reward: -1
+tot reward: 40
+#--- #---
+B--# B--#
+HF#- HF#-
+-DE- -DE-
+
+time: 8
+new reward: -1
+tot reward: 39
+#--- #---
+B--# B--#
+-$#- -$#-
+-DE- -DE-
+
+time: 9
+new reward: -1
+tot reward: 38
+#--- #---
+B$-# B$-#
+--#- --#-
+-DE- -DE-
+
+time: 10
+new reward: 49
+tot reward: 87
+#--- #---
+b--# b--#
+--#- --#-
+-DE- -DE-
+
+time: 11
+new reward: -1
+tot reward: 86
+#--- #---
+B--# B--#
+H-#- H-#-
+-DE- -DE-
+
+time: 12
+new reward: -1
+tot reward: 85
+#--- #---
+B--# B--#
+--#- --#-
+HDE- HDE-
+
+time: 13
+new reward: -1
+tot reward: 84
+#--- #---
+B--# B--#
+--#- --#-
+-dE- -dE-
+
+time: 14
+new reward: -2
+tot reward: 82
+#--- #---
+B--# B--#
+--#- --#-
+--dE --dE
+
+time: 15
+new reward: -1
+tot reward: 81
+#--- #---
+B--# B--#
+--#- --#-
+-$DE -$DE
+
+time: 16
+new reward: -1
+tot reward: 80
+#--- #---
+B--# B--#
+-$#- -$#-
+--DE --DE
+
+time: 17
+new reward: -1
+tot reward: 79
+#--- #---
+B$-# B$-#
+--#- --#-
+--DE --DE
+
+time: 18
+new reward: 49
+tot reward: 128
+#--- #---
+b--# b--#
+--#- --#-
+--DE --DE
+
+time: 19
+new reward: -1
+tot reward: 127
+#--- #---
+B--# B--#
+H-#- H-#-
+--DE --DE
+
+time: 20
+new reward: -1
+tot reward: 126
+#--- #---
+B--# B--#
+--#- --#-
+H-DE H-DE
+
+time: 21
+new reward: -1
+tot reward: 125
+#--- #---
+B--# B--#
+--#- --#-
+-HDE -HDE
+
+time: 22
+new reward: -1
+tot reward: 124
+#--- #---
+B--# B--#
+--#- --#-
+--dE --dE
+
+time: 23
+new reward: -2
+tot reward: 122
+#--- #---
+B--# B--#
+--#- --#-
+F-Ed F-Ed
+
+time: 24
+new reward: -2
+tot reward: 120
+#--- #---
+B--# B--#
+--#- --#-
+F-dE F-dE
+
+time: 25
+new reward: -1
+tot reward: 119
+#--- #---
+B--# B--#
+--#- --#-
+F$DE F$DE
+
+time: 26
+new reward: -1
+tot reward: 118
+#--- #---
+B--# B--#
+-$#- -$#-
+F-DE F-DE
+
+time: 27
+new reward: -1
+tot reward: 117
+#--- #---
+B$-# B$-#
+--#- --#-
+F-DE F-DE
+
+time: 28
+new reward: 49
+tot reward: 166
+#--- #---
+b--# b--#
+--#- --#-
+F-DE F-DE
+
+time: 29
+new reward: -1
+tot reward: 165
+#--- #---
+B--# B--#
+H-#- H-#-
+F-DE F-DE
+
+time: 30
+new reward: -1
+tot reward: 164
+#--- #---
+B-F# B-F#
+--#- --#-
+$-DE $-DE
+
+time: 31
+new reward: -1
+tot reward: 163
+#--- #---
+B-F# B-F#
+$-#- $-#-
+--DE --DE
+
+time: 32
+new reward: 49
+tot reward: 212
+#--- #---
+b-F# b-F#
+--#- --#-
+--DE --DE
+
+time: 33
+new reward: -1
+tot reward: 211
+#--- #---
+BHF# BHF#
+--#- --#-
+--DE --DE
+
+time: 34
+new reward: -1
+tot reward: 210
+#--- #---
+B-$# B-$#
+-F#- -F#-
+--DE --DE
+
+time: 35
+new reward: -1
+tot reward: 209
+#--- #---
+B$-# B$-#
+-F#- -F#-
+--DE --DE
+
+time: 36
+new reward: 49
+tot reward: 258
+#--- #---
+b--# b--#
+-F#- -F#-
+--DE --DE
+
+time: 37
+new reward: -1
+tot reward: 257
+#--- #---
+B--# B--#
+HF#- HF#-
+--DE --DE
+
+time: 38
+new reward: -1
+tot reward: 256
+#--- #---
+B--# B--#
+-$#F -$#F
+--DE --DE
+
+time: 39
+new reward: -1
+tot reward: 255
+#--- #---
+B$-# B$-#
+--#F --#F
+--DE --DE
+
+time: 40
+new reward: 49
+tot reward: 304
+#--- #---
+b--# b--#
+--#F --#F
+--DE --DE
+
+time: 41
+new reward: -1
+tot reward: 303
+#--- #---
+B--# B--#
+H-#F H-#F
+--DE --DE
+
+time: 42
+new reward: -1
+tot reward: 302
+#--- #---
+B--# B--#
+--#F --#F
+H-DE H-DE
+
+time: 43
+new reward: -1
+tot reward: 301
+#--- #---
+B--# B--#
+--#F --#F
+-HDE -HDE
+
+time: 44
+new reward: -1
+tot reward: 300
+#--- #---
+B--# B--#
+--#F --#F
+--dE --dE
+
+time: 45
+new reward: -2
+tot reward: 298
+#--- #---
+B--# B--#
+--#F --#F
+--Ed --Ed
+
+time: 46
+new reward: -1
+tot reward: 297
+#--- #---
+B--# B--#
+--#$ --#$
+F-ED F-ED
+
+time: 47
+new reward: -1
+tot reward: 296
+#--- #---
+B--# B--#
+--#- --#-
+F-Ed F-Ed
+
+time: 48
+new reward: -2
+tot reward: 294
+#--- #---
+B--# B--#
+--#- --#-
+F-dE F-dE
+
+time: 49
+new reward: -1
+tot reward: 293
+#--- #---
+B--# B--#
+--#- --#-
+F$DE F$DE
+
+time: 50
+new reward: -1
+tot reward: 292
+#--- #---
+B--# B--#
+-$#- -$#-
+F-DE F-DE
+
+time: 51
+new reward: -1
+tot reward: 291
+#--- #---
+B$-# B$-#
+--#- --#-
+F-DE F-DE
+
+time: 52
+new reward: 49
+tot reward: 340
+#--- #---
+b--# b--#
+--#- --#-
+F-DE F-DE
+
+time: 53
+new reward: -1
+tot reward: 339
+#--- #---
+B--# B--#
+H-#- H-#-
+F-DE F-DE
+
+time: 54
+new reward: -1
+tot reward: 338
+#--- #---
+B--# B--#
+--#- --#-
+$-DE $-DE
+
+time: 55
+new reward: -1
+tot reward: 337
+#--- #---
+B--# B--#
+$-#- $-#-
+--DE --DE
+
+time: 56
+new reward: 49
+tot reward: 386
+#--- #---
+b--# b--#
+--#- --#-
+--DE --DE
+
+time: 57
+new reward: -1
+tot reward: 385
+#--- #---
+B--# B--#
+H-#- H-#-
+--DE --DE
+
+time: 58
+new reward: -1
+tot reward: 384
+#--- #---
+B--# B--#
+--#- --#-
+H-DE H-DE
+
+time: 59
+new reward: -1
+tot reward: 383
+#--- #---
+B--# B--#
+--#- --#-
+-HDE -HDE
+
+time: 60
+new reward: -1
+tot reward: 382
+#--- #---
+B--# B--#
+--#F --#F
+--dE --dE
+
+time: 61
+new reward: -1
+tot reward: 381
+#--- #---
+B--# B--#
+--#F --#F
+-$DE -$DE
+
+time: 62
+new reward: -1
+tot reward: 380
+#--- #---
+B--# B--#
+-$#F -$#F
+--DE --DE
+
+time: 63
+new reward: -1
+tot reward: 379
+#--- #---
+B$-# B$-#
+--#F --#F
+--DE --DE
+
+time: 64
+new reward: 49
+tot reward: 428
+#--- #---
+b--# b--#
+--#F --#F
+--DE --DE
+
+time: 65
+new reward: -1
+tot reward: 427
+#--- #---
+B--# B--#
+H-#F H-#F
+--DE --DE
+
+time: 66
+new reward: -1
+tot reward: 426
+#--- #---
+B--# B--#
+--#F --#F
+H-DE H-DE
+
+time: 67
+new reward: -1
+tot reward: 425
+#--- #---
+B--# B--#
+--#F --#F
+-HDE -HDE
+
+time: 68
+new reward: -1
+tot reward: 424
+#--- #---
+B--# B--#
+--#F --#F
+--dE --dE
+
+time: 69
+new reward: -2
+tot reward: 422
+#--- #---
+B--# B--#
+--#F --#F
+--Ed --Ed
+
+time: 70
+new reward: -1
+tot reward: 421
+#--- #---
+B--# B--#
+--#$ --#$
+--ED --ED
+
+time: 71
+new reward: -1
+tot reward: 420
+#--- #---
+B--# B--#
+--#- --#-
+--Ed --Ed
+
+time: 72
+new reward: -2
+tot reward: 418
+#--- #---
+B--# B--#
+--#- --#-
+--dE --dE
+
+time: 73
+new reward: -1
+tot reward: 417
+#--- #---
+B--# B--#
+--#- --#-
+-$DE -$DE
+
+time: 74
+new reward: -1
+tot reward: 416
+#--- #---
+B--# B--#
+-$#- -$#-
+--DE --DE
+
+time: 75
+new reward: -1
+tot reward: 415
+#--- #---
+B$-# B$-#
+--#- --#-
+--DE --DE
+
+time: 76
+new reward: 49
+tot reward: 464
+#--- #---
+b--# b--#
+--#- --#-
+--DE --DE
+
+time: 77
+new reward: -1
+tot reward: 463
+#--- #---
+B--# B--#
+H-#- H-#-
+--DE --DE
+
+time: 78
+new reward: -1
+tot reward: 462
+#--- #---
+B--# B--#
+--#- --#-
+H-DE H-DE
+
+time: 79
+new reward: -1
+tot reward: 461
+#--- #---
+B--# B--#
+--#- --#-
+-HDE -HDE
+
+time: 80
+new reward: -1
+tot reward: 460
+#-F- #-F-
+B--# B--#
+--#- --#-
+--dE --dE
+
+time: 81
+new reward: -1
+tot reward: 459
+#-F- #-F-
+B--# B--#
+--#- --#-
+-$DE -$DE
+
+time: 82
+new reward: -1
+tot reward: 458
+#-F- #-F-
+B--# B--#
+-$#- -$#-
+--DE --DE
+
+time: 83
+new reward: -1
+tot reward: 457
+#-F- #-F-
+B$-# B$-#
+--#- --#-
+--DE --DE
+
+time: 84
+new reward: 49
+tot reward: 506
+#-F- #-F-
+b--# b--#
+--#- --#-
+--DE --DE
+
+time: 85
+new reward: -1
+tot reward: 505
+#-F- #-F-
+BH-# BH-#
+--#- --#-
+--DE --DE
+
+time: 86
+new reward: -1
+tot reward: 504
+#HF- #HF-
+B--# B--#
+--#- --#-
+--DE --DE
+
+time: 87
+new reward: -1
+tot reward: 503
+#-$- #-$-
+B--# B--#
+-F#- -F#-
+--DE --DE
+
+time: 88
+new reward: -1
+tot reward: 502
+#--- #---
+B-$# B-$#
+-F#- -F#-
+--DE --DE
+
+time: 89
+new reward: -1
+tot reward: 501
+#--- #---
+B$-# B$-#
+-F#- -F#-
+--DE --DE
+
+time: 90
+new reward: 49
+tot reward: 550
+#--- #---
+b--# b--#
+-F#- -F#-
+--DE --DE
+
+time: 91
+new reward: -1
+tot reward: 549
+#--- #---
+B--# B--#
+HF#- HF#-
+--DE --DE
+
+time: 92
+new reward: -1
+tot reward: 548
+#--- #---
+B--# B--#
+-$#F -$#F
+--DE --DE
+
+time: 93
+new reward: -1
+tot reward: 547
+#--- #---
+B$-# B$-#
+--#F --#F
+--DE --DE
+
+time: 94
+new reward: 49
+tot reward: 596
+#--- #---
+b--# b--#
+--#F --#F
+--DE --DE
+
+time: 95
+new reward: -1
+tot reward: 595
+#--- #---
+B--# B--#
+H-#F H-#F
+--DE --DE
+
+time: 96
+new reward: -1
+tot reward: 594
+#--- #---
+B--# B--#
+--#F --#F
+H-DE H-DE
+
+time: 97
+new reward: -1
+tot reward: 593
+#--- #---
+B--# B--#
+--#F --#F
+-HDE -HDE
+
+time: 98
+new reward: -1
+tot reward: 592
+#--- #---
+B--# B--#
+--#F --#F
+--dE --dE
+
+time: 99
+new reward: -2
+tot reward: 590
+#--- #---
+B--# B--#
+--#F --#F
+--Ed --Ed
+
+time: 100
+new reward: -1
+tot reward: 589
+#--- #---
+BF-# BF-#
+--#$ --#$
+--ED --ED
+
+summary: 589 ../test/escort_4x4_3_1_real.world
+
+reality: ../test/escort_4x4_3_2_real.world
+belief: ../test/escort_4x4_3_2_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+---- ----
+#-E- #-E-
+---F ---F
+-b#- -b#-
+
+time: 1
+new reward: -1
+tot reward: -1
+---- ----
+#E-- #E--
+-H-F -H-F
+-B#- -B#-
+
+time: 2
+new reward: -1
+tot reward: -2
+---- ----
+#-E- #-E-
+--HF --HF
+-B#- -B#-
+
+time: 3
+new reward: -1
+tot reward: -3
+---- ----
+#--E #--E
+-F-$ -F-$
+-B#- -B#-
+
+time: 4
+new reward: -1
+tot reward: -4
+---- ----
+#-E- #-E-
+-F$- -F$-
+-B#- -B#-
+
+time: 5
+new reward: -1
+tot reward: -5
+---- ----
+#E-- #E--
+-$-- -$--
+-B#- -B#-
+
+time: 6
+new reward: 49
+tot reward: 44
+---- ----
+#--- #---
+-E-- -E--
+-b#- -b#-
+
+time: 7
+new reward: -2
+tot reward: 42
+---- ----
+#--- #---
+-dE- -dE-
+-B#F -B#F
+
+time: 8
+new reward: 49
+tot reward: 91
+---- ----
+#--- #---
+-DE- -DE-
+-b#F -b#F
+
+time: 9
+new reward: -1
+tot reward: 90
+---- ----
+#--- #---
+-dE- -dE-
+-B#F -B#F
+
+time: 10
+new reward: -2
+tot reward: 88
+---- ----
+#--- #---
+--dE --dE
+-B#F -B#F
+
+time: 11
+new reward: -2
+tot reward: 86
+---- ----
+#--- #---
+--Ed --Ed
+-B#F -B#F
+
+time: 12
+new reward: -1
+tot reward: 85
+---- ----
+#--- #---
+--ED --ED
+FB#$ FB#$
+
+time: 13
+new reward: -1
+tot reward: 84
+---- ----
+#--- #---
+--Ed --Ed
+FB#- FB#-
+
+time: 14
+new reward: -2
+tot reward: 82
+---- ----
+#--- #---
+--dE --dE
+FB#- FB#-
+
+time: 15
+new reward: -1
+tot reward: 81
+---- ----
+#--E #--E
+-$D- -$D-
+FB#- FB#-
+
+time: 16
+new reward: 49
+tot reward: 130
+---- ----
+#-E- #-E-
+--D- --D-
+Fb#- Fb#-
+
+time: 17
+new reward: -1
+tot reward: 129
+---- ----
+#EF- #EF-
+--D- --D-
+$B#- $B#-
+
+time: 18
+new reward: 49
+tot reward: 178
+---- ----
+#-F- #-F-
+-ED- -ED-
+-b#- -b#-
+
+time: 19
+new reward: -2
+tot reward: 176
+---- ----
+#-F- #-F-
+-dE- -dE-
+-B#- -B#-
+
+time: 20
+new reward: -1
+tot reward: 175
+---- ----
+#HE- #HE-
+-D-- -D--
+-B#- -B#-
+
+time: 21
+new reward: -3
+tot reward: 172
+---- ----
+#-dE #-dE
+-F-- -F--
+-B#- -B#-
+
+time: 22
+new reward: -1
+tot reward: 171
+---- ----
+#-D- #-D-
+-F$E -F$E
+-B#- -B#-
+
+time: 23
+new reward: -1
+tot reward: 170
+---- ----
+#-D- #-D-
+-$E- -$E-
+-B#- -B#-
+
+time: 24
+new reward: 49
+tot reward: 219
+---- ----
+#-D- #-D-
+-E-- -E--
+-b#- -b#-
+
+time: 25
+new reward: -3
+tot reward: 216
+---- ----
+#--- #---
+-dEF -dEF
+-B#- -B#-
+
+time: 26
+new reward: 49
+tot reward: 265
+---- ----
+#--- #---
+-DEF -DEF
+-b#- -b#-
+
+time: 27
+new reward: -1
+tot reward: 264
+---- ----
+#--- #---
+-dEF -dEF
+-B#- -B#-
+
+time: 28
+new reward: -2
+tot reward: 262
+---- ----
+#--- #---
+--dE --dE
+-B#- -B#-
+
+time: 29
+new reward: -2
+tot reward: 260
+---- ----
+#--- #---
+--Ed --Ed
+FB#- FB#-
+
+time: 30
+new reward: -2
+tot reward: 258
+---- ----
+#--- #---
+--dE --dE
+FB#- FB#-
+
+time: 31
+new reward: -1
+tot reward: 257
+---- ----
+#--E #--E
+-$D- -$D-
+FB#- FB#-
+
+time: 32
+new reward: 49
+tot reward: 306
+---- ----
+#-E- #-E-
+--D- --D-
+Fb#- Fb#-
+
+time: 33
+new reward: -1
+tot reward: 305
+---- ----
+#E-- #E--
+--DF --DF
+$B#- $B#-
+
+time: 34
+new reward: 49
+tot reward: 354
+---- ----
+#--- #---
+-EDF -EDF
+-b#- -b#-
+
+time: 35
+new reward: -2
+tot reward: 352
+---- ----
+#--- #---
+-dEF -dEF
+-B#- -B#-
+
+time: 36
+new reward: -2
+tot reward: 350
+---- ----
+#--- #---
+--dE --dE
+-B#- -B#-
+
+time: 37
+new reward: -2
+tot reward: 348
+--F- --F-
+#--- #---
+--Ed --Ed
+-B#- -B#-
+
+time: 38
+new reward: -2
+tot reward: 346
+--F- --F-
+#--- #---
+--dE --dE
+-B#- -B#-
+
+time: 39
+new reward: -1
+tot reward: 345
+--F- --F-
+#--E #--E
+-$D- -$D-
+-B#- -B#-
+
+time: 40
+new reward: 49
+tot reward: 394
+--F- --F-
+#-E- #-E-
+--D- --D-
+-b#- -b#-
+
+time: 41
+new reward: -1
+tot reward: 393
+--F- --F-
+#E-- #E--
+-HD- -HD-
+-B#- -B#-
+
+time: 42
+new reward: -1
+tot reward: 392
+--F- --F-
+#-E- #-E-
+--d- --d-
+-B#- -B#-
+
+time: 43
+new reward: -2
+tot reward: 390
+--F- --F-
+#-dE #-dE
+---- ----
+-B#- -B#-
+
+time: 44
+new reward: -1
+tot reward: 389
+--$E --$E
+#-D- #-D-
+-F-- -F--
+-B#- -B#-
+
+time: 45
+new reward: -1
+tot reward: 388
+--E- --E-
+#-d- #-d-
+-F-- -F--
+-B#- -B#-
+
+time: 46
+new reward: -1
+tot reward: 387
+---E ---E
+#-D- #-D-
+-F$- -F$-
+-B#- -B#-
+
+time: 47
+new reward: -1
+tot reward: 386
+--E- --E-
+#-D- #-D-
+-$-- -$--
+-B#- -B#-
+
+time: 48
+new reward: 49
+tot reward: 435
+-E-- -E--
+#-D- #-D-
+-F-- -F--
+-b#- -b#-
+
+time: 49
+new reward: -1
+tot reward: 434
+---- ----
+#ED- #ED-
+-$-F -$-F
+-B#- -B#-
+
+time: 50
+new reward: 49
+tot reward: 483
+---- ----
+#-D- #-D-
+-E-F -E-F
+-b#- -b#-
+
+time: 51
+new reward: -3
+tot reward: 480
+---- ----
+#--- #---
+-dEF -dEF
+-B#- -B#-
+
+time: 52
+new reward: -2
+tot reward: 478
+---- ----
+#--- #---
+--dE --dE
+-B#- -B#-
+
+time: 53
+new reward: -2
+tot reward: 476
+---- ----
+#F-- #F--
+--Ed --Ed
+-B#- -B#-
+
+time: 54
+new reward: -2
+tot reward: 474
+---- ----
+#F-- #F--
+--dE --dE
+-B#- -B#-
+
+time: 55
+new reward: -1
+tot reward: 473
+---- ----
+#F-E #F-E
+-$D- -$D-
+-B#- -B#-
+
+time: 56
+new reward: 49
+tot reward: 522
+---- ----
+#FE- #FE-
+--D- --D-
+-b#- -b#-
+
+time: 57
+new reward: -1
+tot reward: 521
+---- ----
+#E-- #E--
+-HD- -HD-
+-B#- -B#-
+
+time: 58
+new reward: -3
+tot reward: 518
+---- ----
+#dE- #dE-
+--F- --F-
+-B#- -B#-
+
+time: 59
+new reward: -1
+tot reward: 517
+---- ----
+#D-- #D--
+-$E- -$E-
+-B#- -B#-
+
+time: 60
+new reward: 49
+tot reward: 566
+---- ----
+#D-- #D--
+-EF- -EF-
+-b#- -b#-
+
+time: 61
+new reward: -2
+tot reward: 564
+---- ----
+#--- #---
+-dE- -dE-
+-B#- -B#-
+
+time: 62
+new reward: -2
+tot reward: 562
+--F- --F-
+#--- #---
+--dE --dE
+-B#- -B#-
+
+time: 63
+new reward: -1
+tot reward: 561
+--F- --F-
+#--E #--E
+-$D- -$D-
+-B#- -B#-
+
+time: 64
+new reward: 49
+tot reward: 610
+--F- --F-
+#-E- #-E-
+--D- --D-
+-b#- -b#-
+
+time: 65
+new reward: -1
+tot reward: 609
+--F- --F-
+#E-- #E--
+-HD- -HD-
+-B#- -B#-
+
+time: 66
+new reward: -1
+tot reward: 608
+--F- --F-
+#-E- #-E-
+--d- --d-
+-B#- -B#-
+
+time: 67
+new reward: -2
+tot reward: 606
+--F- --F-
+#-dE #-dE
+---- ----
+-B#- -B#-
+
+time: 68
+new reward: -1
+tot reward: 605
+F-$E F-$E
+#-D- #-D-
+---- ----
+-B#- -B#-
+
+time: 69
+new reward: -1
+tot reward: 604
+F-E- F-E-
+#-d- #-d-
+---- ----
+-B#- -B#-
+
+time: 70
+new reward: -1
+tot reward: 603
+F--E F--E
+#-D- #-D-
+--$- --$-
+-B#- -B#-
+
+time: 71
+new reward: -1
+tot reward: 602
+F-E- F-E-
+#-D- #-D-
+-$-- -$--
+-B#- -B#-
+
+time: 72
+new reward: 49
+tot reward: 651
+FE-- FE--
+#-D- #-D-
+---- ----
+-b#- -b#-
+
+time: 73
+new reward: -1
+tot reward: 650
+F--- F---
+#ED- #ED-
+-H-- -H--
+-B#- -B#-
+
+time: 74
+new reward: -2
+tot reward: 648
+F--- F---
+#dE- #dE-
+---- ----
+-B#- -B#-
+
+time: 75
+new reward: -1
+tot reward: 647
+FHE- FHE-
+#D-- #D--
+---- ----
+-B#- -B#-
+
+time: 76
+new reward: -1
+tot reward: 646
+$E-- $E--
+#D-- #D--
+--F- --F-
+-B#- -B#-
+
+time: 77
+new reward: -2
+tot reward: 644
+-dE- -dE-
+#--- #---
+--F- --F-
+-B#- -B#-
+
+time: 78
+new reward: -1
+tot reward: 643
+-D-- -D--
+#$E- #$E-
+--F- --F-
+-B#- -B#-
+
+time: 79
+new reward: -1
+tot reward: 642
+-D-- -D--
+#E-- #E--
+-$F- -$F-
+-B#- -B#-
+
+time: 80
+new reward: 49
+tot reward: 691
+-D-- -D--
+#--- #---
+-EF- -EF-
+-b#- -b#-
+
+time: 81
+new reward: -3
+tot reward: 688
+---- ----
+#--- #---
+-dE- -dE-
+-B#- -B#-
+
+time: 82
+new reward: -2
+tot reward: 686
+---- ----
+#--- #---
+--dE --dE
+-B#F -B#F
+
+time: 83
+new reward: -1
+tot reward: 685
+---- ----
+#--E #--E
+-$D- -$D-
+-B#F -B#F
+
+time: 84
+new reward: 49
+tot reward: 734
+---- ----
+#-E- #-E-
+--D- --D-
+-b#F -b#F
+
+time: 85
+new reward: -1
+tot reward: 733
+---- ----
+#E-- #E--
+-HD- -HD-
+-B#F -B#F
+
+time: 86
+new reward: -1
+tot reward: 732
+---- ----
+#-E- #-E-
+--d- --d-
+-B#F -B#F
+
+time: 87
+new reward: -1
+tot reward: 731
+---- ----
+#--E #--E
+--DH --DH
+-B#F -B#F
+
+time: 88
+new reward: -1
+tot reward: 730
+---- ----
+#-F- #-F-
+--DE --DE
+-B#$ -B#$
+
+time: 89
+new reward: -2
+tot reward: 728
+---- ----
+#-F- #-F-
+--Ed --Ed
+-B#- -B#-
+
+time: 90
+new reward: -2
+tot reward: 726
+---- ----
+#-F- #-F-
+--dE --dE
+-B#- -B#-
+
+time: 91
+new reward: -1
+tot reward: 725
+---- ----
+#-FE #-FE
+-$D- -$D-
+-B#- -B#-
+
+time: 92
+new reward: 49
+tot reward: 774
+---- ----
+#-E- #-E-
+--D- --D-
+-b#- -b#-
+
+time: 93
+new reward: -1
+tot reward: 773
+---- ----
+#EF- #EF-
+-HD- -HD-
+-B#- -B#-
+
+time: 94
+new reward: -1
+tot reward: 772
+---- ----
+#-E- #-E-
+--d- --d-
+-B#- -B#-
+
+time: 95
+new reward: -2
+tot reward: 770
+---- ----
+#-dE #-dE
+--F- --F-
+-B#- -B#-
+
+time: 96
+new reward: -1
+tot reward: 769
+---- ----
+#-D- #-D-
+--$E --$E
+-B#- -B#-
+
+time: 97
+new reward: -1
+tot reward: 768
+---- ----
+#-D- #-D-
+-$E- -$E-
+-B#- -B#-
+
+time: 98
+new reward: 49
+tot reward: 817
+---- ----
+#-D- #-D-
+-EF- -EF-
+-b#- -b#-
+
+time: 99
+new reward: -3
+tot reward: 814
+---- ----
+#--- #---
+-dE- -dE-
+-B#- -B#-
+
+time: 100
+new reward: -2
+tot reward: 812
+-F-- -F--
+#--- #---
+--dE --dE
+-B#- -B#-
+
+summary: 812 ../test/escort_4x4_3_2_real.world
+
+reality: ../test/escort_4x4_3_3_real.world
+belief: ../test/escort_4x4_3_3_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+-#-E -#-E
+--#- --#-
+F--b F--b
+---- ----
+
+time: 1
+new reward: -1
+tot reward: -1
+-#-E -#-E
+--#- --#-
+F-HB F-HB
+---- ----
+
+time: 2
+new reward: -1
+tot reward: -2
+-#-E -#-E
+--#- --#-
+FH-B FH-B
+---- ----
+
+time: 3
+new reward: -1
+tot reward: -3
+-#-E -#-E
+--#- --#-
+$F-B $F-B
+---- ----
+
+time: 4
+new reward: -1
+tot reward: -4
+-#-E -#-E
+--#- --#-
+-$-B -$-B
+---- ----
+
+time: 5
+new reward: -1
+tot reward: -5
+-#-E -#-E
+--#- --#-
+-F$B -F$B
+---- ----
+
+time: 6
+new reward: 49
+tot reward: 44
+-#-- -#--
+--#E --#E
+-F-b -F-b
+---- ----
+
+time: 7
+new reward: -1
+tot reward: 43
+-#-- -#--
+--#E --#E
+-FHB -FHB
+---- ----
+
+time: 8
+new reward: -1
+tot reward: 42
+-#-- -#--
+--#E --#E
+-$-B -$-B
+--F- --F-
+
+time: 9
+new reward: -1
+tot reward: 41
+-#-- -#--
+--#E --#E
+--$B --$B
+--F- --F-
+
+time: 10
+new reward: 49
+tot reward: 90
+-#-- -#--
+--#- --#-
+--Eb --Eb
+--F- --F-
+
+time: 11
+new reward: -1
+tot reward: 89
+-#-- -#--
+--#- --#-
+---B ---B
+--EH --EH
+
+time: 12
+new reward: -3
+tot reward: 86
+-#-- -#--
+--#- --#-
+---B ---B
+--dE --dE
+
+time: 13
+new reward: -1
+tot reward: 85
+-#-- -#--
+--#- --#-
+--$E --$E
+--DF --DF
+
+time: 14
+new reward: 47
+tot reward: 132
+-#-- -#--
+--#- --#-
+--Eb --Eb
+---F ---F
+
+time: 15
+new reward: -1
+tot reward: 131
+-#-- -#--
+--#- --#-
+---B ---B
+F-E$ F-E$
+
+time: 16
+new reward: 49
+tot reward: 180
+-#-- -#--
+--#- --#-
+---b ---b
+F--E F--E
+
+time: 17
+new reward: -1
+tot reward: 179
+-#-- -#--
+--#- --#-
+--HB --HB
+F-E- F-E-
+
+time: 18
+new reward: -1
+tot reward: 178
+-#-- -#--
+--#- --#-
+-H-B -H-B
+FE-- FE--
+
+time: 19
+new reward: -1
+tot reward: 177
+-#-- -#--
+--#- --#-
+H--B H--B
+E--- E---
+
+time: 20
+new reward: -1
+tot reward: 176
+-#-- -#--
+H-#- H-#-
+E--B E--B
+F--- F---
+
+time: 21
+new reward: -4
+tot reward: 172
+-#-- -#--
+--#- --#-
+dE-B dE-B
+F--- F---
+
+time: 22
+new reward: -1
+tot reward: 171
+-#-- -#--
+--#- --#-
+DF-B DF-B
+$E-- $E--
+
+time: 23
+new reward: -1
+tot reward: 170
+-#-- -#--
+--#- --#-
+dF-B dF-B
+E--- E---
+
+time: 24
+new reward: -1
+tot reward: 169
+-#-- -#--
+--#- --#-
+D$-B D$-B
+-E-- -E--
+
+time: 25
+new reward: -1
+tot reward: 168
+-#-- -#--
+--#- --#-
+DF$B DF$B
+--E- --E-
+
+time: 26
+new reward: 49
+tot reward: 217
+-#-- -#--
+--#- --#-
+DF-b DF-b
+---E ---E
+
+time: 27
+new reward: -1
+tot reward: 216
+-#-- -#--
+--#- --#-
+DFHB DFHB
+--E- --E-
+
+time: 28
+new reward: -1
+tot reward: 215
+-#-- -#--
+--#- --#-
+D$-B D$-B
+FE-- FE--
+
+time: 29
+new reward: -1
+tot reward: 214
+-#-- -#--
+--#- --#-
+D-$B D-$B
+F-E- F-E-
+
+time: 30
+new reward: 49
+tot reward: 263
+-#-- -#--
+--#- --#-
+D--b D--b
+F--E F--E
+
+time: 31
+new reward: -1
+tot reward: 262
+-#-- -#--
+--#- --#-
+D-HB D-HB
+F-E- F-E-
+
+time: 32
+new reward: -1
+tot reward: 261
+-#-- -#--
+--#- --#-
+DH-B DH-B
+FE-- FE--
+
+time: 33
+new reward: -1
+tot reward: 260
+-#-- -#--
+--#- --#-
+d--B d--B
+E--- E---
+
+time: 34
+new reward: -2
+tot reward: 258
+-#-- -#--
+--#- --#-
+---B ---B
+dEF- dEF-
+
+time: 35
+new reward: -1
+tot reward: 257
+-#-- -#--
+--#- --#-
+$E-B $E-B
+D-F- D-F-
+
+time: 36
+new reward: -3
+tot reward: 254
+-#-- -#--
+--#- --#-
+-dEB -dEB
+--F- --F-
+
+time: 37
+new reward: -2
+tot reward: 252
+-#-- -#--
+--#- --#-
+--dE --dE
+--F- --F-
+
+time: 38
+new reward: 48
+tot reward: 300
+-#-- -#--
+--#- --#-
+--Eb --Eb
+--F- --F-
+
+time: 39
+new reward: -1
+tot reward: 299
+-#-- -#--
+--#- --#-
+---B ---B
+--EH --EH
+
+time: 40
+new reward: -3
+tot reward: 296
+-#-- -#--
+F-#- F-#-
+---B ---B
+--dE --dE
+
+time: 41
+new reward: -1
+tot reward: 295
+-#-- -#--
+F-#- F-#-
+--$E --$E
+--D- --D-
+
+time: 42
+new reward: 47
+tot reward: 342
+-#-- -#--
+F-#- F-#-
+--Eb --Eb
+---- ----
+
+time: 43
+new reward: -2
+tot reward: 340
+-#-- -#--
+F-#- F-#-
+--dE --dE
+---- ----
+
+time: 44
+new reward: -1
+tot reward: 339
+-#-- -#--
+F-#- F-#-
+-HDB -HDB
+---E ---E
+
+time: 45
+new reward: -1
+tot reward: 338
+-#-- -#--
+FH#- FH#-
+--DB --DB
+--E- --E-
+
+time: 46
+new reward: -1
+tot reward: 337
+-#-- -#--
+$-#- $-#-
+--DB --DB
+-EF- -EF-
+
+time: 47
+new reward: -1
+tot reward: 336
+-#-- -#--
+--#- --#-
+$-DB $-DB
+E-F- E-F-
+
+time: 48
+new reward: -1
+tot reward: 335
+-#-- -#--
+--#- --#-
+-$DB -$DB
+-EF- -EF-
+
+time: 49
+new reward: -1
+tot reward: 334
+-#-- -#--
+--#- --#-
+--dB --dB
+--E- --E-
+
+time: 50
+new reward: 49
+tot reward: 383
+-#-- -#--
+--#- --#-
+--Db --Db
+--FE --FE
+
+time: 51
+new reward: -1
+tot reward: 382
+-#-- -#--
+--#- --#-
+--dB --dB
+--E- --E-
+
+time: 52
+new reward: -2
+tot reward: 380
+-#F- -#F-
+--#- --#-
+---B ---B
+--dE --dE
+
+time: 53
+new reward: -1
+tot reward: 379
+-#F- -#F-
+--#- --#-
+--$E --$E
+--D- --D-
+
+time: 54
+new reward: 47
+tot reward: 426
+-#F- -#F-
+--#- --#-
+--Eb --Eb
+---- ----
+
+time: 55
+new reward: -1
+tot reward: 425
+-#F- -#F-
+--#H --#H
+--EB --EB
+---- ----
+
+time: 56
+new reward: -1
+tot reward: 424
+-#FH -#FH
+--#- --#-
+--EB --EB
+---- ----
+
+time: 57
+new reward: -1
+tot reward: 423
+-#$- -#$-
+F-#- F-#-
+--EB --EB
+---- ----
+
+time: 58
+new reward: -1
+tot reward: 422
+-#-$ -#-$
+F-#- F-#-
+--EB --EB
+---- ----
+
+time: 59
+new reward: -1
+tot reward: 421
+-#-- -#--
+F-#$ F-#$
+--EB --EB
+---- ----
+
+time: 60
+new reward: 49
+tot reward: 470
+-#-- -#--
+F-#- F-#-
+--Eb --Eb
+---- ----
+
+time: 61
+new reward: -2
+tot reward: 468
+-#-- -#--
+F-#- F-#-
+--dE --dE
+---- ----
+
+time: 62
+new reward: -1
+tot reward: 467
+-#-- -#--
+F-#- F-#-
+-HDB -HDB
+---E ---E
+
+time: 63
+new reward: -1
+tot reward: 466
+-#-- -#--
+FH#- FH#-
+--DB --DB
+--E- --E-
+
+time: 64
+new reward: -1
+tot reward: 465
+-#-- -#--
+$-#- $-#-
+-FDB -FDB
+-E-- -E--
+
+time: 65
+new reward: -1
+tot reward: 464
+-#-- -#--
+--#- --#-
+$FDB $FDB
+E--- E---
+
+time: 66
+new reward: -1
+tot reward: 463
+-#-- -#--
+--#- --#-
+-$DB -$DB
+-E-- -E--
+
+time: 67
+new reward: -1
+tot reward: 462
+-#-- -#--
+--#- --#-
+-FdB -FdB
+--E- --E-
+
+time: 68
+new reward: 49
+tot reward: 511
+-#-- -#--
+--#- --#-
+-FDb -FDb
+---E ---E
+
+time: 69
+new reward: -1
+tot reward: 510
+-#-- -#--
+--#- --#-
+-FdB -FdB
+--E- --E-
+
+time: 70
+new reward: -1
+tot reward: 509
+-#-- -#--
+-F#- -F#-
+-$DB -$DB
+-E-- -E--
+
+time: 71
+new reward: -1
+tot reward: 508
+-#-- -#--
+-F#- -F#-
+--dB --dB
+--E- --E-
+
+time: 72
+new reward: 49
+tot reward: 557
+-#-- -#--
+-F#- -F#-
+--Db --Db
+---E ---E
+
+time: 73
+new reward: -1
+tot reward: 556
+-#-- -#--
+-F#- -F#-
+--dB --dB
+--E- --E-
+
+time: 74
+new reward: -1
+tot reward: 555
+-#-- -#--
+-F#- -F#-
+-HDB -HDB
+-E-- -E--
+
+time: 75
+new reward: -1
+tot reward: 554
+-#-- -#--
+-$#- -$#-
+-EDB -EDB
+---- ----
+
+time: 76
+new reward: -2
+tot reward: 552
+-#-- -#--
+--#- --#-
+-dEB -dEB
+---- ----
+
+time: 77
+new reward: -2
+tot reward: 550
+-#-- -#--
+--#- --#-
+--dE --dE
+---- ----
+
+time: 78
+new reward: 48
+tot reward: 598
+-#-- -#--
+--#- --#-
+--Eb --Eb
+---- ----
+
+time: 79
+new reward: -2
+tot reward: 596
+-#F- -#F-
+--#- --#-
+--dE --dE
+---- ----
+
+time: 80
+new reward: 48
+tot reward: 644
+-#F- -#F-
+--#- --#-
+--Eb --Eb
+---- ----
+
+time: 81
+new reward: -1
+tot reward: 643
+-#F- -#F-
+--#H --#H
+--EB --EB
+---- ----
+
+time: 82
+new reward: -1
+tot reward: 642
+-#FH -#FH
+--#- --#-
+--EB --EB
+---- ----
+
+time: 83
+new reward: -1
+tot reward: 641
+-#$- -#$-
+--#- --#-
+--EB --EB
+-F-- -F--
+
+time: 84
+new reward: -1
+tot reward: 640
+-#-$ -#-$
+--#- --#-
+--EB --EB
+-F-- -F--
+
+time: 85
+new reward: -1
+tot reward: 639
+-#-- -#--
+--#$ --#$
+--EB --EB
+-F-- -F--
+
+time: 86
+new reward: 49
+tot reward: 688
+-#-- -#--
+--#- --#-
+--Eb --Eb
+-F-- -F--
+
+time: 87
+new reward: -1
+tot reward: 687
+-#-- -#--
+--#- --#-
+---B ---B
+-FEH -FEH
+
+time: 88
+new reward: -1
+tot reward: 686
+-#-- -#--
+--#- --#-
+---b ---b
+-F-E -F-E
+
+time: 89
+new reward: -1
+tot reward: 685
+-#-- -#--
+--#- --#-
+--HB --HB
+-FE- -FE-
+
+time: 90
+new reward: -1
+tot reward: 684
+-#-- -#--
+--#- --#-
+-H-B -H-B
+-E-- -E--
+
+time: 91
+new reward: -1
+tot reward: 683
+-#-- -#--
+-H#- -H#-
+-E-B -E-B
+-F-- -F--
+
+time: 92
+new reward: -1
+tot reward: 682
+-#-- -#--
+H-#- H-#-
+E--B E--B
+-F-- -F--
+
+time: 93
+new reward: -1
+tot reward: 681
+-#-- -#--
+-H#- -H#-
+-E-B -E-B
+-F-- -F--
+
+time: 94
+new reward: -1
+tot reward: 680
+-#-- -#--
+H-#- H-#-
+E--B E--B
+-F-- -F--
+
+time: 95
+new reward: -1
+tot reward: 679
+-#-- -#--
+-H#- -H#-
+-E-B -E-B
+-F-- -F--
+
+time: 96
+new reward: -1
+tot reward: 678
+-#-- -#--
+H-#- H-#-
+E--B E--B
+-F-- -F--
+
+time: 97
+new reward: -1
+tot reward: 677
+-#-- -#--
+-H#- -H#-
+-E-B -E-B
+-F-- -F--
+
+time: 98
+new reward: -1
+tot reward: 676
+-#-- -#--
+H-#- H-#-
+E--B E--B
+-F-- -F--
+
+time: 99
+new reward: -1
+tot reward: 675
+-#-- -#--
+-H#- -H#-
+-E-B -E-B
+-F-- -F--
+
+time: 100
+new reward: -1
+tot reward: 674
+-#-- -#--
+H-#- H-#-
+E--B E--B
+-F-- -F--
+
+summary: 674 ../test/escort_4x4_3_3_real.world
+
+reality: ../test/escort_4x4_3_4_real.world
+belief: ../test/escort_4x4_3_4_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#-#- #-#-
+---E ---E
+#b-- #b--
+F--- F---
+
+time: 1
+new reward: -1
+tot reward: -1
+#-#- #-#-
+--E- --E-
+#B-- #B--
+FH-- FH--
+
+time: 2
+new reward: -1
+tot reward: -2
+#-#- #-#-
+---- ----
+#BE- #BE-
+$-F- $-F-
+
+time: 3
+new reward: -1
+tot reward: -3
+#-#- #-#-
+---- ----
+#B-- #B--
+-$E- -$E-
+
+time: 4
+new reward: 49
+tot reward: 46
+#-#- #-#-
+---- ----
+#b-- #b--
+-EF- -EF-
+
+time: 5
+new reward: -1
+tot reward: 45
+#-#- #-#-
+---- ----
+#BH- #BH-
+--E- --E-
+
+time: 6
+new reward: -3
+tot reward: 42
+#-#- #-#-
+---- ----
+#B-- #B--
+--dE --dE
+
+time: 7
+new reward: -1
+tot reward: 41
+#-#- #-#-
+---- ----
+#B$E #B$E
+--DF --DF
+
+time: 8
+new reward: 49
+tot reward: 90
+#-#- #-#-
+---- ----
+#bE- #bE-
+--DF --DF
+
+time: 9
+new reward: -1
+tot reward: 89
+#-#- #-#-
+---- ----
+#E-- #E--
+-HDF -HDF
+
+time: 10
+new reward: -1
+tot reward: 88
+#-#- #-#-
+---- ----
+#BE- #BE-
+--dF --dF
+
+time: 11
+new reward: -1
+tot reward: 87
+#-#- #-#-
+---- ----
+#B-E #B-E
+F-D$ F-D$
+
+time: 12
+new reward: -1
+tot reward: 86
+#-#- #-#-
+---- ----
+#BE- #BE-
+F-d- F-d-
+
+time: 13
+new reward: -1
+tot reward: 85
+#-#- #-#-
+---- ----
+#E-- #E--
+F$D- F$D-
+
+time: 14
+new reward: 47
+tot reward: 132
+#-#- #-#-
+---- ----
+#bE- #bE-
+F--- F---
+
+time: 15
+new reward: -1
+tot reward: 131
+#-#- #-#-
+---- ----
+#B-- #B--
+FHE- FHE-
+
+time: 16
+new reward: -1
+tot reward: 130
+#-#- #-#-
+--F- --F-
+#B-- #B--
+$E-- $E--
+
+time: 17
+new reward: -2
+tot reward: 128
+#-#- #-#-
+--F- --F-
+#B-- #B--
+-dE- -dE-
+
+time: 18
+new reward: 49
+tot reward: 177
+#-#- #-#-
+--F- --F-
+#bE- #bE-
+-D-- -D--
+
+time: 19
+new reward: -1
+tot reward: 176
+#-#- #-#-
+-HF- -HF-
+#E-- #E--
+-D-- -D--
+
+time: 20
+new reward: -1
+tot reward: 175
+#-#- #-#-
+--$- --$-
+#BEF #BEF
+-D-- -D--
+
+time: 21
+new reward: -1
+tot reward: 174
+#-#- #-#-
+-$-- -$--
+#E-F #E-F
+-D-- -D--
+
+time: 22
+new reward: 48
+tot reward: 222
+#-#- #-#-
+---- ----
+#bEF #bEF
+---- ----
+
+time: 23
+new reward: -2
+tot reward: 220
+#-#- #-#-
+---- ----
+#BdE #BdE
+---- ----
+
+time: 24
+new reward: -2
+tot reward: 218
+#-#- #-#-
+---- ----
+#BEd #BEd
+F--- F---
+
+time: 25
+new reward: -2
+tot reward: 216
+#-#- #-#-
+---- ----
+#BdE #BdE
+F--- F---
+
+time: 26
+new reward: 49
+tot reward: 265
+#-#- #-#-
+---E ---E
+#bD- #bD-
+F--- F---
+
+time: 27
+new reward: -1
+tot reward: 264
+#-#- #-#-
+--E- --E-
+#BD- #BD-
+FH-- FH--
+
+time: 28
+new reward: -1
+tot reward: 263
+#-#- #-#-
+-E-- -E--
+#BD- #BD-
+$-F- $-F-
+
+time: 29
+new reward: -1
+tot reward: 262
+#-#- #-#-
+---- ----
+#ED- #ED-
+-$F- -$F-
+
+time: 30
+new reward: 48
+tot reward: 310
+#-#- #-#-
+---- ----
+#bE- #bE-
+--F- --F-
+
+time: 31
+new reward: -1
+tot reward: 309
+#-#- #-#-
+---- ----
+#B-- #B--
+-HE- -HE-
+
+time: 32
+new reward: -3
+tot reward: 306
+#-#- #-#-
+---- ----
+#B-F #B-F
+--dE --dE
+
+time: 33
+new reward: -1
+tot reward: 305
+#-#- #-#-
+---- ----
+#B$E #B$E
+--D- --D-
+
+time: 34
+new reward: 49
+tot reward: 354
+#-#- #-#-
+---- ----
+#bEF #bEF
+--D- --D-
+
+time: 35
+new reward: -2
+tot reward: 352
+#-#- #-#-
+---- ----
+#BdE #BdE
+---- ----
+
+time: 36
+new reward: -2
+tot reward: 350
+#-#- #-#-
+F--- F---
+#BEd #BEd
+---- ----
+
+time: 37
+new reward: -2
+tot reward: 348
+#-#- #-#-
+F--- F---
+#BdE #BdE
+---- ----
+
+time: 38
+new reward: 49
+tot reward: 397
+#-#- #-#-
+F--E F--E
+#bD- #bD-
+---- ----
+
+time: 39
+new reward: -1
+tot reward: 396
+#-#- #-#-
+FHE- FHE-
+#BD- #BD-
+---- ----
+
+time: 40
+new reward: -1
+tot reward: 395
+#-#- #-#-
+$E-- $E--
+#BD- #BD-
+--F- --F-
+
+time: 41
+new reward: -3
+tot reward: 392
+#-#- #-#-
+-dE- -dE-
+#B-- #B--
+--F- --F-
+
+time: 42
+new reward: 49
+tot reward: 441
+#-#- #-#-
+-D-- -D--
+#bE- #bE-
+--F- --F-
+
+time: 43
+new reward: -1
+tot reward: 440
+#-#- #-#-
+-D-- -D--
+#E-- #E--
+-HF- -HF-
+
+time: 44
+new reward: -1
+tot reward: 439
+#-#- #-#-
+FD-- FD--
+#BE- #BE-
+--$- --$-
+
+time: 45
+new reward: -1
+tot reward: 438
+#-#- #-#-
+FD-- FD--
+#E-- #E--
+-$-- -$--
+
+time: 46
+new reward: 48
+tot reward: 486
+#-#- #-#-
+F--- F---
+#bE- #bE-
+---- ----
+
+time: 47
+new reward: -1
+tot reward: 485
+#-#- #-#-
+FHE- FHE-
+#B-- #B--
+---- ----
+
+time: 48
+new reward: -1
+tot reward: 484
+#-#- #-#-
+$E-- $E--
+#B-F #B-F
+---- ----
+
+time: 49
+new reward: -2
+tot reward: 482
+#-#- #-#-
+-dE- -dE-
+#B-F #B-F
+---- ----
+
+time: 50
+new reward: 49
+tot reward: 531
+#-#- #-#-
+-D-- -D--
+#bEF #bEF
+---- ----
+
+time: 51
+new reward: -3
+tot reward: 528
+#-#- #-#-
+---- ----
+#BdE #BdE
+---- ----
+
+time: 52
+new reward: -2
+tot reward: 526
+#-#- #-#-
+-F-- -F--
+#BEd #BEd
+---- ----
+
+time: 53
+new reward: -2
+tot reward: 524
+#-#- #-#-
+-F-- -F--
+#BdE #BdE
+---- ----
+
+time: 54
+new reward: 49
+tot reward: 573
+#-#- #-#-
+-F-E -F-E
+#bD- #bD-
+---- ----
+
+time: 55
+new reward: -1
+tot reward: 572
+#-#- #-#-
+-$E- -$E-
+#BD- #BD-
+---- ----
+
+time: 56
+new reward: 49
+tot reward: 621
+#-#- #-#-
+-E-- -E--
+#bD- #bD-
+---- ----
+
+time: 57
+new reward: -1
+tot reward: 620
+#-#- #-#-
+--E- --E-
+#Bd- #Bd-
+-F-- -F--
+
+time: 58
+new reward: 49
+tot reward: 669
+#-#- #-#-
+-E-- -E--
+#bD- #bD-
+-F-- -F--
+
+time: 59
+new reward: -1
+tot reward: 668
+#-#- #-#-
+---- ----
+#ED- #ED-
+-$-- -$--
+
+time: 60
+new reward: 48
+tot reward: 716
+#-#- #-#-
+---- ----
+#bE- #bE-
+---- ----
+
+time: 61
+new reward: -2
+tot reward: 714
+#-#- #-#-
+---- ----
+#BdE #BdE
+---F ---F
+
+time: 62
+new reward: 49
+tot reward: 763
+#-#- #-#-
+---E ---E
+#bD- #bD-
+---F ---F
+
+time: 63
+new reward: -1
+tot reward: 762
+#-#- #-#-
+--E- --E-
+#BD- #BD-
+-H-F -H-F
+
+time: 64
+new reward: -1
+tot reward: 761
+#-#- #-#-
+---E ---E
+#BD- #BD-
+--HF --HF
+
+time: 65
+new reward: -1
+tot reward: 760
+#-#- #-#-
+--F- --F-
+#BDE #BDE
+---$ ---$
+
+time: 66
+new reward: -1
+tot reward: 759
+#-#- #-#-
+--F- --F-
+#BD- #BD-
+--$E --$E
+
+time: 67
+new reward: -1
+tot reward: 758
+#-#- #-#-
+--F- --F-
+#Bd- #Bd-
+--E- --E-
+
+time: 68
+new reward: 49
+tot reward: 807
+#-#- #-#-
+--F- --F-
+#bD- #bD-
+-E-- -E--
+
+time: 69
+new reward: -1
+tot reward: 806
+#-#- #-#-
+-HF- -HF-
+#ED- #ED-
+---- ----
+
+time: 70
+new reward: -1
+tot reward: 805
+#-#- #-#-
+-E$- -E$-
+#BD- #BD-
+--F- --F-
+
+time: 71
+new reward: -1
+tot reward: 804
+#-#- #-#-
+--E- --E-
+#Bd- #Bd-
+--F- --F-
+
+time: 72
+new reward: 49
+tot reward: 853
+#-#- #-#-
+-E-- -E--
+#bD- #bD-
+--F- --F-
+
+time: 73
+new reward: -1
+tot reward: 852
+#-#- #-#-
+---- ----
+#ED- #ED-
+-HF- -HF-
+
+time: 74
+new reward: -1
+tot reward: 851
+#-#- #-#-
+---- ----
+#BD- #BD-
+-E$- -E$-
+
+time: 75
+new reward: -1
+tot reward: 850
+#-#- #-#-
+---- ----
+#Bd- #Bd-
+-FE- -FE-
+
+time: 76
+new reward: 49
+tot reward: 899
+#-#- #-#-
+---- ----
+#bD- #bD-
+-E-- -E--
+
+time: 77
+new reward: -3
+tot reward: 896
+#-#- #-#-
+---- ----
+#BF- #BF-
+-dE- -dE-
+
+time: 78
+new reward: 49
+tot reward: 945
+#-#- #-#-
+---- ----
+#bE- #bE-
+-D-- -D--
+
+time: 79
+new reward: -3
+tot reward: 942
+#F#- #F#-
+---- ----
+#BdE #BdE
+---- ----
+
+time: 80
+new reward: 49
+tot reward: 991
+#F#- #F#-
+---E ---E
+#bD- #bD-
+---- ----
+
+time: 81
+new reward: -1
+tot reward: 990
+#F#- #F#-
+-HE- -HE-
+#BD- #BD-
+---- ----
+
+time: 82
+new reward: -1
+tot reward: 989
+#$#- #$#-
+-E-- -E--
+#BD- #BD-
+---F ---F
+
+time: 83
+new reward: -3
+tot reward: 986
+#-#- #-#-
+-dE- -dE-
+#B-- #B--
+---F ---F
+
+time: 84
+new reward: 49
+tot reward: 1035
+#-#- #-#-
+-D-- -D--
+#bE- #bE-
+---F ---F
+
+time: 85
+new reward: -1
+tot reward: 1034
+#-#- #-#-
+-D-- -D--
+#E-- #E--
+-H-F -H-F
+
+time: 86
+new reward: -1
+tot reward: 1033
+#-#- #-#-
+-D-- -D--
+#BE- #BE-
+--HF --HF
+
+time: 87
+new reward: -1
+tot reward: 1032
+#-#- #-#-
+-D-- -D--
+#B-E #B-E
+--F$ --F$
+
+time: 88
+new reward: -1
+tot reward: 1031
+#-#- #-#-
+-D-- -D--
+#BE- #BE-
+--$- --$-
+
+time: 89
+new reward: -1
+tot reward: 1030
+#-#- #-#-
+-D-- -D--
+#E-- #E--
+-$F- -$F-
+
+time: 90
+new reward: 48
+tot reward: 1078
+#-#- #-#-
+---- ----
+#bE- #bE-
+--F- --F-
+
+time: 91
+new reward: -1
+tot reward: 1077
+#-#- #-#-
+---- ----
+#B-- #B--
+-HE- -HE-
+
+time: 92
+new reward: -3
+tot reward: 1074
+#-#- #-#-
+F--- F---
+#B-- #B--
+--dE --dE
+
+time: 93
+new reward: -1
+tot reward: 1073
+#-#- #-#-
+F--- F---
+#B$E #B$E
+--D- --D-
+
+time: 94
+new reward: 49
+tot reward: 1122
+#-#- #-#-
+F--- F---
+#bE- #bE-
+--D- --D-
+
+time: 95
+new reward: -1
+tot reward: 1121
+#-#- #-#-
+FH-- FH--
+#E-- #E--
+--D- --D-
+
+time: 96
+new reward: -1
+tot reward: 1120
+#F#- #F#-
+$E-- $E--
+#B-- #B--
+--D- --D-
+
+time: 97
+new reward: -4
+tot reward: 1116
+#F#- #F#-
+-dE- -dE-
+#B-- #B--
+---- ----
+
+time: 98
+new reward: 49
+tot reward: 1165
+#F#- #F#-
+-D-- -D--
+#bE- #bE-
+---- ----
+
+time: 99
+new reward: -1
+tot reward: 1164
+#F#- #F#-
+-d-- -d--
+#E-- #E--
+---- ----
+
+time: 100
+new reward: -1
+tot reward: 1163
+#$#- #$#-
+-D-- -D--
+#E-- #E--
+---- ----
+
+summary: 1163 ../test/escort_4x4_3_4_real.world
+
+reality: ../test/escort_4x4_3_5_real.world
+belief: ../test/escort_4x4_3_5_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+E--- E---
+---b ---b
+-F#- -F#-
+---# ---#
+
+time: 1
+new reward: -1
+tot reward: -1
+-E-- -E--
+--HB --HB
+-F#- -F#-
+---# ---#
+
+time: 2
+new reward: -1
+tot reward: -2
+--E- --E-
+---b ---b
+-F#- -F#-
+---# ---#
+
+time: 3
+new reward: -2
+tot reward: -4
+---- ----
+--dE --dE
+-F#- -F#-
+---# ---#
+
+time: 4
+new reward: -1
+tot reward: -5
+---E ---E
+-HDB -HDB
+-F#- -F#-
+---# ---#
+
+time: 5
+new reward: -1
+tot reward: -6
+--E- --E-
+--DB --DB
+-$#- -$#-
+--F# --F#
+
+time: 6
+new reward: -1
+tot reward: -7
+-E-- -E--
+-$DB -$DB
+--#- --#-
+--F# --F#
+
+time: 7
+new reward: -1
+tot reward: -8
+--E- --E-
+--dB --dB
+--#- --#-
+--F# --F#
+
+time: 8
+new reward: 49
+tot reward: 41
+---E ---E
+--Db --Db
+--#- --#-
+--F# --F#
+
+time: 9
+new reward: -1
+tot reward: 40
+--E- --E-
+--dB --dB
+--#- --#-
+--F# --F#
+
+time: 10
+new reward: -1
+tot reward: 39
+-E-- -E--
+-HDB -HDB
+--#- --#-
+--F# --F#
+
+time: 11
+new reward: -1
+tot reward: 38
+---- ----
+-EDB -EDB
+-H#- -H#-
+--F# --F#
+
+time: 12
+new reward: -1
+tot reward: 37
+---- ----
+--DB --DB
+-E#- -E#-
+-HF# -HF#
+
+time: 13
+new reward: -1
+tot reward: 36
+---- ----
+--DB --DB
+--#- --#-
+FE$# FE$#
+
+time: 14
+new reward: -4
+tot reward: 32
+---- ----
+---B ---B
+--#- --#-
+FdE# FdE#
+
+time: 15
+new reward: -1
+tot reward: 31
+---- ----
+---B ---B
+-$#- -$#-
+FDE# FDE#
+
+time: 16
+new reward: -1
+tot reward: 30
+---- ----
+-$-B -$-B
+--#- --#-
+FDE# FDE#
+
+time: 17
+new reward: -1
+tot reward: 29
+---- ----
+--$B --$B
+--#- --#-
+FDE# FDE#
+
+time: 18
+new reward: 49
+tot reward: 78
+---- ----
+---b ---b
+--#- --#-
+FDE# FDE#
+
+time: 19
+new reward: -1
+tot reward: 77
+---- ----
+--HB --HB
+--#- --#-
+FDE# FDE#
+
+time: 20
+new reward: -1
+tot reward: 76
+---- ----
+-H-B -H-B
+--#- --#-
+FDE# FDE#
+
+time: 21
+new reward: -1
+tot reward: 75
+---- ----
+---B ---B
+-H#- -H#-
+FDE# FDE#
+
+time: 22
+new reward: -1
+tot reward: 74
+---- ----
+---B ---B
+--#- --#-
+FdE# FdE#
+
+time: 23
+new reward: -1
+tot reward: 73
+---- ----
+--FB --FB
+--#- --#-
+$DE# $DE#
+
+time: 24
+new reward: -1
+tot reward: 72
+---- ----
+--FB --FB
+$-#- $-#-
+-DE# -DE#
+
+time: 25
+new reward: -1
+tot reward: 71
+---- ----
+$-FB $-FB
+--#- --#-
+-DE# -DE#
+
+time: 26
+new reward: -1
+tot reward: 70
+---- ----
+-$FB -$FB
+--#- --#-
+-DE# -DE#
+
+time: 27
+new reward: -1
+tot reward: 69
+---- ----
+--$B --$B
+--#- --#-
+-DE# -DE#
+
+time: 28
+new reward: 49
+tot reward: 118
+---- ----
+--Fb --Fb
+--#- --#-
+-DE# -DE#
+
+time: 29
+new reward: -1
+tot reward: 117
+---- ----
+--$B --$B
+-F#- -F#-
+-DE# -DE#
+
+time: 30
+new reward: 49
+tot reward: 166
+---- ----
+---b ---b
+-F#- -F#-
+-DE# -DE#
+
+time: 31
+new reward: -1
+tot reward: 165
+---- ----
+--HB --HB
+-F#- -F#-
+-DE# -DE#
+
+time: 32
+new reward: -1
+tot reward: 164
+---- ----
+-H-B -H-B
+-F#- -F#-
+-DE# -DE#
+
+time: 33
+new reward: -1
+tot reward: 163
+---- ----
+---B ---B
+-$#F -$#F
+-DE# -DE#
+
+time: 34
+new reward: -1
+tot reward: 162
+---- ----
+-$-B -$-B
+--#F --#F
+-DE# -DE#
+
+time: 35
+new reward: -1
+tot reward: 161
+---- ----
+--$B --$B
+--#F --#F
+-DE# -DE#
+
+time: 36
+new reward: 49
+tot reward: 210
+---- ----
+---b ---b
+--#F --#F
+-DE# -DE#
+
+time: 37
+new reward: -1
+tot reward: 209
+---- ----
+---B ---B
+--#$ --#$
+FDE# FDE#
+
+time: 38
+new reward: 49
+tot reward: 258
+---- ----
+---b ---b
+--#- --#-
+FDE# FDE#
+
+time: 39
+new reward: -1
+tot reward: 257
+---- ----
+--HB --HB
+--#- --#-
+FDE# FDE#
+
+time: 40
+new reward: -1
+tot reward: 256
+---- ----
+-H-B -H-B
+--#- --#-
+FDE# FDE#
+
+time: 41
+new reward: -1
+tot reward: 255
+---- ----
+---B ---B
+-H#- -H#-
+FDE# FDE#
+
+time: 42
+new reward: -1
+tot reward: 254
+---- ----
+---B ---B
+--#- --#-
+FdE# FdE#
+
+time: 43
+new reward: -1
+tot reward: 253
+---- ----
+---B ---B
+--#- --#-
+$DE# $DE#
+
+time: 44
+new reward: -1
+tot reward: 252
+---- ----
+---B ---B
+$-#- $-#-
+-DE# -DE#
+
+time: 45
+new reward: -1
+tot reward: 251
+---- ----
+$--B $--B
+--#- --#-
+-DE# -DE#
+
+time: 46
+new reward: -1
+tot reward: 250
+---- ----
+-$-B -$-B
+--#- --#-
+-DE# -DE#
+
+time: 47
+new reward: -1
+tot reward: 249
+---- ----
+--$B --$B
+--#- --#-
+-DE# -DE#
+
+time: 48
+new reward: 49
+tot reward: 298
+---- ----
+---b ---b
+--#- --#-
+-DE# -DE#
+
+time: 49
+new reward: -1
+tot reward: 297
+---- ----
+--HB --HB
+--#- --#-
+-DE# -DE#
+
+time: 50
+new reward: -1
+tot reward: 296
+---- ----
+-H-B -H-B
+--#- --#-
+-DE# -DE#
+
+time: 51
+new reward: -1
+tot reward: 295
+---- ----
+---B ---B
+-H#- -H#-
+-DE# -DE#
+
+time: 52
+new reward: -1
+tot reward: 294
+---- ----
+---B ---B
+--#- --#-
+-dE# -dE#
+
+time: 53
+new reward: -2
+tot reward: 292
+---- ----
+---B ---B
+--#F --#F
+-Ed# -Ed#
+
+time: 54
+new reward: -2
+tot reward: 290
+---- ----
+---B ---B
+--#F --#F
+-dE# -dE#
+
+time: 55
+new reward: -1
+tot reward: 289
+---- ----
+---B ---B
+-$#F -$#F
+-DE# -DE#
+
+time: 56
+new reward: -1
+tot reward: 288
+---- ----
+-$-B -$-B
+--#F --#F
+-DE# -DE#
+
+time: 57
+new reward: -1
+tot reward: 287
+---- ----
+--$B --$B
+--#F --#F
+-DE# -DE#
+
+time: 58
+new reward: 49
+tot reward: 336
+---- ----
+---b ---b
+--#F --#F
+-DE# -DE#
+
+time: 59
+new reward: -1
+tot reward: 335
+---- ----
+F--B F--B
+--#$ --#$
+-DE# -DE#
+
+time: 60
+new reward: 49
+tot reward: 384
+---- ----
+F--b F--b
+--#- --#-
+-DE# -DE#
+
+time: 61
+new reward: -1
+tot reward: 383
+---- ----
+F-HB F-HB
+--#- --#-
+-DE# -DE#
+
+time: 62
+new reward: -1
+tot reward: 382
+---- ----
+FH-B FH-B
+--#- --#-
+-DE# -DE#
+
+time: 63
+new reward: -1
+tot reward: 381
+---- ----
+$--B $--B
+--#- --#-
+-DE# -DE#
+
+time: 64
+new reward: -1
+tot reward: 380
+---- ----
+-$-B -$-B
+--#- --#-
+-DE# -DE#
+
+time: 65
+new reward: -1
+tot reward: 379
+---- ----
+--$B --$B
+--#- --#-
+-DE# -DE#
+
+time: 66
+new reward: 49
+tot reward: 428
+---- ----
+---b ---b
+--#- --#-
+-DE# -DE#
+
+time: 67
+new reward: -1
+tot reward: 427
+---- ----
+--HB --HB
+--#- --#-
+-DE# -DE#
+
+time: 68
+new reward: -1
+tot reward: 426
+---- ----
+-H-B -H-B
+--#- --#-
+-DE# -DE#
+
+time: 69
+new reward: -1
+tot reward: 425
+---- ----
+---B ---B
+-H#- -H#-
+-DE# -DE#
+
+time: 70
+new reward: -1
+tot reward: 424
+---- ----
+---B ---B
+--#- --#-
+-dE# -dE#
+
+time: 71
+new reward: -2
+tot reward: 422
+--F- --F-
+---B ---B
+--#- --#-
+-Ed# -Ed#
+
+time: 72
+new reward: -2
+tot reward: 420
+--F- --F-
+---B ---B
+--#- --#-
+-dE# -dE#
+
+time: 73
+new reward: -1
+tot reward: 419
+--F- --F-
+---B ---B
+-$#- -$#-
+-DE# -DE#
+
+time: 74
+new reward: -1
+tot reward: 418
+--F- --F-
+-$-B -$-B
+--#- --#-
+-DE# -DE#
+
+time: 75
+new reward: -1
+tot reward: 417
+--F- --F-
+--$B --$B
+--#- --#-
+-DE# -DE#
+
+time: 76
+new reward: 49
+tot reward: 466
+--F- --F-
+---b ---b
+--#- --#-
+-DE# -DE#
+
+time: 77
+new reward: -1
+tot reward: 465
+--FH --FH
+---B ---B
+--#- --#-
+-DE# -DE#
+
+time: 78
+new reward: -1
+tot reward: 464
+--$- --$-
+F--B F--B
+--#- --#-
+-DE# -DE#
+
+time: 79
+new reward: -1
+tot reward: 463
+---- ----
+F-$B F-$B
+--#- --#-
+-DE# -DE#
+
+time: 80
+new reward: 49
+tot reward: 512
+---- ----
+F--b F--b
+--#- --#-
+-DE# -DE#
+
+time: 81
+new reward: -1
+tot reward: 511
+---- ----
+F-HB F-HB
+--#- --#-
+-DE# -DE#
+
+time: 82
+new reward: -1
+tot reward: 510
+---- ----
+FH-B FH-B
+--#- --#-
+-DE# -DE#
+
+time: 83
+new reward: -1
+tot reward: 509
+---- ----
+$--B $--B
+-F#- -F#-
+-DE# -DE#
+
+time: 84
+new reward: -1
+tot reward: 508
+---- ----
+-$-B -$-B
+-F#- -F#-
+-DE# -DE#
+
+time: 85
+new reward: -1
+tot reward: 507
+---- ----
+--$B --$B
+-F#- -F#-
+-DE# -DE#
+
+time: 86
+new reward: 49
+tot reward: 556
+---- ----
+---b ---b
+-F#- -F#-
+-DE# -DE#
+
+time: 87
+new reward: -1
+tot reward: 555
+---- ----
+--HB --HB
+-F#- -F#-
+-DE# -DE#
+
+time: 88
+new reward: -1
+tot reward: 554
+---- ----
+-H-B -H-B
+-F#- -F#-
+-DE# -DE#
+
+time: 89
+new reward: -1
+tot reward: 553
+---- ----
+---B ---B
+-$#F -$#F
+-DE# -DE#
+
+time: 90
+new reward: -1
+tot reward: 552
+---- ----
+-$-B -$-B
+--#F --#F
+-DE# -DE#
+
+time: 91
+new reward: -1
+tot reward: 551
+---- ----
+--$B --$B
+--#F --#F
+-DE# -DE#
+
+time: 92
+new reward: 49
+tot reward: 600
+---- ----
+---b ---b
+--#F --#F
+-DE# -DE#
+
+time: 93
+new reward: -1
+tot reward: 599
+---- ----
+-F-B -F-B
+--#$ --#$
+-DE# -DE#
+
+time: 94
+new reward: 49
+tot reward: 648
+---- ----
+-F-b -F-b
+--#- --#-
+-DE# -DE#
+
+time: 95
+new reward: -1
+tot reward: 647
+---- ----
+-FHB -FHB
+--#- --#-
+-DE# -DE#
+
+time: 96
+new reward: -1
+tot reward: 646
+--F- --F-
+-$-B -$-B
+--#- --#-
+-DE# -DE#
+
+time: 97
+new reward: -1
+tot reward: 645
+--F- --F-
+--$B --$B
+--#- --#-
+-DE# -DE#
+
+time: 98
+new reward: 49
+tot reward: 694
+--F- --F-
+---b ---b
+--#- --#-
+-DE# -DE#
+
+time: 99
+new reward: -1
+tot reward: 693
+--FH --FH
+---B ---B
+--#- --#-
+-DE# -DE#
+
+time: 100
+new reward: -1
+tot reward: 692
+--$- --$-
+---B ---B
+--#- --#-
+-DE# -DE#
+
+summary: 692 ../test/escort_4x4_3_5_real.world
+
+reality: ../test/escort_4x4_3_6_real.world
+belief: ../test/escort_4x4_3_6_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#F-- #F--
+--#- --#-
+---E ---E
+--#b --#b
+
+time: 1
+new reward: -2
+tot reward: -2
+#F-- #F--
+--#- --#-
+--Ed --Ed
+--#B --#B
+
+time: 2
+new reward: -1
+tot reward: -3
+#F-- #F--
+--#H --#H
+-E-D -E-D
+--#B --#B
+
+time: 3
+new reward: -1
+tot reward: -4
+#F-H #F-H
+-E#- -E#-
+---D ---D
+--#B --#B
+
+time: 4
+new reward: -1
+tot reward: -5
+#EH- #EH-
+--#- --#-
+---D ---D
+--#B --#B
+
+time: 5
+new reward: -1
+tot reward: -6
+#FEH #FEH
+--#- --#-
+---D ---D
+--#B --#B
+
+time: 6
+new reward: -1
+tot reward: -7
+#F-E #F-E
+--#H --#H
+---D ---D
+--#B --#B
+
+time: 7
+new reward: -1
+tot reward: -8
+#F-- #F--
+--#E --#E
+---d ---d
+--#B --#B
+
+time: 8
+new reward: -1
+tot reward: -9
+#F-E #F-E
+--#- --#-
+--HD --HD
+--#B --#B
+
+time: 9
+new reward: -1
+tot reward: -10
+#FE- #FE-
+--#- --#-
+-H-D -H-D
+--#B --#B
+
+time: 10
+new reward: -1
+tot reward: -11
+#E-- #E--
+-H#- -H#-
+---D ---D
+--#B --#B
+
+time: 11
+new reward: -1
+tot reward: -12
+#F-- #F--
+-E#- -E#-
+-H-D -H-D
+--#B --#B
+
+time: 12
+new reward: -1
+tot reward: -13
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 13
+new reward: -1
+tot reward: -14
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 14
+new reward: -1
+tot reward: -15
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 15
+new reward: -1
+tot reward: -16
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 16
+new reward: -1
+tot reward: -17
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 17
+new reward: -1
+tot reward: -18
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 18
+new reward: -1
+tot reward: -19
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 19
+new reward: -1
+tot reward: -20
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 20
+new reward: -1
+tot reward: -21
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 21
+new reward: -1
+tot reward: -22
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 22
+new reward: -1
+tot reward: -23
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 23
+new reward: -1
+tot reward: -24
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 24
+new reward: -1
+tot reward: -25
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 25
+new reward: -1
+tot reward: -26
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 26
+new reward: -1
+tot reward: -27
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 27
+new reward: -1
+tot reward: -28
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 28
+new reward: -1
+tot reward: -29
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 29
+new reward: -1
+tot reward: -30
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 30
+new reward: -1
+tot reward: -31
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 31
+new reward: -1
+tot reward: -32
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 32
+new reward: -1
+tot reward: -33
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 33
+new reward: -1
+tot reward: -34
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 34
+new reward: -1
+tot reward: -35
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 35
+new reward: -1
+tot reward: -36
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 36
+new reward: -1
+tot reward: -37
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 37
+new reward: -1
+tot reward: -38
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 38
+new reward: -1
+tot reward: -39
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 39
+new reward: -1
+tot reward: -40
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 40
+new reward: -1
+tot reward: -41
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 41
+new reward: -1
+tot reward: -42
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 42
+new reward: -1
+tot reward: -43
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 43
+new reward: -1
+tot reward: -44
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 44
+new reward: -1
+tot reward: -45
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 45
+new reward: -1
+tot reward: -46
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 46
+new reward: -1
+tot reward: -47
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 47
+new reward: -1
+tot reward: -48
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 48
+new reward: -1
+tot reward: -49
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 49
+new reward: -1
+tot reward: -50
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 50
+new reward: -1
+tot reward: -51
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 51
+new reward: -1
+tot reward: -52
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 52
+new reward: -1
+tot reward: -53
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 53
+new reward: -1
+tot reward: -54
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 54
+new reward: -1
+tot reward: -55
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 55
+new reward: -1
+tot reward: -56
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 56
+new reward: -1
+tot reward: -57
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 57
+new reward: -1
+tot reward: -58
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 58
+new reward: -1
+tot reward: -59
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 59
+new reward: -1
+tot reward: -60
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 60
+new reward: -1
+tot reward: -61
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 61
+new reward: -1
+tot reward: -62
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 62
+new reward: -1
+tot reward: -63
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 63
+new reward: -1
+tot reward: -64
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 64
+new reward: -1
+tot reward: -65
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 65
+new reward: -1
+tot reward: -66
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 66
+new reward: -1
+tot reward: -67
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 67
+new reward: -1
+tot reward: -68
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 68
+new reward: -1
+tot reward: -69
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 69
+new reward: -1
+tot reward: -70
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 70
+new reward: -1
+tot reward: -71
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 71
+new reward: -1
+tot reward: -72
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 72
+new reward: -1
+tot reward: -73
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 73
+new reward: -1
+tot reward: -74
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 74
+new reward: -1
+tot reward: -75
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 75
+new reward: -1
+tot reward: -76
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 76
+new reward: -1
+tot reward: -77
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 77
+new reward: -1
+tot reward: -78
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 78
+new reward: -1
+tot reward: -79
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 79
+new reward: -1
+tot reward: -80
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 80
+new reward: -1
+tot reward: -81
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 81
+new reward: -1
+tot reward: -82
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 82
+new reward: -1
+tot reward: -83
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 83
+new reward: -1
+tot reward: -84
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 84
+new reward: -1
+tot reward: -85
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 85
+new reward: -1
+tot reward: -86
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 86
+new reward: -1
+tot reward: -87
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 87
+new reward: -1
+tot reward: -88
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 88
+new reward: -1
+tot reward: -89
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 89
+new reward: -1
+tot reward: -90
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 90
+new reward: -1
+tot reward: -91
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 91
+new reward: -1
+tot reward: -92
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 92
+new reward: -1
+tot reward: -93
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 93
+new reward: -1
+tot reward: -94
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 94
+new reward: -1
+tot reward: -95
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 95
+new reward: -1
+tot reward: -96
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 96
+new reward: -1
+tot reward: -97
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 97
+new reward: -1
+tot reward: -98
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 98
+new reward: -1
+tot reward: -99
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+time: 99
+new reward: -1
+tot reward: -100
+#F-- #F--
+--#- --#-
+E--D E--D
+H-#B H-#B
+
+time: 100
+new reward: -1
+tot reward: -101
+#F-- #F--
+--#- --#-
+-E-D -E-D
+-H#B -H#B
+
+summary: -101 ../test/escort_4x4_3_6_real.world
+
+reality: ../test/escort_4x4_3_7_real.world
+belief: ../test/escort_4x4_3_7_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+E--- E---
+-#b- -#b-
+F--- F---
+#--- #---
+
+time: 1
+new reward: -1
+tot reward: -1
+---- ----
+E#B- E#B-
+F-H- F-H-
+#--- #---
+
+time: 2
+new reward: -1
+tot reward: -2
+---- ----
+-#B- -#B-
+EH-- EH--
+#--- #---
+
+time: 3
+new reward: -4
+tot reward: -6
+---- ----
+-#B- -#B-
+dE-- dE--
+#--- #---
+
+time: 4
+new reward: -2
+tot reward: -8
+---- ----
+-#B- -#B-
+-dE- -dE-
+#--- #---
+
+time: 5
+new reward: -2
+tot reward: -10
+---- ----
+-#B- -#B-
+-FdE -FdE
+#--- #---
+
+time: 6
+new reward: 49
+tot reward: 39
+---- ----
+-#bE -#bE
+-FD- -FD-
+#--- #---
+
+time: 7
+new reward: -1
+tot reward: 38
+---- ----
+-#E- -#E-
+-Fd- -Fd-
+#--- #---
+
+time: 8
+new reward: -1
+tot reward: 37
+---- ----
+-#BE -#BE
+-$D- -$D-
+#-F- #-F-
+
+time: 9
+new reward: -1
+tot reward: 36
+---- ----
+-#E- -#E-
+--d- --d-
+#-F- #-F-
+
+time: 10
+new reward: 48
+tot reward: 84
+---- ----
+-#bE -#bE
+---- ----
+#-F- #-F-
+
+time: 11
+new reward: -1
+tot reward: 83
+---- ----
+-#B- -#B-
+--HE --HE
+#-F- #-F-
+
+time: 12
+new reward: -1
+tot reward: 82
+---- ----
+-#B- -#B-
+--E- --E-
+#-$F #-$F
+
+time: 13
+new reward: -2
+tot reward: 80
+---- ----
+-#B- -#B-
+--dE --dE
+#--F #--F
+
+time: 14
+new reward: 49
+tot reward: 129
+---- ----
+-#bE -#bE
+--D- --D-
+#--F #--F
+
+time: 15
+new reward: -1
+tot reward: 128
+---- ----
+-#E- -#E-
+--d- --d-
+#--F #--F
+
+time: 16
+new reward: -1
+tot reward: 127
+---- ----
+-#BE -#BE
+--D- --D-
+#-HF #-HF
+
+time: 17
+new reward: -1
+tot reward: 126
+---- ----
+-#B- -#B-
+-FDE -FDE
+#--$ #--$
+
+time: 18
+new reward: -1
+tot reward: 125
+---- ----
+-#B- -#B-
+-FD- -FD-
+#-$E #-$E
+
+time: 19
+new reward: -1
+tot reward: 124
+---- ----
+-#B- -#B-
+-Fd- -Fd-
+#-E- #-E-
+
+time: 20
+new reward: 49
+tot reward: 173
+---- ----
+-#b- -#b-
+-FD- -FD-
+#--E #--E
+
+time: 21
+new reward: -1
+tot reward: 172
+---- ----
+-#B- -#B-
+-Fd- -Fd-
+#-E- #-E-
+
+time: 22
+new reward: -1
+tot reward: 171
+---- ----
+-#B- -#B-
+-$DF -$DF
+#E-- #E--
+
+time: 23
+new reward: -1
+tot reward: 170
+---- ----
+-#B- -#B-
+--dF --dF
+#-E- #-E-
+
+time: 24
+new reward: 49
+tot reward: 219
+---- ----
+-#b- -#b-
+--DF --DF
+#--E #--E
+
+time: 25
+new reward: -1
+tot reward: 218
+---- ----
+-#B- -#B-
+--dF --dF
+#-E- #-E-
+
+time: 26
+new reward: -1
+tot reward: 217
+---- ----
+-#B- -#B-
+--D$ --D$
+#-FE #-FE
+
+time: 27
+new reward: -1
+tot reward: 216
+---- ----
+-#B$ -#B$
+--DE --DE
+#-F- #-F-
+
+time: 28
+new reward: 49
+tot reward: 265
+---- ----
+-#bE -#bE
+--D- --D-
+#-F- #-F-
+
+time: 29
+new reward: -1
+tot reward: 264
+---- ----
+-#E- -#E-
+--d- --d-
+#-F- #-F-
+
+time: 30
+new reward: -1
+tot reward: 263
+---- ----
+-#BE -#BE
+--DF --DF
+#-$- #-$-
+
+time: 31
+new reward: -1
+tot reward: 262
+---- ----
+-#E- -#E-
+--dF --dF
+#--- #---
+
+time: 32
+new reward: 48
+tot reward: 310
+---- ----
+-#bE -#bE
+---F ---F
+#--- #---
+
+time: 33
+new reward: -1
+tot reward: 309
+---- ----
+-#B- -#B-
+--HE --HE
+#--- #---
+
+time: 34
+new reward: -3
+tot reward: 306
+---- ----
+F#B- F#B-
+--Ed --Ed
+#--- #---
+
+time: 35
+new reward: -1
+tot reward: 305
+---- ----
+F#E$ F#E$
+---D ---D
+#--- #---
+
+time: 36
+new reward: 47
+tot reward: 352
+---- ----
+F#bE F#bE
+---- ----
+#--- #---
+
+time: 37
+new reward: -1
+tot reward: 351
+--HE --HE
+F#B- F#B-
+---- ----
+#--- #---
+
+time: 38
+new reward: -1
+tot reward: 350
+-HE- -HE-
+F#B- F#B-
+---- ----
+#--- #---
+
+time: 39
+new reward: -1
+tot reward: 349
+HE-- HE--
+F#B- F#B-
+---- ----
+#--- #---
+
+time: 40
+new reward: -1
+tot reward: 348
+E--- E---
+$#B- $#B-
+---- ----
+#-F- #-F-
+
+time: 41
+new reward: -1
+tot reward: 347
+---- ----
+E#B- E#B-
+$--- $---
+#-F- #-F-
+
+time: 42
+new reward: -1
+tot reward: 346
+---- ----
+-#B- -#B-
+E$-- E$--
+#-F- #-F-
+
+time: 43
+new reward: -1
+tot reward: 345
+---- ----
+-#B- -#B-
+-E$- -E$-
+#-F- #-F-
+
+time: 44
+new reward: 49
+tot reward: 394
+---- ----
+-#b- -#b-
+--E- --E-
+#-F- #-F-
+
+time: 45
+new reward: -2
+tot reward: 392
+---- ----
+-#B- -#B-
+--dE --dE
+#-F- #-F-
+
+time: 46
+new reward: -1
+tot reward: 391
+--F- --F-
+-#B- -#B-
+--D- --D-
+#-$E #-$E
+
+time: 47
+new reward: -1
+tot reward: 390
+--F- --F-
+-#B- -#B-
+--d- --d-
+#-E- #-E-
+
+time: 48
+new reward: 49
+tot reward: 439
+--F- --F-
+-#b- -#b-
+--D- --D-
+#--E #--E
+
+time: 49
+new reward: -1
+tot reward: 438
+--$- --$-
+F#B- F#B-
+--DE --DE
+#--- #---
+
+time: 50
+new reward: 49
+tot reward: 487
+---- ----
+F#bE F#bE
+--D- --D-
+#--- #---
+
+time: 51
+new reward: -1
+tot reward: 486
+--H- --H-
+F#E- F#E-
+--D- --D-
+#--- #---
+
+time: 52
+new reward: -1
+tot reward: 485
+-HE- -HE-
+F#B- F#B-
+--D- --D-
+#--- #---
+
+time: 53
+new reward: -1
+tot reward: 484
+HE-- HE--
+F#B- F#B-
+--D- --D-
+#--- #---
+
+time: 54
+new reward: -1
+tot reward: 483
+E--- E---
+$#B- $#B-
+-FD- -FD-
+#--- #---
+
+time: 55
+new reward: -1
+tot reward: 482
+---- ----
+E#B- E#B-
+$FD- $FD-
+#--- #---
+
+time: 56
+new reward: -1
+tot reward: 481
+---- ----
+-#B- -#B-
+E$D- E$D-
+#--- #---
+
+time: 57
+new reward: -1
+tot reward: 480
+---- ----
+-#B- -#B-
+-Ed- -Ed-
+#--- #---
+
+time: 58
+new reward: 49
+tot reward: 529
+---- ----
+-#b- -#b-
+EFD- EFD-
+#--- #---
+
+time: 59
+new reward: -1
+tot reward: 528
+---- ----
+-#B- -#B-
+-Ed- -Ed-
+#--- #---
+
+time: 60
+new reward: -2
+tot reward: 526
+---- ----
+-#B- -#B-
+-dEF -dEF
+#--- #---
+
+time: 61
+new reward: -2
+tot reward: 524
+---- ----
+-#B- -#B-
+--dE --dE
+#--- #---
+
+time: 62
+new reward: 49
+tot reward: 573
+---- ----
+-#bE -#bE
+--DF --DF
+#--- #---
+
+time: 63
+new reward: -1
+tot reward: 572
+---- ----
+-#E- -#E-
+--dF --dF
+#--- #---
+
+time: 64
+new reward: -1
+tot reward: 571
+---- ----
+-#BE -#BE
+--D$ --D$
+#--- #---
+
+time: 65
+new reward: -1
+tot reward: 570
+---- ----
+-#E- -#E-
+--d- --d-
+#--- #---
+
+time: 66
+new reward: 48
+tot reward: 618
+---- ----
+-#bE -#bE
+--F- --F-
+#--- #---
+
+time: 67
+new reward: -1
+tot reward: 617
+--F- --F-
+-#B- -#B-
+--$E --$E
+#--- #---
+
+time: 68
+new reward: 49
+tot reward: 666
+--F- --F-
+-#b- -#b-
+--E- --E-
+#--- #---
+
+time: 69
+new reward: -1
+tot reward: 665
+--$- --$-
+-#B- -#B-
+---E ---E
+#F-- #F--
+
+time: 70
+new reward: 49
+tot reward: 714
+---- ----
+-#b- -#b-
+--E- --E-
+#F-- #F--
+
+time: 71
+new reward: -2
+tot reward: 712
+---- ----
+-#B- -#B-
+--dE --dE
+#F-- #F--
+
+time: 72
+new reward: -1
+tot reward: 711
+---- ----
+-#B- -#B-
+--D- --D-
+#FHE #FHE
+
+time: 73
+new reward: -1
+tot reward: 710
+F--- F---
+-#B- -#B-
+--D- --D-
+#$E- #$E-
+
+time: 74
+new reward: -1
+tot reward: 709
+F--- F---
+-#B- -#B-
+-$D- -$D-
+#E-- #E--
+
+time: 75
+new reward: -1
+tot reward: 708
+F--- F---
+-#B- -#B-
+--d- --d-
+#-E- #-E-
+
+time: 76
+new reward: 49
+tot reward: 757
+F--- F---
+-#b- -#b-
+--D- --D-
+#--E #--E
+
+time: 77
+new reward: -1
+tot reward: 756
+F-H- F-H-
+-#B- -#B-
+--DE --DE
+#--- #---
+
+time: 78
+new reward: -1
+tot reward: 755
+FH-- FH--
+-#BE -#BE
+--D- --D-
+#--- #---
+
+time: 79
+new reward: -1
+tot reward: 754
+$--- $---
+-#E- -#E-
+--D- --D-
+#--- #---
+
+time: 80
+new reward: -1
+tot reward: 753
+-$E- -$E-
+-#B- -#B-
+--D- --D-
+#--- #---
+
+time: 81
+new reward: -3
+tot reward: 750
+--dE --dE
+-#B- -#B-
+--F- --F-
+#--- #---
+
+time: 82
+new reward: 49
+tot reward: 799
+--D- --D-
+-#bE -#bE
+--F- --F-
+#--- #---
+
+time: 83
+new reward: -1
+tot reward: 798
+--D- --D-
+-#E- -#E-
+--$- --$-
+#--F #--F
+
+time: 84
+new reward: 48
+tot reward: 846
+---- ----
+-#bE -#bE
+---- ----
+#--F #--F
+
+time: 85
+new reward: -1
+tot reward: 845
+---- ----
+-#B- -#B-
+--HE --HE
+#--F #--F
+
+time: 86
+new reward: -1
+tot reward: 844
+---- ----
+-#B- -#B-
+--E- --E-
+#-HF #-HF
+
+time: 87
+new reward: -1
+tot reward: 843
+---- ----
+-#B- -#B-
+---E ---E
+#-F$ #-F$
+
+time: 88
+new reward: -1
+tot reward: 842
+---- ----
+-#B- -#B-
+--E- --E-
+#-$- #-$-
+
+time: 89
+new reward: -2
+tot reward: 840
+---- ----
+-#B- -#B-
+--dE --dE
+#-F- #-F-
+
+time: 90
+new reward: 49
+tot reward: 889
+---- ----
+-#bE -#bE
+--D- --D-
+#-F- #-F-
+
+time: 91
+new reward: -1
+tot reward: 888
+---- ----
+-#E- -#E-
+--d- --d-
+#-F- #-F-
+
+time: 92
+new reward: -1
+tot reward: 887
+---- ----
+-#BE -#BE
+--D- --D-
+#F$- #F$-
+
+time: 93
+new reward: -1
+tot reward: 886
+---- ----
+-#E- -#E-
+--d- --d-
+#F-- #F--
+
+time: 94
+new reward: 48
+tot reward: 934
+---- ----
+-#bE -#bE
+---- ----
+#F-- #F--
+
+time: 95
+new reward: -1
+tot reward: 933
+---- ----
+-#B- -#B-
+--HE --HE
+#F-- #F--
+
+time: 96
+new reward: -1
+tot reward: 932
+---- ----
+-#B- -#B-
+--E- --E-
+#FH- #FH-
+
+time: 97
+new reward: -1
+tot reward: 931
+---- ----
+-#B- -#B-
+-EF- -EF-
+#$-- #$--
+
+time: 98
+new reward: -1
+tot reward: 930
+---- ----
+-#B- -#B-
+--E- --E-
+#-$- #-$-
+
+time: 99
+new reward: -2
+tot reward: 928
+---- ----
+-#B- -#B-
+--dE --dE
+#--- #---
+
+time: 100
+new reward: 49
+tot reward: 977
+---- ----
+-#bE -#bE
+--D- --D-
+#--- #---
+
+summary: 977 ../test/escort_4x4_3_7_real.world
+
+reality: ../test/escort_4x4_3_8_real.world
+belief: ../test/escort_4x4_3_8_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+b#-F b#-F
+---# ---#
+--E- --E-
+---- ----
+
+time: 1
+new reward: -1
+tot reward: -1
+B#-F B#-F
+H--# H--#
+-E-- -E--
+---- ----
+
+time: 2
+new reward: -1
+tot reward: -2
+b#-F b#-F
+---# ---#
+E--- E---
+---- ----
+
+time: 3
+new reward: -2
+tot reward: -4
+B#-F B#-F
+dE-# dE-#
+---- ----
+---- ----
+
+time: 4
+new reward: -2
+tot reward: -6
+B#-F B#-F
+-dE# -dE#
+---- ----
+---- ----
+
+time: 5
+new reward: -2
+tot reward: -8
+B#-F B#-F
+-Ed# -Ed#
+---- ----
+---- ----
+
+time: 6
+new reward: -1
+tot reward: -9
+B#HF B#HF
+-ED# -ED#
+---- ----
+---- ----
+
+time: 7
+new reward: -1
+tot reward: -10
+B#-$ B#-$
+-ED# -ED#
+-F-- -F--
+---- ----
+
+time: 8
+new reward: -1
+tot reward: -11
+B#$- B#$-
+-ED# -ED#
+-F-- -F--
+---- ----
+
+time: 9
+new reward: -1
+tot reward: -12
+B#-- B#--
+-Ed# -Ed#
+-F-- -F--
+---- ----
+
+time: 10
+new reward: -2
+tot reward: -14
+B#-- B#--
+-dE# -dE#
+-F-- -F--
+---- ----
+
+time: 11
+new reward: -1
+tot reward: -15
+B#-- B#--
+$D-# $D-#
+-FE- -FE-
+---- ----
+
+time: 12
+new reward: 49
+tot reward: 34
+b#-- b#--
+-D-# -D-#
+-E-- -E--
+---- ----
+
+time: 13
+new reward: -1
+tot reward: 33
+B#-- B#--
+HD-# HD-#
+EF-- EF--
+---- ----
+
+time: 14
+new reward: -1
+tot reward: 32
+B#-- B#--
+-d-# -d-#
+-E-- -E--
+---- ----
+
+time: 15
+new reward: -2
+tot reward: 30
+B#-- B#--
+---# ---#
+-dE- -dE-
+--F- --F-
+
+time: 16
+new reward: -1
+tot reward: 29
+B#-- B#--
+-$E# -$E#
+-D-- -D--
+--F- --F-
+
+time: 17
+new reward: -1
+tot reward: 28
+B#-- B#--
+$E-# $E-#
+-D-- -D--
+--F- --F-
+
+time: 18
+new reward: 49
+tot reward: 77
+b#-- b#--
+E--# E--#
+-D-- -D--
+--F- --F-
+
+time: 19
+new reward: -3
+tot reward: 74
+B#-- B#--
+dE-# dE-#
+---- ----
+--F- --F-
+
+time: 20
+new reward: -1
+tot reward: 73
+B#-- B#--
+D--# D--#
+HE-- HE--
+--F- --F-
+
+time: 21
+new reward: -1
+tot reward: 72
+B#-- B#--
+D--# D--#
+E--- E---
+H-F- H-F-
+
+time: 22
+new reward: -1
+tot reward: 71
+B#-- B#--
+D--# D--#
+-E-- -E--
+-HF- -HF-
+
+time: 23
+new reward: -1
+tot reward: 70
+B#-- B#--
+D--# D--#
+--E- --E-
+--$F --$F
+
+time: 24
+new reward: -1
+tot reward: 69
+B#-- B#--
+D--# D--#
+-E-- -E--
+-$-F -$-F
+
+time: 25
+new reward: -1
+tot reward: 68
+B#-- B#--
+D--# D--#
+E--- E---
+$--F $--F
+
+time: 26
+new reward: -2
+tot reward: 66
+B#-- B#--
+---# ---#
+dE-- dE--
+---F ---F
+
+time: 27
+new reward: -1
+tot reward: 65
+B#-- B#--
+$E-# $E-#
+D--- D---
+---F ---F
+
+time: 28
+new reward: 49
+tot reward: 114
+b#-- b#--
+E--# E--#
+D--- D---
+---F ---F
+
+time: 29
+new reward: -2
+tot reward: 112
+B#-- B#--
+dE-# dE-#
+---- ----
+---F ---F
+
+time: 30
+new reward: -1
+tot reward: 111
+B#-- B#--
+D--# D--#
+HE-- HE--
+---F ---F
+
+time: 31
+new reward: -1
+tot reward: 110
+B#-- B#--
+D--# D--#
+E--- E---
+H--F H--F
+
+time: 32
+new reward: -1
+tot reward: 109
+B#-- B#--
+D--# D--#
+-E-- -E--
+-H-F -H-F
+
+time: 33
+new reward: -1
+tot reward: 108
+B#-- B#--
+D--# D--#
+--E- --E-
+--HF --HF
+
+time: 34
+new reward: -1
+tot reward: 107
+B#-- B#--
+D--# D--#
+---E ---E
+F--$ F--$
+
+time: 35
+new reward: -1
+tot reward: 106
+B#-- B#--
+D--# D--#
+--E- --E-
+F-$- F-$-
+
+time: 36
+new reward: -1
+tot reward: 105
+B#-- B#--
+D--# D--#
+-E-- -E--
+F$-- F$--
+
+time: 37
+new reward: -1
+tot reward: 104
+B#-- B#--
+D--# D--#
+E--- E---
+$--- $---
+
+time: 38
+new reward: -2
+tot reward: 102
+B#-- B#--
+---# ---#
+dE-- dE--
+F--- F---
+
+time: 39
+new reward: -1
+tot reward: 101
+B#-- B#--
+$E-# $E-#
+D--- D---
+F--- F---
+
+time: 40
+new reward: 49
+tot reward: 150
+b#-- b#--
+E--# E--#
+D--- D---
+F--- F---
+
+time: 41
+new reward: -2
+tot reward: 148
+B#-- B#--
+dE-# dE-#
+---- ----
+F--- F---
+
+time: 42
+new reward: -1
+tot reward: 147
+B#-- B#--
+D--# D--#
+HE-- HE--
+F--- F---
+
+time: 43
+new reward: -1
+tot reward: 146
+B#-- B#--
+D-F# D-F#
+E--- E---
+$--- $---
+
+time: 44
+new reward: -2
+tot reward: 144
+B#-- B#--
+--F# --F#
+dE-- dE--
+---- ----
+
+time: 45
+new reward: -1
+tot reward: 143
+B#-- B#--
+$EF# $EF#
+D--- D---
+---- ----
+
+time: 46
+new reward: 49
+tot reward: 192
+b#-- b#--
+E-F# E-F#
+D--- D---
+---- ----
+
+time: 47
+new reward: -2
+tot reward: 190
+B#-- B#--
+dEF# dEF#
+---- ----
+---- ----
+
+time: 48
+new reward: -2
+tot reward: 188
+B#-- B#--
+-dE# -dE#
+---- ----
+---- ----
+
+time: 49
+new reward: -2
+tot reward: 186
+B#-- B#--
+-Ed# -Ed#
+-F-- -F--
+---- ----
+
+time: 50
+new reward: -2
+tot reward: 184
+B#-- B#--
+-dE# -dE#
+-F-- -F--
+---- ----
+
+time: 51
+new reward: -1
+tot reward: 183
+B#-- B#--
+$D-# $D-#
+-FE- -FE-
+---- ----
+
+time: 52
+new reward: 49
+tot reward: 232
+b#-- b#--
+-D-# -D-#
+-E-- -E--
+---- ----
+
+time: 53
+new reward: -1
+tot reward: 231
+B#-- B#--
+HD-# HD-#
+EF-- EF--
+---- ----
+
+time: 54
+new reward: -1
+tot reward: 230
+B#-- B#--
+-d-# -d-#
+-E-- -E--
+---- ----
+
+time: 55
+new reward: -2
+tot reward: 228
+B#-- B#--
+---# ---#
+-dEF -dEF
+---- ----
+
+time: 56
+new reward: -1
+tot reward: 227
+B#-- B#--
+-$E# -$E#
+-D-F -D-F
+---- ----
+
+time: 57
+new reward: -1
+tot reward: 226
+B#-- B#--
+$E-# $E-#
+-D-F -D-F
+---- ----
+
+time: 58
+new reward: 49
+tot reward: 275
+b#-- b#--
+E--# E--#
+-D-F -D-F
+---- ----
+
+time: 59
+new reward: -3
+tot reward: 272
+B#-- B#--
+dE-# dE-#
+---F ---F
+---- ----
+
+time: 60
+new reward: -1
+tot reward: 271
+B#-- B#--
+D--# D--#
+HE-F HE-F
+---- ----
+
+time: 61
+new reward: -1
+tot reward: 270
+B#-- B#--
+d--# d--#
+E--F E--F
+---- ----
+
+time: 62
+new reward: -1
+tot reward: 269
+B#-- B#--
+DH-# DH-#
+-E-F -E-F
+---- ----
+
+time: 63
+new reward: -1
+tot reward: 268
+B#-- B#--
+D-H# D-H#
+--EF --EF
+---- ----
+
+time: 64
+new reward: -1
+tot reward: 267
+B#H- B#H-
+D-E# D-E#
+---F ---F
+---- ----
+
+time: 65
+new reward: -1
+tot reward: 266
+B#EH B#EH
+D--# D--#
+---F ---F
+---- ----
+
+time: 66
+new reward: -4
+tot reward: 262
+B#dE B#dE
+---# ---#
+---F ---F
+---- ----
+
+time: 67
+new reward: -1
+tot reward: 261
+B#DE B#DE
+--H# --H#
+---F ---F
+---- ----
+
+time: 68
+new reward: -1
+tot reward: 260
+B#DE B#DE
+---# ---#
+--HF --HF
+---- ----
+
+time: 69
+new reward: -1
+tot reward: 259
+B#DE B#DE
+---# ---#
+---$ ---$
+F--- F---
+
+time: 70
+new reward: -1
+tot reward: 258
+B#DE B#DE
+---# ---#
+--$- --$-
+F--- F---
+
+time: 71
+new reward: -1
+tot reward: 257
+B#DE B#DE
+--$# --$#
+---- ----
+F--- F---
+
+time: 72
+new reward: -1
+tot reward: 256
+B#DE B#DE
+-$-# -$-#
+---- ----
+F--- F---
+
+time: 73
+new reward: -1
+tot reward: 255
+B#DE B#DE
+$--# $--#
+---- ----
+F--- F---
+
+time: 74
+new reward: 49
+tot reward: 304
+b#DE b#DE
+---# ---#
+---- ----
+F--- F---
+
+time: 75
+new reward: -1
+tot reward: 303
+B#DE B#DE
+H--# H--#
+---- ----
+F--- F---
+
+time: 76
+new reward: -1
+tot reward: 302
+B#DE B#DE
+---# ---#
+H--- H---
+F--- F---
+
+time: 77
+new reward: -1
+tot reward: 301
+B#DE B#DE
+---# ---#
+---- ----
+$-F- $-F-
+
+time: 78
+new reward: -1
+tot reward: 300
+B#DE B#DE
+---# ---#
+$--- $---
+--F- --F-
+
+time: 79
+new reward: -1
+tot reward: 299
+B#DE B#DE
+$--# $--#
+---- ----
+--F- --F-
+
+time: 80
+new reward: 49
+tot reward: 348
+b#DE b#DE
+---# ---#
+---- ----
+--F- --F-
+
+time: 81
+new reward: -1
+tot reward: 347
+B#DE B#DE
+H--# H--#
+---- ----
+--F- --F-
+
+time: 82
+new reward: -1
+tot reward: 346
+B#DE B#DE
+---# ---#
+H--- H---
+--F- --F-
+
+time: 83
+new reward: -1
+tot reward: 345
+B#DE B#DE
+---# ---#
+---- ----
+H-F- H-F-
+
+time: 84
+new reward: -1
+tot reward: 344
+B#DE B#DE
+---# ---#
+---- ----
+-HF- -HF-
+
+time: 85
+new reward: -1
+tot reward: 343
+B#DE B#DE
+---# ---#
+---F ---F
+--$- --$-
+
+time: 86
+new reward: -1
+tot reward: 342
+B#DE B#DE
+---# ---#
+--$F --$F
+---- ----
+
+time: 87
+new reward: -1
+tot reward: 341
+B#DE B#DE
+--$# --$#
+---F ---F
+---- ----
+
+time: 88
+new reward: -1
+tot reward: 340
+B#DE B#DE
+-$-# -$-#
+---F ---F
+---- ----
+
+time: 89
+new reward: -1
+tot reward: 339
+B#DE B#DE
+$--# $--#
+---F ---F
+---- ----
+
+time: 90
+new reward: 49
+tot reward: 388
+b#DE b#DE
+---# ---#
+---F ---F
+---- ----
+
+time: 91
+new reward: -1
+tot reward: 387
+B#DE B#DE
+H--# H--#
+---F ---F
+---- ----
+
+time: 92
+new reward: -1
+tot reward: 386
+B#DE B#DE
+---# ---#
+H--F H--F
+---- ----
+
+time: 93
+new reward: -1
+tot reward: 385
+B#DE B#DE
+---# ---#
+-H-F -H-F
+---- ----
+
+time: 94
+new reward: -1
+tot reward: 384
+B#DE B#DE
+---# ---#
+--HF --HF
+---- ----
+
+time: 95
+new reward: -1
+tot reward: 383
+B#DE B#DE
+F--# F--#
+---$ ---$
+---- ----
+
+time: 96
+new reward: -1
+tot reward: 382
+B#DE B#DE
+F--# F--#
+--$- --$-
+---- ----
+
+time: 97
+new reward: -1
+tot reward: 381
+B#DE B#DE
+F-$# F-$#
+---- ----
+---- ----
+
+time: 98
+new reward: -1
+tot reward: 380
+B#DE B#DE
+F$-# F$-#
+---- ----
+---- ----
+
+time: 99
+new reward: -1
+tot reward: 379
+B#DE B#DE
+$--# $--#
+---- ----
+---- ----
+
+time: 100
+new reward: 49
+tot reward: 428
+b#DE b#DE
+F--# F--#
+---- ----
+---- ----
+
+summary: 428 ../test/escort_4x4_3_8_real.world
+
+reality: ../test/escort_4x4_3_9_real.world
+belief: ../test/escort_4x4_3_9_real.world
+horizon: 10
+sample: 1
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+new reward: 0
+tot reward: 0
+--E- --E-
+-b#- -b#-
+--## --##
+--F- --F-
+
+time: 1
+new reward: -1
+tot reward: -1
+-E-- -E--
+-B#- -B#-
+-H## -H##
+--F- --F-
+
+time: 2
+new reward: -1
+tot reward: -2
+E--- E---
+-B#- -B#-
+--## --##
+-HF- -HF-
+
+time: 3
+new reward: -1
+tot reward: -3
+---- ----
+EB#- EB#-
+-F## -F##
+--$- --$-
+
+time: 4
+new reward: -1
+tot reward: -4
+---- ----
+-B#- -B#-
+EF## EF##
+-$-- -$--
+
+time: 5
+new reward: -2
+tot reward: -6
+---- ----
+-B#- -B#-
+Ed## Ed##
+---- ----
+
+time: 6
+new reward: 49
+tot reward: 43
+---- ----
+Eb#- Eb#-
+-D## -D##
+---- ----
+
+time: 7
+new reward: -1
+tot reward: 42
+---- ----
+-E#- -E#-
+-d## -d##
+--F- --F-
+
+time: 8
+new reward: 48
+tot reward: 90
+---- ----
+Eb#- Eb#-
+--## --##
+--F- --F-
+
+time: 9
+new reward: -1
+tot reward: 89
+---- ----
+-B#- -B#-
+EH## EH##
+--F- --F-
+
+time: 10
+new reward: -1
+tot reward: 88
+---- ----
+-B#- -B#-
+-E## -E##
+-HF- -HF-
+
+time: 11
+new reward: -1
+tot reward: 87
+---- ----
+-B#- -B#-
+--## --##
+-E$F -E$F
+
+time: 12
+new reward: -3
+tot reward: 84
+---- ----
+-B#- -B#-
+--## --##
+-dEF -dEF
+
+time: 13
+new reward: -1
+tot reward: 83
+---- ----
+-B#- -B#-
+-$## -$##
+-DEF -DEF
+
+time: 14
+new reward: 49
+tot reward: 132
+---- ----
+-b#- -b#-
+--## --##
+-DEF -DEF
+
+time: 15
+new reward: -1
+tot reward: 131
+---- ----
+-B#- -B#-
+-H## -H##
+-DEF -DEF
+
+time: 16
+new reward: -1
+tot reward: 130
+---- ----
+-B#- -B#-
+--## --##
+-dEF -dEF
+
+time: 17
+new reward: -2
+tot reward: 128
+---- ----
+-B#- -B#-
+--## --##
+--dE --dE
+
+time: 18
+new reward: -2
+tot reward: 126
+---- ----
+-B#- -B#-
+--## --##
+F-Ed F-Ed
+
+time: 19
+new reward: -2
+tot reward: 124
+---- ----
+-B#- -B#-
+--## --##
+F-dE F-dE
+
+time: 20
+new reward: -1
+tot reward: 123
+---- ----
+-B#- -B#-
+--## --##
+F$DE F$DE
+
+time: 21
+new reward: -1
+tot reward: 122
+---- ----
+-B#- -B#-
+-$## -$##
+F-DE F-DE
+
+time: 22
+new reward: 49
+tot reward: 171
+---- ----
+-b#- -b#-
+--## --##
+F-DE F-DE
+
+time: 23
+new reward: -1
+tot reward: 170
+---- ----
+-B#- -B#-
+-H## -H##
+F-DE F-DE
+
+time: 24
+new reward: -1
+tot reward: 169
+---- ----
+-B#- -B#-
+--## --##
+FHDE FHDE
+
+time: 25
+new reward: -1
+tot reward: 168
+---- ----
+-B#- -B#-
+-F## -F##
+$-DE $-DE
+
+time: 26
+new reward: -1
+tot reward: 167
+---- ----
+-B#- -B#-
+$F## $F##
+--DE --DE
+
+time: 27
+new reward: -1
+tot reward: 166
+---- ----
+$B#- $B#-
+-F## -F##
+--DE --DE
+
+time: 28
+new reward: 49
+tot reward: 215
+---- ----
+-b#- -b#-
+-F## -F##
+--DE --DE
+
+time: 29
+new reward: -1
+tot reward: 214
+---- ----
+-B#- -B#-
+-$## -$##
+F-DE F-DE
+
+time: 30
+new reward: 49
+tot reward: 263
+---- ----
+-b#- -b#-
+--## --##
+F-DE F-DE
+
+time: 31
+new reward: -1
+tot reward: 262
+---- ----
+-B#- -B#-
+-H## -H##
+F-DE F-DE
+
+time: 32
+new reward: -1
+tot reward: 261
+---- ----
+-B#- -B#-
+--## --##
+FHDE FHDE
+
+time: 33
+new reward: -1
+tot reward: 260
+---- ----
+-B#- -B#-
+--## --##
+$-DE $-DE
+
+time: 34
+new reward: -1
+tot reward: 259
+---- ----
+-B#- -B#-
+$-## $-##
+--DE --DE
+
+time: 35
+new reward: -1
+tot reward: 258
+---- ----
+$B#- $B#-
+--## --##
+--DE --DE
+
+time: 36
+new reward: 49
+tot reward: 307
+---- ----
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 37
+new reward: -1
+tot reward: 306
+---- ----
+-B#- -B#-
+-H## -H##
+--DE --DE
+
+time: 38
+new reward: -1
+tot reward: 305
+---- ----
+-B#- -B#-
+--## --##
+-HDE -HDE
+
+time: 39
+new reward: -1
+tot reward: 304
+---- ----
+FB#- FB#-
+--## --##
+--dE --dE
+
+time: 40
+new reward: -1
+tot reward: 303
+---- ----
+FB#- FB#-
+--## --##
+-$DE -$DE
+
+time: 41
+new reward: -1
+tot reward: 302
+---- ----
+FB#- FB#-
+-$## -$##
+--DE --DE
+
+time: 42
+new reward: 49
+tot reward: 351
+---- ----
+Fb#- Fb#-
+--## --##
+--DE --DE
+
+time: 43
+new reward: -1
+tot reward: 350
+---- ----
+$B#- $B#-
+--## --##
+--DE --DE
+
+time: 44
+new reward: 49
+tot reward: 399
+---- ----
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 45
+new reward: -1
+tot reward: 398
+---- ----
+-B#- -B#-
+-H## -H##
+--DE --DE
+
+time: 46
+new reward: -1
+tot reward: 397
+---- ----
+-B#- -B#-
+--## --##
+-HDE -HDE
+
+time: 47
+new reward: -1
+tot reward: 396
+--F- --F-
+-B#- -B#-
+--## --##
+--dE --dE
+
+time: 48
+new reward: -1
+tot reward: 395
+--F- --F-
+-B#- -B#-
+--## --##
+-$DE -$DE
+
+time: 49
+new reward: -1
+tot reward: 394
+--F- --F-
+-B#- -B#-
+-$## -$##
+--DE --DE
+
+time: 50
+new reward: 49
+tot reward: 443
+--F- --F-
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 51
+new reward: -1
+tot reward: 442
+-HF- -HF-
+-B#- -B#-
+--## --##
+--DE --DE
+
+time: 52
+new reward: -1
+tot reward: 441
+--$- --$-
+FB#- FB#-
+--## --##
+--DE --DE
+
+time: 53
+new reward: -1
+tot reward: 440
+-$-- -$--
+FB#- FB#-
+--## --##
+--DE --DE
+
+time: 54
+new reward: 49
+tot reward: 489
+---- ----
+Fb#- Fb#-
+--## --##
+--DE --DE
+
+time: 55
+new reward: -1
+tot reward: 488
+---- ----
+$B#- $B#-
+-F## -F##
+--DE --DE
+
+time: 56
+new reward: 49
+tot reward: 537
+---- ----
+-b#- -b#-
+-F## -F##
+--DE --DE
+
+time: 57
+new reward: -1
+tot reward: 536
+--F- --F-
+-B#- -B#-
+-$## -$##
+--DE --DE
+
+time: 58
+new reward: 49
+tot reward: 585
+--F- --F-
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 59
+new reward: -1
+tot reward: 584
+-HF- -HF-
+-B#- -B#-
+--## --##
+--DE --DE
+
+time: 60
+new reward: -1
+tot reward: 583
+--$- --$-
+-B#- -B#-
+--## --##
+-FDE -FDE
+
+time: 61
+new reward: -1
+tot reward: 582
+-$-- -$--
+-B#- -B#-
+--## --##
+-FDE -FDE
+
+time: 62
+new reward: 49
+tot reward: 631
+---- ----
+-b#- -b#-
+--## --##
+-FDE -FDE
+
+time: 63
+new reward: -1
+tot reward: 630
+---- ----
+-B#- -B#-
+-H## -H##
+-FDE -FDE
+
+time: 64
+new reward: -1
+tot reward: 629
+F--- F---
+-B#- -B#-
+--## --##
+-$DE -$DE
+
+time: 65
+new reward: -1
+tot reward: 628
+F--- F---
+-B#- -B#-
+-$## -$##
+--DE --DE
+
+time: 66
+new reward: 49
+tot reward: 677
+F--- F---
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 67
+new reward: -1
+tot reward: 676
+FH-- FH--
+-B#- -B#-
+--## --##
+--DE --DE
+
+time: 68
+new reward: -1
+tot reward: 675
+$--- $---
+-B#- -B#-
+--## --##
+--DE --DE
+
+time: 69
+new reward: -1
+tot reward: 674
+---- ----
+$B#- $B#-
+--## --##
+--DE --DE
+
+time: 70
+new reward: 49
+tot reward: 723
+---- ----
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 71
+new reward: -1
+tot reward: 722
+---- ----
+-B#- -B#-
+-H## -H##
+--DE --DE
+
+time: 72
+new reward: -1
+tot reward: 721
+---- ----
+-B#- -B#-
+--## --##
+-HDE -HDE
+
+time: 73
+new reward: -1
+tot reward: 720
+---- ----
+-B#- -B#-
+--## --##
+--dE --dE
+
+time: 74
+new reward: -2
+tot reward: 718
+---- ----
+-B#- -B#-
+--## --##
+--Ed --Ed
+
+time: 75
+new reward: -2
+tot reward: 716
+---- ----
+-B#- -B#-
+--## --##
+--dE --dE
+
+time: 76
+new reward: -1
+tot reward: 715
+---- ----
+-B#- -B#-
+--## --##
+-$DE -$DE
+
+time: 77
+new reward: -1
+tot reward: 714
+---- ----
+-B#- -B#-
+-$## -$##
+--DE --DE
+
+time: 78
+new reward: 49
+tot reward: 763
+---- ----
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 79
+new reward: -1
+tot reward: 762
+---- ----
+-B#- -B#-
+-H## -H##
+--DE --DE
+
+time: 80
+new reward: -1
+tot reward: 761
+---- ----
+-B#- -B#-
+--## --##
+-HDE -HDE
+
+time: 81
+new reward: -1
+tot reward: 760
+---- ----
+-B#- -B#-
+--## --##
+-FdE -FdE
+
+time: 82
+new reward: -1
+tot reward: 759
+---- ----
+-B#- -B#-
+--## --##
+-$DE -$DE
+
+time: 83
+new reward: -1
+tot reward: 758
+---- ----
+-B#- -B#-
+-$## -$##
+-FDE -FDE
+
+time: 84
+new reward: 49
+tot reward: 807
+---- ----
+-b#- -b#-
+--## --##
+-FDE -FDE
+
+time: 85
+new reward: -1
+tot reward: 806
+---- ----
+-B#- -B#-
+-H## -H##
+-FDE -FDE
+
+time: 86
+new reward: -1
+tot reward: 805
+-F-- -F--
+-B#- -B#-
+--## --##
+-$DE -$DE
+
+time: 87
+new reward: -1
+tot reward: 804
+-F-- -F--
+-B#- -B#-
+-$## -$##
+--DE --DE
+
+time: 88
+new reward: 49
+tot reward: 853
+-F-- -F--
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 89
+new reward: -1
+tot reward: 852
+-$-- -$--
+-B#- -B#-
+--## --##
+--DE --DE
+
+time: 90
+new reward: 49
+tot reward: 901
+---- ----
+-b#- -b#-
+--## --##
+--DE --DE
+
+time: 91
+new reward: -1
+tot reward: 900
+---- ----
+-B#- -B#-
+-H## -H##
+--DE --DE
+
+time: 92
+new reward: -1
+tot reward: 899
+---- ----
+-B#- -B#-
+--## --##
+-HDE -HDE
+
+time: 93
+new reward: -1
+tot reward: 898
+---- ----
+-B#- -B#-
+--## --##
+--dE --dE
+
+time: 94
+new reward: -2
+tot reward: 896
+---- ----
+-B#- -B#-
+F-## F-##
+--Ed --Ed
+
+time: 95
+new reward: -2
+tot reward: 894
+---- ----
+-B#- -B#-
+F-## F-##
+--dE --dE
+
+time: 96
+new reward: -1
+tot reward: 893
+---- ----
+-B#- -B#-
+F-## F-##
+-$DE -$DE
+
+time: 97
+new reward: -1
+tot reward: 892
+---- ----
+-B#- -B#-
+F$## F$##
+--DE --DE
+
+time: 98
+new reward: 49
+tot reward: 941
+---- ----
+-b#- -b#-
+F-## F-##
+--DE --DE
+
+time: 99
+new reward: -1
+tot reward: 940
+---- ----
+-B#- -B#-
+FH## FH##
+--DE --DE
+
+time: 100
+new reward: -1
+tot reward: 939
+---- ----
+-B#- -B#-
+$-## $-##
+--DE --DE
+
+summary: 939 ../test/escort_4x4_3_9_real.world
+

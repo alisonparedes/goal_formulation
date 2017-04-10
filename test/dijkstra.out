@@ -1,0 +1,187 @@
+initial_state: ../test/initial_state_01.txt
+goal: B
+21 F?
+10 ?b
+
+initial_state: ../test/initial_state_02.txt
+goal: B
+21 F?
+10 HB
+
+initial_state: ../test/initial_state_03.txt
+goal: B
+21 H?
+10 ?B
+
+initial_state: ../test/initial_state_04.txt
+goal: B
+21 ??
+10 HB
+
+initial_state: ../test/initial_state_05.txt
+goal: B
+21 ?$
+10 ?B
+
+initial_state: ../test/initial_state_06.txt
+goal: B
+21 $?
+10 ?B
+
+initial_state: ../test/initial_state_07.txt
+goal: B
+21 F?
+10 HB
+
+initial_state: ../test/initial_state_08.txt
+goal: B
+21 ??
+10 ?*
+
+initial_state: ../test/initial_state_08.txt
+goal: F_0_0
+01 ??
+12 ?*
+
+initial_state: ../test/initial_state_09.txt
+goal: F_0_0
+01 F?
+12 ?b
+
+initial_state: ../test/initial_state_10.txt
+goal: F_0_0
+01 FH
+12 ?B
+
+initial_state: ../test/initial_state_11.txt
+goal: F_0_0
+01 F?
+12 HB
+
+initial_state: ../test/initial_state_13.txt
+goal: F_0_0
+0X F#
+12 ?b
+
+initial_state: ../test/initial_state_14.txt
+goal: F_0_0
+0X F#
+12 HB
+
+initial_state: ../test/initial_state_16.txt
+goal: F_0_0
+0X F#
+12 ?*
+
+initial_state: ../test/initial_state_17.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#??
+2345 ????
+3X56 ?#?b
+
+initial_state: ../test/initial_state_18.txt
+goal: F_0_0
+0X67 F#H?
+1X56 ?#??
+2345 ????
+3X56 ?#?B
+
+initial_state: ../test/initial_state_19.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#??
+2345 ????
+3X56 ?#?*
+
+initial_state: ../test/initial_state_20.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#$?
+2345 ????
+3X56 ?#?B
+
+initial_state: ../test/initial_state_21.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#$?
+2345 ????
+3X56 ?#?B
+
+initial_state: ../test/initial_state_22.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#??
+2345 ????
+3X56 H#?B
+
+initial_state: ../test/initial_state_23.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#??
+2345 ??$?
+3X56 ?#?B
+
+initial_state: ../test/initial_state_24.txt
+goal: F_0_0
+0X67 F#??
+1X56 ?#?H
+2345 ????
+3X56 ?#?B
+
+initial_state: ../test/initial_state_17.txt
+goal: B
+6X43 F#??
+5X32 ?#??
+4321 ????
+5X10 ?#?b
+
+initial_state: ../test/initial_state_18.txt
+goal: B
+6X43 F#H?
+5X32 ?#??
+4321 ????
+5X10 ?#?B
+
+initial_state: ../test/initial_state_19.txt
+goal: B
+6X43 F#??
+5X32 ?#??
+4321 ????
+5X10 ?#?*
+
+initial_state: ../test/initial_state_20.txt
+goal: B
+6X43 F#??
+5X32 ?#$?
+4321 ????
+5X10 ?#?B
+
+initial_state: ../test/initial_state_21.txt
+goal: B
+6X43 F#??
+5X32 ?#$?
+4321 ????
+5X10 ?#?B
+
+initial_state: ../test/initial_state_22.txt
+goal: B
+6X43 F#??
+5X32 ?#??
+4321 ????
+5X10 H#?B
+
+initial_state: ../test/initial_state_23.txt
+goal: B
+6X43 F#??
+5X32 ?#??
+4321 ??$?
+5X10 ?#?B
+
+initial_state: ../test/initial_state_24.txt
+goal: B
+6X43 F#??
+5X32 ?#?H
+4321 ????
+5X10 ?#?B
+

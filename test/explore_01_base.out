@@ -1,0 +1,835 @@
+reality: ../test/baseline_4x4_0_real.world
+belief: ../test/baseline_4x4_0_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+         
+   F    F
+         
+B    B   
+
+time: 1
+reward: 0
+         
+   F    F
+H    H   
+B    B   
+
+time: 2
+reward: 0
+         
+H  F H  F
+-    -   
+B    B   
+
+time: 3
+reward: 0
+         
+-H F -H F
+-    -   
+B    B   
+
+time: 4
+reward: 0
+         
+--HF --HF
+-    -   
+B    B   
+
+time: 5
+reward: 0
+         
+   $    $
+ F    F  
+B    B   
+
+time: 6
+reward: 0
+         
+   -    -
+ F $  F $
+B    B   
+
+time: 7
+reward: 0
+         
+   -    -
+ F -  F -
+B  $ B  $
+
+time: 8
+reward: 0
+         
+   -    -
+ F -  F -
+B $- B $-
+
+time: 9
+reward: 0
+         
+   -    -
+ F -  F -
+B$-- B$--
+
+time: 10
+reward: 50
+         
+   -    -
+ F -  F -
+B--- B---
+
+time: 11
+reward: 50
+         
+   -    -
+HF - HF -
+B--- B---
+
+time: 12
+reward: 50
+         
+         
+ $    $  
+B F  B F 
+
+time: 13
+reward: 50
+         
+         
+ -    -  
+B$F  B$F 
+
+time: 14
+reward: 100
+         
+         
+ -    -  
+B-F  B-F 
+
+time: 15
+reward: 100
+         
+         
+ -    -  
+BHF  BHF 
+
+time: 16
+reward: 100
+         
+         
+         
+B $F B $F
+
+time: 17
+reward: 100
+         
+         
+         
+B$-F B$-F
+
+time: 18
+reward: 150
+         
+         
+         
+B--F B--F
+
+time: 19
+reward: 150
+         
+         
+         
+BH-F BH-F
+
+time: 20
+reward: 150
+         
+         
+         
+B-HF B-HF
+
+time: 21
+reward: 150
+         
+  F    F 
+         
+B  $ B  $
+
+time: 22
+reward: 150
+         
+  F    F 
+         
+B $- B $-
+
+time: 23
+reward: 150
+         
+  F    F 
+         
+B$-- B$--
+
+time: 24
+reward: 200
+         
+  F    F 
+         
+B--- B---
+
+time: 25
+reward: 200
+         
+  F    F 
+H    H   
+B--- B---
+
+time: 26
+reward: 200
+         
+H F  H F 
+-    -   
+B--- B---
+
+time: 27
+reward: 200
+         
+-HF  -HF 
+-    -   
+B--- B---
+
+time: 28
+reward: 200
+         
+  $    $ 
+ F    F  
+B    B   
+
+time: 29
+reward: 200
+         
+  -    - 
+ F$   F$ 
+B    B   
+
+time: 30
+reward: 200
+         
+  -    - 
+ F-   F- 
+B $  B $ 
+
+time: 31
+reward: 200
+         
+  -    - 
+ F-   F- 
+B$-  B$- 
+
+time: 32
+reward: 250
+         
+  -    - 
+ F-   F- 
+B--  B-- 
+
+time: 33
+reward: 250
+         
+  -    - 
+HF-  HF- 
+B--  B-- 
+
+time: 34
+reward: 250
+         
+         
+ $ F  $ F
+B    B   
+
+time: 35
+reward: 250
+         
+         
+ - F  - F
+B$   B$  
+
+time: 36
+reward: 300
+         
+         
+ - F  - F
+B-   B-  
+
+time: 37
+reward: 300
+         
+         
+H- F H- F
+B-   B-  
+
+time: 38
+reward: 300
+         
+         
+-H F -H F
+B-   B-  
+
+time: 39
+reward: 300
+         
+         
+--HF --HF
+B-   B-  
+
+time: 40
+reward: 300
+         
+         
+   $    $
+B F  B F 
+
+time: 41
+reward: 300
+         
+         
+   -    -
+B F$ B F$
+
+time: 42
+reward: 300
+         
+         
+   -    -
+B $- B $-
+
+time: 43
+reward: 300
+         
+         
+   -    -
+B$F- B$F-
+
+time: 44
+reward: 350
+         
+         
+   -    -
+B-F- B-F-
+
+time: 45
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 46
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 47
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 48
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 49
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 50
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 51
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 52
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 53
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 54
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 55
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 56
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 57
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 58
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 59
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 60
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 61
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 62
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 63
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 64
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 65
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 66
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 67
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 68
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 69
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 70
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 71
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 72
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 73
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 74
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 75
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 76
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 77
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 78
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 79
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 80
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 81
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 82
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 83
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 84
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 85
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 86
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 87
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 88
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 89
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 90
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 91
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 92
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 93
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+time: 94
+reward: 350
+         
+         
+-  - -  -
+B-F- B-F-
+
+time: 95
+reward: 350
+         
+         
+H  - H  -
+B-F- B-F-
+
+reality: ../test/baseline_4x4_1_real.world
+belief: ../test/baseline_4x4_1_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+         
+ B    B  
+         
+  F    F 
+
+reality: ../test/baseline_4x4_2_real.world
+belief: ../test/baseline_4x4_2_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+B    B   
+   F    F
+         
+         
+
+reality: ../test/baseline_4x4_3_real.world
+belief: ../test/baseline_4x4_3_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+   B    B
+         
+ F    F  
+         
+
+reality: ../test/baseline_4x4_4_real.world
+belief: ../test/baseline_4x4_4_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+   F    F
+         
+         
+B    B   
+
+reality: ../test/baseline_4x4_5_real.world
+belief: ../test/baseline_4x4_5_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+         
+   F    F
+B    B   
+         
+
+reality: ../test/baseline_4x4_6_real.world
+belief: ../test/baseline_4x4_6_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+F    F   
+B    B   
+         
+         
+
+reality: ../test/baseline_4x4_7_real.world
+belief: ../test/baseline_4x4_7_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+F    F   
+ B    B  
+         
+         
+
+reality: ../test/baseline_4x4_8_real.world
+belief: ../test/baseline_4x4_8_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+ F    F  
+B    B   
+         
+         
+
+reality: ../test/baseline_4x4_9_real.world
+belief: ../test/baseline_4x4_9_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+  F    F 
+         
+   B    B
+         
+

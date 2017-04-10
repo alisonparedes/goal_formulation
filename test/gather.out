@@ -1,0 +1,67 @@
+reality: ../test/gather_10x1_0_real.world
+belief: ../test/gather_10x1_0_belief.world
+horizon: 20
+sample: 10
+max_food: 2
+time: 10
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+-b--F--F-- ?b?????F??
+
+time: 1
+new reward: -1
+tot reward: -1
+-BH-F--F-- ?BH????F??
+
+time: 2
+new reward: -1
+tot reward: -2
+-B-HF--F-- ?B-H???F??
+
+time: 3
+new reward: -1
+tot reward: -3
+-B--$--F-F ?B??$??F??
+
+time: 4
+new reward: -1
+tot reward: -4
+-B-$---F-F ?B?$-??F??
+
+time: 5
+new reward: -1
+tot reward: -5
+-B$----F-F ?B$--??F??
+
+time: 6
+new reward: 49
+tot reward: 44
+-b-----F-F ?b---??F??
+
+time: 7
+new reward: -1
+tot reward: 43
+-BH----F-F ?BH--??F??
+
+time: 8
+new reward: -1
+tot reward: 42
+-B-H---F-F ?B-H-??F??
+
+time: 9
+new reward: -1
+tot reward: 41
+-B--H--F-F ?B--H??F??
+
+time: 10
+new reward: -1
+tot reward: 40
+-B---H-F-F ?B---H?F??
+
+summary: 40 ../test/gather_10x1_0_belief.world
+

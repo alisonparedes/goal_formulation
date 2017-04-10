@@ -1,0 +1,2610 @@
+reality: ../test/escort_4x4_3_0_real.world
+belief: ../test/escort_4x4_3_0_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+b--- b???
+-#FE ?#??
+---# ???#
+---# ???#
+
+time: 1
+new reward: -1
+tot reward: -1
+B--- B???
+H#E- H#??
+---# ???#
+---# ???#
+
+time: 2
+new reward: -3
+tot reward: -4
+B--- B???
+-#F- -#??
+d-E# d??#
+---# ???#
+
+time: 3
+new reward: -11
+tot reward: -15
+B--- B???
+-#F- -#??
+D!-# D!?#
+---# ???#
+
+time: 4
+new reward: -1
+tot reward: -16
+B--- B???
+-#F- -#??
+dE-# dE?#
+---# ???#
+
+time: 5
+new reward: -2
+tot reward: -18
+B--- B???
+-#F- -#??
+-dE# -dE#
+---# ???#
+
+time: 6
+new reward: -2
+tot reward: -20
+B--- B???
+-#F- -#??
+-Ed# -Ed#
+---# ???#
+
+time: 7
+new reward: -1
+tot reward: -21
+B--- B???
+-#$- ?#$?
+EFD# E?D#
+---# ???#
+
+time: 8
+new reward: -1
+tot reward: -22
+B-$- B?$?
+E#-- E#-?
+-FD# ??D#
+---# ???#
+
+time: 9
+new reward: -1
+tot reward: -23
+E$-- E$-?
+-#-- ?#-?
+-FD# ??D#
+---# ???#
+
+time: 10
+new reward: 45
+tot reward: 22
+bE-- bE-?
+-#-- ?#-?
+-F-# ???#
+---# ???#
+
+time: 11
+new reward: -1
+tot reward: 21
+B-E- B-E?
+H#-- H#-?
+-F-# ???#
+---# ???#
+
+time: 12
+new reward: -1
+tot reward: 20
+B--- B--?
+-#E- -#E?
+HF-# H??#
+---# ???#
+
+time: 13
+new reward: -1
+tot reward: 19
+B--- B???
+-#-- ?#??
+-$E# ?$E#
+--F# ???#
+
+time: 14
+new reward: -1
+tot reward: 18
+B--- B???
+-#-- ?#??
+$E-# $E?#
+--F# ???#
+
+time: 15
+new reward: -1
+tot reward: 17
+B--- B???
+$#-- $#??
+E--# E-?#
+--F# ???#
+
+time: 16
+new reward: 49
+tot reward: 66
+b--- b???
+E#-- E#??
+---# --?#
+--F# ???#
+
+time: 17
+new reward: -1
+tot reward: 65
+BH-- BH??
+-#-- -#??
+E--# E-?#
+--F# ???#
+
+time: 18
+new reward: -1
+tot reward: 64
+B-H- B-H?
+-#-- -#??
+-E-# -E?#
+--F# ???#
+
+time: 19
+new reward: -1
+tot reward: 63
+B--H B--H
+-#-- -#??
+--E# --E#
+--F# ???#
+
+time: 20
+new reward: -1
+tot reward: 62
+B--- B---
+-#EH -#EH
+---# --?#
+--F# ???#
+
+time: 21
+new reward: -4
+tot reward: 58
+B--- B---
+-#dE -#dE
+---# --?#
+--F# ???#
+
+time: 22
+new reward: -1
+tot reward: 57
+B--E B--E
+-#D- -#D-
+--H# --H#
+--F# ???#
+
+time: 23
+new reward: -1
+tot reward: 56
+B-E- B?E?
+-#D- ?#D?
+---# ???#
+F-$# ??$#
+
+time: 24
+new reward: -1
+tot reward: 55
+BE-- BE??
+-#D- ?#D?
+--$# ??$#
+F--# ??-#
+
+time: 25
+new reward: -1
+tot reward: 54
+B-E- B?E?
+-#d- ?#d?
+---# ??-#
+F--# ??-#
+
+time: 26
+new reward: -2
+tot reward: 52
+B-dE B?dE
+-#-- ?#-?
+---# ??-#
+F--# ??-#
+
+time: 27
+new reward: -1
+tot reward: 51
+B$D- B$D?
+-#-E ?#-E
+---# ??-#
+F--# ??-#
+
+time: 28
+new reward: 49
+tot reward: 100
+b-D- b-D?
+-#E- ?#E?
+---# ??-#
+F--# ??-#
+
+time: 29
+new reward: -1
+tot reward: 99
+B-D- B-D?
+H#-- H#-?
+--E# ??E#
+F--# ??-#
+
+time: 30
+new reward: -1
+tot reward: 98
+B-D- B-D?
+-#-- -#-?
+HE-# HE-#
+F--# ??-#
+
+time: 31
+new reward: -1
+tot reward: 97
+B-D- B?D?
+-#F- ?#??
+E--# E??#
+$--# $??#
+
+time: 32
+new reward: -5
+tot reward: 92
+B--- B???
+-#F- ?#??
+dE-# dE?#
+---# -??#
+
+time: 33
+new reward: -1
+tot reward: 91
+B--- B???
+$#F- $#??
+D-E# D?E#
+---# -??#
+
+time: 34
+new reward: 49
+tot reward: 140
+b--- b???
+-#E- -#E?
+D--# D??#
+---# -??#
+
+time: 35
+new reward: -1
+tot reward: 139
+BHE- BHE?
+-#F- -#??
+D--# D??#
+---# -??#
+
+time: 36
+new reward: -1
+tot reward: 138
+bE-- bE??
+-#F- -#??
+D--# D??#
+---# -??#
+
+time: 37
+new reward: -4
+tot reward: 134
+BdE- BdE?
+-#F- -#??
+---# -??#
+---# -??#
+
+time: 38
+new reward: -2
+tot reward: 132
+B-dE B-dE
+-#F- -#??
+---# -??#
+---# -??#
+
+time: 39
+new reward: -1
+tot reward: 131
+B-D- B?D?
+-#$E ?#$E
+-F-# ???#
+---# ???#
+
+time: 40
+new reward: -1
+tot reward: 130
+B-d- B?d?
+-#E- ?#E?
+-F-# ???#
+---# ???#
+
+time: 41
+new reward: -1
+tot reward: 129
+B$D- B$D?
+-#-- ?#-?
+-FE# ??E#
+---# ???#
+
+time: 42
+new reward: 49
+tot reward: 178
+b-D- b-D?
+-#-- ?#-?
+-E-# ?E?#
+---# ???#
+
+time: 43
+new reward: -1
+tot reward: 177
+B-D- B-D?
+H#-- H#-?
+EF-# E??#
+---# ???#
+
+time: 44
+new reward: -1
+tot reward: 176
+b-D- b-D?
+E#-- E#-?
+-F-# ???#
+---# ???#
+
+time: 45
+new reward: -1
+tot reward: 175
+EHD- EHD?
+-#-- -#-?
+-F-# ???#
+---# ???#
+
+time: 46
+new reward: -1
+tot reward: 174
+BEd- BEd?
+-#-- -#-?
+-F-# ???#
+---# ???#
+
+time: 47
+new reward: -1
+tot reward: 173
+E-D- E-D?
+-#H- -#H?
+-F-# ???#
+---# ???#
+
+time: 48
+new reward: -1
+tot reward: 172
+B-D- B-D?
+E#-- E#-?
+-FH# ??H#
+---# ???#
+
+time: 49
+new reward: -1
+tot reward: 171
+B-D- B?D?
+-#-- ?#??
+E$-# E$?#
+F--# ???#
+
+time: 50
+new reward: -5
+tot reward: 166
+B--- B???
+-#-- ?#??
+dE-# dE?#
+F--# ???#
+
+time: 51
+new reward: -1
+tot reward: 165
+B--- B???
+$#-- $#??
+D-E# D-E#
+F--# ???#
+
+time: 52
+new reward: 49
+tot reward: 214
+b--- b???
+-#E- -#E?
+D--# D-?#
+F--# ???#
+
+time: 53
+new reward: -1
+tot reward: 213
+BHE- BHE?
+-#-- -#??
+D--# D-?#
+F--# ???#
+
+time: 54
+new reward: -5
+tot reward: 208
+B-dE B-dE
+-#-- -#??
+---# --?#
+F--# ???#
+
+time: 55
+new reward: -1
+tot reward: 207
+B-D- B-D?
+-#HE -#HE
+---# --?#
+F--# ???#
+
+time: 56
+new reward: -1
+tot reward: 206
+B-D- B-D?
+-#E- -#E?
+--H# --H#
+F--# ???#
+
+time: 57
+new reward: -2
+tot reward: 204
+B--- B--?
+-#dE -#dE
+---# ---#
+F--# ???#
+
+time: 58
+new reward: -1
+tot reward: 203
+B--E B--E
+-#D- -#D?
+--H# --H#
+F--# ???#
+
+time: 59
+new reward: -1
+tot reward: 202
+B-E- B-E?
+-#d- -#d?
+---# ---#
+F--# ???#
+
+time: 60
+new reward: -1
+tot reward: 201
+B--E B--E
+-#DH -#DH
+---# ---#
+F--# ???#
+
+time: 61
+new reward: -3
+tot reward: 198
+B-Ed B-Ed
+-#-- -#--
+---# ---#
+F--# ???#
+
+time: 62
+new reward: -1
+tot reward: 197
+B--D B--D
+-#EH -#EH
+---# ---#
+F--# ???#
+
+time: 63
+new reward: -3
+tot reward: 194
+B--- B---
+-#dE -#dE
+---# ---#
+F--# ???#
+
+time: 64
+new reward: -1
+tot reward: 193
+B--E B--E
+-#D- -#D-
+--H# --H#
+F--# ???#
+
+time: 65
+new reward: -1
+tot reward: 192
+B-E- B-E-
+-#D- -#D-
+---# ---#
+F-H# ??H#
+
+time: 66
+new reward: -1
+tot reward: 191
+BE-- BE--
+-#D- -#D-
+---# ---#
+FH-# ?H-#
+
+time: 67
+new reward: -1
+tot reward: 190
+E--- E???
+-#D- ?#D?
+---# ???#
+$-F# $??#
+
+time: 68
+new reward: -1
+tot reward: 189
+B--- B???
+E#D- E#D?
+$--# $??#
+--F# -??#
+
+time: 69
+new reward: -3
+tot reward: 186
+B--- B???
+d#-- d#??
+E--# E??#
+--F# -??#
+
+time: 70
+new reward: 49
+tot reward: 235
+b--- b???
+D#-- D#??
+-E-# -E?#
+--F# -??#
+
+time: 71
+new reward: -1
+tot reward: 234
+BH-- BH??
+D#-- D#??
+--E# -?E#
+--F# -??#
+
+time: 72
+new reward: -1
+tot reward: 233
+B-H- B-H?
+D#E- D#E?
+---# -??#
+--F# -??#
+
+time: 73
+new reward: -3
+tot reward: 230
+B--- B--?
+-#dE -#dE
+---# -??#
+--F# -??#
+
+time: 74
+new reward: -1
+tot reward: 229
+B--E B--E
+-#D- -#D?
+--H# -?H#
+--F# -??#
+
+time: 75
+new reward: -1
+tot reward: 228
+B-E- B-E?
+-#D- -#D?
+-H-# -H-#
+--F# -??#
+
+time: 76
+new reward: -1
+tot reward: 227
+BE-- BE-?
+-#D- -#D?
+--H# --H#
+--F# -??#
+
+time: 77
+new reward: -1
+tot reward: 226
+B-E- B-E?
+-#d- -#d?
+---# ---#
+--F# -??#
+
+time: 78
+new reward: -1
+tot reward: 225
+B--E B--E
+-#DH -#DH
+---# ---#
+--F# -??#
+
+time: 79
+new reward: -1
+tot reward: 224
+B-E- B-E?
+-#d- -#d-
+---# ---#
+--F# -??#
+
+time: 80
+new reward: -1
+tot reward: 223
+B--E B--E
+-#DH -#DH
+---# ---#
+--F# -??#
+
+time: 81
+new reward: -1
+tot reward: 222
+B-E- B-E?
+-#d- -#d-
+---# ---#
+--F# -??#
+
+time: 82
+new reward: -1
+tot reward: 221
+BE-- BE-?
+-#D- -#D-
+--H# --H#
+--F# -??#
+
+time: 83
+new reward: -1
+tot reward: 220
+E--- E???
+F#D- ?#D?
+---# ???#
+--$# ??$#
+
+time: 84
+new reward: -1
+tot reward: 219
+B--- B???
+E#D- E#D?
+--$# ??$#
+---# ??-#
+
+time: 85
+new reward: -1
+tot reward: 218
+E--- E???
+F#d- ?#d?
+---# ??-#
+---# ??-#
+
+time: 86
+new reward: -1
+tot reward: 217
+BE$- BE$?
+F#D- ?#D?
+---# ??-#
+---# ??-#
+
+time: 87
+new reward: -3
+tot reward: 214
+BdE- BdE?
+F#-- ?#-?
+---# ??-#
+---# ??-#
+
+time: 88
+new reward: 49
+tot reward: 263
+bD-- bD-?
+F#E- ?#E?
+---# ??-#
+---# ??-#
+
+time: 89
+new reward: -1
+tot reward: 262
+BD-- BD??
+$#-- $#??
+--E# ??E#
+--F# ???#
+
+time: 90
+new reward: 49
+tot reward: 311
+bD-- bD??
+-#-- -#??
+-E-# ?E?#
+--F# ???#
+
+time: 91
+new reward: -1
+tot reward: 310
+Bd-- Bd??
+-#-- -#??
+--E# ??E#
+--F# ???#
+
+time: 92
+new reward: -1
+tot reward: 309
+BDH- BDH?
+-#E- -#E?
+---# ???#
+--F# ???#
+
+time: 93
+new reward: -1
+tot reward: 308
+BD-H BD-H
+-#-E -#?E
+---# ???#
+--F# ???#
+
+time: 94
+new reward: -1
+tot reward: 307
+BDH- BDH-
+-#E- -#E?
+---# ???#
+--F# ???#
+
+time: 95
+new reward: -1
+tot reward: 306
+BD-H BD-H
+-#-E -#?E
+---# ???#
+--F# ???#
+
+time: 96
+new reward: -1
+tot reward: 305
+BDH- BDH-
+-#E- -#E?
+---# ???#
+--F# ???#
+
+time: 97
+new reward: -3
+tot reward: 302
+B--- B---
+-#dE -#dE
+---# ???#
+--F# ???#
+
+time: 98
+new reward: -1
+tot reward: 301
+B--E B--E
+-#D- -#D?
+--H# ??H#
+--F# ???#
+
+time: 99
+new reward: -1
+tot reward: 300
+B-E- B-E-
+-#D- -#D?
+-H-# ?H-#
+--F# ???#
+
+time: 100
+new reward: -1
+tot reward: 299
+BE-- BE--
+-#D- -#D?
+---# ?--#
+-HF# ?H?#
+
+summary: 299 ../test/escort_4x4_3_0_belief.world
+
+reality: ../test/escort_4x4_3_1_real.world
+belief: ../test/escort_4x4_3_1_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#--- #???
+b-E# b??#
+--#- ??#?
+-F-- ????
+
+time: 1
+new reward: -2
+tot reward: -2
+#--- #???
+BdE# BdE#
+--#- ??#?
+-F-- ????
+
+time: 2
+new reward: -1
+tot reward: -3
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+-F-- ????
+
+time: 3
+new reward: -1
+tot reward: -4
+#--- #???
+BDE# BDE#
+-F#- ??#?
+-$-- ?$??
+
+time: 4
+new reward: -1
+tot reward: -5
+#--- #???
+BDE# BDE#
+-$#- ?$#?
+---- ?-??
+
+time: 5
+new reward: -1
+tot reward: -6
+#--- #???
+BdE# BdE#
+-F#- ?F#?
+---- ?-??
+
+time: 6
+new reward: 49
+tot reward: 43
+#--- #???
+bDE# bDE#
+-F#- ?F#?
+---- ?-??
+
+time: 7
+new reward: -1
+tot reward: 42
+#--- #???
+BDE# BDE#
+HF#- HF#?
+---- ?-??
+
+time: 8
+new reward: -1
+tot reward: 41
+#--- #???
+BDE# BDE#
+-$#- ?$#?
+--F- ????
+
+time: 9
+new reward: -1
+tot reward: 40
+#--- #???
+BdE# BdE#
+--#- ?-#?
+--F- ????
+
+time: 10
+new reward: 49
+tot reward: 89
+#--- #???
+bDE# bDE#
+--#- ?-#?
+--F- ????
+
+time: 11
+new reward: -1
+tot reward: 88
+#--- #???
+BdE# BdE#
+--#- ?-#?
+--F- ????
+
+time: 12
+new reward: -1
+tot reward: 87
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+--F- ????
+
+time: 13
+new reward: -1
+tot reward: 86
+#--- #???
+BdE# BdE#
+--#- ?-#?
+--F- ????
+
+time: 14
+new reward: -1
+tot reward: 85
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+--F- ????
+
+time: 15
+new reward: -1
+tot reward: 84
+#--- #???
+BDE# BDE#
+--#- ?-#?
+-HF- ?H??
+
+time: 16
+new reward: -1
+tot reward: 83
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+--F- ?-??
+
+time: 17
+new reward: -1
+tot reward: 82
+#--- #???
+BdE# BdE#
+--#- ?-#?
+--F- ?-??
+
+time: 18
+new reward: -1
+tot reward: 81
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+--F- ?-??
+
+time: 19
+new reward: -1
+tot reward: 80
+#--- #???
+BDE# BDE#
+--#- ?-#?
+-HF- ?H??
+
+time: 20
+new reward: -1
+tot reward: 79
+#--- #???
+BDE# BDE#
+--#- ?-#?
+H-F- H-??
+
+time: 21
+new reward: -1
+tot reward: 78
+#--- #???
+BDE# BDE#
+H-#- H-#?
+--F- --??
+
+time: 22
+new reward: -1
+tot reward: 77
+#--- #???
+BDE# BDE#
+-H#- -H#?
+--F- --??
+
+time: 23
+new reward: -1
+tot reward: 76
+#--- #???
+BdE# BdE#
+--#- --#?
+--F- --??
+
+time: 24
+new reward: -1
+tot reward: 75
+#HE- #HE?
+BD-# BD?#
+--#- --#?
+--F- --??
+
+time: 25
+new reward: -1
+tot reward: 74
+#E-- #E??
+Bd-# Bd?#
+--#- --#?
+--F- --??
+
+time: 26
+new reward: -1
+tot reward: 73
+#E-- #E??
+BD-# BD?#
+-H#- -H#?
+--F- --??
+
+time: 27
+new reward: -1
+tot reward: 72
+#--- #-??
+BdE# BdE#
+--#- --#?
+--F- --??
+
+time: 28
+new reward: -1
+tot reward: 71
+#--- #-??
+BDE# BDE#
+-H#- -H#?
+--F- --??
+
+time: 29
+new reward: -1
+tot reward: 70
+#--- #-??
+BDE# BDE#
+--#- --#?
+-HF- -H??
+
+time: 30
+new reward: -1
+tot reward: 69
+#--- #???
+BDE# BDE#
+--#- ??#?
+--$F ??$?
+
+time: 31
+new reward: -1
+tot reward: 68
+#--- #???
+BDE# BDE#
+--#- ??#?
+-$-F ?$-?
+
+time: 32
+new reward: -1
+tot reward: 67
+#--- #???
+BDE# BDE#
+-$#- ?$#?
+---F ?--?
+
+time: 33
+new reward: -1
+tot reward: 66
+#--- #???
+BdE# BdE#
+--#- ?-#?
+---F ?--?
+
+time: 34
+new reward: 49
+tot reward: 115
+#--- #???
+bDE# bDE#
+--#- ?-#?
+---F ?--?
+
+time: 35
+new reward: -1
+tot reward: 114
+#--- #???
+BdE# BdE#
+--#- ?-#?
+---F ?--?
+
+time: 36
+new reward: -1
+tot reward: 113
+#--- #???
+BDE# BDE#
+-H#- ?H#?
+---F ?--?
+
+time: 37
+new reward: -1
+tot reward: 112
+#--- #???
+BdE# BdE#
+--#- ?-#?
+---F ?--?
+
+time: 38
+new reward: -1
+tot reward: 111
+#HE- #HE?
+BD-# BD?#
+--#- ?-#?
+---F ?--?
+
+time: 39
+new reward: -1
+tot reward: 110
+#E-- #E??
+Bd-# Bd?#
+--#- ?-#?
+---F ?--?
+
+time: 40
+new reward: -1
+tot reward: 109
+#-E- #-E?
+BDH# BDH#
+--#- ?-#?
+---F ?--?
+
+time: 41
+new reward: -1
+tot reward: 108
+#E-- #E??
+Bd-# Bd-#
+--#- ?-#?
+---F ?--?
+
+time: 42
+new reward: -1
+tot reward: 107
+#E-- #E??
+BD-# BD-#
+-H#- ?H#?
+---F ?--?
+
+time: 43
+new reward: -1
+tot reward: 106
+#E-- #E??
+BD-# BD-#
+H-#- H-#?
+---F ?--?
+
+time: 44
+new reward: -1
+tot reward: 105
+#E-- #E??
+BD-# BD-#
+--#- --#?
+H--F H--?
+
+time: 45
+new reward: -1
+tot reward: 104
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 46
+new reward: -1
+tot reward: 103
+#E-- #E??
+BD-# BD-#
+--#- --#?
+--HF --H?
+
+time: 47
+new reward: -1
+tot reward: 102
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 48
+new reward: -1
+tot reward: 101
+#E-- #E??
+BD-# BD-#
+--#- --#?
+--HF --H?
+
+time: 49
+new reward: -1
+tot reward: 100
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 50
+new reward: -1
+tot reward: 99
+#E-- #E??
+BD-# BD-#
+-H#- -H#?
+---F ---?
+
+time: 51
+new reward: -1
+tot reward: 98
+#--- #-??
+BdE# BdE#
+--#- --#?
+---F ---?
+
+time: 52
+new reward: -1
+tot reward: 97
+#--- #-??
+BDE# BDE#
+-H#- -H#?
+---F ---?
+
+time: 53
+new reward: -1
+tot reward: 96
+#--- #-??
+BdE# BdE#
+--#- --#?
+---F ---?
+
+time: 54
+new reward: -1
+tot reward: 95
+#--- #-??
+BDE# BDE#
+-H#- -H#?
+---F ---?
+
+time: 55
+new reward: -1
+tot reward: 94
+#--- #-??
+BdE# BdE#
+--#- --#?
+---F ---?
+
+time: 56
+new reward: -1
+tot reward: 93
+#HE- #HE?
+BD-# BD-#
+--#- --#?
+---F ---?
+
+time: 57
+new reward: -1
+tot reward: 92
+#E-- #E??
+Bd-# Bd-#
+--#- --#?
+---F ---?
+
+time: 58
+new reward: -1
+tot reward: 91
+#-E- #-E?
+BDH# BDH#
+--#- --#?
+---F ---?
+
+time: 59
+new reward: -1
+tot reward: 90
+#E-- #E??
+Bd-# Bd-#
+--#- --#?
+---F ---?
+
+time: 60
+new reward: -1
+tot reward: 89
+#E-- #E??
+BD-# BD-#
+-H#- -H#?
+---F ---?
+
+time: 61
+new reward: -1
+tot reward: 88
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 62
+new reward: -1
+tot reward: 87
+#E-- #E??
+BD-# BD-#
+-H#- -H#?
+---F ---?
+
+time: 63
+new reward: -1
+tot reward: 86
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 64
+new reward: -1
+tot reward: 85
+#E-- #E??
+BD-# BD-#
+--#- --#?
+--HF --H?
+
+time: 65
+new reward: -1
+tot reward: 84
+#E-- #E??
+BD-# BD-#
+--#- --#?
+-H-F -H-?
+
+time: 66
+new reward: -1
+tot reward: 83
+#E-- #E??
+BD-# BD-#
+--#- --#?
+--HF --H?
+
+time: 67
+new reward: -1
+tot reward: 82
+#E-- #E??
+BD-# BD?#
+--#- ??#?
+F--$ ???$
+
+time: 68
+new reward: -1
+tot reward: 81
+#E-- #E??
+BD-# BD?#
+--#- ??#?
+F-$- ??$-
+
+time: 69
+new reward: -1
+tot reward: 80
+#E-- #E??
+BD-# BD?#
+--#- ??#?
+F$-- ?$--
+
+time: 70
+new reward: -1
+tot reward: 79
+#E-- #E??
+BD-# BD?#
+-$#- ?$#?
+F--- ?---
+
+time: 71
+new reward: -1
+tot reward: 78
+#--- #???
+BdE# BdE#
+--#- ?-#?
+F--- ?---
+
+time: 72
+new reward: 49
+tot reward: 127
+#--- #???
+bDE# bDE#
+--#- ?-#?
+F--- ?---
+
+time: 73
+new reward: -1
+tot reward: 126
+#--- #???
+BDE# BDE#
+H-#- H-#?
+F--- ?---
+
+time: 74
+new reward: -1
+tot reward: 125
+#--- #???
+BDE# BDE#
+-H#- -H#?
+F--- ?---
+
+time: 75
+new reward: -1
+tot reward: 124
+#--- #???
+BdE# BdE#
+--#- --#?
+F--- ?---
+
+time: 76
+new reward: -1
+tot reward: 123
+#HE- #HE?
+BD-# BD?#
+--#- --#?
+F--- ?---
+
+time: 77
+new reward: -1
+tot reward: 122
+#E-- #E??
+Bd-# Bd?#
+--#- --#?
+F--- ?---
+
+time: 78
+new reward: -1
+tot reward: 121
+#-E- #-E?
+BDH# BDH#
+--#- --#?
+F--- ?---
+
+time: 79
+new reward: -1
+tot reward: 120
+#E-- #E??
+Bd-# Bd-#
+--#- --#?
+F--- ?---
+
+time: 80
+new reward: -1
+tot reward: 119
+#-E- #-E?
+BDH# BDH#
+--#- --#?
+F--- ?---
+
+time: 81
+new reward: -3
+tot reward: 116
+#-dE #-dE
+B--# B--#
+--#- --#?
+F--- ?---
+
+time: 82
+new reward: -1
+tot reward: 115
+#-DE #-DE
+B-H# B-H#
+--#- --#?
+F--- ?---
+
+time: 83
+new reward: -1
+tot reward: 114
+#-DE #-DE
+BH-# BH-#
+--#- --#?
+F--- ?---
+
+time: 84
+new reward: -1
+tot reward: 113
+#-DE #-DE
+B--# B--#
+-H#- -H#?
+F--- ?---
+
+time: 85
+new reward: -1
+tot reward: 112
+#-DE #-DE
+B--# B--#
+--#- --#?
+FH-- ?H--
+
+time: 86
+new reward: -1
+tot reward: 111
+#-DE #-DE
+B--# B--#
+-H#- -H#?
+F--- ?---
+
+time: 87
+new reward: -1
+tot reward: 110
+#-DE #-DE
+B--# B--#
+--#- --#?
+FH-- ?H--
+
+time: 88
+new reward: -1
+tot reward: 109
+#-DE #?DE
+B-F# B??#
+--#- ??#?
+$--- $???
+
+time: 89
+new reward: -1
+tot reward: 108
+#-DE #?DE
+B-F# B??#
+$-#- $?#?
+---- -???
+
+time: 90
+new reward: 49
+tot reward: 157
+#-DE #?DE
+b-F# b??#
+--#- -?#?
+---- -???
+
+time: 91
+new reward: -1
+tot reward: 156
+#-DE #?DE
+BHF# BH?#
+--#- -?#?
+---- -???
+
+time: 92
+new reward: -1
+tot reward: 155
+#-DE #?DE
+B-F# B-?#
+-H#- -H#?
+---- -???
+
+time: 93
+new reward: -1
+tot reward: 154
+#-DE #?DE
+B-F# B-?#
+--#- --#?
+-H-- -H??
+
+time: 94
+new reward: -1
+tot reward: 153
+#-DE #?DE
+B-F# B-?#
+--#- --#?
+--H- --H?
+
+time: 95
+new reward: -1
+tot reward: 152
+#-DE #?DE
+B-F# B-?#
+--#- --#?
+-H-- -H-?
+
+time: 96
+new reward: -1
+tot reward: 151
+#-DE #?DE
+B-F# B-?#
+-H#- -H#?
+---- ---?
+
+time: 97
+new reward: -1
+tot reward: 150
+#-DE #?DE
+BHF# BH?#
+--#- --#?
+---- ---?
+
+time: 98
+new reward: -1
+tot reward: 149
+#-DE #?DE
+B-F# B-?#
+-H#- -H#?
+---- ---?
+
+time: 99
+new reward: -1
+tot reward: 148
+#-DE #?DE
+B-F# B-?#
+--#- --#?
+-H-- -H-?
+
+time: 100
+new reward: -1
+tot reward: 147
+#-DE #?DE
+B-F# B-?#
+-H#- -H#?
+---- ---?
+
+summary: 147 ../test/escort_4x4_3_1_belief.world
+
+reality: ../test/escort_4x4_3_2_real.world
+belief: ../test/escort_4x4_3_2_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+---- ????
+#-E- #?#?
+---F ????
+-b#- ?b#?
+
+time: 1
+new reward: -1
+tot reward: -1
+---- ????
+#E-- #E#?
+-H-F ?H??
+-B#- ?B#?
+
+time: 2
+new reward: -1
+tot reward: -2
+---- ????
+#-E- #?E?
+--HF ?-H?
+-B#- ?B#?
+
+time: 3
+new reward: -1
+tot reward: -3
+---- ????
+#E-- #E#?
+-H-F ?H-?
+-B#- ?B#?
+
+time: 4
+new reward: -1
+tot reward: -4
+---- ????
+#-E- #?E?
+--HF ?-H?
+-B#- ?B#?
+
+time: 5
+new reward: -1
+tot reward: -5
+---- ????
+#E-- #E#?
+-H-F ?H-?
+-B#- ?B#?
+
+time: 6
+new reward: -3
+tot reward: -8
+---- ????
+#dE- #dE?
+---F ?--?
+-B#- ?B#?
+
+time: 7
+new reward: -1
+tot reward: -9
+---- ????
+#D-- #D#?
+-HEF ?HE?
+-B#- ?B#?
+
+time: 8
+new reward: -1
+tot reward: -10
+---- ????
+#D-- #D#?
+HE-F HE-?
+-B#- ?B#?
+
+time: 9
+new reward: -2
+tot reward: -12
+---- ????
+#--- #-#?
+-dEF -dE?
+-B#- ?B#?
+
+time: 10
+new reward: -2
+tot reward: -14
+---- ????
+#--- #-#?
+--dE --dE
+-B#- ?B#?
+
+time: 11
+new reward: -1
+tot reward: -15
+---- ????
+#--E #-#E
+-HDF -HD?
+-B#- ?B#?
+
+time: 12
+new reward: -1
+tot reward: -16
+---- ????
+#HE- #HE?
+--DF --D?
+-B#- ?B#?
+
+time: 13
+new reward: -1
+tot reward: -17
+-H-- ?H??
+#E-- #E#?
+--DF --D?
+-B#- ?B#?
+
+time: 14
+new reward: -1
+tot reward: -18
+--H- ?-H?
+#-E- #-E?
+--DF --D?
+-B#- ?B#?
+
+time: 15
+new reward: -1
+tot reward: -19
+---H ?--H
+#--E #-#E
+--DF --D?
+-B#- ?B#?
+
+time: 16
+new reward: -1
+tot reward: -20
+--H- ?-H-
+#-E- #-E?
+--DF --D?
+-B#- ?B#?
+
+time: 17
+new reward: -1
+tot reward: -21
+-H-- ?H--
+#E-- #E#?
+--DF --D?
+-B#- ?B#?
+
+time: 18
+new reward: -1
+tot reward: -22
+--H- ?-H-
+#-E- #-E?
+--DF --D?
+-B#- ?B#?
+
+time: 19
+new reward: -1
+tot reward: -23
+-H-- ?H--
+#E-- #E#?
+--DF --D?
+-B#- ?B#?
+
+time: 20
+new reward: -1
+tot reward: -24
+--H- ?-H-
+#-E- #-E?
+--DF --D?
+-B#- ?B#?
+
+time: 21
+new reward: -1
+tot reward: -25
+-H-- ?H--
+#E-- #E#?
+--DF --D?
+-B#- ?B#?
+
+time: 22
+new reward: -1
+tot reward: -26
+--H- ?-H-
+#-E- #-E?
+--DF --D?
+-B#- ?B#?
+
+time: 23
+new reward: -1
+tot reward: -27
+-H-- ?H--
+#E-- #E#?
+--DF --D?
+-B#- ?B#?
+
+time: 24
+new reward: -1
+tot reward: -28
+HE-- HE--
+#--- #-#?
+--DF --D?
+-B#- ?B#?
+
+time: 25
+new reward: -4
+tot reward: -32
+-dE- -dE-
+#--- #-#?
+---F ---?
+-B#- ?B#?
+
+time: 26
+new reward: -1
+tot reward: -33
+-D-- -D--
+#HE- #HE?
+---F ---?
+-B#- ?B#?
+
+time: 27
+new reward: -1
+tot reward: -34
+-D-- -D--
+#E-- #E#?
+-H-F -H-?
+-B#- ?B#?
+
+time: 28
+new reward: -1
+tot reward: -35
+-D-- -D--
+#--- #-#?
+-E-F -E-?
+-b#- ?b#?
+
+time: 29
+new reward: -1
+tot reward: -36
+-D-- -D--
+#--- #-#?
+E--F E--?
+HB#- HB#?
+
+time: 30
+new reward: -1
+tot reward: -37
+-D-- -D--
+#--- #-#?
+-E-F -E-?
+-b#- -b#?
+
+time: 31
+new reward: -3
+tot reward: -40
+---- ----
+#--- #-#?
+-dEF -dE?
+-B#- -B#?
+
+time: 32
+new reward: -2
+tot reward: -42
+---- ----
+#--- #-#?
+--dE --dE
+-B#- -B#?
+
+time: 33
+new reward: -2
+tot reward: -44
+---- ????
+#--- #?#?
+-FEd ??Ed
+-B#- ?B#?
+
+time: 34
+new reward: -2
+tot reward: -46
+---- ????
+#--- #?#?
+-FdE ??dE
+-B#- ?B#?
+
+time: 35
+new reward: -1
+tot reward: -47
+---- ????
+#--E #?#E
+-$D- ?$D-
+-B#- ?B#?
+
+time: 36
+new reward: 49
+tot reward: 2
+---- ????
+#-E- #?E?
+-FD- ?FD-
+-b#- ?b#?
+
+time: 37
+new reward: -1
+tot reward: 1
+---- ????
+#E-- #E#?
+-$D- ?$D?
+-B#F ?B#?
+
+time: 38
+new reward: 49
+tot reward: 50
+---- ????
+#--- #?#?
+-ED- ?ED?
+-b#F ?b#?
+
+time: 39
+new reward: -1
+tot reward: 49
+---- ????
+#--- #?#?
+E-D- E-D?
+HB#F HB#?
+
+time: 40
+new reward: -1
+tot reward: 48
+---- ????
+#--- #?#?
+-ED- ?ED?
+-b#F -b#?
+
+time: 41
+new reward: -2
+tot reward: 46
+---- ????
+#--- #?#?
+-dE- ?dE?
+-B#F -B#?
+
+time: 42
+new reward: -1
+tot reward: 45
+---- ????
+#--- #?#?
+HDE- HDE?
+-B#F -B#?
+
+time: 43
+new reward: -1
+tot reward: 44
+---- ????
+#--- #?#?
+-dE- -dE?
+-B#F -B#?
+
+time: 44
+new reward: -1
+tot reward: 43
+---- ????
+#HE- #HE?
+-D-- -D??
+-B#F -B#?
+
+time: 45
+new reward: -1
+tot reward: 42
+-H-- ?H??
+#E-- #E#?
+-D-- -D??
+-B#F -B#?
+
+time: 46
+new reward: -1
+tot reward: 41
+--H- ?-H?
+#-E- #-E?
+-D-- -D??
+-B#F -B#?
+
+time: 47
+new reward: -1
+tot reward: 40
+---H ?--H
+#--E #-#E
+-D-- -D??
+-B#F -B#?
+
+time: 48
+new reward: -1
+tot reward: 39
+--H- ?-H-
+#-E- #-E?
+-D-- -D??
+-B#F -B#?
+
+time: 49
+new reward: -1
+tot reward: 38
+---H ?--H
+#--E #-#E
+-D-- -D??
+-B#F -B#?
+
+time: 50
+new reward: -4
+tot reward: 34
+---- ?---
+#-Ed #-Ed
+---- --??
+-B#F -B#?
+
+time: 51
+new reward: -1
+tot reward: 33
+---- ?---
+#--D #-#D
+--EH --EH
+-B#F -B#?
+
+time: 52
+new reward: -3
+tot reward: 30
+---- ?---
+#--- #-#-
+--dE --dE
+-B#F -B#?
+
+time: 53
+new reward: -2
+tot reward: 28
+---- ?---
+#--- #-#-
+--Ed --Ed
+-B#F -B#?
+
+time: 54
+new reward: -1
+tot reward: 27
+---- ????
+#--- #?#?
+--ED ??ED
+FB#$ ?B#$
+
+time: 55
+new reward: -1
+tot reward: 26
+---- ????
+#--- #?#?
+--Ed ??Ed
+FB#- ?B#-
+
+time: 56
+new reward: -2
+tot reward: 24
+---- ????
+#--- #?#?
+--dE ??dE
+FB#- ?B#-
+
+time: 57
+new reward: -1
+tot reward: 23
+---- ????
+#--E #?#E
+-$D- ?$D-
+FB#- ?B#-
+
+time: 58
+new reward: 49
+tot reward: 72
+---- ????
+#-E- #?E?
+--D- ?-D-
+Fb#- ?b#-
+
+time: 59
+new reward: -1
+tot reward: 71
+---- ????
+#E-- #E#?
+-HD- ?HD-
+FB#- ?B#-
+
+time: 60
+new reward: -1
+tot reward: 70
+---- ????
+#-E- #?E?
+--d- ?-d-
+FB#- ?B#-
+
+time: 61
+new reward: -1
+tot reward: 69
+---- ????
+#E-- #E#?
+-HD- ?HD-
+FB#- ?B#-
+
+time: 62
+new reward: -1
+tot reward: 68
+---- ????
+#--- #?#?
+HED- HED-
+FB#- ?B#-
+
+time: 63
+new reward: -2
+tot reward: 66
+---- ????
+#--- #?#?
+-dE- -dE-
+FB#- ?B#-
+
+time: 64
+new reward: -1
+tot reward: 65
+---- ????
+#--- #?#?
+-DE- -DE-
+Fb#- ?b#-
+
+time: 65
+new reward: -1
+tot reward: 64
+---- ????
+#--- #?#?
+-dE- -dE-
+FB#- ?B#-
+
+time: 66
+new reward: -1
+tot reward: 63
+---- ????
+#HE- #HE?
+-D-- -D--
+FB#- ?B#-
+
+time: 67
+new reward: -1
+tot reward: 62
+-H-- ?H??
+#E-- #E#?
+-D-- -D--
+FB#- ?B#-
+
+time: 68
+new reward: -1
+tot reward: 61
+HE-- HE??
+#--- #-#?
+-D-- -D--
+FB#- ?B#-
+
+time: 69
+new reward: -3
+tot reward: 58
+-dE- -dE?
+#--- #-#?
+---- ----
+FB#- ?B#-
+
+time: 70
+new reward: -2
+tot reward: 56
+--dE --dE
+#--- #-#?
+---- ----
+FB#- ?B#-
+
+time: 71
+new reward: -2
+tot reward: 54
+--Ed --Ed
+#--- #-#?
+---- ----
+FB#- ?B#-
+
+time: 72
+new reward: -1
+tot reward: 53
+---D ---D
+#-EH #-EH
+---- ----
+FB#- ?B#-
+
+time: 73
+new reward: -1
+tot reward: 52
+---D ---D
+#--E #-#E
+---H ---H
+FB#- ?B#-
+
+time: 74
+new reward: -1
+tot reward: 51
+---D ---D
+#-E- #-E-
+--H- --H-
+FB#- ?B#-
+
+time: 75
+new reward: -1
+tot reward: 50
+---D ---D
+#E-- #E#-
+-H-- -H--
+FB#- ?B#-
+
+time: 76
+new reward: -1
+tot reward: 49
+---D ---D
+#--- #-#-
+-E-- -E--
+Fb#- ?b#-
+
+time: 77
+new reward: -1
+tot reward: 48
+---D ???D
+#-F- #?#?
+E--- E???
+$B#- $B#?
+
+time: 78
+new reward: 49
+tot reward: 97
+---D ???D
+#-F- #?#?
+-E-- ?E??
+-b#- -b#?
+
+time: 79
+new reward: -1
+tot reward: 96
+---D ???D
+#-F- #?#?
+E--- E???
+HB#- HB#?
+
+time: 80
+new reward: -1
+tot reward: 95
+---D ???D
+#-F- #?#?
+-E-- ?E??
+-b#- -b#?
+
+time: 81
+new reward: -5
+tot reward: 90
+---- ????
+#-F- #?#?
+-dE- ?dE?
+-B#- -B#?
+
+time: 82
+new reward: -1
+tot reward: 89
+---- ????
+#HE- #HE?
+-D-- ?D??
+-B#- -B#?
+
+time: 83
+new reward: -1
+tot reward: 88
+---- ????
+#EF- #E#?
+-d-- ?d??
+-B#- -B#?
+
+time: 84
+new reward: -1
+tot reward: 87
+---- ????
+#-E- #-E?
+-DH- ?DH?
+-B#- -B#?
+
+time: 85
+new reward: -1
+tot reward: 86
+---- ????
+#EF- #E#?
+-d-- ?d-?
+-B#- -B#?
+
+time: 86
+new reward: -2
+tot reward: 84
+---- ????
+#dE- #dE?
+---- ?--?
+-B#- -B#?
+
+time: 87
+new reward: -1
+tot reward: 83
+-HE- ?HE?
+#DF- #D#?
+---- ?--?
+-B#- -B#?
+
+time: 88
+new reward: -3
+tot reward: 80
+--dE ?-dE
+#-F- #-#?
+---- ?--?
+-B#- -B#?
+
+time: 89
+new reward: -2
+tot reward: 78
+--Ed ?-Ed
+#-F- #-#?
+---- ?--?
+-B#- -B#?
+
+time: 90
+new reward: -1
+tot reward: 77
+---D ?--D
+#-EH #-EH
+---- ?--?
+-B#- -B#?
+
+time: 91
+new reward: -1
+tot reward: 76
+---D ?--D
+#-FE #-#E
+---H ?--H
+-B#- -B#?
+
+time: 92
+new reward: -1
+tot reward: 75
+---D ?--D
+#-E- #-E-
+--H- ?-H-
+-B#- -B#?
+
+time: 93
+new reward: -1
+tot reward: 74
+---D ?--D
+#-FE #-#E
+---H ?--H
+-B#- -B#?
+
+time: 94
+new reward: -1
+tot reward: 73
+---D ?--D
+#-F- #-#-
+---E ?--E
+-B#H -B#H
+
+time: 95
+new reward: -3
+tot reward: 70
+---- ?---
+#-F- #-#-
+--Ed ?-Ed
+-B#- -B#-
+
+time: 96
+new reward: -2
+tot reward: 68
+---- ?---
+#-F- #-#-
+--dE ?-dE
+-B#- -B#-
+
+time: 97
+new reward: -1
+tot reward: 67
+---- ?---
+#-FE #-#E
+-HD- ?HD-
+-B#- -B#-
+
+time: 98
+new reward: -1
+tot reward: 66
+---- ?---
+#-E- #-E-
+H-D- H-D-
+-B#- -B#-
+
+time: 99
+new reward: -1
+tot reward: 65
+---- ?---
+#EF- #E#-
+-HD- -HD-
+-B#- -B#-
+
+time: 100
+new reward: -3
+tot reward: 62
+---- ?---
+#dE- #dE-
+---- ----
+-B#- -B#-
+
+summary: 62 ../test/escort_4x4_3_2_belief.world
+
+reality: ../test/escort_4x4_3_3_real.world
+belief: ../test/escort_4x4_3_3_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+-#-E ?#?#
+--#- ??#?
+F--b ???b
+---- ????
+
+reality: ../test/escort_4x4_3_4_real.world
+belief: ../test/escort_4x4_3_4_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#-#- #?#?
+---E ????
+#b-- #b??
+F--- ????
+
+time: 1
+new reward: -2
+tot reward: -2
+#-#- #?#?
+--E- ??E?
+#Bd- #Bd?
+F--- ????
+
+time: 2
+new reward: -1
+tot reward: -3
+#-#- #?#?
+---E ???E
+#BD- #BD?
+F-H- ??H?
+
+time: 3
+new reward: -1
+tot reward: -4
+#-#- #?#?
+--E- ??E?
+#BD- #BD?
+FH-- ?H-?
+
+reality: ../test/escort_4x4_3_5_real.world
+belief: ../test/escort_4x4_3_5_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+E--- #???
+---b ???b
+-F#- ??#?
+---# ???#
+
+reality: ../test/escort_4x4_3_6_real.world
+belief: ../test/escort_4x4_3_6_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+#F-- #???
+--#- ??#?
+---E ????
+--#b ??#b
+
+reality: ../test/escort_4x4_3_7_real.world
+belief: ../test/escort_4x4_3_7_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+E--- #???
+-#b- ?#b?
+F--- ????
+#--- #???
+
+reality: ../test/escort_4x4_3_8_real.world
+belief: ../test/escort_4x4_3_8_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+b#-F b#??
+---# ???#
+--E- ??#?
+---- ????
+
+reality: ../test/escort_4x4_3_9_real.world
+belief: ../test/escort_4x4_3_9_belief.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 0
+
+
+time: 0
+new reward: 0
+tot reward: 0
+--E- ????
+-b#- ?b#?
+--## ??##
+--F- ????
+

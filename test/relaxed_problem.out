@@ -1,0 +1,208 @@
+initial_state: ../test/initial_state_01.txt
+max_food: 0
+action: HB
+action cost: 0
+reward: 0
+F- F?
+-b ?b
+
+initial_state: ../test/initial_state_02.txt
+max_food: 0
+action: HB
+action cost: 1
+reward: -1
+F- F?
+HB -b
+
+initial_state: ../test/initial_state_03.txt
+max_food: 0
+action: HB
+action cost: 2
+reward: -2
+H- -?
+-B ?b
+
+initial_state: ../test/initial_state_04.txt
+max_food: 0
+action: HB
+action cost: 1
+reward: -1
+-- ??
+HB -b
+
+initial_state: ../test/initial_state_05.txt
+max_food: 0
+action: HB
+action cost: 1
+reward: 49
+-$ ?-
+-B ?*
+
+initial_state: ../test/initial_state_06.txt
+max_food: 0
+action: HB
+action cost: 2
+reward: 48
+$- -?
+-B ?*
+
+initial_state: ../test/initial_state_07.txt
+max_food: 0
+action: HB
+action cost: 1
+reward: -1
+F- F?
+HB -b
+
+initial_state: ../test/initial_state_08.txt
+max_food: 0
+action: HB
+action cost: 0
+reward: 0
+-- ??
+-* ?b
+
+initial_state: ../test/initial_state_09.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F- $?
+-b FB
+
+initial_state: ../test/initial_state_10.txt
+max_food: 1
+action: HF_0_0
+action cost: 1
+reward: -1
+FH $-
+-B FB
+
+initial_state: ../test/initial_state_11.txt
+max_food: 1
+action: HF_0_0
+action cost: 1
+reward: -1
+F- $?
+HB FB
+
+initial_state: ../test/initial_state_12.txt
+max_food: 1
+action: HF_0_0
+action cost: 0
+reward: 0
+$F $F
+-B ?B
+
+initial_state: ../test/initial_state_13.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F# $#
+-b FB
+
+initial_state: ../test/initial_state_14.txt
+max_food: 1
+action: HF_0_0
+action cost: 1
+reward: -1
+F# $#
+HB FB
+
+initial_state: ../test/initial_state_15.txt
+max_food: 1
+action: HF_0_0
+action cost: 0
+reward: 0
+$# $#
+FB FB
+
+initial_state: ../test/initial_state_16.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F# $#
+-* FB
+
+initial_state: ../test/initial_state_17.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F#-- F#??
+-#-- ?#??
+---- ??H?
+-#-b ?#?B
+
+initial_state: ../test/initial_state_18.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F#H- F#-?
+-#-- ?#??
+---- ??H?
+-#-B ?#?B
+
+initial_state: ../test/initial_state_19.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F#-- F#??
+-#-- ?#??
+---- ??H?
+-#-* ?#?B
+
+initial_state: ../test/initial_state_20.txt
+max_food: 1
+action: HF_0_0
+action cost: 2
+reward: -2
+F#-- F#??
+-#$- ?#-?
+---- ?$??
+-#-B ?#?B
+
+initial_state: ../test/initial_state_21.txt
+max_food: 1
+action: HB
+action cost: 2
+reward: -2
+F#-- F#??
+-#$- ?#-?
+---- ???$
+-#-B ?#?B
+
+initial_state: ../test/initial_state_22.txt
+max_food: 1
+action: HB
+action cost: 2
+reward: -2
+F#-- F#??
+-#-- ?#??
+---- ?H??
+H#-B -#?B
+
+initial_state: ../test/initial_state_23.txt
+max_food: 1
+action: HB
+action cost: 2
+reward: 48
+F#-- F#??
+-#-- ?#??
+--$- ??-?
+-#-B ?#?*
+
+initial_state: ../test/initial_state_24.txt
+max_food: 1
+action: HB
+action cost: 2
+reward: -2
+F#-- F#??
+-#-H ?#?-
+---- ????
+-#-B ?#?b
+

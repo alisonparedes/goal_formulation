@@ -1,0 +1,7310 @@
+reality: ../test/baseline_4x4_0_real.world
+belief: ../test/baseline_4x4_0_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+---- ????
+---F ???F
+---- ????
+b--- b???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 10, 0, 0]]
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+('N', 41.0)
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+----
+BH--
+
+(41, ['HF_3_1', 'HB'])
+('E', 41.0)
+Transition from:
+
+----
+---F
+----
+b---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(('N', 41.0), Observation(dict={(0, 3): 'B', (0, 2): 'H'}, reward=0))
+time: 1
+reward: 0
+---- ????
+---F ???F
+H--- H???
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 10, 0, 0]]
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+('N', 42.0)
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+----
+b---
+
+(40, ['HF_3_1', 'HB'])
+('S', 40.0)
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+('E', 42.0)
+Transition from:
+
+----
+---F
+H---
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(('N', 42.0), Observation(dict={(0, 1): 'H', (0, 2): '-'}, reward=0))
+time: 2
+reward: 0
+---- ????
+H--F H??F
+---- -???
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 10, 0, 0]]
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+H---
+---F
+----
+B---
+
+(41, ['HF_3_1', 'HB'])
+('N', 41.0)
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+---F
+H---
+B---
+
+(41, ['HF_3_1', 'HB'])
+('S', 41.0)
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+('E', 43.0)
+Transition from:
+
+----
+H--F
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(('E', 43.0), Observation(dict={(0, 1): '-', (1, 1): 'H'}, reward=0))
+time: 3
+reward: 0
+---- ????
+-H-F -H?F
+---- -???
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 10, 0, 0]]
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+-H--
+---F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+('N', 42.0)
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+---F
+-H--
+B---
+
+(42, ['HF_3_1', 'HB'])
+('S', 42.0)
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(44, ['HF_3_1', 'HB'])
+('E', 44.0)
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+H--F
+----
+B---
+
+(42, ['HF_3_1', 'HB'])
+('W', 42.0)
+Transition from:
+
+----
+-H-F
+----
+B---
+
+Transition to:
+
+----
+--HF
+----
+B---
+
+(('E', 44.0), Observation(dict={(1, 1): '-', (2, 1): 'H'}, reward=0))
+time: 4
+reward: 0
+---- ????
+--HF --HF
+---- -???
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 10, 0, 0]]
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+--H-
+---F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+('N', 43.0)
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---F
+--H-
+B---
+
+(43, ['HF_3_1', 'HB'])
+('S', 43.0)
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+-F--
+B---
+
+(91, ['HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+-F--
+B---
+
+(91, ['HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+F---
+---$
+----
+B---
+
+(89, ['HB', 'HF_0_0', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+--F-
+B---
+
+(89, ['HB', 'HF_2_2', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+--F$
+----
+B---
+
+(87, ['HB', 'HF_2_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+-F--
+B---
+
+(91, ['HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+-F--
+---$
+----
+B---
+
+(87, ['HB', 'HF_1_0', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+---F
+---$
+----
+B---
+
+(45, ['HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+--F$
+----
+B---
+
+(87, ['HB', 'HF_2_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+----
+B--F
+
+(89, ['HB', 'HF_3_3', 'HB'])
+('E', 84.6)
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+-H-F
+----
+B---
+
+(43, ['HF_3_1', 'HB'])
+('W', 43.0)
+Transition from:
+
+----
+--HF
+----
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(('E', 84.6), Observation(dict={(3, 2): 'F', (3, 1): '$', (2, 1): '-'}, reward=0))
+time: 5
+reward: 0
+---- ????
+---$ ???$
+---F ???F
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---$
+----
+---F
+B---
+
+(44, ['HB'])
+('N', 44.0)
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+-F--
+----
+---$
+B---
+
+(88, ['HB', 'HF_1_0', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+F---
+---$
+B---
+
+(92, ['HB', 'HF_0_1', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+----
+-F-$
+B---
+
+(92, ['HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+F---
+---$
+B---
+
+(140, ['HB', 'HF_0_1', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--F-
+---$
+B---
+
+(88, ['HB', 'HF_2_1', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+----
+---$
+B--F
+
+(90, ['HB', 'HF_3_3', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---F
+----
+---$
+B---
+
+(46, ['HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+-F--
+---$
+B---
+
+(90, ['HB', 'HF_1_1', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+-F--
+----
+---$
+B---
+
+(88, ['HB', 'HF_1_0', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+---F
+----
+---$
+B---
+
+(46, ['HB'])
+('S', 86.0)
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+('W', 88.0)
+Transition from:
+
+----
+---$
+---F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(('W', 88.0), Observation(dict={(3, 1): '-', (2, 1): '$'}, reward=0))
+time: 6
+reward: 0
+---- ????
+--$- ??$?
+---F ???F
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+--$-
+----
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+('N', 87.0)
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+('S', 89.0)
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+---$
+---F
+B---
+
+(87, ['HB', 'HF_3_2', 'HB'])
+('E', 87.0)
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+-$--
+---F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+('W', 89.0)
+Transition from:
+
+----
+--$-
+---F
+B---
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(('S', 89.0), Observation(dict={(2, 1): '-', (2, 2): '$'}, reward=0))
+time: 7
+reward: 0
+---- ????
+---- ????
+--$F ??$F
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--$-
+---F
+B---
+
+(88, ['HB', 'HF_3_2', 'HB'])
+('N', 88.0)
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+('S', 90.0)
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+--F$
+B---
+
+(90, ['HB', 'HF_2_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+--F$
+B---
+
+(90, ['HB', 'HF_2_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+-F--
+----
+---$
+B---
+
+(88, ['HB', 'HF_1_0', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+-F--
+----
+---$
+B---
+
+(88, ['HB', 'HF_1_0', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+---F
+----
+---$
+B---
+
+(46, ['HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+-F--
+---$
+B---
+
+(90, ['HB', 'HF_1_1', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+---F
+---$
+B---
+
+(86, ['HB', 'HF_3_1', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+---F
+---$
+B---
+
+(86, ['HB', 'HF_3_1', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+--F-
+----
+---$
+B---
+
+(86, ['HB', 'HF_2_0', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+--F-
+---$
+B---
+
+(88, ['HB', 'HF_2_1', 'HB'])
+('E', 83.8)
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+('W', 90.0)
+Transition from:
+
+----
+----
+--$F
+B---
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(('S', 90.0), Observation(dict={(2, 3): '$', (2, 2): '-'}, reward=0))
+time: 8
+reward: 0
+---- ????
+---- ????
+---F ???F
+B-$- B?$?
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+--$F
+B---
+
+(89, ['HB', 'HF_3_2', 'HB'])
+('N', 89.0)
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B--$
+
+(89, ['HB', 'HF_3_2', 'HB'])
+('E', 89.0)
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(91, ['HB', 'HF_3_2', 'HB'])
+('W', 91.0)
+Transition from:
+
+----
+----
+---F
+B-$-
+
+Transition to:
+
+----
+----
+---F
+B$--
+
+(('W', 91.0), Observation(dict={(1, 3): '$', (2, 3): '-'}, reward=0))
+time: 9
+reward: 0
+---- ????
+---- ????
+---F ???F
+B$-- B$??
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+-$-F
+B---
+
+(90, ['HB', 'HF_3_2', 'HB'])
+('N', 90.0)
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+B-$-
+
+(90, ['HB', 'HF_3_2', 'HB'])
+('E', 90.0)
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(140, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(140, ['HF_3_2', 'HB', 'HF_0_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(140, ['HF_3_2', 'HB', 'HF_0_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(92, ['HF_3_2', 'HB'])
+('W', 156.4)
+Transition from:
+
+----
+----
+---F
+B$--
+
+Transition to:
+
+----
+----
+---F
+*---
+
+(('W', 156.4), Observation(dict={(0, 3): '*', (1, 3): '-'}, reward=50))
+time: 10
+reward: 50
+---- ????
+---- ????
+---F ???F
+*--- *???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_0_1', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(141, ['HF_3_2', 'HB', 'HF_0_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_0_1', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+('N', 170.8)
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_0_1', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(141, ['HF_3_2', 'HB', 'HF_0_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_0_1', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+('E', 170.8)
+Transition from:
+
+----
+----
+---F
+*---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(('N', 170.8), Observation(dict={(0, 3): 'B', (0, 2): 'H'}, reward=50))
+time: 11
+reward: 50
+---- ????
+---- ????
+H--F H??F
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+('N', 142.0)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(140, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+('S', 146.8)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+('E', 144.0)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(('S', 146.8), Observation(dict={(0, 3): 'b', (0, 2): '-'}, reward=50))
+time: 12
+reward: 50
+---- ????
+---- ????
+---F -??F
+b--- b???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+('N', 152.2)
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+('E', 152.2)
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(('N', 152.2), Observation(dict={(0, 3): 'B', (0, 2): 'H'}, reward=50))
+time: 13
+reward: 50
+---- ????
+---- ????
+H--F H??F
+B--- B???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+H---
+---F
+B---
+
+(92, ['HF_3_2', 'HB'])
+('N', 142.0)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(140, ['HF_3_2', 'HB', 'HF_0_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(92, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(140, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+('S', 151.6)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+-H-F
+B---
+
+(94, ['HF_3_2', 'HB'])
+('E', 144.0)
+Transition from:
+
+----
+----
+H--F
+B---
+
+Transition to:
+
+----
+----
+---F
+b---
+
+(('S', 151.6), Observation(dict={(0, 3): 'b', (0, 2): '-'}, reward=50))
+time: 14
+reward: 50
+---- ????
+---- ????
+---F -??F
+b--- b???
+
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 10, 0]]
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(141, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(141, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(93, ['HB', 'HF_3_2', 'HB'])
+('N', 161.8)
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(141, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_2_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(141, ['HF_3_2', 'HB', 'HF_1_3', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(139, ['HF_3_2', 'HB', 'HF_1_2', 'HB'])
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+---F
+BH--
+
+(93, ['HB', 'HF_3_2', 'HB'])
+('E', 161.8)
+Transition from:
+
+----
+----
+---F
+b---
+
+Transition to:
+
+----
+----
+H--F
+B---
+
+(('N', 161.8), Observation(dict={(0, 3): 'B', (0, 2): 'H'}, reward=50))
+time: 15
+reward: 50
+---- ????
+---- ????
+H--F H??F
+B--- B???
+
+reality: ../test/baseline_4x4_1_real.world
+belief: ../test/baseline_4x4_1_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+---- ????
+-b-- ?b??
+---- ????
+--F- ??F?
+
+reality: ../test/baseline_4x4_2_real.world
+belief: ../test/baseline_4x4_2_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+b--- b???
+---F ???F
+---- ????
+---- ????
+
+reality: ../test/baseline_4x4_3_real.world
+belief: ../test/baseline_4x4_3_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+---b ???b
+---- ????
+-F-- ?F??
+---- ????
+
+reality: ../test/baseline_4x4_4_real.world
+belief: ../test/baseline_4x4_4_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+---F ???F
+---- ????
+---- ????
+b--- b???
+
+reality: ../test/baseline_4x4_5_real.world
+belief: ../test/baseline_4x4_5_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+---- ????
+---F ???F
+b--- b???
+---- ????
+
+reality: ../test/baseline_4x4_6_real.world
+belief: ../test/baseline_4x4_6_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+F--- F???
+b--- b???
+---- ????
+---- ????
+
+reality: ../test/baseline_4x4_7_real.world
+belief: ../test/baseline_4x4_7_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+F--- F???
+-b-- ?b??
+---- ????
+---- ????
+
+reality: ../test/baseline_4x4_8_real.world
+belief: ../test/baseline_4x4_8_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+-F-- ?F??
+b--- b???
+---- ????
+---- ????
+
+reality: ../test/baseline_4x4_9_real.world
+belief: ../test/baseline_4x4_9_real.world
+horizon: 10
+sample: 10
+max_food: 1
+time: 100
+seed: 1
+known: 1
+
+
+time: 0
+reward: 0
+--F- ??F?
+---- ????
+---b ???b
+---- ????
+
