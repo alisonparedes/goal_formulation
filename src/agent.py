@@ -161,7 +161,7 @@ def print_args(args):
 
 
 def print_step(time_step, reality, belief, dimensions):
-    #os.system('clear')
+    os.system('clear')
     print "time: {0}".format(time_step)
     print "new reward: {0}".format(belief.step_reward)
     print "tot reward: {0}".format(belief.reward)
