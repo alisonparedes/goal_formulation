@@ -40,11 +40,11 @@ def search(initial_state, dimensions, horizon=1, return_plan=False):
     max_g = -1000
     plan = None
     q = 0
-    print("NEW SEARCH=====================================")
+
     while True: #len(open_list) > 0:
         try:
             s = heapq.heappop(open_list)
-            print(s.time)
+            #print(s.time)
         #s = open_list.popleft()
         #print(q, get_plan(s))
 
