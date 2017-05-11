@@ -7,39 +7,62 @@ from collections import namedtuple, deque
 import relaxed_problem
 import copy
 import problem
+import heapq
+import exceptions
 
+
+class Node:
+        def __init__(self, state, previous, action, g, time, step_time):
+            self.state = state
+            self.previous = previous
+            self.action = action
+            self.g = g
+            self.time = time
+            self.step_time = step_time
+
+        def __cmp__(self, other):
+            return cmp(self.time, other.time)
 
 def to_node(state, previous, action, g=0, time=0, step_time=0):
-    Node = namedtuple('Node', ['state', 'previous', 'action', 'g', 'time', 'step_time'])
-    return Node(state, previous, action, g, time, step_time)
+    #Node = namedtuple('Node', ['state', 'previous', 'action', 'g', 'time', 'step_time'])
+    n = Node(state, previous, action, g, time, step_time)
+    return n #Node(state, previous, action, g, time, step_time)
 
 
 def search(initial_state, dimensions, horizon=1, return_plan=False):
 
     #print(initial_state)
     i = to_node(initial_state, previous=None, action=None, g=0, time=0, step_time=0)
-    open_list = deque([i])
+    open_list = [] #deque([i])
+    heapq.heappush(open_list, i)
     closed_list = deque([])
     nodes_expanded = 0
     max_g = -1000
     plan = None
     q = 0
-    while len(open_list) > 0:
-        s = open_list.popleft()
+    print("NEW SEARCH=====================================")
+    while True: #len(open_list) > 0:
+        try:
+            s = heapq.heappop(open_list)
+            print(s.time)
+        #s = open_list.popleft()
         #print(q, get_plan(s))
 
-        q += 1
+            q += 1
         # if s.previous:
             # compare_grid(s.state.grid, s.previous.state.grid)
             # compare_g(s, s.previous)
             # compare_future(s.state, s.previous.state)
-        if s.time >= horizon:
-            if s.g > max_g:
-                max_g = s.g
-                plan = s
-        else:
-            expand(s, open_list, closed_list, max_g, dimensions, horizon)
-            nodes_expanded += 1
+            if s.time >= horizon:
+                if s.g > max_g:
+                    max_g = s.g
+                    plan = s
+            else:
+                expand(s, open_list, closed_list, max_g, dimensions, horizon)
+                nodes_expanded += 1
+        except exceptions.IndexError:
+            break
+
 
     #for action, state in get_plan(plan):
     #    print("action: {0}\n".format(action))
@@ -127,7 +150,8 @@ def expand(s_node, open_list, closed_list, max_g, dimensions, horizon):
             #    max_g = g
             #    plan = result
             # TODO: if node.state not in closed_list
-            open_list.append(result)
+            #open_list.append(result)
+            heapq.heappush(open_list, result)
             closed_list.append(result.state)
             expanded.append(result)
 
